@@ -1,10 +1,11 @@
-extends Node2D
+extends Control
 
 # Takes care of listening to device input and assign player control
 # instances to the devices
-#const playerController = preload("res://player/playerController.tscn")
-#const playerPanelUiElement = preload("res://MainMenu/connectedPlayerPanel.tscn")
-@onready var deviceDetector = $"../HBoxContainer/DetectedDevices"
+const playerController = preload("res://player/player_input_listener.tscn")
+var gameSceneManager: GameSceneManager
+
+@onready var deviceDetector = $HBoxContainer/DetectedDevices
 var readyPlayers: Dictionary
 
 func _input(event: InputEvent) -> void:
@@ -28,4 +29,13 @@ func CheckAllPlayersReady() -> void:
 		else:
 			return
 			
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	CreatePlayerControllers()
+	
+	gameSceneManager.ChangeActiveScene("res://GameScenes/game.tscn")
+
+func CreatePlayerControllers() -> void:
+	for deviceId in deviceDetector.connectedDeviceIds.keys():
+		var instance = playerController.instantiate()
+		instance.deviceId = deviceId
+		
+		gameSceneManager.AddPersistentChild(instance)

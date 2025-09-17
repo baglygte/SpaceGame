@@ -4,7 +4,7 @@ var connectedDeviceIds: Dictionary
 
 const connectDevicePanel = preload("res://menu/connectedDevicePanel.tscn")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var detectedDeviceIds = Input.get_connected_joypads()
 	
 	GetDevicesToRemove(detectedDeviceIds)

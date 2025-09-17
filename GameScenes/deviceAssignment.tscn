@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ce3sglci4hdl4"]
 
-[ext_resource type="Script" uid="uid://debuaoyh7fm8i" path="res://menu/deviceAssigner.gd" id="1_q6j11"]
-[ext_resource type="Script" uid="uid://ulrg2sob4vqw" path="res://menu/deviceDetector.gd" id="2_i2570"]
+[ext_resource type="Script" uid="uid://debuaoyh7fm8i" path="res://menu/deviceAssigner.gd" id="1_p8soq"]
+[ext_resource type="Script" uid="uid://ulrg2sob4vqw" path="res://menu/deviceDetector.gd" id="2_bs13l"]
 
 [node name="DeviceAssignment" type="Control"]
 layout_mode = 3
@@ -12,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("1_p8soq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -25,7 +26,7 @@ alignment = 1
 [node name="DetectedDevices" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 alignment = 1
-script = ExtResource("2_i2570")
+script = ExtResource("2_bs13l")
 
 [node name="Label" type="Label" parent="HBoxContainer/DetectedDevices"]
 layout_mode = 2
@@ -36,6 +37,3 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/DetectedDevices"]
 layout_mode = 2
-
-[node name="DeviceAssigner" type="Node2D" parent="."]
-script = ExtResource("1_q6j11")

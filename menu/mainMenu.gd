@@ -7,7 +7,7 @@ func _ready() -> void:
 	$VBoxContainer/LoadGame.pressed.connect(LoadGame)
 	
 func StartNewGame() -> void:
-	gameSceneManager.ChangeActiveScene("res://menu/deviceAssignment.tscn")
+	gameSceneManager.ChangeActiveScene("res://GameScenes/deviceAssignment.tscn")
 	
 func LoadGame() -> void:
 	print("load game")

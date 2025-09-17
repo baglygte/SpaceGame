@@ -1,11 +1,13 @@
 extends Node2D
-class_name GameMaster
+class_name Game
 
-const playerScene = preload("res://scenes/player.tscn")
+var gameSceneManager: GameSceneManager
+
+#const playerScene = preload("res://scenes/player.tscn")
 const physicalItemScene = preload("res://scenes/physicalItem.tscn")
 
 func _ready() -> void:	
-	SpawnPlayer()
+	#SpawnPlayer()
 	
 	var physicalItem = physicalItemScene.instantiate()
 	physicalItem.ContainItem($ModuleGenerator.CreateShipModule())
@@ -19,12 +21,17 @@ func _ready() -> void:
 	
 	CreateThrusters()
 
-func SpawnPlayer() -> void:
-	var player = playerScene.instantiate() as Player
-	player.AssignMoveSignal($InputManager.moveSignal)
-	$ModuleGenerator.player = player
-	$Ship.AddPlayer(player)
+#func SpawnPlayer() -> void:
+	#var player = playerScene.instantiate() as Player
+	#player.AssignMoveSignal($InputManager.moveSignal)
+	#$ModuleGenerator.player = player
+	#$Ship.AddPlayer(player)
 	
+func AddNodeToShip(node: Node) -> void:
+	if node.get_parent() == null:
+		$Ship.add_child(node)
+	else:
+		node.reparent($Ship)
 
 func CreateThrusters() -> void:
 	var physicalItem = physicalItemScene.instantiate()

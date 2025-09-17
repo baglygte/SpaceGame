@@ -1,9 +1,9 @@
 extends Node
-
+class_name GameSceneManager
 var activeScene
 
 func _ready() -> void:
-	ChangeActiveScene("res://menu/mainMenu.tscn")
+	ChangeActiveScene("res://GameScenes/mainMenu.tscn")
 
 func ChangeActiveScene(scenePath: String) -> void:
 	var scene = load(scenePath).instantiate()
@@ -16,3 +16,6 @@ func ChangeActiveScene(scenePath: String) -> void:
 	scene.gameSceneManager = $"."
 	
 	get_parent().add_child.call_deferred(scene)
+
+func AddPersistentChild(node: Node) -> void:
+	get_parent().add_child(node)

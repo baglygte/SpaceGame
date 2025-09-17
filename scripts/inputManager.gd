@@ -2,14 +2,14 @@ extends Node
 # Listens for inputs and emits corresponding signals
 class_name InputManager
 
-signal moveSignal
+#signal moveSignal
 signal interactSignal
 signal leftClickSignal
 signal modifySignal
 
 func _process(_delta: float) -> void:
-	var moveInputVector = Input.get_vector("left", "right", "up", "down")
-	moveSignal.emit(moveInputVector)
+	#var moveInputVector = Input.get_vector("left", "right", "up", "down")
+	#moveSignal.emit(moveInputVector)
 	
 	if Input.is_action_just_pressed("interact"):
 		interactSignal.emit()
