@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6d5ttlwacwny"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_karvb"]
+[ext_resource type="Script" path="res://scripts/ship.gd" id="2_phmhb"]
+[ext_resource type="Script" path="res://scripts/player_inventory_manager.gd" id="3_dwk5i"]
+[ext_resource type="Script" path="res://scripts/mode_manager.gd" id="4_cm57x"]
+[ext_resource type="PackedScene" uid="uid://b2i0pprx4byav" path="res://scenes/enemy.tscn" id="5_hu1qp"]
+[ext_resource type="Script" path="res://scripts/module_generator.gd" id="5_jbah0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2jwnv"]
+
+[node name="GameMaster" type="Node2D"]
+script = ExtResource("1_karvb")
+
+[node name="Ship" type="RigidBody2D" parent="."]
+script = ExtResource("2_phmhb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
+shape = SubResource("RectangleShape2D_2jwnv")
+disabled = true
+
+[node name="PlayerInventoryManager" type="Node" parent="."]
+script = ExtResource("3_dwk5i")
+
+[node name="ModeManager" type="Node" parent="."]
+script = ExtResource("4_cm57x")
+
+[node name="ModuleGenerator" type="Node" parent="."]
+script = ExtResource("5_jbah0")
+
+[node name="enemy" parent="." instance=ExtResource("5_hu1qp")]
+position = Vector2(155, -21)

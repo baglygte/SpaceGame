@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2i0pprx4byav"]
+
+[ext_resource type="Texture2D" uid="uid://dv4psqxgyd4xa" path="res://sprites/rocket.png" id="1_ptmd8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mlnrn"]
+size = Vector2(36, 8)
+
+[node name="enemy" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ptmd8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_mlnrn")

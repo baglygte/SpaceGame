@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxqq2ft218vv"]
+
+[ext_resource type="Texture2D" uid="uid://drw8jroe1cv6j" path="res://sprites/sectionTilemap.png" id="2_8glup"]
+
+[sub_resource type="Resource" id="Resource_w4xvr"]
+metadata/__load_path__ = "res://scripts/section.gd"
+
+[node name="section" type="StaticBody2D"]
+z_index = -1000
+z_as_relative = false
+script = SubResource("Resource_w4xvr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8glup")
+region_enabled = true
+region_rect = Rect2(0, 576, 64, 64)

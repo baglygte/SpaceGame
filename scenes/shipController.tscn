@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://p0rawd3ls1pm"]
+
+[ext_resource type="Script" uid="uid://tpxgiuowqyhw" path="res://scripts/shipController.gd" id="1_kdox6"]
+[ext_resource type="PackedScene" uid="uid://37umxulv0221" path="res://scenes/interactiveRegion.tscn" id="2_mh8lk"]
+
+[node name="ShipController" type="Node2D"]
+script = ExtResource("1_kdox6")
+
+[node name="interactiveRegion" parent="." instance=ExtResource("2_mh8lk")]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxqq2ft218vv"]
+
+[ext_resource type="Script" path="res://scenes/floor.gd" id="1_opa2x"]
+[ext_resource type="Texture2D" uid="uid://cm4esrnkee6vm" path="res://sprites/floor.png" id="1_oxi6h"]
+[ext_resource type="PackedScene" uid="uid://b77mpgkaj3t7p" path="res://scenes/wall.tscn" id="2_reyuv"]
+
+[node name="floor" type="StaticBody2D"]
+z_index = -1000
+z_as_relative = false
+script = ExtResource("1_opa2x")
+wallScene = ExtResource("2_reyuv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oxi6h")

@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6d5ttlwacwny"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_karvb"]
+[ext_resource type="Script" path="res://scripts/ship.gd" id="2_phmhb"]
+[ext_resource type="Script" path="res://scripts/shipBuilder.gd" id="3_koh4m"]
+[ext_resource type="PackedScene" uid="uid://b2i0pprx4byav" path="res://scenes/enemy.tscn" id="5_hu1qp"]
+[ext_resource type="Script" path="res://scripts/moduleGenerator.gd" id="5_jbah0"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="7_hae3d"]
+[ext_resource type="Script" path="res://scripts/inputManager.gd" id="7_saost"]
+
+[node name="GameMaster" type="Node2D"]
+script = ExtResource("1_karvb")
+
+[node name="Ship" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+script = ExtResource("2_phmhb")
+
+[node name="ShipBuilder" type="Node2D" parent="Ship"]
+script = ExtResource("3_koh4m")
+
+[node name="ModuleGenerator" type="Node" parent="."]
+script = ExtResource("5_jbah0")
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource("7_saost")
+
+[node name="enemy" parent="." instance=ExtResource("5_hu1qp")]
+position = Vector2(155, -21)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("7_hae3d")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="HUD/MarginContainer"]
+layout_mode = 2
+text = "HUD"
