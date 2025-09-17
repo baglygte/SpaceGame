@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://scripts/game.gd" id="1_karvb"]
 [ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://scripts/ship.gd" id="2_phmhb"]
 [ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://scripts/shipBuilder.gd" id="3_koh4m"]
-[ext_resource type="PackedScene" uid="uid://b2i0pprx4byav" path="res://scenes/enemy.tscn" id="5_hu1qp"]
 [ext_resource type="Script" uid="uid://siv3ulplt76y" path="res://scripts/moduleGenerator.gd" id="5_jbah0"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://scripts/hud.gd" id="7_hae3d"]
 [ext_resource type="Script" uid="uid://bhesonx2bohb4" path="res://scripts/inputManager.gd" id="7_saost"]
 [ext_resource type="Script" uid="uid://cg6ekym3l5vgn" path="res://scripts/inHandUi.gd" id="8_gee14"]
+[ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://scenes/playerSpawner.gd" id="9_0tnpc"]
 
 [node name="GameMaster" type="Node2D"]
 script = ExtResource("1_karvb")
@@ -24,9 +24,6 @@ script = ExtResource("5_jbah0")
 
 [node name="InputManager" type="Node" parent="."]
 script = ExtResource("7_saost")
-
-[node name="enemy" parent="." instance=ExtResource("5_hu1qp")]
-position = Vector2(155, -21)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("7_hae3d")
@@ -68,3 +65,6 @@ layout_mode = 2
 text = "empty"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayerSpawner" type="Node2D" parent="."]
+script = ExtResource("9_0tnpc")
