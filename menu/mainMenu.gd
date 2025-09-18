@@ -10,4 +10,6 @@ func StartNewGame() -> void:
 	gameSceneManager.ChangeActiveScene("res://GameScenes/deviceAssignment.tscn")
 	
 func LoadGame() -> void:
-	print("load game")
+	var saveManager: SaveManager = get_tree().get_first_node_in_group("SaveManager")
+	saveManager.shouldLoadGame = true
+	gameSceneManager.ChangeActiveScene("res://GameScenes/deviceAssignment.tscn")

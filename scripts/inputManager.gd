@@ -3,22 +3,22 @@ extends Node
 class_name InputManager
 
 #signal moveSignal
-signal interactSignal
-signal leftClickSignal
-signal modifySignal
+#signal interactSignal
+#signal leftClickSignal
+#signal modifySignal
 
-func _process(_delta: float) -> void:
+#func _process(_delta: float) -> void:
 	#var moveInputVector = Input.get_vector("left", "right", "up", "down")
 	#moveSignal.emit(moveInputVector)
 	
-	if Input.is_action_just_pressed("interact"):
-		interactSignal.emit()
-		
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		leftClickSignal.emit()
-		
-	if Input.is_action_just_pressed("modify"):
-		modifySignal.emit()
+	#if Input.is_action_just_pressed("interact"):
+		#interactSignal.emit()
+		#
+	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		#leftClickSignal.emit()
+		#
+	#if Input.is_action_just_pressed("modify"):
+		#modifySignal.emit()
 
 func ClearSignal(signalToClear) -> void:
 	for connection in signalToClear.get_connections():

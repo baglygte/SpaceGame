@@ -1,10 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://xaqe6bbqas30"]
+[gd_scene load_steps=2 format=3 uid="uid://xaqe6bbqas30"]
 
 [ext_resource type="Script" uid="uid://uiel7kkctjvv" path="res://player/player_input_listener.gd" id="1_apwu4"]
-[ext_resource type="Script" uid="uid://rsq47xebfenk" path="res://player/controllerEcho.gd" id="2_nyleb"]
 
 [node name="PlayerInputListener" type="Node2D" groups=["PlayerInputListeners"]]
 script = ExtResource("1_apwu4")
-
-[node name="Timer" type="Timer" parent="."]
-script = ExtResource("2_nyleb")

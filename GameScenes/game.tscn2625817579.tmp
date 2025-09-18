@@ -7,12 +7,12 @@
 [ext_resource type="Script" uid="uid://bhesonx2bohb4" path="res://scripts/inputManager.gd" id="5_wy7ce"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://scripts/hud.gd" id="6_68ns4"]
 [ext_resource type="Script" uid="uid://cg6ekym3l5vgn" path="res://scripts/inHandUi.gd" id="7_q1v8x"]
-[ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://player/player_creator.gd" id="8_6ce2g"]
+[ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://scenes/playerSpawner.gd" id="8_6ce2g"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_g60ea")
 
-[node name="Ship" type="RigidBody2D" parent="." groups=["Ship"]]
+[node name="Ship" type="RigidBody2D" parent="."]
 gravity_scale = 0.0
 script = ExtResource("2_q3a5i")
 
@@ -66,5 +66,5 @@ text = "empty"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerCreator" type="Node2D" parent="." groups=["PlayerCreator"]]
+[node name="PlayerSpawner" type="Node2D" parent="."]
 script = ExtResource("8_6ce2g")

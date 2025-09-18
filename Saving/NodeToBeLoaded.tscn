@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctv3gaafwfq0e"]
+
+[sub_resource type="GDScript" id="GDScript_xd6rk"]
+script/source = "extends Node
+class_name NodeToBeLoaded
+
+var creatorName: String 
+var variablesToSet: Dictionary
+
+func Load() -> void:
+	var creator = get_tree().get_first_node_in_group(creatorName)
+	creator.CreateFromSave()
+	
+	queue_free()
+"
+
+[node name="Node" type="Node"]
+script = SubResource("GDScript_xd6rk")

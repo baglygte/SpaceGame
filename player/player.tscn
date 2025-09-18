@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpbckf7lnq03t"]
+[gd_scene load_steps=7 format=3 uid="uid://dpbckf7lnq03t"]
 
 [ext_resource type="Script" uid="uid://bbnj1feh4run6" path="res://scripts/player.gd" id="1_oy2p6"]
 [ext_resource type="Texture2D" uid="uid://dl66md7spe4bw" path="res://sprites/player.png" id="1_v6yc6"]
 [ext_resource type="Script" uid="uid://bi8w5dn02wnny" path="res://scripts/PlayerCamera.gd" id="3_nu3vr"]
 [ext_resource type="PackedScene" uid="uid://dukhc7kkp0j02" path="res://scenes/playerInventory.tscn" id="4_afcpi"]
+[ext_resource type="Script" uid="uid://cq63nlfia1o17" path="res://Saving/save_data_tracker.gd" id="5_qjkh3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuf4o"]
 radius = 11.0454
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["MustBeSaved"]]
 z_index = 1000
 script = ExtResource("1_oy2p6")
 
@@ -22,3 +23,6 @@ shape = SubResource("CircleShape2D_tuf4o")
 script = ExtResource("3_nu3vr")
 
 [node name="playerInventory" parent="." instance=ExtResource("4_afcpi")]
+
+[node name="saveDataTracker" type="Node2D" parent="."]
+script = ExtResource("5_qjkh3")

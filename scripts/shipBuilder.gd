@@ -5,7 +5,7 @@ class_name ShipBuilder
 var hoverItem: Node2D
 
 @onready var ship: Ship = $".."
-@onready var inputManager: InputManager = $"../../InputManager"
+#@onready var inputManager: InputManager = $"../../InputManager"
 
 func _process(_delta: float) -> void:		
 	HoverItem()
@@ -26,11 +26,11 @@ func HoverItem() -> void:
 func SetHoverItem(itemToHover: Module) -> void:
 	hoverItem = itemToHover
 	
-	inputManager.ClearSignal(inputManager.leftClickSignal)
-	inputManager.leftClickSignal.connect(PlaceItem)
-	
-	inputManager.ClearSignal(inputManager.modifySignal)
-	inputManager.modifySignal.connect(RotateItem)
+	#inputManager.ClearSignal(inputManager.leftClickSignal)
+	#inputManager.leftClickSignal.connect(PlaceItem)
+	#
+	#inputManager.ClearSignal(inputManager.modifySignal)
+	#inputManager.modifySignal.connect(RotateItem)
 	
 	ship.call_deferred("add_child", hoverItem)
 

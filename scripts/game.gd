@@ -7,7 +7,7 @@ var gameSceneManager: GameSceneManager
 const physicalItemScene = preload("res://scenes/physicalItem.tscn")
 
 func _ready() -> void:	
-	#SpawnPlayer()
+	CreateStuff()
 	
 	var physicalItem = physicalItemScene.instantiate()
 	physicalItem.ContainItem($ModuleGenerator.CreateShipModule())
@@ -21,7 +21,13 @@ func _ready() -> void:
 	
 	CreateThrusters()
 
-#func SpawnPlayer() -> void:
+func CreateStuff() -> void:
+	var saveManager = get_tree().get_first_node_in_group("SaveManager")
+	if saveManager.shouldLoadGame:
+		saveManager.LoadGame()
+	else:
+		$PlayerCreator.CreateNewPlayers()
+		
 	#var player = playerScene.instantiate() as Player
 	#player.AssignMoveSignal($InputManager.moveSignal)
 	#$ModuleGenerator.player = player
