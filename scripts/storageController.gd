@@ -1,7 +1,7 @@
 extends Node2D
 
-var inputManager
-var hud : HUD
+#var inputManager
+#var hud : HUD
 var inventory: Array
 var inventoryIsShown := false
 var uiInventory: UIInventory
@@ -12,10 +12,10 @@ const wallScene = preload("res://scenes/wall.tscn")
 
 func _ready() -> void:
 	interactiveRegion.interactedWithSignal.connect(ShowInventory)
-	inputManager.interactSignal.connect(interactiveRegion.InteractedWith)
+	#inputManager.interactSignal.connect(interactiveRegion.InteractedWith)
 	
 	uiInventory = UIInventoryScene.instantiate()
-	hud.AddUIElement(uiInventory)
+	#hud.AddUIElement(uiInventory)
 
 func ShowInventory(player: Player) -> void:
 	if player.playerInventory.heldItem != null:
@@ -24,11 +24,11 @@ func ShowInventory(player: Player) -> void:
 		return
 
 	if inventoryIsShown:
-		player.AssignMoveSignal(inputManager.moveSignal)
+		#player.AssignMoveSignal(inputManager.moveSignal)
 		inventoryIsShown = false
 	else:
 		uiInventory.player = player
-		inputManager.ClearSignal(inputManager.moveSignal)
+		#inputManager.ClearSignal(inputManager.moveSignal)
 		inventoryIsShown = true
 	
 	uiInventory.visible = inventoryIsShown

@@ -17,6 +17,7 @@ func AddPlayer(playerToAdd: Player) -> void:
 	player = playerToAdd
 
 func AddThruster(thrusterObject) -> void:
+	add_child(thrusterObject)
 	assignedThrusters.append(thrusterObject)
 
 func ApplyThrust(inputs) -> void:
@@ -30,6 +31,3 @@ func ApplyThrust(inputs) -> void:
 			continue
 			
 		apply_force(thruster.GetForceToApply(), module.global_position * 200)
-			
-		
-	

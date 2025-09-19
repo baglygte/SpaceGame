@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://scripts/shipBuilder.gd" id="3_w3as4"]
 [ext_resource type="Script" uid="uid://siv3ulplt76y" path="res://scripts/moduleGenerator.gd" id="4_rjcol"]
 [ext_resource type="Script" uid="uid://bhesonx2bohb4" path="res://scripts/inputManager.gd" id="5_wy7ce"]
-[ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://scripts/hud.gd" id="6_68ns4"]
-[ext_resource type="Script" uid="uid://cg6ekym3l5vgn" path="res://scripts/inHandUi.gd" id="7_q1v8x"]
-[ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://player/player_creator.gd" id="8_6ce2g"]
+[ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
+[ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="8_6ce2g"]
+[ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="8_g60ea"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_g60ea")
@@ -25,13 +25,14 @@ script = ExtResource("4_rjcol")
 [node name="InputManager" type="Node" parent="."]
 script = ExtResource("5_wy7ce")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." groups=["HUD"]]
 script = ExtResource("6_68ns4")
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 624.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 8
@@ -39,32 +40,8 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="HUD/MarginContainer"]
-layout_mode = 2
-text = "HUD"
-
-[node name="InHand" type="MarginContainer" parent="HUD" groups=["inHandUi"]]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -80.0
-offset_right = 80.0
-grow_vertical = 0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-script = ExtResource("7_q1v8x")
-
-[node name="inhandbackground" type="ColorRect" parent="HUD/InHand"]
-layout_mode = 2
-color = Color(0.72156864, 1, 1, 1)
-
-[node name="Label" type="Label" parent="HUD/InHand"]
-layout_mode = 2
-text = "empty"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="PlayerCreator" type="Node2D" parent="." groups=["PlayerCreator"]]
 script = ExtResource("8_6ce2g")
+
+[node name="ContainedItemCreator" type="Node2D" parent="." groups=["ContainedItemCreator"]]
+script = ExtResource("8_g60ea")

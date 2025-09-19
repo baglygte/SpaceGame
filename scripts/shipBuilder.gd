@@ -14,14 +14,14 @@ func HoverItem() -> void:
 	if hoverItem == null:
 		return
 	
-	var mousePosition = get_viewport().get_camera_2d().get_global_mouse_position()
-	var shipPosition = ship.global_position
-	var snappedPosition: Vector2
-	
-	snappedPosition.x = mousePosition.x - fmod(mousePosition.x, hoverItem.moduleWidth) + shipPosition.x
-	snappedPosition.y = mousePosition.y - fmod(mousePosition.y, hoverItem.moduleWidth) + shipPosition.y
-	
-	hoverItem.global_position = snappedPosition
+	#var mousePosition = get_viewport().get_camera_2d().get_global_mouse_position()
+	#var shipPosition = ship.global_position
+	#var snappedPosition: Vector2
+	#
+	#snappedPosition.x = mousePosition.x - fmod(mousePosition.x, hoverItem.moduleWidth) + shipPosition.x
+	#snappedPosition.y = mousePosition.y - fmod(mousePosition.y, hoverItem.moduleWidth) + shipPosition.y
+	#
+	#hoverItem.global_position = snappedPosition
 
 func SetHoverItem(itemToHover: Module) -> void:
 	hoverItem = itemToHover

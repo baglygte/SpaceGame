@@ -2,7 +2,6 @@ extends Control
 
 # Takes care of listening to device input and assign player control
 # instances to the devices
-const playerController = preload("res://player/player_input_listener.tscn")
 var gameSceneManager: GameSceneManager
 
 @onready var deviceDetector = $HBoxContainer/DetectedDevices
@@ -34,8 +33,5 @@ func CheckAllPlayersReady() -> void:
 	gameSceneManager.ChangeActiveScene("res://GameScenes/game.tscn")
 
 func CreatePlayerControllers() -> void:
-	for deviceId in deviceDetector.connectedDeviceIds.keys():
-		var instance = playerController.instantiate()
-		instance.deviceId = deviceId
+	gameSceneManager.AddPersistentData({"deviceIds": deviceDetector.connectedDeviceIds.keys()})
 		
-		gameSceneManager.AddPersistentChild(instance)

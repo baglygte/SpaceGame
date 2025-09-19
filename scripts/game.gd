@@ -3,23 +3,16 @@ class_name Game
 
 var gameSceneManager: GameSceneManager
 
-#const playerScene = preload("res://scenes/player.tscn")
-const physicalItemScene = preload("res://scenes/physicalItem.tscn")
-
 func _ready() -> void:	
 	CreateStuff()
 	
-	var physicalItem = physicalItemScene.instantiate()
-	physicalItem.ContainItem($ModuleGenerator.CreateShipModule())
-	$Ship.add_child(physicalItem)
-	physicalItem.position = Vector2(200,0)
+	$ContainedItemCreator.SpawnItemInShip(load("res://scenes/section.tscn").instantiate(), Vector2(200,0))
+	$ContainedItemCreator.SpawnItemInShip(load("res://scenes/section.tscn").instantiate(), Vector2(200,50))
 	
-	physicalItem = physicalItemScene.instantiate()
-	physicalItem.ContainItem($ModuleGenerator.CreateStorageModule())
-	$Ship.add_child(physicalItem)
-	physicalItem.position = Vector2(200,50)
+	$ContainedItemCreator.SpawnItemInShip(load("res://Items/Tools/hammer.tscn").instantiate(), Vector2(100,0))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/shipController.tscn").instantiate(), Vector2(100,50))
 	
-	CreateThrusters()
+	#CreateThrusters()
 
 func CreateStuff() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")
@@ -27,35 +20,13 @@ func CreateStuff() -> void:
 		saveManager.LoadGame()
 	else:
 		$PlayerCreator.CreateNewPlayers()
-		
-	#var player = playerScene.instantiate() as Player
-	#player.AssignMoveSignal($InputManager.moveSignal)
-	#$ModuleGenerator.player = player
-	#$Ship.AddPlayer(player)
-	
+
 func AddNodeToShip(node: Node) -> void:
 	if node.get_parent() == null:
 		$Ship.add_child(node)
 	else:
 		node.reparent($Ship)
 
-func CreateThrusters() -> void:
-	var physicalItem = physicalItemScene.instantiate()
-	physicalItem.ContainItem($ModuleGenerator.CreateThrusterModule())
-	$Ship.add_child(physicalItem)
-	physicalItem.position = Vector2(200,100)
-
-	physicalItem = physicalItemScene.instantiate()
-	physicalItem.ContainItem($ModuleGenerator.CreateThrusterModule())
-	$Ship.add_child(physicalItem)
-	physicalItem.position = Vector2(200,100)
-	
-	physicalItem = physicalItemScene.instantiate()
-	physicalItem.ContainItem($ModuleGenerator.CreateThrusterModule())
-	$Ship.add_child(physicalItem)
-	physicalItem.position = Vector2(200,100)
-	
-	physicalItem = physicalItemScene.instantiate()
-	physicalItem.ContainItem($ModuleGenerator.CreateThrusterModule())
-	$Ship.add_child(physicalItem)
-	physicalItem.position = Vector2(200,100)
+#func CreateThrusters() -> void:
+	#for xPos in [100, 150, 200, 250]:
+		#$ContainedItemCreator.SpawnItemInShip($ModuleGenerator.CreateThrusterModule(), Vector2(200,xPos))	

@@ -4,26 +4,29 @@ class_name PlayerCreator
 const player = preload("res://player/player.tscn")
 
 func CreateNewPlayers() -> void:
-	var numberOfListeners = get_tree().get_nodes_in_group("PlayerInputListeners").size()
+	var deviceIds = $"..".gameSceneManager.persistentData["deviceIds"]
 	
-	for playerNum in range(numberOfListeners):
-		FindAndAssignListener(player.instantiate())
-	
-func CreateFromSave(variablesToSet: Dictionary) -> void:
-	var instance: Player = player.instantiate()
+	while deviceIds.size() > 0:
+		CreatePlayerInstance(deviceIds[0])
+		
+		deviceIds.remove_at(0)
+		$"..".gameSceneManager.persistentData["deviceIds"] = deviceIds
 
-	FindAndAssignListener(instance)
+func CreateFromSave(variablesToSet: Dictionary) -> void:
+	var deviceIds: Array = $"..".gameSceneManager.persistentData["deviceIds"]
 	
+	var instance = CreatePlayerInstance(deviceIds[0])
+	
+	deviceIds.remove_at(0)
+	$"..".gameSceneManager.persistentData["deviceIds"] = deviceIds
+
 	instance.position.x = variablesToSet["position.x"]
 	instance.position.y = variablesToSet["position.y"]
 
-func FindAndAssignListener(playerInstance: Player) -> void:
-	var listeners = get_tree().get_nodes_in_group("PlayerInputListeners")
-	for listener: PlayerInputListener in listeners:
+func CreatePlayerInstance(deviceId) -> Player:
+	var instance = player.instantiate()
+	instance.get_node("PlayerInputListener").deviceId = deviceId
 		
-		if listener.isAssigned:
-			continue
-		
-		listener.AssignToPlayer(playerInstance)
-		get_parent().AddNodeToShip(playerInstance)
-		return
+	$"../Ship".add_child(instance)
+	$"../HUD".CreatePlayerHands(instance)
+	return instance

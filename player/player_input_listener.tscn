@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://xaqe6bbqas30"]
-
-[ext_resource type="Script" uid="uid://uiel7kkctjvv" path="res://player/player_input_listener.gd" id="1_apwu4"]
-
-[node name="PlayerInputListener" type="Node2D" groups=["PlayerInputListeners"]]
-script = ExtResource("1_apwu4")
