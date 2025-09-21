@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctt53lpi2omgq"]
+
+[ext_resource type="Texture2D" uid="uid://ch0iids6p2oxv" path="res://sprites/starmapBlip.png" id="1_4kjpj"]
+
+[node name="StarmapBlip" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4kjpj")

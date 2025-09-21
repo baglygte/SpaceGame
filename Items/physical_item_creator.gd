@@ -15,8 +15,8 @@ func ExtractItemFromContainer(container: ItemContainer) -> Node2D:
 	
 	return extractedItem
 
-func SpawnItemInShip(item: Node2D, position: Vector2) -> void:
+func SpawnItemInShip(item: Node2D, itemPosition: Vector2) -> void:
 	var itemContainer = CreateItemContainer(item)
 	
 	$"../Ship".add_child(itemContainer)
-	itemContainer.position = position
+	itemContainer.position = itemPosition

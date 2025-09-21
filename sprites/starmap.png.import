@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckotnxib5v5x2"
-path="res://.godot/imported/wall.png-202f71260357ef04e6e8c2cec090a94e.ctex"
+uid="uid://b7lu20whdqqjv"
+path="res://.godot/imported/starmap.png-fe142bf77b7b223edbeacc58a831d1d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/wall.png"
-dest_files=["res://.godot/imported/wall.png-202f71260357ef04e6e8c2cec090a94e.ctex"]
+source_file="res://sprites/starmap.png"
+dest_files=["res://.godot/imported/starmap.png-fe142bf77b7b223edbeacc58a831d1d2.ctex"]
 
 [params]
 

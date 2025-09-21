@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7ixrkhmcjj0o"]
 
-[ext_resource type="Script" uid="uid://c5nrfy5sdeyoa" path="res://scripts/thrusterController.gd" id="1_i8txs"]
+[ext_resource type="Script" uid="uid://c5nrfy5sdeyoa" path="res://Systems/thrusterController.gd" id="1_i8txs"]
 [ext_resource type="PackedScene" uid="uid://37umxulv0221" path="res://scenes/interactiveRegion.tscn" id="1_tuyk5"]
 [ext_resource type="Texture2D" uid="uid://drw8jroe1cv6j" path="res://sprites/sectionTilemap.png" id="2_s8qw6"]
 

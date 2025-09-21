@@ -6,11 +6,11 @@ var gameSceneManager: GameSceneManager
 func _ready() -> void:	
 	CreateStuff()
 	
-	$ContainedItemCreator.SpawnItemInShip(load("res://scenes/section.tscn").instantiate(), Vector2(200,0))
-	$ContainedItemCreator.SpawnItemInShip(load("res://scenes/section.tscn").instantiate(), Vector2(200,50))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Sections/section.tscn").instantiate(), Vector2(200,0))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Sections/section.tscn").instantiate(), Vector2(200,50))
 	
 	$ContainedItemCreator.SpawnItemInShip(load("res://Items/Tools/hammer.tscn").instantiate(), Vector2(100,0))
-	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/shipController.tscn").instantiate(), Vector2(100,50))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/starmap.tscn").instantiate(), Vector2(100,50))
 	
 	#CreateThrusters()
 

@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=11 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://scripts/game.gd" id="1_g60ea"]
-[ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://scripts/ship.gd" id="2_q3a5i"]
-[ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://scripts/shipBuilder.gd" id="3_w3as4"]
+[ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="2_q3a5i"]
+[ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://Ship/ship_section_builder.gd" id="3_w3as4"]
 [ext_resource type="Script" uid="uid://siv3ulplt76y" path="res://scripts/moduleGenerator.gd" id="4_rjcol"]
+[ext_resource type="Script" uid="uid://d0pmrbwvyke8v" path="res://GameScenes/wall_builder.gd" id="4_w3as4"]
 [ext_resource type="Script" uid="uid://bhesonx2bohb4" path="res://scripts/inputManager.gd" id="5_wy7ce"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="8_6ce2g"]
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="8_g60ea"]
+[ext_resource type="PackedScene" uid="uid://b2i0pprx4byav" path="res://scenes/enemy.tscn" id="9_q3a5i"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_g60ea")
@@ -16,8 +18,11 @@ script = ExtResource("1_g60ea")
 gravity_scale = 0.0
 script = ExtResource("2_q3a5i")
 
-[node name="ShipBuilder" type="Node2D" parent="Ship"]
+[node name="ShipSectionBuilder" type="Node2D" parent="Ship"]
 script = ExtResource("3_w3as4")
+
+[node name="WallBuilder" type="Node2D" parent="Ship/ShipSectionBuilder"]
+script = ExtResource("4_w3as4")
 
 [node name="ModuleGenerator" type="Node" parent="."]
 script = ExtResource("4_rjcol")
@@ -45,3 +50,6 @@ script = ExtResource("8_6ce2g")
 
 [node name="ContainedItemCreator" type="Node2D" parent="." groups=["ContainedItemCreator"]]
 script = ExtResource("8_g60ea")
+
+[node name="enemy" parent="." groups=["VisibleOnStarmap"] instance=ExtResource("9_q3a5i")]
+gravity_scale = 0.01

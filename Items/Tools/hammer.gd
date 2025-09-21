@@ -46,6 +46,4 @@ func Use() -> void:
 	
 	otherHand.LoseItem()
 
-	ship.add_child(item)
-	item.position = previewInstance.position
-	
+	ship.get_node("ShipSectionBuilder").AddSectionAtPosition(item, previewInstance.position)	

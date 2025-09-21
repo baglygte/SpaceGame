@@ -3,7 +3,6 @@ extends RigidBody2D
 # Contains everything the player can interacted with
 # Modules, walls, etc.
 class_name Ship
-@onready var shipBuilder: ShipBuilder = $ShipBuilder
 
 var moveDirection := Vector2(0,0)
 var player: Player
