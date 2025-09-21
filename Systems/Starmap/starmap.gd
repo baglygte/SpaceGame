@@ -3,7 +3,7 @@ extends Node2D
 var thingsToDisplay: Dictionary
 var visibleRange = 720 * 0.5
 var mapSize
-const blipScene = preload("res://Systems/starmapBlip.tscn")
+const blipScene = preload("res://Systems/Starmap/starmapBlip.tscn")
 
 func _ready() -> void:
 	mapSize = $Sprite2D.texture.get_width() - 2

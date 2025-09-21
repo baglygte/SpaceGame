@@ -31,10 +31,10 @@ script = ExtResource("3_nu3vr")
 [node name="saveDataTracker" type="Node2D" parent="."]
 script = ExtResource("5_qjkh3")
 
-[node name="ReachCollider" type="Area2D" parent="."]
+[node name="PlayerReach" type="Area2D" parent="."]
 script = ExtResource("6_g6k8r")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ReachCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerReach"]
 shape = SubResource("SegmentShape2D_boad6")
 
 [node name="PlayerInputListener" type="Node2D" parent="."]

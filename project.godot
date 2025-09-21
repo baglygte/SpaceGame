@@ -28,6 +28,7 @@ version_control/autoload_on_startup=true
 [file_customization]
 
 folder_colors={
+"res://Tools/": "green",
 "res://sprites/": "yellow"
 }
 
@@ -35,6 +36,8 @@ folder_colors={
 
 System=""
 VisibleOnStarmap=""
+HammerCanEdit=""
+PliersCanEdit=""
 
 [input]
 

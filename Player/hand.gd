@@ -1,15 +1,19 @@
 extends Node2D
 class_name Hand
 
-var heldItem: Node2D
+var heldItem: Node
 signal itemWasPickedUp
+@onready var playerReach: PlayerReach = $"../PlayerReach"
 
+func _ready() -> void:
+	playerReach.AddHoverGroup("CanPickUp")
+	
 func Interact() -> void:
 	if heldItem == null:
 		PickUpItem()
 		return
 		
-	if heldItem.is_in_group("Tool"):
+	if heldItem is Tool:
 		heldItem.Use()
 	
 func Drop() -> void:
@@ -19,7 +23,7 @@ func Drop() -> void:
 	DropItem()
 	
 func PickUpItem() -> void:
-	var itemContainer = $"../ReachCollider".GetItemWithinReach()
+	var itemContainer = playerReach.GetItemWithinReach()
 	
 	if itemContainer == null:
 		return
@@ -32,7 +36,7 @@ func PickUpItem() -> void:
 	
 	add_child(heldItem)
 
-	if heldItem.is_in_group("Tool"):
+	if heldItem is Tool:
 		heldItem.Equip()
 	
 	itemWasPickedUp.emit()
@@ -61,7 +65,7 @@ func GetOtherHand() -> Hand:
 func LoseItem() -> void:
 	heldItem.show()
 	
-	if heldItem.is_in_group("Tool"):
+	if heldItem is Tool:
 		heldItem.Unequip()
 		
 	remove_child(heldItem)

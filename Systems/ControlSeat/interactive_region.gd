@@ -1,7 +1,6 @@
 extends Area2D
 # A collider that detects if a player is in contact
 # and emits a signal if the interact key is pressed
-class_name InteractiveRegion
 
 signal interactedWithSignal
 var player: Player

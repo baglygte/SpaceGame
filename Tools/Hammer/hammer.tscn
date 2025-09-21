@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://da67althap6r3"]
+
+[ext_resource type="PackedScene" uid="uid://nx3tpn4s6od5" path="res://Tools/tool.tscn" id="1_eq58q"]
+[ext_resource type="Texture2D" uid="uid://ctwpaw248frfu" path="res://sprites/hammer.png" id="1_o8p1l"]
+[ext_resource type="Script" uid="uid://owvxkhgk5ylj" path="res://Tools/Hammer/hammer.gd" id="1_q7g0b"]
+
+[node name="Tool" instance=ExtResource("1_eq58q")]
+
+[node name="Hammer" type="Node2D" parent="." index="0"]
+script = ExtResource("1_q7g0b")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hammer" index="0"]
+texture = ExtResource("1_o8p1l")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://f7k374j2h0j8"]
+
+[ext_resource type="PackedScene" uid="uid://nx3tpn4s6od5" path="res://Tools/tool.tscn" id="1_phlv4"]
+[ext_resource type="Script" uid="uid://cqegq08rwb05o" path="res://Tools/Pliers/pliers.gd" id="2_ke2bu"]
+[ext_resource type="Texture2D" uid="uid://dvl16nx20cxen" path="res://sprites/pliers.png" id="3_fkqf4"]
+
+[node name="Tool" instance=ExtResource("1_phlv4")]
+
+[node name="Pliers" type="Node2D" parent="." index="0"]
+script = ExtResource("2_ke2bu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Pliers" index="0"]
+texture = ExtResource("3_fkqf4")

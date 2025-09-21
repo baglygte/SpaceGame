@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvk53r6lroe1e"]
 
-[ext_resource type="Script" uid="uid://b6a25mfb3i261" path="res://Systems/starmap.gd" id="1_dxfcr"]
+[ext_resource type="Script" uid="uid://b6a25mfb3i261" path="res://Systems/Starmap/starmap.gd" id="1_dxfcr"]
 [ext_resource type="Texture2D" uid="uid://b7lu20whdqqjv" path="res://sprites/starmap.png" id="1_fw7qg"]
 
 [node name="Starmap" type="Node2D" groups=["System"]]

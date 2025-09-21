@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqxqq2ft218vv"]
+[gd_scene load_steps=3 format=3 uid="uid://bqxqq2ft218vv"]
 
 [ext_resource type="Texture2D" uid="uid://drw8jroe1cv6j" path="res://sprites/sectionTilemap.png" id="2_8glup"]
+[ext_resource type="PackedScene" uid="uid://c21tu7qhdabiw" path="res://editable_hover.tscn" id="2_26vgj"]
 
-[node name="section" type="StaticBody2D"]
+[node name="Section" type="Node2D" groups=["HammerCanEdit"]]
 z_index = -1000
 z_as_relative = false
 
@@ -10,3 +11,5 @@ z_as_relative = false
 texture = ExtResource("2_8glup")
 region_enabled = true
 region_rect = Rect2(0, 576, 64, 64)
+
+[node name="SectionHover" parent="." instance=ExtResource("2_26vgj")]

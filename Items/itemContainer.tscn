@@ -1,14 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp6y8v5gc2cqa"]
+[gd_scene load_steps=4 format=3 uid="uid://dp6y8v5gc2cqa"]
 
 [ext_resource type="Script" uid="uid://rkvsx7yyajhh" path="res://Items/itemContainer.gd" id="1_yc5jj"]
 [ext_resource type="Texture2D" uid="uid://cr1vdioipelk7" path="res://sprites/physicalItemFrame.png" id="2_pwyp5"]
-[ext_resource type="Script" uid="uid://cklwast5n2502" path="res://scenes/itemCollision.gd" id="3_yg5a3"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hc7b7"]
-radius = 17.0294
-
-[sub_resource type="Theme" id="Theme_rnquk"]
-default_font_size = 10
+[ext_resource type="PackedScene" uid="uid://c21tu7qhdabiw" path="res://editable_hover.tscn" id="3_y0e62"]
 
 [node name="itemContainer" type="Node2D" groups=["CanPickUp"]]
 script = ExtResource("1_yc5jj")
@@ -16,24 +10,4 @@ script = ExtResource("1_yc5jj")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pwyp5")
 
-[node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("3_yg5a3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_hc7b7")
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-visible = false
-offset_left = -18.0
-offset_top = -36.0
-offset_right = 18.0
-offset_bottom = -21.0
-
-[node name="Label" type="Label" parent="PanelContainer"]
-layout_mode = 2
-theme = SubResource("Theme_rnquk")
-text = "item"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="editableHover" parent="." instance=ExtResource("3_y0e62")]

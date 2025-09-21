@@ -11,4 +11,3 @@ func _process(delta: float) -> void:
 
 func ContainItem(itemToContain) -> void:
 	containedItem = itemToContain
-	$PanelContainer/Label.text = itemToContain.name
