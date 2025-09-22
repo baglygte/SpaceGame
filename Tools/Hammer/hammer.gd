@@ -1,15 +1,19 @@
-extends Tool
+extends Node2D
 class_name Hammer
 
+var isEquipped: bool = false
 var previewInstance
 var ship
 var player
 
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
-	player = get_parent().get_parent().get_parent()
+	player = get_parent().get_parent()
 
-func OnProcess() -> void:
+func _process(_delta: float) -> void:
+	if !isEquipped:
+		return
+		
 	var pointedPosition = player.position + Vector2(70,0).rotated(player.rotation)
 	var shipPosition = ship.global_position
 	var snappedPosition: Vector2
@@ -19,22 +23,31 @@ func OnProcess() -> void:
 	
 	previewInstance.global_position = snappedPosition
 	
-func OnEquip() -> void:
+func Equip() -> void:
+	isEquipped = true
 	previewInstance = load("res://section_preview.tscn").instantiate()
 	player.get_node("PlayerReach").AddHoverGroup("HammerCanEdit")
 	ship.add_child(previewInstance)
 
-func OnUnequip() -> void:
+func Unequip() -> void:
+	isEquipped = false
 	player.get_node("PlayerReach").RemoveHoverGroup("HammerCanEdit")
 	previewInstance.queue_free()
 	
-func OnUse() -> void:
-	var otherHand: Hand = get_parent().get_parent().GetOtherHand()
+func Use() -> void:
+	if not isEquipped:
+		return
+		
+	var otherHand: Hand = get_parent().GetOtherHand()
+	var item
 	
 	if otherHand.heldItem == null:
+		item = player.get_node("PlayerReach").GetNearestItemInGroup("HammerCanEdit")
+
+		otherHand.PutItemIntoHand(item)
 		return
 	
-	var item = otherHand.heldItem
+	item = otherHand.heldItem
 	
 	otherHand.LoseItem()
 

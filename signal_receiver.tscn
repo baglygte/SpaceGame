@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ut51d0u04hri"]
+
+[ext_resource type="Script" uid="uid://cerwmew0qxv2p" path="res://signal_receiver.gd" id="1_crx3x"]
+
+[node name="SignalReceiver" type="Node2D" groups=["signaler"]]
+script = ExtResource("1_crx3x")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpbckf7lnq03t"]
+[gd_scene load_steps=11 format=3 uid="uid://dpbckf7lnq03t"]
 
 [ext_resource type="Script" uid="uid://bbnj1feh4run6" path="res://scripts/player.gd" id="1_oy2p6"]
 [ext_resource type="Texture2D" uid="uid://dl66md7spe4bw" path="res://sprites/player.png" id="1_v6yc6"]
@@ -14,6 +14,8 @@ radius = 11.0454
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_boad6"]
 a = Vector2(12, 0)
 b = Vector2(55, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtle1"]
 
 [node name="Player" type="CharacterBody2D" groups=["MustBeSaved"]]
 z_index = 1000
@@ -45,3 +47,8 @@ script = ExtResource("7_rgyib")
 
 [node name="RightHand" type="Node2D" parent="."]
 script = ExtResource("7_rgyib")
+
+[node name="EnterExitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnterExitArea"]
+shape = SubResource("CircleShape2D_vtle1")

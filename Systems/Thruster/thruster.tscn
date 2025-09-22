@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bt4wngy5qigs7"]
+
+[ext_resource type="Script" uid="uid://dx87tfcjg1fup" path="res://Systems/Thruster/thruster.gd" id="1_0hj6a"]
+[ext_resource type="Texture2D" uid="uid://fpaw53oftt7h" path="res://sprites/thruster.png" id="1_7bk4a"]
+[ext_resource type="Script" uid="uid://dmgtkfejwsm0s" path="res://Sections/section_hover.gd" id="2_ymiq1"]
+[ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="3_xjhfb"]
+[ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="4_1808l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymiq1"]
+size = Vector2(60, 41)
+
+[node name="Thruster" type="Node2D" groups=["HammerCanEdit", "PliersCanEdit"]]
+script = ExtResource("1_0hj6a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7bk4a")
+
+[node name="hoverRegion" type="Area2D" parent="."]
+script = ExtResource("2_ymiq1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hoverRegion"]
+position = Vector2(0, -11.5)
+shape = SubResource("RectangleShape2D_ymiq1")
+
+[node name="Sprite2D2" type="Sprite2D" parent="hoverRegion"]
+visible = false
+position = Vector2(0.50000095, -0.50000095)
+scale = Vector2(0.0703125, 0.07031251)
+texture = ExtResource("3_xjhfb")
+
+[node name="SignalReceiver" parent="." instance=ExtResource("4_1808l")]

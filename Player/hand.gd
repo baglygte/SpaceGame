@@ -13,7 +13,7 @@ func Interact() -> void:
 		PickUpItem()
 		return
 		
-	if heldItem is Tool:
+	if heldItem.is_in_group("Tool"):
 		heldItem.Use()
 	
 func Drop() -> void:
@@ -23,26 +23,35 @@ func Drop() -> void:
 	DropItem()
 	
 func PickUpItem() -> void:
-	var itemContainer = playerReach.GetItemWithinReach()
+	var itemContainer = playerReach.GetNearestItemInGroup("CanPickUp")
 	
 	if itemContainer == null:
 		return
 
 	var creator = get_tree().get_first_node_in_group("ContainedItemCreator")
 	
-	heldItem = creator.ExtractItemFromContainer(itemContainer)
+	PutItemIntoHand(creator.ExtractItemFromContainer(itemContainer))
+	
+func PutItemIntoHand(item) -> void:
+	if item == null:
+		return
+	
+	heldItem = item
 	
 	heldItem.hide()
 	
-	add_child(heldItem)
+	if heldItem.get_parent() == null:
+		add_child(heldItem)
+	else:
+		heldItem.reparent(self)
 
-	if heldItem is Tool:
+	if heldItem.is_in_group("Tool"):
 		heldItem.Equip()
 	
 	itemWasPickedUp.emit()
 	
 	SendItemToHUD()
-
+	
 func DropItem() -> void:
 	var creator: ContainedItemCreator = get_tree().get_first_node_in_group("ContainedItemCreator")
 	creator.SpawnItemInShip(heldItem, global_position)
@@ -65,7 +74,7 @@ func GetOtherHand() -> Hand:
 func LoseItem() -> void:
 	heldItem.show()
 	
-	if heldItem is Tool:
+	if heldItem.is_in_group("Tool"):
 		heldItem.Unequip()
 		
 	remove_child(heldItem)

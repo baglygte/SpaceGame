@@ -17,8 +17,7 @@ func _ready() -> void:
 	# Systems
 	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Starmap/starmap.tscn").instantiate(), Vector2(150,0))
 	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(150,25))
-	
-	#CreateThrusters()
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(150,50))
 
 func CreateStuff() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")
@@ -32,7 +31,3 @@ func AddNodeToShip(node: Node) -> void:
 		$Ship.add_child(node)
 	else:
 		node.reparent($Ship)
-
-#func CreateThrusters() -> void:
-	#for xPos in [100, 150, 200, 250]:
-		#$ContainedItemCreator.SpawnItemInShip($ModuleGenerator.CreateThrusterModule(), Vector2(200,xPos))	

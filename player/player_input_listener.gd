@@ -14,17 +14,12 @@ signal interactRight
 signal interactLeft
 signal dropRight
 signal dropLeft
+signal enterexit
 
 func _ready() -> void:
-	var player = $".."
+	SetDefaultInputs()
 	
-	player.AssignMoveSignal(moveSignal)
-	lookSignal.connect(player.ReceiveLook)
-	
-	interactRight.connect($"../RightHand".Interact)
-	interactLeft.connect($"../LeftHand".Interact)
-	dropRight.connect($"../RightHand".Drop)
-	dropLeft.connect($"../LeftHand".Drop)
+	enterexit.connect($"..".ToggleEnterExit)
 	
 func _process(_delta: float) -> void:
 	SendMoveSignal()
@@ -45,6 +40,9 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed(str(deviceId) + "_drop_left"):
 		dropLeft.emit()
+	
+	if Input.is_action_just_pressed(str(deviceId) + "_enterexit"):
+		enterexit.emit()
 
 func SendMoveSignal() -> void:
 	var prefix = str(deviceId) + "_move"
@@ -70,4 +68,26 @@ func SendLookSignal() -> void:
 	#canMove = event.device == deviceId
 	#if event.device != deviceId:
 		#return
+
+func SetDefaultInputs() -> void:
+	ResetInputs()
 	
+	moveSignal.connect($"..".ReceiveMovement)
+	lookSignal.connect($"..".ReceiveLook)
+	
+	interactRight.connect($"../RightHand".Interact)
+	interactLeft.connect($"../LeftHand".Interact)
+	dropRight.connect($"../RightHand".Drop)
+	dropLeft.connect($"../LeftHand".Drop)
+
+func ResetInputs() -> void:
+	ClearInputSignal(moveSignal)
+	ClearInputSignal(lookSignal)
+	ClearInputSignal(interactRight)
+	ClearInputSignal(interactLeft)
+	ClearInputSignal(dropRight)
+	ClearInputSignal(dropLeft)
+
+func ClearInputSignal(signalToClear: Signal) -> void:
+	for connection in signalToClear.get_connections():
+		signalToClear.disconnect(connection["callable"])

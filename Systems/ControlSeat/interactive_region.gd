@@ -1,25 +1,22 @@
+class_name EnterExitArea
 extends Area2D
-# A collider that detects if a player is in contact
-# and emits a signal if the interact key is pressed
 
-signal interactedWithSignal
-var player: Player
-
-func _init() -> void:
-	body_entered.connect(EnteredRegion)
-	body_exited.connect(LeftRegion)
-
-func EnteredRegion(body: Node2D) -> void:
-	if body is not Player:
-		return
-		
-	player = body
+var listenerInControl: PlayerInputListener
 	
-func LeftRegion(_body: Node2D) -> void:
-	player = null
-
-func InteractedWith() -> void:
-	if player == null:
+func ToggleControl(listener: PlayerInputListener) -> void:
+	if listenerInControl == listener:
+		ReleaseControl()
 		return
 	
-	interactedWithSignal.emit(player)
+	if listenerInControl == null:
+		TakeControl(listener)
+		return
+	
+func ReleaseControl() -> void:
+	listenerInControl.SetDefaultInputs()
+	listenerInControl = null
+
+func TakeControl(listener:PlayerInputListener):
+	listenerInControl = listener
+	listener.ResetInputs()
+	listener.moveSignal.connect($"../SignalEmitter".SendMovementSignal)

@@ -7,7 +7,8 @@ const rotateSpeed = 2
 var containedItem: Node2D
 
 func _process(delta: float) -> void:
-	$Sprite2D.rotate(rotateSpeed * delta)
+	$PanelContainer.rotation += (rotateSpeed * delta)
 
 func ContainItem(itemToContain) -> void:
 	containedItem = itemToContain
+	$PanelContainer/TextureRect.texture = itemToContain.get_node("Sprite2D").texture

@@ -1,21 +1,43 @@
-extends Tool
+extends Node2D
 class_name Pliers
 
 var playerReach: PlayerReach
+var signalerToLink
 
 func _ready() -> void:
-	playerReach = get_parent().get_parent().get_parent().get_node("PlayerReach")
+	playerReach = get_parent().get_parent().get_node("PlayerReach")
 	
-func OnProcess() -> void:		
-	return
-	
-func OnEquip() -> void:
+func Equip() -> void:
 	playerReach.AddHoverGroup("PliersCanEdit")
 
-func OnUnequip() -> void:
+func Unequip() -> void:
 	playerReach.RemoveHoverGroup("PliersCanEdit")
 	
-func OnUse() -> void:
-	var items = playerReach.GetItemsInGroup("PliersCanEdit")
-	print(items[0].name)
-	return
+func Use() -> void:
+	var item = playerReach.GetNearestItemInGroup("PliersCanEdit")
+	
+	if item == null:
+		return
+	
+	if signalerToLink == null:
+		signalerToLink = GetSignaler(item)
+	else:
+		EstablishLink(GetSignaler(item))
+		
+func GetSignaler(item: Node2D) -> Node2D:
+	var children = item.get_children()
+	
+	for child in children:
+		if child.is_in_group("signaler"):
+			return child
+		
+	return null
+	
+func EstablishLink(item) -> void:
+	if signalerToLink is SignalEmitter:
+		signalerToLink.AddReceiver(item)
+		print("Linked " + item.get_parent().name + " to " + signalerToLink.get_parent().name)
+	
+	if item is SignalEmitter:
+		item.AddReceiver(signalerToLink)
+		print("Linked " + item.get_parent().name + " to " + signalerToLink.get_parent().name)

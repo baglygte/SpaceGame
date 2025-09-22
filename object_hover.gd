@@ -12,6 +12,6 @@ func UnrequestHover() -> void:
 	
 func ToggleLabelDisplay() -> void:
 	if numberOfHoverRequesters > 0:
-		$PanelContainer.show()
+		$Label.show()
 	else:
-		$"PanelContainer".hide()
+		$"Label".hide()

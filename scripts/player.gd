@@ -10,9 +10,6 @@ func _ready() -> void:
 	saveDataTracker.creatorName = "PlayerCreator"
 	saveDataTracker.AddVariableNameToSave("position")
 
-func AssignMoveSignal(moveSignal) -> void:
-	moveSignal.connect(ReceiveMovement)
-
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:
 		return
@@ -25,3 +22,20 @@ func ReceiveLook(lookVector: Vector2) -> void:
 		return
 		
 	self.rotation = lookVector.angle()
+
+func ToggleEnterExit() -> void:
+	var area: EnterExitArea = GetEnterExitArea()
+	
+	if area == null:
+		return
+		
+	area.ToggleControl($PlayerInputListener)
+
+func GetEnterExitArea() -> EnterExitArea:
+	var areas = $EnterExitArea.get_overlapping_areas()
+	
+	for area: Area2D in areas:
+		if area is EnterExitArea:
+			return area
+		
+	return null

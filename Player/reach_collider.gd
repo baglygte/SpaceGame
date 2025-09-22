@@ -20,11 +20,13 @@ func RemoveHoverGroup(groupName: String) -> void:
 	hoverGroups.erase(groupName)
 	
 	for area in get_overlapping_areas():
+		if not area.is_in_group("Hoverable"):
+			continue
 		if area.get_parent().is_in_group(groupName):
 			area.UnrequestHover()
 	
 func AreaEntered(area: Area2D) -> void:
-	if area is not EditableHover:
+	if not area.is_in_group("Hoverable"):
 		return
 		
 	if not IsAreaInAnyAllowedHoverGroups(area):
@@ -33,7 +35,7 @@ func AreaEntered(area: Area2D) -> void:
 	area.RequestHover()
 
 func AreaExited(area: Area2D) -> void:
-	if area is not EditableHover:
+	if not area.is_in_group("Hoverable"):
 		return
 		
 	if not IsAreaInAnyAllowedHoverGroups(area):
@@ -51,30 +53,33 @@ func IsAreaInAnyAllowedHoverGroups(area: Area2D) -> bool:
 			
 	return areaIsInHoverGroups
 
-func GetItemsInGroup(groupName: String) -> Array:
-	var items = GetAllItemsWithinReach()
-	var itemsToReturn: Array
-	
-	for item in items:
-		if not item.get_parent().is_in_group(groupName):
-			continue
-		
-		itemsToReturn.append(item.get_parent())
-		
-	return itemsToReturn
-	
-func GetItemWithinReach() -> Node2D:
-	var areas = GetAllItemsWithinReach()
+func GetNearestItemInGroup(groupName: String) -> Node2D:
+	var areas = FilterGroupName(get_overlapping_areas(), groupName)
 	
 	if areas.size() < 1:
 		return null
-	
-	var itemContainer: Node2D = areas[0].get_parent()
-	
-	if "CanPickUp" not in itemContainer.get_groups():
-		return null
-	
-	return itemContainer
+		
+	return FilterNearest(areas).get_parent()
 
-func GetAllItemsWithinReach() -> Array:
-	return get_overlapping_areas()
+func FilterGroupName(areas: Array, groupName: String) -> Array:
+	var filteredAreas: Array
+	
+	for area in areas:
+		if not area.get_parent().is_in_group(groupName):
+			continue
+		
+		filteredAreas.append(area)
+		
+	return filteredAreas
+
+func FilterNearest(areas: Array) -> Area2D:
+	var nearestArea: Area2D
+	var minimumLength = INF
+	
+	for area: Area2D in areas:
+		var distance = (area.position - $"..".position).length()
+		if distance < minimumLength:
+			minimumLength = distance
+			nearestArea = area
+			
+	return nearestArea

@@ -1,4 +1,3 @@
-class_name EditableHover
 extends Area2D
 
 var numberOfHoverRequesters: int = 0
