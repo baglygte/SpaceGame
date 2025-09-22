@@ -1,0 +1,14 @@
+extends Node2D
+
+const rocketScene = preload("res://rocket.tscn")
+func ReceiveMovement(vector: Vector2) -> void:
+	$Barrel.rotate(deg_to_rad(3) * sign(vector.x))
+
+func ReceiveLeftHand() -> void:
+	var rocket: RigidBody2D = rocketScene.instantiate()
+	rocket.rotation = rotation
+	rocket.global_position = global_position
+	rocket.apply_central_force(Vector2.UP.rotated(rotation) * 100)
+	var gameScene = get_tree().root.get_child(0).get_node("Game")
+	
+	gameScene.add_child(rocket)

@@ -12,3 +12,10 @@ func SendMovementSignal(vector: Vector2) -> void:
 		
 	for receiver in signalReceivers:
 		receiver.ReceiveMovement(vector)
+		
+func SendLeftHandSignal() -> void:
+	if signalReceivers.size() < 1:
+		return
+		
+	for receiver in signalReceivers:
+		receiver.ReceiveLeftHand()

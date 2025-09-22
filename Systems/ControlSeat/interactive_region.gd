@@ -19,4 +19,6 @@ func ReleaseControl() -> void:
 func TakeControl(listener:PlayerInputListener):
 	listenerInControl = listener
 	listener.ResetInputs()
+	
 	listener.moveSignal.connect($"../SignalEmitter".SendMovementSignal)
+	listener.interactLeft.connect($"../SignalEmitter".SendLeftHandSignal)

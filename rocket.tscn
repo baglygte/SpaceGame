@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mlnrn"]
 size = Vector2(36, 8)
 
-[node name="enemy" type="RigidBody2D"]
+[node name="rocket" type="RigidBody2D"]
 gravity_scale = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
