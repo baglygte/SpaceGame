@@ -1,9 +1,16 @@
 extends Node2D
-# Handles placing and removing of sections on the ship
 class_name ShipBuilder
 
 var sectionMap: Dictionary
 
+func IsSectionPositionValid(positionToCheck: Vector2) -> bool:
+	if IsPositionOccupied(positionToCheck):
+		return false
+	return true
+
+func IsPositionOccupied(positionToCheck: Vector2) -> bool:
+	return positionToCheck in sectionMap.values()
+	
 func AddSectionAtPosition(section: Node2D, positionToGet: Vector2) -> void:
 	$"..".AddSection(section)
 	section.position = positionToGet
@@ -11,7 +18,6 @@ func AddSectionAtPosition(section: Node2D, positionToGet: Vector2) -> void:
 	$WallBuilder.UpdateExternalWalls()
 
 func CreateFromSave(variablesToSet: Dictionary) -> void:
-	
 	var instance
 	match variablesToSet["systemType"]:
 		"thruster":

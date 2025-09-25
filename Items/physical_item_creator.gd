@@ -20,3 +20,9 @@ func SpawnItemInShip(item: Node2D, itemPosition: Vector2) -> void:
 	
 	$"../Ship".add_child(itemContainer)
 	itemContainer.position = itemPosition
+
+func SpawnItemInWorld(item: Node2D, itemPosition: Vector2) -> void:
+	var itemContainer = CreateItemContainer(item)
+	
+	$"..".add_child(itemContainer)
+	itemContainer.position = itemPosition
