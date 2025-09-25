@@ -3,12 +3,85 @@
 [ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://scripts/game.gd" id="1_g60ea"]
 [ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="2_q3a5i"]
 [ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://Ship/ship_section_builder.gd" id="3_w3as4"]
-[ext_resource type="Script" uid="uid://siv3ulplt76y" path="res://scripts/moduleGenerator.gd" id="4_rjcol"]
 [ext_resource type="Script" uid="uid://d0pmrbwvyke8v" path="res://GameScenes/wall_builder.gd" id="4_w3as4"]
-[ext_resource type="Script" uid="uid://bhesonx2bohb4" path="res://scripts/inputManager.gd" id="5_wy7ce"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="8_6ce2g"]
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="8_g60ea"]
+
+[sub_resource type="GDScript" id="GDScript_rcqf4"]
+script/source = "extends Node
+#class_name ModuleGenerator
+#
+#const moduleScene = preload(\"res://scenes/module.tscn\")
+#const interactiveRegionScene = preload(\"res://scenes/interactiveRegion.tscn\")
+#const shipControllerScene = preload(\"res://scenes/shipController.tscn\")
+#const storageControllerScene = preload(\"res://scenes/storageController.tscn\")
+#const thrusterControllerScene = preload(\"res://scenes/thrusterController.tscn\")
+#var player: Player
+#
+#func CreateStorageModule() -> Module:
+	#var module = moduleScene.instantiate()
+	#
+	#var storageController = storageControllerScene.instantiate()
+	#module.add_child(storageController)
+	##storageController.inputManager = $\"../InputManager\"
+	##storageController.hud = $\"../HUD\"
+#
+	#module.name = \"Storage\"
+	#return module
+#
+#func CreateShipModule() -> Module:
+	#var module = moduleScene.instantiate()
+	#
+	#var shipController = shipControllerScene.instantiate()
+	#shipController.inputManager = $\"../InputManager\"
+	#shipController.ship = $\"../Ship\"
+#
+	#module.add_child(shipController)
+	#
+	#module.name = \"Ship\"
+	#return module
+	#
+#func CreateThrusterModule() -> Module:
+	#var module = moduleScene.instantiate()
+	#
+	#var thrusterController = thrusterControllerScene.instantiate()
+	#thrusterController.inputManager = $\"../InputManager\"
+#
+	#module.add_child(thrusterController)
+	#
+	#module.name = \"Thruster\"
+	#return module
+"
+
+[sub_resource type="GDScript" id="GDScript_g60ea"]
+script/source = "extends Node
+# Listens for inputs and emits corresponding signals
+class_name InputManager
+
+#signal moveSignal
+#signal interactSignal
+#signal leftClickSignal
+#signal modifySignal
+
+#func _process(_delta: float) -> void:
+	#var moveInputVector = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+	#moveSignal.emit(moveInputVector)
+	
+	#if Input.is_action_just_pressed(\"interact\"):
+		#interactSignal.emit()
+		#
+	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		#leftClickSignal.emit()
+		#
+	#if Input.is_action_just_pressed(\"modify\"):
+		#modifySignal.emit()
+
+func ClearSignal(signalToClear) -> void:
+	for connection in signalToClear.get_connections():
+		signalToClear.disconnect(connection.callable)
+		
+"
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_g60ea")
@@ -24,10 +97,10 @@ script = ExtResource("3_w3as4")
 script = ExtResource("4_w3as4")
 
 [node name="ModuleGenerator" type="Node" parent="."]
-script = ExtResource("4_rjcol")
+script = SubResource("GDScript_rcqf4")
 
 [node name="InputManager" type="Node" parent="."]
-script = ExtResource("5_wy7ce")
+script = SubResource("GDScript_g60ea")
 
 [node name="HUD" type="CanvasLayer" parent="." groups=["HUD"]]
 script = ExtResource("6_68ns4")
@@ -49,3 +122,6 @@ script = ExtResource("8_6ce2g")
 
 [node name="ContainedItemCreator" type="Node2D" parent="." groups=["ContainedItemCreator"]]
 script = ExtResource("8_g60ea")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

@@ -6,9 +6,8 @@ func ReceiveMovement(vector: Vector2) -> void:
 
 func ReceiveLeftHand() -> void:
 	var rocket: RigidBody2D = rocketScene.instantiate()
-	rocket.rotation = rotation
+	rocket.rotation = $Barrel.rotation
 	rocket.global_position = global_position
-	rocket.apply_central_force(Vector2.UP.rotated(rotation) * 100)
 	var gameScene = get_tree().root.get_child(0).get_node("Game")
-	
 	gameScene.add_child(rocket)
+	rocket.apply_central_force(Vector2.UP.rotated($Barrel.rotation) * 10000)

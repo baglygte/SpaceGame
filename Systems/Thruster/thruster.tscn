@@ -29,3 +29,12 @@ scale = Vector2(0.0703125, 0.07031251)
 texture = ExtResource("3_xjhfb")
 
 [node name="SignalReceiver" parent="." instance=ExtResource("4_1808l")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -30.0
+offset_top = -32.0
+offset_right = 30.0
+offset_bottom = 9.0
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1

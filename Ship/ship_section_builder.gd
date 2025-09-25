@@ -5,7 +5,7 @@ class_name ShipBuilder
 var sectionMap: Dictionary
 
 func AddSectionAtPosition(section: Node2D, positionToGet: Vector2) -> void:
-	$"..".add_child(section)
+	$"..".AddSection(section)
 	section.position = positionToGet
 	sectionMap[section] = positionToGet
 	$WallBuilder.UpdateExternalWalls()

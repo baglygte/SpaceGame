@@ -4,23 +4,32 @@ class_name Game
 var gameSceneManager: GameSceneManager
 
 func _ready() -> void:	
-	CreateStuff()
+	StartGameScene()
 	
 	# Sections
 	for i in range(5):
-		$ContainedItemCreator.SpawnItemInShip(load("res://Sections/section.tscn").instantiate(), Vector2(200,0))
+		$ContainedItemCreator.SpawnItemInShip(load("res://Sections/section.tscn").instantiate(), Vector2(250,50))
 		
 	# Tools
-	$ContainedItemCreator.SpawnItemInShip(load("res://Tools/Hammer/hammer.tscn").instantiate(), Vector2(100,0))
-	$ContainedItemCreator.SpawnItemInShip(load("res://Tools/Pliers/pliers.tscn").instantiate(), Vector2(100,25))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Tools/Hammer/hammer.tscn").instantiate(), Vector2(150,50))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Tools/Pliers/pliers.tscn").instantiate(), Vector2(150,75))
 	
 	# Systems
-	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Starmap/starmap.tscn").instantiate(), Vector2(150,0))
-	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(150,40))
-	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(150,80))
-	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Gun/gun.tscn").instantiate(), Vector2(150,120))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Starmap/starmap.tscn").instantiate(), Vector2(200,50))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(200,130))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(200,130))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(200,130))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(200,130))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/Gun/gun.tscn").instantiate(), Vector2(200,170))
+	$ContainedItemCreator.SpawnItemInShip(load("res://Systems/FlightControl/flightControl.tscn").instantiate(), Vector2(200,210))
 
-func CreateStuff() -> void:
+func StartGameScene() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")
 	if saveManager.shouldLoadGame:
 		saveManager.LoadGame()

@@ -15,18 +15,14 @@ func AddPlayer(playerToAdd: Player) -> void:
 	add_child(playerToAdd)
 	player = playerToAdd
 
-func AddThruster(thrusterObject) -> void:
-	add_child(thrusterObject)
-	assignedThrusters.append(thrusterObject)
-
+func AddSection(section) -> void:
+	add_child(section)
+	
+	if section is Thruster:
+		assignedThrusters.append(section)
+		
 func ApplyThrust(inputs) -> void:
 	if inputs == Vector2.ZERO:
-		return;
+		return
 		
-	for module in assignedThrusters:
-		var thruster = module.GetType()
-		
-		if !thruster.IsAssignedKey(inputs):
-			continue
-			
-		apply_force(thruster.GetForceToApply(), module.global_position * 200)
+	apply_central_force(inputs)

@@ -11,6 +11,8 @@ func SendMovementSignal(vector: Vector2) -> void:
 		return
 		
 	for receiver in signalReceivers:
+		if receiver is SignalEmitter:
+			continue
 		receiver.ReceiveMovement(vector)
 		
 func SendLeftHandSignal() -> void:

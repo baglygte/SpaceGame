@@ -38,7 +38,7 @@ func PutItemIntoHand(item) -> void:
 	
 	heldItem = item
 	
-	heldItem.hide()
+	#heldItem.hide()
 	
 	if heldItem.get_parent() == null:
 		add_child(heldItem)

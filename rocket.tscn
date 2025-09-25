@@ -3,14 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://dv4psqxgyd4xa" path="res://sprites/rocket.png" id="1_ptmd8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mlnrn"]
-size = Vector2(36, 8)
+size = Vector2(8, 36)
 
 [node name="rocket" type="RigidBody2D"]
 gravity_scale = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5707964
 texture = ExtResource("1_ptmd8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_mlnrn")

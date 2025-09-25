@@ -8,7 +8,7 @@ var player
 
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
-	player = get_parent().get_parent()
+	
 
 func _process(_delta: float) -> void:
 	if !isEquipped:
@@ -24,6 +24,7 @@ func _process(_delta: float) -> void:
 	previewInstance.global_position = snappedPosition
 	
 func Equip() -> void:
+	player = get_parent().get_parent()
 	isEquipped = true
 	previewInstance = load("res://section_preview.tscn").instantiate()
 	player.get_node("PlayerReach").AddHoverGroup("HammerCanEdit")
@@ -33,6 +34,7 @@ func Unequip() -> void:
 	isEquipped = false
 	player.get_node("PlayerReach").RemoveHoverGroup("HammerCanEdit")
 	previewInstance.queue_free()
+	player = null
 	
 func Use() -> void:
 	if not isEquipped:

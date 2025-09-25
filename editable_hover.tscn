@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hhg1i"]
 size = Vector2(62, 62)
 
-[node name="editableHover" type="Area2D"]
+[node name="editableHover" type="Area2D" groups=["Hoverable"]]
 script = ExtResource("1_rfsr0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
