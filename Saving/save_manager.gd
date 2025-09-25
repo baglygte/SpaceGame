@@ -12,7 +12,7 @@ func SaveGame() -> void:
 	var dataToSave: Array
 	
 	for node in nodesToSave:
-		var saveInfo = node.saveDataTracker.GetAllSaveVariables()
+		var saveInfo = node.GetSaveData()
 		dataToSave.append(saveInfo)
 	
 	var save_file = FileAccess.open(savePath, FileAccess.WRITE)

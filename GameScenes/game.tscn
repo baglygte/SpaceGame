@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=11 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://scripts/game.gd" id="1_g60ea"]
 [ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="2_q3a5i"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="8_6ce2g"]
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="8_g60ea"]
+[ext_resource type="Script" uid="uid://7p4uw5aoqly0" path="res://camera.gd" id="8_q3a5i"]
 
 [sub_resource type="GDScript" id="GDScript_rcqf4"]
 script/source = "extends Node
@@ -90,7 +91,7 @@ script = ExtResource("1_g60ea")
 gravity_scale = 0.0
 script = ExtResource("2_q3a5i")
 
-[node name="ShipSectionBuilder" type="Node2D" parent="Ship"]
+[node name="ShipSectionBuilder" type="Node2D" parent="Ship" groups=["ShipSectionBuilder"]]
 script = ExtResource("3_w3as4")
 
 [node name="WallBuilder" type="Node2D" parent="Ship/ShipSectionBuilder"]
@@ -124,4 +125,4 @@ script = ExtResource("8_6ce2g")
 script = ExtResource("8_g60ea")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+script = ExtResource("8_q3a5i")

@@ -11,3 +11,12 @@ func ReceiveLeftHand() -> void:
 	var gameScene = get_tree().root.get_child(0).get_node("Game")
 	gameScene.add_child(rocket)
 	rocket.apply_central_force(Vector2.UP.rotated($Barrel.rotation) * 10000)
+
+func GetSaveData() -> Dictionary:
+	var dictionaryToSave: Dictionary = {"creator": "ShipSectionBuilder"}
+	
+	dictionaryToSave["systemType"] = "gun"
+	dictionaryToSave["position.x"] = position.x
+	dictionaryToSave["position.y"] = position.y
+	
+	return dictionaryToSave

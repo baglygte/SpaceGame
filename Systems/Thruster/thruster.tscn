@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymiq1"]
 size = Vector2(60, 41)
 
-[node name="Thruster" type="Node2D" groups=["HammerCanEdit", "PliersCanEdit"]]
+[node name="Thruster" type="Node2D" groups=["HammerCanEdit", "MustBeSaved", "PliersCanEdit"]]
 script = ExtResource("1_0hj6a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

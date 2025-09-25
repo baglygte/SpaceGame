@@ -4,12 +4,6 @@ class_name Player
 const SPEED = 100.0
 var canMove := true
 
-@onready var saveDataTracker: SaveDataTracker = $saveDataTracker
-
-func _ready() -> void:
-	saveDataTracker.creatorName = "PlayerCreator"
-	saveDataTracker.AddVariableNameToSave("position")
-
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:
 		return
@@ -39,3 +33,11 @@ func GetEnterExitArea() -> EnterExitArea:
 			return area
 		
 	return null
+
+func GetSaveData() -> Dictionary:
+	var dictionaryToSave: Dictionary = {"creator": "PlayerCreator"}
+	
+	dictionaryToSave["position.x"] = position.x
+	dictionaryToSave["position.y"] = position.y
+	
+	return dictionaryToSave

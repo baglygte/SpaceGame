@@ -21,3 +21,12 @@ func ReceiveMovement(movementVector: Vector2) -> void:
 	else:
 		assignedDirection = Vector2.LEFT * strength
 		$Label.text = "Left"
+
+func GetSaveData() -> Dictionary:
+	var dictionaryToSave: Dictionary = {"creator": "ShipSectionBuilder"}
+	
+	dictionaryToSave["systemType"] = "thruster"
+	dictionaryToSave["position.x"] = position.x
+	dictionaryToSave["position.y"] = position.y
+	
+	return dictionaryToSave

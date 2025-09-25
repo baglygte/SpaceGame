@@ -24,3 +24,12 @@ func AddBlipToMap(instance: Node2D) -> void:
 	var blip = blipScene.instantiate()
 	thingsToDisplay[instance] = blip
 	$Sprite2D.add_child(blip)
+
+func GetSaveData() -> Dictionary:
+	var dictionaryToSave: Dictionary = {"creator": "ShipSectionBuilder"}
+	
+	dictionaryToSave["systemType"] = "starmap"
+	dictionaryToSave["position.x"] = position.x
+	dictionaryToSave["position.y"] = position.y
+	
+	return dictionaryToSave

@@ -41,3 +41,12 @@ func ReceiveMovement(movementVector: Vector2) -> void:
 		totalVector.y = movementVector.y * availableThrust.z
 		
 	ship.ApplyThrust(totalVector)
+
+func GetSaveData() -> Dictionary:
+	var dictionaryToSave: Dictionary = {"creator": "ShipSectionBuilder"}
+	
+	dictionaryToSave["systemType"] = "flightcontrol"
+	dictionaryToSave["position.x"] = position.x
+	dictionaryToSave["position.y"] = position.y
+	
+	return dictionaryToSave
