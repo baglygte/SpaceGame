@@ -15,12 +15,15 @@ func AddPlayer(playerToAdd: Player) -> void:
 	add_child(playerToAdd)
 	player = playerToAdd
 
-func AddSection(section) -> void:
+func AddSection(section: Node2D) -> void:
 	add_child(section)
 	
 	if section is Thruster:
 		assignedThrusters.append(section)
 		
+func RemoveSection(section: Node2D) -> void:
+	remove_child(section)
+	
 func ApplyThrust(inputs) -> void:
 	if inputs == Vector2.ZERO:
 		return

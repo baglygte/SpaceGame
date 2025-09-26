@@ -11,12 +11,28 @@ func IsSectionPositionValid(positionToCheck: Vector2) -> bool:
 func IsPositionOccupied(positionToCheck: Vector2) -> bool:
 	return positionToCheck in sectionMap.values()
 	
-func AddSectionAtPosition(section: Node2D, positionToGet: Vector2) -> void:
+func AddSectionAtPosition(section, positionToGet: Vector2, rotationToGet: float) -> void:
 	$"..".AddSection(section)
 	section.position = positionToGet
+	section.rotation = rotationToGet
 	sectionMap[section] = positionToGet
 	$WallBuilder.UpdateExternalWalls()
-
+	
+func ExtractSectionAtPosition(positionToRemove: Vector2) -> Node2D:
+	if not IsPositionOccupied(positionToRemove):
+		return null
+	
+	for section in sectionMap.keys():
+		var sectionPosition = sectionMap[section]
+		
+		if sectionPosition == positionToRemove:
+			$"..".RemoveSection(section)
+			sectionMap.erase(section)
+			$WallBuilder.UpdateExternalWalls()
+			return section
+	
+	return null
+	
 func CreateFromSave(variablesToSet: Dictionary) -> void:
 	var instance
 	match variablesToSet["systemType"]:
@@ -34,5 +50,6 @@ func CreateFromSave(variablesToSet: Dictionary) -> void:
 			instance = load("res://Systems/FlightControl/flightControl.tscn").instantiate()
 
 	var positionToGet = Vector2(variablesToSet["position.x"], variablesToSet["position.y"])
-
-	AddSectionAtPosition(instance, positionToGet)
+	var rotationToGet = variablesToSet["rotation"]
+	
+	AddSectionAtPosition(instance, positionToGet, rotationToGet)

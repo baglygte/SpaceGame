@@ -3,11 +3,19 @@ class_name Hand
 
 var heldItem: Node
 signal itemWasPickedUp
+signal itemWasDropped
 @onready var playerReach: PlayerReach = $"../PlayerReach"
 
 func _ready() -> void:
 	playerReach.AddHoverGroup("CanPickUp")
+
+func Modify() -> void:
+	if heldItem == null:
+		return
 	
+	if heldItem is Hammer:
+		heldItem.RotateSection()
+		
 func Interact() -> void:
 	if heldItem == null:
 		PickUpItem()
@@ -38,7 +46,7 @@ func PutItemIntoHand(item) -> void:
 	
 	heldItem = item
 	
-	#heldItem.hide()
+	heldItem.hide()
 	
 	if heldItem.get_parent() == null:
 		add_child(heldItem)
@@ -80,5 +88,7 @@ func LoseItem() -> void:
 	remove_child(heldItem)
 	
 	heldItem = null
+	
+	itemWasDropped.emit()
 	
 	SendItemToHUD()

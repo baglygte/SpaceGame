@@ -14,6 +14,7 @@ signal interactRight
 signal interactLeft
 signal dropRight
 signal dropLeft
+signal modify
 signal enterexit
 
 func _ready() -> void:
@@ -43,6 +44,9 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed(str(deviceId) + "_enterexit"):
 		enterexit.emit()
+	
+	if Input.is_action_just_pressed(str(deviceId) + "_modify"):
+		modify.emit()
 
 func SendMoveSignal() -> void:
 	var prefix = str(deviceId) + "_move"
@@ -77,8 +81,12 @@ func SetDefaultInputs() -> void:
 	
 	interactRight.connect($"../RightHand".Interact)
 	interactLeft.connect($"../LeftHand".Interact)
+	
 	dropRight.connect($"../RightHand".Drop)
 	dropLeft.connect($"../LeftHand".Drop)
+	
+	modify.connect($"../RightHand".Modify)
+	modify.connect($"../LeftHand".Modify)
 
 func ResetInputs() -> void:
 	ClearInputSignal(moveSignal)
@@ -87,6 +95,7 @@ func ResetInputs() -> void:
 	ClearInputSignal(interactLeft)
 	ClearInputSignal(dropRight)
 	ClearInputSignal(dropLeft)
+	ClearInputSignal(modify)
 
 func ClearInputSignal(signalToClear: Signal) -> void:
 	for connection in signalToClear.get_connections():

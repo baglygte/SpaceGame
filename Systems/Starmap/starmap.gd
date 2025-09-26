@@ -31,5 +31,6 @@ func GetSaveData() -> Dictionary:
 	dictionaryToSave["systemType"] = "starmap"
 	dictionaryToSave["position.x"] = position.x
 	dictionaryToSave["position.y"] = position.y
+	dictionaryToSave["rotation"] = rotation
 	
 	return dictionaryToSave
