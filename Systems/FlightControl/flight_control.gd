@@ -1,6 +1,6 @@
 extends Node2D
 
-#var availableThrust: Vector4
+var globalId: int
 
 func ReceiveMovement(movementVector: Vector2) -> void:
 	var ship: Ship = get_tree().get_first_node_in_group("Ship")
@@ -43,11 +43,12 @@ func ReceiveMovement(movementVector: Vector2) -> void:
 	ship.ApplyThrust(totalVector)
 
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "ShipSectionBuilder"}
+	var dictionaryToSave: Dictionary = {"creator": "SystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "flightcontrol"
 	dictionaryToSave["position.x"] = position.x
 	dictionaryToSave["position.y"] = position.y
 	dictionaryToSave["rotation"] = rotation
+	dictionaryToSave["globalId"] = globalId
 	
 	return dictionaryToSave

@@ -1,7 +1,8 @@
+class_name SectionBuilder
 extends Node2D
-class_name ShipBuilder
 
 var sectionMap: Dictionary
+var sectionScene =  preload("res://Sections/section.tscn")
 
 func IsSectionPositionValid(positionToCheck: Vector2) -> bool:
 	if IsPositionOccupied(positionToCheck):
@@ -34,22 +35,8 @@ func ExtractSectionAtPosition(positionToRemove: Vector2) -> Node2D:
 	return null
 	
 func CreateFromSave(variablesToSet: Dictionary) -> void:
-	var instance
-	match variablesToSet["systemType"]:
-		"thruster":
-			instance = load("res://Systems/Thruster/thruster.tscn").instantiate()
-		"section":
-			instance = load("res://Sections/section.tscn").instantiate()
-		"starmap":
-			instance = load("res://Systems/Starmap/starmap.tscn").instantiate()
-		"gun":
-			instance = load("res://Systems/Gun/gun.tscn").instantiate()
-		"controlseat":
-			instance = load("res://Systems/ControlSeat/controlSeat.tscn").instantiate()
-		"flightcontrol":
-			instance = load("res://Systems/FlightControl/flightControl.tscn").instantiate()
-
+	var section = sectionScene.instantiate()
 	var positionToGet = Vector2(variablesToSet["position.x"], variablesToSet["position.y"])
 	var rotationToGet = variablesToSet["rotation"]
 	
-	AddSectionAtPosition(instance, positionToGet, rotationToGet)
+	AddSectionAtPosition(section, positionToGet, rotationToGet)

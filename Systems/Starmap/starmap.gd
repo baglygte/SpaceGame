@@ -1,5 +1,6 @@
 extends Node2D
 
+var globalId: int
 var thingsToDisplay: Dictionary
 var visibleRange = 720 * 0.5
 var mapSize
@@ -26,11 +27,12 @@ func AddBlipToMap(instance: Node2D) -> void:
 	$Sprite2D.add_child(blip)
 
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "ShipSectionBuilder"}
+	var dictionaryToSave: Dictionary = {"creator": "SystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "starmap"
 	dictionaryToSave["position.x"] = position.x
 	dictionaryToSave["position.y"] = position.y
 	dictionaryToSave["rotation"] = rotation
+	dictionaryToSave["globalId"] = globalId
 	
 	return dictionaryToSave

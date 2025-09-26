@@ -15,6 +15,8 @@ func Modify() -> void:
 	
 	if heldItem is Hammer:
 		heldItem.RotateSection()
+	if heldItem is Wrench:
+		heldItem.RotateSystem()
 		
 func Interact() -> void:
 	if heldItem == null:

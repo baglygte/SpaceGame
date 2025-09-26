@@ -3,7 +3,7 @@ extends Node2D
 
 var isEquipped: bool = false
 var ship: Ship
-var shipSectionBuilder
+var sectionBuilder: SectionBuilder
 var player: Player
 @onready var sectionPreview = $SectionPreview
 const previewTexture = preload("res://sprites/sectionPreview.png")
@@ -19,7 +19,7 @@ const previewOffsetMap: Dictionary = {-180: Vector2(-64,0),
 										180: Vector2(-64,0)}
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
-	shipSectionBuilder = ship.get_node("ShipSectionBuilder")
+	sectionBuilder = ship.get_node("SectionBuilder")
 
 func _process(_delta: float) -> void:
 	if !isEquipped:
@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 	sectionPreview.position = previewPosition
 	
 	var shadedColor = Vector4(255,0,0,0.5)
-	if shipSectionBuilder.IsSectionPositionValid(previewPosition):
+	if sectionBuilder.IsSectionPositionValid(previewPosition):
 		shadedColor = Vector4(0,255,0,0.5)
 		
 	sectionPreview.get_child(0).material.set("shader_parameter/shadedColor", shadedColor)
@@ -53,6 +53,19 @@ func GetPreviewPosition() -> Vector2:
 	
 	return snappedPlayerPosition + previewOffset
 
+func UpdatePreviewTexture() -> void:
+	var item: Node2D = get_parent().GetOtherHand().heldItem
+	
+	var textureToGet: Texture = null
+	
+	if item == null:
+		textureToGet = previewTexture
+	else:
+		textureToGet = item.get_node("Sprite2D").texture
+	
+	sectionPreview.get_child(0).texture = textureToGet
+	sectionPreview.show()
+
 func Equip() -> void:
 	isEquipped = true
 	player = get_parent().get_parent()
@@ -66,19 +79,6 @@ func Equip() -> void:
 		
 	otherHand.itemWasPickedUp.connect(UpdatePreviewTexture)
 	otherHand.itemWasDropped.connect(UpdatePreviewTexture)
-
-func UpdatePreviewTexture() -> void:
-	var item: Node2D = get_parent().GetOtherHand().heldItem
-	
-	var textureToGet: Texture = null
-	
-	if item == null:
-		textureToGet = previewTexture
-	else:
-		textureToGet = item.get_node("Sprite2D").texture
-	
-	sectionPreview.get_child(0).texture = textureToGet
-	sectionPreview.show()
 	
 func Unequip() -> void:
 	isEquipped = false
@@ -102,16 +102,19 @@ func Use() -> void:
 func PickUpSection() -> void:
 	var previewPosition = GetPreviewPosition()
 	
-	var section = shipSectionBuilder.ExtractSectionAtPosition(previewPosition)
+	var section = sectionBuilder.ExtractSectionAtPosition(previewPosition)
 	get_parent().GetOtherHand().PutItemIntoHand(section)
 
 func PlaceHeldSection() -> void:
-	if !shipSectionBuilder.IsSectionPositionValid(sectionPreview.position):
+	if !sectionBuilder.IsSectionPositionValid(sectionPreview.position):
 		return
 		
 	var otherHand: Hand = get_parent().GetOtherHand()
 	var section = otherHand.heldItem
 	
+	if not section is Section:
+		return
+	
 	otherHand.LoseItem()
 
-	shipSectionBuilder.AddSectionAtPosition(section, sectionPreview.position, sectionPreview.rotation)	
+	sectionBuilder.AddSectionAtPosition(section, sectionPreview.position, sectionPreview.rotation)	

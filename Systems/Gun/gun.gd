@@ -1,4 +1,5 @@
 extends Node2D
+var globalId: int
 
 const rocketScene = preload("res://rocket.tscn")
 func ReceiveMovement(vector: Vector2) -> void:
@@ -13,11 +14,12 @@ func ReceiveLeftHand() -> void:
 	rocket.apply_central_force(Vector2.UP.rotated($Barrel.rotation) * 10000)
 
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "ShipSectionBuilder"}
+	var dictionaryToSave: Dictionary = {"creator": "SystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "gun"
 	dictionaryToSave["position.x"] = position.x
 	dictionaryToSave["position.y"] = position.y
 	dictionaryToSave["rotation"] = rotation
+	dictionaryToSave["globalId"] = globalId
 	
 	return dictionaryToSave

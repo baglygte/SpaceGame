@@ -11,7 +11,6 @@ func _process(_delta: float) -> void:
 		return
 		
 	line.set_point_position(0, global_position)
-	#queue_redraw()
 		
 func _ready() -> void:
 	playerReach = get_parent().get_parent().get_node("PlayerReach")
@@ -23,11 +22,9 @@ func Unequip() -> void:
 	playerReach.RemoveHoverGroup("PliersCanEdit")
 	
 func Use() -> void:
-	var item = playerReach.GetNearestItemInGroup("PliersCanEdit")
-		
-	var signalerInReach = GetSignaler(item)
+	var systemInReach = playerReach.GetNearestItemInGroup("PliersCanEdit")
 	
-	if item == null or signalerInReach == signalerToLink:
+	if systemInReach == null or systemInReach == signalerToLink:
 		if line != null:
 			line.queue_free()
 			line = null
@@ -35,36 +32,19 @@ func Use() -> void:
 		return
 		
 	if signalerToLink == null:
-		signalerToLink = GetSignaler(item)
+		signalerToLink = systemInReach
 		
 		if signalerToLink != null:
 			line = lineScene.instantiate()
 			get_tree().root.get_child(0).get_node("Game").add_child(line)
 			line.add_point(global_position)
-			line.add_point(signalerToLink.get_parent().global_position)
+			line.add_point(signalerToLink.global_position)
 	else:
-		EstablishLink(GetSignaler(item))
+		EstablishLink(systemInReach)
 	
-func GetSignaler(item: Node2D) -> Node2D:
-	if item == null:
-		return null
-		
-	var children = item.get_children()
-	
-	for child in children:
-		if child.is_in_group("signaler"):
-			return child
-		
-	return null
-	
-func EstablishLink(item) -> void:
-	if signalerToLink is SignalEmitter:
-		signalerToLink.AddReceiver(item)
-		print("Linked " + item.get_parent().name + " to " + signalerToLink.get_parent().name)
-	
-	if item is SignalEmitter:
-		item.AddReceiver(signalerToLink)
-		print("Linked " + item.get_parent().name + " to " + signalerToLink.get_parent().name)
+func EstablishLink(item) -> void:	
+	var builder: ConnectionBuilder = get_tree().get_first_node_in_group("Ship").get_node("ConnectionBuilder")
+	builder.ConnectSystems(item, signalerToLink)
 	
 	if not line == null:
 		line.queue_free()

@@ -8,7 +8,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uw5wt"]
 
-[node name="ControlSeat" type="Node2D" groups=["MustBeSaved", "PliersCanEdit"]]
+[node name="ControlSeat" type="Node2D" groups=["MustBeSaved", "PliersCanEdit", "System"]]
 script = ExtResource("1_uw5wt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

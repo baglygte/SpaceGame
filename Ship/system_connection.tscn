@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2dakjcjhlwvn"]
+
+[ext_resource type="Script" uid="uid://c14oqmgc1a4kx" path="res://Ship/system_connection.gd" id="1_3cum0"]
+
+[node name="SystemConnection" type="Line2D" groups=["MustBeSaved"]]
+width = 2.0
+default_color = Color(1, 0.23000002, 0.23000002, 1)
+script = ExtResource("1_3cum0")

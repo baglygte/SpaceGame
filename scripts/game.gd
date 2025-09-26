@@ -12,23 +12,17 @@ func _ready() -> void:
 		
 	# Tools
 	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Hammer/hammer.tscn").instantiate(), Vector2(50,25))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Hammer/hammer.tscn").instantiate(), Vector2(50,50))
+	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Wrench/wrench.tscn").instantiate(), Vector2(50,50))
 	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Pliers/pliers.tscn").instantiate(), Vector2(50,75))
 	
 	# Systems
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Starmap/starmap.tscn").instantiate(), Vector2(200,50))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/ControlSeat/controlSeat.tscn").instantiate(), Vector2(200,90))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(200,130))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(200,130))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(200,130))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Thruster/thruster.tscn").instantiate(), Vector2(200,130))
+	$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/Starmap/starmap.tscn"), Vector2(200,50))
+	for i in range(5):
+		$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))
+	for i in range(5):
+		$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/Thruster/thruster.tscn"), Vector2(200,130))
 	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Gun/gun.tscn").instantiate(), Vector2(200,170))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/FlightControl/flightControl.tscn").instantiate(), Vector2(200,210))
+	$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(200,210))
 
 func StartGameScene() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")

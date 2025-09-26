@@ -17,9 +17,6 @@ func AddPlayer(playerToAdd: Player) -> void:
 
 func AddSection(section: Node2D) -> void:
 	add_child(section)
-	
-	if section is Thruster:
-		assignedThrusters.append(section)
 		
 func RemoveSection(section: Node2D) -> void:
 	remove_child(section)

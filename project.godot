@@ -28,6 +28,7 @@ version_control/autoload_on_startup=true
 [file_customization]
 
 folder_colors={
+"res://Ship/": "red",
 "res://Tools/": "green",
 "res://sprites/": "yellow"
 }

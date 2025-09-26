@@ -4,7 +4,7 @@ class_name SaveManager
 const savePath = "user://savegame.save"
 
 var shouldLoadGame: bool = false
-var instancesToAdd: Dictionary
+var objectsToLoad: Array
 
 func SaveGame() -> void:
 	var nodesToSave = get_tree().get_nodes_in_group("MustBeSaved")
@@ -22,6 +22,17 @@ func SaveGame() -> void:
 	save_file.store_line(json_string)
 
 func LoadGame() -> void:
+	ReadFile()
+	
+	LoadObjectsOfCreator("PlayerCreator")
+	
+	LoadObjectsOfCreator("SectionBuilder")
+	
+	LoadObjectsOfCreator("SystemBuilder")
+	
+	LoadObjectsOfCreator("ConnectionBuilder")
+
+func ReadFile() -> void:
 	var save_file = FileAccess.open(savePath, FileAccess.READ)
 	
 	while save_file.get_position() < save_file.get_length():
@@ -36,11 +47,12 @@ func LoadGame() -> void:
 			continue
 
 		# Get the data from the JSON object.
-		var objectsToLoad = json.data
-		
-		for objectToLoad in objectsToLoad:
-			var variablesToSet = objectToLoad
+		objectsToLoad = json.data
 			
-			var creatorName = objectToLoad["creator"]
-			var creator = get_tree().get_first_node_in_group(creatorName)
-			creator.CreateFromSave(variablesToSet)
+func LoadObjectsOfCreator(creatorName: String) -> void:
+	for objectToLoad in objectsToLoad:
+		if objectToLoad["creator"] != creatorName:
+			continue
+			
+		var creator = get_tree().get_first_node_in_group(creatorName)
+		creator.CreateFromSave(objectToLoad)
