@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://day26uov32qel"]
+
+[ext_resource type="Script" uid="uid://dkjm68vw731ik" path="res://inactivity_destructor.gd" id="1_d57w6"]
+
+[node name="InactivityDestructor" type="Node2D"]
+script = ExtResource("1_d57w6")
+
+[node name="Timer" type="Timer" parent="."]

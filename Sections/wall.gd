@@ -4,3 +4,6 @@ extends Node2D
 func _ready() -> void:
 	$Health.maxHealth = 4
 	$Health.GainHealth(4)
+	
+func Kill() -> void:
+	queue_free()

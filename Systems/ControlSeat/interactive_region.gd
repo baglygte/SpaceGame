@@ -13,6 +13,8 @@ func ToggleControl(listener: PlayerInputListener) -> void:
 		return
 	
 func ReleaseControl() -> void:
+	if listenerInControl == null:
+		return
 	listenerInControl.SetDefaultInputs()
 	listenerInControl = null
 

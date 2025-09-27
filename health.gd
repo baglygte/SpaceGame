@@ -8,10 +8,8 @@ func LoseHealth(amountToLose: int) -> void:
 	healthAmount -= amountToLose
 	
 	if healthAmount < 1:
-		if get_parent().has_method("OnDeath"):
-			get_parent().OnDeath()
-			
-		get_parent().queue_free()
+		if get_parent().has_method("Kill"):
+			get_parent().Kill()
 
 func GainHealth(amountToGain: int) -> void:
 	var newHealthAmount = healthAmount + amountToGain

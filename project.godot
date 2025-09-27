@@ -36,7 +36,6 @@ folder_colors={
 [global_group]
 
 System=""
-VisibleOnStarmap=""
 HammerCanEdit=""
 PliersCanEdit=""
 Tool=""
@@ -45,6 +44,7 @@ signaler=""
 Ship=""
 Player=""
 MustBeSaved=""
+Starmap=""
 
 [input]
 

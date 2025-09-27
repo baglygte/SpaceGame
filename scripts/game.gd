@@ -23,7 +23,10 @@ func _ready() -> void:
 		$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/Thruster/thruster.tscn"), Vector2(200,130))
 	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Gun/gun.tscn").instantiate(), Vector2(200,170))
 	$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(200,210))
-
+	
+	var instance = load("res://Enemies/simpleSpawner.tscn").instantiate()
+	add_child(instance)
+	instance.position = Vector2(5000,5000)
 func StartGameScene() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")
 	if saveManager.shouldLoadGame:

@@ -14,7 +14,7 @@ func GetSaveData() -> Dictionary:
 	
 	return dictionaryToSave
 
-func OnDeath() -> void:
+func Kill() -> void:
 	var systems = get_tree().get_nodes_in_group("System")
 	
 	for system in systems:
@@ -22,6 +22,8 @@ func OnDeath() -> void:
 			continue
 			
 		system.Kill()
+		
+	queue_free()
 
 func IsPositionOnMe(positionToCheck: Vector2) -> bool:
 	var isWithinX : bool = false
