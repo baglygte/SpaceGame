@@ -6,12 +6,11 @@ func ReceiveMovement(vector: Vector2) -> void:
 	$Barrel.rotate(deg_to_rad(3) * sign(vector.x))
 
 func ReceiveLeftHand() -> void:
-	var rocket: RigidBody2D = rocketScene.instantiate()
+	var rocket: Node2D = rocketScene.instantiate()
 	rocket.rotation = $Barrel.rotation
 	rocket.global_position = global_position
 	var gameScene = get_tree().root.get_child(0).get_node("Game")
 	gameScene.add_child(rocket)
-	rocket.apply_central_force(Vector2.UP.rotated($Barrel.rotation) * 10000)
 
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "SystemBuilder"}

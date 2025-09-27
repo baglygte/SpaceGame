@@ -199,6 +199,11 @@ interact={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player collisions"
+2d_physics/layer_2="Ship collisions"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

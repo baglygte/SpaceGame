@@ -12,3 +12,7 @@ func GetSaveData() -> Dictionary:
 	dictionaryToSave["globalId"] = globalId
 	
 	return dictionaryToSave
+
+func Kill() -> void:
+	$interactiveRegion.ReleaseControl()
+	queue_free()

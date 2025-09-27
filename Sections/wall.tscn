@@ -1,18 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cf2scpr8a85te"]
+[gd_scene load_steps=5 format=3 uid="uid://cf2scpr8a85te"]
 
+[ext_resource type="Script" uid="uid://dul3idbs8qiw6" path="res://Sections/wall.gd" id="1_cjut5"]
 [ext_resource type="Texture2D" uid="uid://ckotnxib5v5x2" path="res://sprites/wall.png" id="1_g6to0"]
+[ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_j0cip"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_cjut5"]
 a = Vector2(32, -32)
 b = Vector2(32, 32)
 
 [node name="Wall" type="Node2D" groups=["Wall"]]
+script = ExtResource("1_cjut5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(32, 0)
 texture = ExtResource("1_g6to0")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("SegmentShape2D_cjut5")
+
+[node name="Health" parent="." instance=ExtResource("3_j0cip")]
