@@ -86,8 +86,9 @@ func LoseItem() -> void:
 	
 	if heldItem.is_in_group("Tool"):
 		heldItem.Unequip()
-		
-	remove_child(heldItem)
+	
+	if heldItem.get_parent() == self:
+		remove_child(heldItem)
 	
 	heldItem = null
 	

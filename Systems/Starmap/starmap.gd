@@ -34,11 +34,11 @@ func RemoveBlipFromMap(instance: Node2D) -> void:
 	blipsToDisplay.erase(instance)
 	
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "SystemBuilder"}
+	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "starmap"
-	dictionaryToSave["position.x"] = position.x
-	dictionaryToSave["position.y"] = position.y
+	dictionaryToSave["position.x"] = global_position.x
+	dictionaryToSave["position.y"] = global_position.y
 	dictionaryToSave["rotation"] = rotation
 	dictionaryToSave["globalId"] = globalId
 	

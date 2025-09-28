@@ -33,7 +33,7 @@ func AssignDirection(angle: float) -> void:
 	assignedAngle = angle
 	
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "SystemBuilder"}
+	var dictionaryToSave: Dictionary = {"creator": "ExternalSystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "thruster"
 	dictionaryToSave["position.x"] = position.x

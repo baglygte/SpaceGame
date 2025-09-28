@@ -8,8 +8,8 @@ func ConnectSystems(systemA, systemB) -> void:
 	var connection: SystemConnection = connectionScene.instantiate()
 	add_child(connection)
 	
-	connection.add_point(systemA.position)
-	connection.add_point(systemB.position)
+	connection.add_point(systemA.global_position)
+	connection.add_point(systemB.global_position)
 	connection.systemA = systemA
 	connection.systemB = systemB
 	
@@ -39,7 +39,7 @@ func CreateFromSave(variablesToSet: Dictionary) -> void:
 	var systemAId = variablesToSet["systemAId"]
 	var systemBId = variablesToSet["systemBId"]
 	
-	var systemA = $"../SystemBuilder".GetSystemFromId(systemAId)
-	var systemB = $"../SystemBuilder".GetSystemFromId(systemBId)
+	var systemA = $"../../GlobalSystemCounter".GetSystemFromId(systemAId)
+	var systemB = $"../../GlobalSystemCounter".GetSystemFromId(systemBId)
 	
 	ConnectSystems(systemA, systemB)

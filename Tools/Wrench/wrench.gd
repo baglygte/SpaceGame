@@ -3,83 +3,81 @@ extends Node2D
 
 var player: Player
 var ship: Ship
-var systemBuilder: SystemBuilder
 var isEquipped := false
 @onready var systemPreview = $SystemPreview
+var otherHandItem
 
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
-	systemBuilder = ship.get_node("SystemBuilder")
 	player = get_parent().get_parent()
+	$InternalSystemBuilderConnection.initialize()
+	$ExternalSystemBuilderConnection.initialize()
 
 func _process(_delta: float) -> void:
 	if !isEquipped:
 		return
 	
-	systemPreview.position = GetPreviewPosition()
-	
-func GetPreviewPosition() -> Vector2:	
-	return player.position + Vector2(64,0).rotated(player.rotation)
-
-func RotateSystem() -> void:
-	var otherHand = get_parent().GetOtherHand()
-	
-	if otherHand.heldItem == null:
+	if otherHandItem == null:
 		return
-		
-	systemPreview.rotate(deg_to_rad(90))
+	
+	if otherHandItem.is_in_group("InternalSystem"):
+		systemPreview.position = $InternalSystemBuilderConnection.GetPreviewPosition()
+	elif otherHandItem.is_in_group("ExternalSystem"):
+		systemPreview.position = $ExternalSystemBuilderConnection.GetPreviewPosition()
 	
 func Equip() -> void:
 	isEquipped = true
-	player.get_node("PlayerReach").AddHoverGroup("System")
+	
+	player.get_node("PlayerReach").AddHoverGroup("InternalSystem")
+	player.get_node("PlayerReach").AddHoverGroup("ExternalSystem")
+	
 	systemPreview.reparent(ship)
+	systemPreview.show()
 	systemPreview.rotation = 0
 	
-	UpdatePreviewTexture()
-	
 	var otherHand = get_parent().GetOtherHand()
-	otherHand.itemWasPickedUp.connect(UpdatePreviewTexture)
-	otherHand.itemWasDropped.connect(UpdatePreviewTexture)
+	otherHand.itemWasPickedUp.connect(UpdatePickedItem)
+	otherHand.itemWasDropped.connect(UpdatePickedItem)
 
 func Unequip() -> void:
 	isEquipped = false
-	player.get_node("PlayerReach").RemoveHoverGroup("System")
+	
+	player.get_node("PlayerReach").RemoveHoverGroup("InternalSystem")
+	player.get_node("PlayerReach").RemoveHoverGroup("ExternalSystem")
+	
+	systemPreview.reparent(self)
+	systemPreview.hide()
+	
 	var otherHand = get_parent().GetOtherHand()
-	otherHand.itemWasPickedUp.disconnect(UpdatePreviewTexture)
-	otherHand.itemWasDropped.disconnect(UpdatePreviewTexture)
+	otherHand.itemWasPickedUp.disconnect(UpdatePickedItem)
+	otherHand.itemWasDropped.disconnect(UpdatePickedItem)
 
-func UpdatePreviewTexture() -> void:
-	var item: Node2D = get_parent().GetOtherHand().heldItem
-	
-	var textureToGet: Texture = null
-	
-	if item == null:
-		textureToGet = null
-	else:
-		textureToGet = item.get_node("Sprite2D").texture
-	
-	systemPreview.get_child(0).texture = textureToGet
-	
+func UpdatePickedItem() -> void:
+	otherHandItem = get_parent().GetOtherHand().heldItem
+	UpdatePreviewTexture()
+
 func Use() -> void:
-	if get_parent().GetOtherHand().heldItem == null:
+	if otherHandItem == null:
 		PickUpSystem()
 		return
 	
-	PlaceHeldSystem()
+	if otherHandItem.is_in_group("InternalSystem"):
+		$InternalSystemBuilderConnection.PlaceHeldSystem(otherHandItem, systemPreview.rotation)
+	elif otherHandItem.is_in_group("ExternalSystem"):
+		$ExternalSystemBuilderConnection.PlaceHeldSystem(otherHandItem, systemPreview.rotation)
+
+func RotateSystem() -> void:
+	systemPreview.rotate(PI/2)
 
 func PickUpSystem() -> void:
 	print("PickUpSystem")
 
-func PlaceHeldSystem() -> void:
-	if !systemBuilder.IsSystemPositionValid(systemPreview.position):
-		return
-		
-	var otherHand: Hand = get_parent().GetOtherHand()
-	var item = otherHand.heldItem
+func UpdatePreviewTexture() -> void:
+	var textureToGet: Texture = null
 	
-	if not item.is_in_group("System"):
-		return
+	if otherHandItem == null:
+		textureToGet = null
+	else:
+		textureToGet = otherHandItem.get_node("Sprite2D").texture
 	
-	otherHand.LoseItem()
-
-	systemBuilder.AddSystemAtPosition(item, systemPreview.position, systemPreview.rotation)	
+	systemPreview.get_child(0).texture = textureToGet

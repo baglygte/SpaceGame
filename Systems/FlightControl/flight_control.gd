@@ -43,11 +43,11 @@ func ReceiveMovement(movementVector: Vector2) -> void:
 	ship.ApplyThrust(totalVector)
 
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "SystemBuilder"}
+	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "flightcontrol"
-	dictionaryToSave["position.x"] = position.x
-	dictionaryToSave["position.y"] = position.y
+	dictionaryToSave["position.x"] = global_position.x
+	dictionaryToSave["position.y"] = global_position.y
 	dictionaryToSave["rotation"] = rotation
 	dictionaryToSave["globalId"] = globalId
 	

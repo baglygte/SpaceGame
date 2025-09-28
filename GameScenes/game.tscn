@@ -1,15 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=15 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://scripts/game.gd" id="1_g60ea"]
 [ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="2_q3a5i"]
 [ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://Ship/section_builder.gd" id="3_w3as4"]
 [ext_resource type="Script" uid="uid://d0pmrbwvyke8v" path="res://Ship/wall_builder.gd" id="4_w3as4"]
 [ext_resource type="Script" uid="uid://cpsruny863qje" path="res://Ship/connection_builder.gd" id="5_q3a5i"]
+[ext_resource type="Script" uid="uid://7bp6m8is2glc" path="res://Ship/internal_system_builder.gd" id="5_rjcol"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
-[ext_resource type="Script" uid="uid://bxxhfivskxbb1" path="res://Ship/system_builder.gd" id="6_w3as4"]
+[ext_resource type="Script" uid="uid://bxxhfivskxbb1" path="res://Ship/external_system_builder.gd" id="6_w3as4"]
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="8_6ce2g"]
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="8_g60ea"]
 [ext_resource type="Script" uid="uid://7p4uw5aoqly0" path="res://camera.gd" id="8_q3a5i"]
+[ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="12_wy7ce"]
 
 [sub_resource type="GDScript" id="GDScript_rcqf4"]
 script/source = "extends Node
@@ -99,10 +101,13 @@ script = ExtResource("3_w3as4")
 [node name="WallBuilder" type="Node2D" parent="Ship/SectionBuilder"]
 script = ExtResource("4_w3as4")
 
+[node name="InternalSystemBuilder" type="Node2D" parent="Ship/SectionBuilder" groups=["InternalSystemBuilder"]]
+script = ExtResource("5_rjcol")
+
 [node name="ConnectionBuilder" type="Node2D" parent="Ship" groups=["ConnectionBuilder"]]
 script = ExtResource("5_q3a5i")
 
-[node name="SystemBuilder" type="Node2D" parent="Ship" groups=["SystemBuilder"]]
+[node name="ExternalSystemBuilder" type="Node2D" parent="Ship" groups=["ExternalSystemBuilder"]]
 script = ExtResource("6_w3as4")
 
 [node name="ModuleGenerator" type="Node" parent="."]
@@ -134,3 +139,6 @@ script = ExtResource("8_g60ea")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("8_q3a5i")
+
+[node name="GlobalSystemCounter" type="Node2D" parent="."]
+script = ExtResource("12_wy7ce")

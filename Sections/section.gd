@@ -4,6 +4,19 @@ extends Node2D
 func _ready() -> void:
 	$Health.maxHealth = 2
 	$Health.GainHealth(2)
+
+func AddSystem(system) -> void:
+	if system.get_parent() == null:
+		$Systems.add_child(system)
+	else:
+		system.reparent($Systems)
+
+func GetSystemFromId(id: int) -> Node2D:
+	for child in $Systems.get_children():
+		if child.globalId == id:
+			return child
+			
+	return null
 	
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "SectionBuilder"}

@@ -1,0 +1,37 @@
+class_name ExtenalSystemBuilderConnection
+extends Node2D
+
+var externalSystemBuilder: ExternalSystemBuilder
+const previewOffsetMap: Dictionary = {-180: Vector2(-64,0),
+										-135: Vector2(-64,-64),
+										-90: Vector2(0,-64),
+										-45: Vector2(64,-64),
+										0: Vector2(64,0),
+										45: Vector2(64,64),
+										90: Vector2(0,64),
+										135: Vector2(-64,64),
+										180: Vector2(-64,0)}
+										
+func initialize() -> void:
+	externalSystemBuilder = $"..".ship.get_node("ExternalSystemBuilder")
+
+func GetPreviewPosition() -> Vector2:	
+	var snappedRotation : int = snapped(rad_to_deg($"..".player.rotation), 45)
+	
+	var snappedPlayerPosition : Vector2
+	snappedPlayerPosition.x = round($"..".player.position.x/64)*64
+	snappedPlayerPosition.y = round($"..".player.position.y/64)*64
+	
+	var previewOffset: Vector2 = previewOffsetMap[snappedRotation]
+	
+	return snappedPlayerPosition + previewOffset
+
+func PlaceHeldSystem(system, angle: float) -> void:
+	var previewPosition = GetPreviewPosition()
+	
+	if !externalSystemBuilder.IsSystemPositionValid(previewPosition):
+		return
+	
+	externalSystemBuilder.AddSystemAtPosition(system, previewPosition, angle)	
+	
+	$"..".get_parent().GetOtherHand().LoseItem()

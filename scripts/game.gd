@@ -16,17 +16,18 @@ func _ready() -> void:
 	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Pliers/pliers.tscn").instantiate(), Vector2(50,75))
 	
 	# Systems
-	$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/Starmap/starmap.tscn"), Vector2(200,50))
+	$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/Starmap/starmap.tscn"), Vector2(200,50))
 	for i in range(5):
-		$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))
+		$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))
 	for i in range(5):
-		$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/Thruster/thruster.tscn"), Vector2(200,130))
+		$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Thruster/thruster.tscn"), Vector2(200,130))
 	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Gun/gun.tscn").instantiate(), Vector2(200,170))
-	$ContainedItemCreator.SpawnItemInWorld($Ship/SystemBuilder.CreateSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(200,210))
+	$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(200,210))
 	
-	var instance = load("res://Enemies/simpleSpawner.tscn").instantiate()
-	add_child(instance)
-	instance.position = Vector2(5000,5000)
+	#var instance = load("res://Enemies/simpleSpawner.tscn").instantiate()
+	#add_child(instance)
+	#instance.position = Vector2(5000,5000)
+	
 func StartGameScene() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")
 	if saveManager.shouldLoadGame:

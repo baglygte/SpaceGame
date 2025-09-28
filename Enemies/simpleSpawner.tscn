@@ -1,12 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://crhndw50dy0eb"]
+[gd_scene load_steps=2 format=3 uid="uid://crhndw50dy0eb"]
 
 [ext_resource type="Script" uid="uid://bept6u1sucpvp" path="res://Enemies/simple_spawner.gd" id="1_sx6so"]
-[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Systems/Starmap/starmap_blip_connector.tscn" id="2_45x0b"]
 
 [node name="SimpleSpawner" type="Node2D"]
 script = ExtResource("1_sx6so")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
-
-[node name="StarmapBlipConnector" parent="." instance=ExtResource("2_45x0b")]

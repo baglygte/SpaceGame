@@ -13,7 +13,7 @@ func IsPositionOccupied(positionToCheck: Vector2) -> bool:
 	return positionToCheck in sectionMap.values()
 	
 func AddSectionAtPosition(section, positionToGet: Vector2, rotationToGet: float) -> void:
-	$"..".AddSection(section)
+	add_child(section)
 	section.position = positionToGet
 	section.rotation = rotationToGet
 	sectionMap[section] = positionToGet

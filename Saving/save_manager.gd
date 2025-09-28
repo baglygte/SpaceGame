@@ -28,7 +28,9 @@ func LoadGame() -> void:
 	
 	LoadObjectsOfCreator("SectionBuilder")
 	
-	LoadObjectsOfCreator("SystemBuilder")
+	LoadObjectsOfCreator("InternalSystemBuilder")
+	
+	LoadObjectsOfCreator("ExternalSystemBuilder")
 	
 	LoadObjectsOfCreator("ConnectionBuilder")
 

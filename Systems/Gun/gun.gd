@@ -13,7 +13,7 @@ func ReceiveLeftHand() -> void:
 	gameScene.add_child(rocket)
 
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "SystemBuilder"}
+	var dictionaryToSave: Dictionary = {"creator": "ExternalSystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "gun"
 	dictionaryToSave["position.x"] = position.x
