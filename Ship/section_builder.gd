@@ -18,11 +18,30 @@ func AddSectionAtPosition(section, positionToGet: Vector2, rotationToGet: float)
 	section.rotation = rotationToGet
 	sectionMap[section] = positionToGet
 	$WallBuilder.UpdateExternalWalls()
+	
+	$"..".center_of_mass = GetCenterOfMass()
+	$"../Node2D".position = $"..".center_of_mass
+	
 	var distance: float = ($"..".center_of_mass - section.position).length()
 	$"..".inertia += section.mass * pow(distance,2)
-	$"..".center_of_mass += section.position
+
+func GetCenterOfMass() -> Vector2:
+	var totalMass: float = 0
+	var totalMassDistanceX: float = 0
+	var totalMassDistanceY: float = 0
 	
+	for child in get_children():
+		if child is not Section:
+			continue
+			
+		totalMass += child.mass
+		totalMassDistanceX += child.mass * child.position.x
+		totalMassDistanceY += child.mass * child.position.y
 	
+	var centerOfMass := Vector2(totalMassDistanceX/totalMass, totalMassDistanceY/totalMass)
+	
+	return centerOfMass
+
 func ExtractSectionAtPosition(positionToRemove: Vector2) -> Node2D:
 	if not IsPositionOccupied(positionToRemove):
 		return null

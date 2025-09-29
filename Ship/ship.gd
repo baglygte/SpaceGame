@@ -20,9 +20,3 @@ func AddSection(section: Node2D) -> void:
 		
 func RemoveSection(section: Node2D) -> void:
 	remove_child(section)
-	
-func ApplyThrust(inputs) -> void:
-	if inputs == Vector2.ZERO:
-		return
-		
-	#apply_central_force(inputs)

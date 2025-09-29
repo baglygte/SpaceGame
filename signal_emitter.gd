@@ -6,7 +6,7 @@ var signalReceivers: Array
 func AddReceiver(reciever) -> void:
 	signalReceivers.append(reciever)
 	
-func SendMovementSignal(vector: Vector2) -> void:
+func SendMoveSignal(vector: Vector2) -> void:
 	if signalReceivers.size() < 1:
 		return
 		
@@ -14,7 +14,16 @@ func SendMovementSignal(vector: Vector2) -> void:
 		if receiver is SignalEmitter:
 			continue
 		receiver.ReceiveMovement(vector)
+
+func SendLookSignal(vector: Vector2) -> void:
+	if signalReceivers.size() < 1:
+		return
 		
+	for receiver in signalReceivers:
+		if receiver is SignalEmitter:
+			continue
+		receiver.ReceiveLook(vector)
+
 func SendLeftHandSignal() -> void:
 	if signalReceivers.size() < 1:
 		return

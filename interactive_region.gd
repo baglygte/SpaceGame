@@ -22,5 +22,6 @@ func TakeControl(listener:PlayerInputListener):
 	listenerInControl = listener
 	listener.ResetInputs()
 	
-	listener.moveSignal.connect($"../SignalEmitter".SendMovementSignal)
+	listener.moveSignal.connect($"../SignalEmitter".SendMoveSignal)
+	listener.lookSignal.connect($"../SignalEmitter".SendLookSignal)
 	listener.interactLeft.connect($"../SignalEmitter".SendLeftHandSignal)

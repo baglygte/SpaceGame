@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bdgleq1jjl0s5" path="res://sprites/controlSeat.png" id="1_suegr"]
 [ext_resource type="Script" uid="uid://cu0fs5qhfrl2w" path="res://Systems/ControlSeat/control_seat.gd" id="1_uw5wt"]
-[ext_resource type="Script" uid="uid://dce48q6togcr" path="res://Systems/ControlSeat/interactive_region.gd" id="3_14183"]
+[ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_14183"]
 [ext_resource type="PackedScene" uid="uid://c21tu7qhdabiw" path="res://editable_hover.tscn" id="4_c58h8"]
 [ext_resource type="PackedScene" uid="uid://clla0hc44fhq5" path="res://signal_emitter.tscn" id="5_yoneg"]
 

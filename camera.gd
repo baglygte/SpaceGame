@@ -1,7 +1,7 @@
 extends Camera2D
 
-const closestZoom = 2.5
-const fartherstZoom = 1.5
+const closestZoom = 1.5
+const fartherstZoom = 1
 const windowSize = Vector2(1280, 720)
 const windowMargin = 100
 
@@ -10,7 +10,6 @@ var targetZoom = 1
 func _process(_delta: float) -> void:
 	global_position = GetAveragePositionOfAllPlayers()
 	AssignZoom()
-
 
 func AssignZoom() -> void:
 	var players: Array = get_tree().get_nodes_in_group("Player")
