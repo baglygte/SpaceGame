@@ -1,6 +1,8 @@
 class_name Section
 extends Node2D
 
+var mass: float = 100
+
 func _ready() -> void:
 	$Health.maxHealth = 2
 	$Health.GainHealth(2)

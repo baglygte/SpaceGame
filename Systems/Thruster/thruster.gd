@@ -2,36 +2,29 @@ class_name Thruster
 extends Node2D
 
 var globalId: int
-var assignedDirection := Vector2.ZERO
-var assignedAngle: float
-const strength := 500
-const directionTextMap := {Vector2.UP: "Up",
-							Vector2.DOWN: "Down",
-							Vector2.RIGHT: "Right",
-							Vector2.LEFT: "Left"}
+const strength := 50
+var isContributing: bool = false
 
-func ReceiveMovement(movementVector: Vector2) -> void:
-	if movementVector.length() == 0:
-		return
-		
-	AssignDirection(rad_to_deg(movementVector.angle()))
+func _process(_delta: float) -> void:
+	$GPUParticles2D.emitting = false
+	
+func GetThrustContribution(flightControl: FlightControl, movementVector: Vector2) -> Vector2:
+	var contribution = Vector2.UP.rotated(rotation)
+	var rotatedMovement = movementVector.rotated(flightControl.rotation)
+	
+	contribution = round(contribution)
+	
+	if sign(rotatedMovement.x) != sign(contribution.x):
+		contribution.x = 0
+	
+	if sign(rotatedMovement.y) != sign(contribution.y):
+		contribution.y = 0
 
-func AssignDirection(angle: float) -> void:
-	var directionToAssign: Vector2
-	
-	if angle > -135 and angle < -45:
-		directionToAssign = Vector2.UP
-	elif angle > -45 and angle < 45:
-		directionToAssign = Vector2.RIGHT
-	elif angle > 45 and angle < 135:
-		directionToAssign = Vector2.DOWN
-	else:
-		directionToAssign = Vector2.LEFT
-	
-	assignedDirection = directionToAssign * strength
-	$Label.text = directionTextMap[directionToAssign]
-	assignedAngle = angle
-	
+	if contribution.length() > 0:
+		$GPUParticles2D.emitting = true
+
+	return contribution * strength
+
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "ExternalSystemBuilder"}
 	
@@ -40,6 +33,5 @@ func GetSaveData() -> Dictionary:
 	dictionaryToSave["position.y"] = position.y
 	dictionaryToSave["rotation"] = rotation
 	dictionaryToSave["globalId"] = globalId
-	dictionaryToSave["assignedAngle"] = assignedAngle
-	
+
 	return dictionaryToSave

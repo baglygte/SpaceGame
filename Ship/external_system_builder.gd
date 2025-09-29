@@ -28,7 +28,6 @@ func CreateFromSave(variablesToSet: Dictionary) -> void:
 	match variablesToSet["systemType"]:
 		"thruster":
 			instance = CreateExternalSystem("res://Systems/Thruster/thruster.tscn")
-			instance.AssignDirection(variablesToSet["assignedAngle"])
 		"gun":
 			instance = CreateExternalSystem("res://Systems/Gun/gun.tscn")
 			

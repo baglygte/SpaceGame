@@ -4,10 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://fpaw53oftt7h" path="res://sprites/thruster.png" id="1_7bk4a"]
 [ext_resource type="Script" uid="uid://dmgtkfejwsm0s" path="res://Sections/section_hover.gd" id="2_ymiq1"]
 [ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="3_xjhfb"]
-[ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="4_1808l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymiq1"]
 size = Vector2(60, 41)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0hj6a"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 5, 1)
+angle_min = 1.0728835e-05
+angle_max = 1.0728835e-05
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 109.45
+initial_velocity_max = 195.65999
+gravity = Vector3(0, 0, 0)
 
 [node name="Thruster" type="Node2D" groups=["ExternalSystem", "HammerCanEdit", "MustBeSaved", "PliersCanEdit"]]
 script = ExtResource("1_0hj6a")
@@ -28,13 +39,8 @@ position = Vector2(0.50000095, -0.50000095)
 scale = Vector2(0.0703125, 0.07031251)
 texture = ExtResource("3_xjhfb")
 
-[node name="SignalReceiver" parent="." instance=ExtResource("4_1808l")]
-
-[node name="Label" type="Label" parent="."]
-offset_left = -30.0
-offset_top = -32.0
-offset_right = 30.0
-offset_bottom = 9.0
-text = "?"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 11)
+amount = 100
+lifetime = 0.29000000000000004
+process_material = SubResource("ParticleProcessMaterial_0hj6a")

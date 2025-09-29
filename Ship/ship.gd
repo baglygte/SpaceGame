@@ -25,4 +25,4 @@ func ApplyThrust(inputs) -> void:
 	if inputs == Vector2.ZERO:
 		return
 		
-	apply_central_force(inputs)
+	#apply_central_force(inputs)

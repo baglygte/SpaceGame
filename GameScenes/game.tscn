@@ -93,6 +93,7 @@ script = ExtResource("1_g60ea")
 
 [node name="Ship" type="RigidBody2D" parent="." groups=["Ship"]]
 gravity_scale = 0.0
+center_of_mass_mode = 1
 script = ExtResource("2_q3a5i")
 
 [node name="SectionBuilder" type="Node2D" parent="Ship" groups=["SectionBuilder"]]

@@ -1,7 +1,7 @@
 extends Node2D
 var globalId: int
 
-const rocketScene = preload("res://Rockets/homing_rocket.tscn")
+const rocketScene = preload("res://Rockets/rocket.tscn")
 func ReceiveMovement(vector: Vector2) -> void:
 	$Barrel.rotate(deg_to_rad(3) * sign(vector.x))
 
