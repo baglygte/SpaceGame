@@ -46,6 +46,9 @@ MustBeSaved=""
 Starmap=""
 ExternalSystem=""
 InternalSystem=""
+StarmapBlipConnection=""
+GameSceneManager=""
+PlayerCreator=""
 
 [input]
 
@@ -197,6 +200,16 @@ interact={
 1_modify={
 "deadzone": 0.2,
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":1,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+]
+}
+0_toggle_camera_zoom={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+]
+}
+1_toggle_camera_zoom={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":1,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
 

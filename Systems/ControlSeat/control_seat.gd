@@ -6,8 +6,9 @@ func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "controlseat"
-	dictionaryToSave["position.x"] = global_position.x
-	dictionaryToSave["position.y"] = global_position.y
+	var section: Section = get_parent().get_parent()
+	dictionaryToSave["position.x"] = position.x + section.position.x
+	dictionaryToSave["position.y"] = position.y + section.position.y
 	dictionaryToSave["rotation"] = rotation
 	dictionaryToSave["globalId"] = globalId
 	

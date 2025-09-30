@@ -32,13 +32,20 @@ func RemoveBlipFromMap(instance: Node2D) -> void:
 		
 	blipsToDisplay[instance].queue_free()
 	blipsToDisplay.erase(instance)
+
+func OnPlace() -> void:
+	var connections = get_tree().get_nodes_in_group("StarmapBlipConnection")
+	
+	for connection in connections:
+		AddBlipToMap(connection.get_parent())
 	
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "starmap"
-	dictionaryToSave["position.x"] = global_position.x
-	dictionaryToSave["position.y"] = global_position.y
+	var section: Section = get_parent().get_parent()
+	dictionaryToSave["position.x"] = position.x + section.position.x
+	dictionaryToSave["position.y"] = position.y + section.position.y
 	dictionaryToSave["rotation"] = rotation
 	dictionaryToSave["globalId"] = globalId
 	

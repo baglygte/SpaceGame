@@ -14,4 +14,4 @@ func SpawnRocket() -> void:
 	rocket.rotation = angle
 	rocket.position = position
 	get_parent().add_child(rocket)
-	$Timer.start(1)
+	$Timer.start(20)

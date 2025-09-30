@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://crhndw50dy0eb"]
+
+[ext_resource type="Script" uid="uid://bept6u1sucpvp" path="res://Enemies/dabox.gd" id="1_sx6so"]
+[ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://sprites/sectionPreview.png" id="2_elafv"]
+[ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_x5o0o"]
+[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Systems/Starmap/starmap_blip_connector.tscn" id="4_suqjk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elafv"]
+size = Vector2(384, 384)
+
+[node name="dabox" type="RigidBody2D"]
+script = ExtResource("1_sx6so")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(6, 6)
+texture = ExtResource("2_elafv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_elafv")
+
+[node name="Health" parent="." instance=ExtResource("3_x5o0o")]
+position = Vector2(-185.9, -455.7)
+
+[node name="StarmapBlipConnector" parent="." instance=ExtResource("4_suqjk")]

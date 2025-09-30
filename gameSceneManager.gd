@@ -14,8 +14,6 @@ func ChangeActiveScene(scenePath: String) -> void:
 	
 	activeScene = scene
 	
-	scene.gameSceneManager = $"."
-	
 	get_parent().add_child(scene)
 	
 func AddPersistentChild(node: Node) -> void:

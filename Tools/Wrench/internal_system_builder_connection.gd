@@ -14,7 +14,9 @@ func PlaceHeldSystem(system, angle: float) -> void:
 	
 	if !internalSystemBuilder.IsSystemPositionValid(previewPosition):
 		return
-	
+		
 	internalSystemBuilder.AddSystemAtPosition(system, previewPosition, angle)	
-	
+	if system.has_method("OnPlace"):
+		system.OnPlace()
+		
 	$"..".get_parent().GetOtherHand().LoseItem()

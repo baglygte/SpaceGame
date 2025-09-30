@@ -3,6 +3,7 @@ class_name Player
 
 const SPEED = 100.0
 var canMove := true
+var camera: Camera2D
 
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:

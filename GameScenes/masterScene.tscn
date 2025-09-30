@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://btxq4v2vo5anu"]
 
-[ext_resource type="Script" uid="uid://vbnlo62enaco" path="res://menu/gameSceneManager.gd" id="1_a4o26"]
+[ext_resource type="Script" uid="uid://vbnlo62enaco" path="res://gameSceneManager.gd" id="1_a4o26"]
 [ext_resource type="Script" uid="uid://tpm6umqykk4l" path="res://Saving/save_manager.gd" id="2_sncpr"]
 
 [node name="MasterScene" type="Node"]
 
-[node name="GameSceneManager" type="Node" parent="."]
+[node name="GameSceneManager" type="Node" parent="." groups=["GameSceneManager"]]
 script = ExtResource("1_a4o26")
 
 [node name="SaveManager" type="Node" parent="." groups=["SaveManager"]]

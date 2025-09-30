@@ -1,128 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=4 format=3 uid="uid://b6d5ttlwacwny"]
 
-[ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://game.gd" id="1_g60ea"]
-[ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="2_q3a5i"]
-[ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://Ship/section_builder.gd" id="3_w3as4"]
-[ext_resource type="Script" uid="uid://d0pmrbwvyke8v" path="res://Ship/wall_builder.gd" id="4_w3as4"]
-[ext_resource type="Script" uid="uid://cpsruny863qje" path="res://Ship/connection_builder.gd" id="5_q3a5i"]
-[ext_resource type="Script" uid="uid://7bp6m8is2glc" path="res://Ship/internal_system_builder.gd" id="5_rjcol"]
+[ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
-[ext_resource type="Script" uid="uid://bxxhfivskxbb1" path="res://Ship/external_system_builder.gd" id="6_w3as4"]
-[ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="8_6ce2g"]
-[ext_resource type="Texture2D" uid="uid://ch0iids6p2oxv" path="res://sprites/starmapBlip.png" id="8_68ns4"]
-[ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="8_g60ea"]
-[ext_resource type="Script" uid="uid://7p4uw5aoqly0" path="res://camera.gd" id="8_q3a5i"]
-[ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="12_wy7ce"]
+[ext_resource type="PackedScene" uid="uid://d0xa3n8ogb0wy" path="res://GameScenes/game_world.tscn" id="6_q6okl"]
 
-[sub_resource type="GDScript" id="GDScript_rcqf4"]
-script/source = "extends Node
-#class_name ModuleGenerator
-#
-#const moduleScene = preload(\"res://scenes/module.tscn\")
-#const interactiveRegionScene = preload(\"res://scenes/interactiveRegion.tscn\")
-#const shipControllerScene = preload(\"res://scenes/shipController.tscn\")
-#const storageControllerScene = preload(\"res://scenes/storageController.tscn\")
-#const thrusterControllerScene = preload(\"res://scenes/thrusterController.tscn\")
-#var player: Player
-#
-#func CreateStorageModule() -> Module:
-	#var module = moduleScene.instantiate()
-	#
-	#var storageController = storageControllerScene.instantiate()
-	#module.add_child(storageController)
-	##storageController.inputManager = $\"../InputManager\"
-	##storageController.hud = $\"../HUD\"
-#
-	#module.name = \"Storage\"
-	#return module
-#
-#func CreateShipModule() -> Module:
-	#var module = moduleScene.instantiate()
-	#
-	#var shipController = shipControllerScene.instantiate()
-	#shipController.inputManager = $\"../InputManager\"
-	#shipController.ship = $\"../Ship\"
-#
-	#module.add_child(shipController)
-	#
-	#module.name = \"Ship\"
-	#return module
-	#
-#func CreateThrusterModule() -> Module:
-	#var module = moduleScene.instantiate()
-	#
-	#var thrusterController = thrusterControllerScene.instantiate()
-	#thrusterController.inputManager = $\"../InputManager\"
-#
-	#module.add_child(thrusterController)
-	#
-	#module.name = \"Thruster\"
-	#return module
-"
-
-[sub_resource type="GDScript" id="GDScript_g60ea"]
-script/source = "extends Node
-# Listens for inputs and emits corresponding signals
-class_name InputManager
-
-#signal moveSignal
-#signal interactSignal
-#signal leftClickSignal
-#signal modifySignal
-
-#func _process(_delta: float) -> void:
-	#var moveInputVector = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
-	#moveSignal.emit(moveInputVector)
-	
-	#if Input.is_action_just_pressed(\"interact\"):
-		#interactSignal.emit()
-		#
-	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		#leftClickSignal.emit()
-		#
-	#if Input.is_action_just_pressed(\"modify\"):
-		#modifySignal.emit()
-
-func ClearSignal(signalToClear) -> void:
-	for connection in signalToClear.get_connections():
-		signalToClear.disconnect(connection.callable)
-		
-"
-
-[node name="Game" type="Node2D"]
-script = ExtResource("1_g60ea")
-
-[node name="Ship" type="RigidBody2D" parent="." groups=["Ship"]]
-gravity_scale = 0.0
-center_of_mass_mode = 1
-script = ExtResource("2_q3a5i")
-
-[node name="SectionBuilder" type="Node2D" parent="Ship" groups=["SectionBuilder"]]
-script = ExtResource("3_w3as4")
-
-[node name="WallBuilder" type="Node2D" parent="Ship/SectionBuilder"]
-script = ExtResource("4_w3as4")
-
-[node name="InternalSystemBuilder" type="Node2D" parent="Ship/SectionBuilder" groups=["InternalSystemBuilder"]]
-script = ExtResource("5_rjcol")
-
-[node name="ConnectionBuilder" type="Node2D" parent="Ship" groups=["ConnectionBuilder"]]
-script = ExtResource("5_q3a5i")
-
-[node name="ExternalSystemBuilder" type="Node2D" parent="Ship" groups=["ExternalSystemBuilder"]]
-script = ExtResource("6_w3as4")
-
-[node name="Node2D" type="Node2D" parent="Ship"]
-
-[node name="Sprite2D" type="Sprite2D" parent="Ship/Node2D"]
-z_index = 4096
-texture = ExtResource("8_68ns4")
-
-[node name="ModuleGenerator" type="Node" parent="."]
-script = SubResource("GDScript_rcqf4")
-
-[node name="InputManager" type="Node" parent="."]
-script = SubResource("GDScript_g60ea")
+[node name="Game" type="Node"]
 
 [node name="HUD" type="CanvasLayer" parent="." groups=["HUD"]]
 script = ExtResource("6_68ns4")
@@ -139,14 +21,33 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="PlayerCreator" type="Node2D" parent="." groups=["PlayerCreator"]]
-script = ExtResource("8_6ce2g")
+[node name="PlayerViewports" type="HBoxContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("2_fimsf")
 
-[node name="ContainedItemCreator" type="Node2D" parent="." groups=["ContainedItemCreator"]]
-script = ExtResource("8_g60ea")
+[node name="SubViewportContainerLeft" type="SubViewportContainer" parent="HUD/PlayerViewports"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource("8_q3a5i")
+[node name="SubViewport" type="SubViewport" parent="HUD/PlayerViewports/SubViewportContainerLeft"]
+handle_input_locally = false
+size = Vector2i(638, 720)
+render_target_update_mode = 4
 
-[node name="GlobalSystemCounter" type="Node2D" parent="."]
-script = ExtResource("12_wy7ce")
+[node name="GameWorld" parent="HUD/PlayerViewports/SubViewportContainerLeft/SubViewport" instance=ExtResource("6_q6okl")]
+
+[node name="SubViewportContainerRight" type="SubViewportContainer" parent="HUD/PlayerViewports"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/PlayerViewports/SubViewportContainerRight"]
+handle_input_locally = false
+size = Vector2i(638, 720)
+render_target_update_mode = 4

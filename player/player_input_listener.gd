@@ -16,11 +16,13 @@ signal dropRight
 signal dropLeft
 signal modify
 signal enterexit
+signal toggleCameraZoom
 
 func _ready() -> void:
 	SetDefaultInputs()
 	
 	enterexit.connect($"..".ToggleEnterExit)
+	toggleCameraZoom.connect($"..".camera.ToggleZoom)
 	
 func _process(_delta: float) -> void:
 	SendMoveSignal()
@@ -47,6 +49,9 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed(str(deviceId) + "_modify"):
 		modify.emit()
+		
+	if Input.is_action_just_pressed(str(deviceId) + "_toggle_camera_zoom"):
+		toggleCameraZoom.emit()
 
 func SendMoveSignal() -> void:
 	var prefix = str(deviceId) + "_move"

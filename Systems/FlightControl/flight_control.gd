@@ -13,6 +13,9 @@ func ReceiveMovement(movementVector: Vector2) -> void:
 	
 	for thruster: Thruster in ship.assignedThrusters:
 		var forceToApply = thruster.GetThrustMoveContribution(self, movementVector)
+		
+		forceToApply = forceToApply.rotated(ship.rotation)
+		
 		ship.apply_force(forceToApply, thruster.position)
 
 func ReceiveLook(lookVector: Vector2) -> void:
@@ -27,8 +30,9 @@ func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}
 	
 	dictionaryToSave["systemType"] = "flightcontrol"
-	dictionaryToSave["position.x"] = global_position.x
-	dictionaryToSave["position.y"] = global_position.y
+	var section: Section = get_parent().get_parent()
+	dictionaryToSave["position.x"] = position.x + section.position.x
+	dictionaryToSave["position.y"] = position.y + section.position.y
 	dictionaryToSave["rotation"] = rotation
 	dictionaryToSave["globalId"] = globalId
 	
