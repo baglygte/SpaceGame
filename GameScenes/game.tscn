@@ -1,27 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=5 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
+[ext_resource type="Texture2D" uid="uid://bjuvvce50vim5" path="res://sprites/compass.png" id="4_3g60v"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
 [ext_resource type="PackedScene" uid="uid://d0xa3n8ogb0wy" path="res://GameScenes/game_world.tscn" id="6_q6okl"]
 
 [node name="Game" type="Node"]
 
-[node name="HUD" type="CanvasLayer" parent="." groups=["HUD"]]
-script = ExtResource("6_68ns4")
-
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+[node name="HUD" type="Control" parent="." groups=["HUD"]]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 624.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+script = ExtResource("6_68ns4")
 
 [node name="PlayerViewports" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -51,3 +47,33 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(638, 720)
 render_target_update_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="xCoorLabel" type="Label" parent="HUD/CenterContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "x"
+vertical_alignment = 1
+
+[node name="yCoorLabel" type="Label" parent="HUD/CenterContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "y"
+
+[node name="Control" type="Control" parent="HUD/CenterContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/CenterContainer/HBoxContainer/Control"]
+texture = ExtResource("4_3g60v")

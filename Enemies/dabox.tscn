@@ -9,6 +9,7 @@
 size = Vector2(384, 384)
 
 [node name="dabox" type="RigidBody2D"]
+gravity_scale = 0.0
 script = ExtResource("1_sx6so")
 
 [node name="Timer" type="Timer" parent="."]

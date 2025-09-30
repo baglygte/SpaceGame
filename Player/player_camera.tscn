@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://bsap3rl2bpq0y" path="res://Player/player_camera.gd" id="1_ehrhw"]
 
 [node name="PlayerCamera" type="Camera2D"]
+ignore_rotation = false
 script = ExtResource("1_ehrhw")
