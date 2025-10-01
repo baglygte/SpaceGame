@@ -17,3 +17,6 @@ func GetSaveData() -> Dictionary:
 func Kill() -> void:
 	$interactiveRegion.ReleaseControl()
 	queue_free()
+
+func OnEnterExit() -> void:
+	$SignalEmitter.SendEnterExit()

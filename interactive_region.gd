@@ -17,11 +17,17 @@ func ReleaseControl() -> void:
 		return
 	listenerInControl.SetDefaultInputs()
 	listenerInControl = null
+	
+	if get_parent().has_method("OnEnterExit"):
+		get_parent().OnEnterExit()
 
-func TakeControl(listener:PlayerInputListener):
+func TakeControl(listener: PlayerInputListener):
 	listenerInControl = listener
 	listener.ResetInputs()
 	
 	listener.moveSignal.connect($"../SignalEmitter".SendMoveSignal)
 	listener.lookSignal.connect($"../SignalEmitter".SendLookSignal)
 	listener.interactLeft.connect($"../SignalEmitter".SendLeftHandSignal)
+	
+	if get_parent().has_method("OnEnterExit"):
+		get_parent().OnEnterExit()

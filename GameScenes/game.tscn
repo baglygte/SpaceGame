@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=6 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
 [ext_resource type="Texture2D" uid="uid://bjuvvce50vim5" path="res://sprites/compass.png" id="4_3g60v"]
+[ext_resource type="PackedScene" uid="uid://8c7jpm0ppqat" path="res://sectormap_overlay.tscn" id="5_55g6r"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
 [ext_resource type="PackedScene" uid="uid://d0xa3n8ogb0wy" path="res://GameScenes/game_world.tscn" id="6_q6okl"]
 
@@ -77,3 +78,27 @@ size_flags_vertical = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="HUD/CenterContainer/HBoxContainer/Control"]
 texture = ExtResource("4_3g60v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPlayerOverlay" type="Control" parent="HUD/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SectormapOverlay" parent="HUD/HBoxContainer/LeftPlayerOverlay" instance=ExtResource("5_55g6r")]
+visible = false
+layout_mode = 1
+
+[node name="RightPlayerOverlay" type="Control" parent="HUD/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SectormapOverlay" parent="HUD/HBoxContainer/RightPlayerOverlay" instance=ExtResource("5_55g6r")]
+visible = false
+layout_mode = 1

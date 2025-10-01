@@ -17,3 +17,7 @@ func ReceiveLeftHand() -> void:
 	if not get_parent().has_method("ReceiveLeftHand"):
 		return
 	get_parent().ReceiveLeftHand()
+
+func ReceiveEnterExit() -> void:
+	if get_parent().has_method("ReceiveEnterExit"):
+		get_parent().ReceiveEnterExit()

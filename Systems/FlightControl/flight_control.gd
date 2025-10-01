@@ -7,6 +7,10 @@ var ship: Ship
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
 
+func ReceiveEnterExit() -> void:
+	var hud: HUD = get_tree().get_first_node_in_group("HUD")
+	hud.ToggleSkrt()
+	
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:
 		return

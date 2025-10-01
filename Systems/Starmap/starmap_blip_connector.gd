@@ -1,19 +1,15 @@
-class_name StarmapBlipConnector
+class_name SectormapBlipConnector
 extends Node2D
 # Anything that should appear on the starmap shouuld have this scene
 
 func _ready() -> void:
-	var starmap: Starmap = get_tree().get_first_node_in_group("Starmap")
-	
-	if starmap == null:
-		return
+	var hud: HUD = get_tree().get_first_node_in_group("HUD")
+	var overlay: SectormapOverlay = hud.get_node("HBoxContainer/LeftPlayerOverlay/SectormapOverlay")
 		
-	starmap.AddBlipToMap(get_parent())
+	overlay.AddBlip(self)
 
 func Kill() -> void:
-	var starmap: Starmap = get_tree().get_first_node_in_group("Starmap")
-
-	if starmap == null:
-		return
+	var hud: HUD = get_tree().get_first_node_in_group("HUD")
+	var overlay: SectormapOverlay = hud.get_node("HBoxContainer/LeftPlayerOverlay/SectormapOverlay")
 		
-	starmap.RemoveBlipFromMap(get_parent())
+	overlay.RemoveBlip(self)
