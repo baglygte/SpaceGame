@@ -16,10 +16,11 @@ func ReleaseControl() -> void:
 	if listenerInControl == null:
 		return
 	listenerInControl.SetDefaultInputs()
+	var player = listenerInControl.get_parent()
 	listenerInControl = null
 	
 	if get_parent().has_method("OnEnterExit"):
-		get_parent().OnEnterExit()
+		get_parent().OnEnterExit(player)
 
 func TakeControl(listener: PlayerInputListener):
 	listenerInControl = listener
@@ -30,4 +31,4 @@ func TakeControl(listener: PlayerInputListener):
 	listener.interactLeft.connect($"../SignalEmitter".SendLeftHandSignal)
 	
 	if get_parent().has_method("OnEnterExit"):
-		get_parent().OnEnterExit()
+		get_parent().OnEnterExit(listener.get_parent())

@@ -3,11 +3,15 @@ class_name Player
 
 const SPEED = 100.0
 var canMove := true
-var camera: Camera2D
+var viewSide := "Left"
+#var camera: Camera2D
 
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:
 		return
+	
+	var ship = get_tree().get_first_node_in_group("Ship")
+	movementVector = movementVector.rotated(ship.rotation)
 	
 	velocity = movementVector * SPEED
 	move_and_slide()

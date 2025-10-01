@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://8c7jpm0ppqat"]
+
+[ext_resource type="Script" uid="uid://245dpq787ppp" path="res://SectormapOverlay/sectormap_overlay.gd" id="1_f3mcg"]
+[ext_resource type="Texture2D" uid="uid://c00qebdxcdafy" path="res://sprites/Blips/ShipBlip.png" id="2_admor"]
+
+[node name="SectormapOverlay" type="SubViewport"]
+size = Vector2i(640, 720)
+script = ExtResource("1_f3mcg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.21393713, 0.53610027, 0.7687415, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+texture = ExtResource("2_admor")

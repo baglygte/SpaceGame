@@ -1,6 +1,7 @@
 extends Node2D
 
 var globalId: int
+var playerInSeat: Player
 
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}
@@ -18,5 +19,13 @@ func Kill() -> void:
 	$interactiveRegion.ReleaseControl()
 	queue_free()
 
-func OnEnterExit() -> void:
-	$SignalEmitter.SendEnterExit()
+func OnEnterExit(player: Player) -> void:
+	
+	if playerInSeat == player:
+		playerInSeat = null
+	elif playerInSeat == null:
+		playerInSeat = player
+	else:
+		return
+	
+	$SignalEmitter.SendEnterExit(player)

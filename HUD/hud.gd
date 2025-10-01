@@ -9,9 +9,9 @@ func CreatePlayerHands(playerInstance: Player) -> void:
 	playerHandSets[playerInstance] = instance
 	
 	if playerHandSets.size() == 1:
-		$PlayerViewports/SubViewportContainerLeft.add_child.call_deferred(instance)
+		$PlayerViewports/LeftPlayerView.add_child.call_deferred(instance)
 	elif playerHandSets.size() == 2:
-		$PlayerViewports/SubViewportContainerRight.add_child.call_deferred(instance)
+		$PlayerViewports/RightPlayerView.add_child.call_deferred(instance)
 
 func AddItemToHands(instance: Player, hand, item) -> void:
 	playerHandSets[instance].AddItem(hand, item)
@@ -29,10 +29,3 @@ func _process(_delta: float) -> void:
 	$CenterContainer/HBoxContainer/VBoxContainer/yCoorLabel.text = yText
 	
 	$CenterContainer/HBoxContainer/Control/Sprite2D.rotation = ship.rotation
-
-func ToggleSkrt() -> void:
-	var skrt = $HBoxContainer/LeftPlayerOverlay/SectormapOverlay
-	if skrt.visible:
-		skrt.hide()
-	else:
-		skrt.show()

@@ -6,7 +6,6 @@ class_name PlayerInputListener
 # influence the player
 
 var deviceId
-var isAssigned: bool = false
 
 signal moveSignal
 signal lookSignal
@@ -22,7 +21,7 @@ func _ready() -> void:
 	SetDefaultInputs()
 	
 	enterexit.connect($"..".ToggleEnterExit)
-	toggleCameraZoom.connect($"..".camera.ToggleZoom)
+	#toggleCameraZoom.connect($"..".camera.ToggleZoom)
 	
 func _process(_delta: float) -> void:
 	SendMoveSignal()

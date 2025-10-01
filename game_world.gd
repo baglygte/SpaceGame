@@ -1,4 +1,4 @@
-extends Node
+extends SubViewport
 class_name GameWorld
 
 func _ready() -> void:	
@@ -14,7 +14,6 @@ func _ready() -> void:
 	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Pliers/pliers.tscn").instantiate(), Vector2(50,75))
 	
 	# Systems
-	$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/Starmap/starmap.tscn"), Vector2(200,50))
 	for i in range(5):
 		$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))
 	for i in range(10):
@@ -28,10 +27,13 @@ func _ready() -> void:
 	
 func StartGameScene() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")
+	
 	if saveManager.shouldLoadGame:
 		saveManager.LoadGame()
-	else:
-		get_tree().get_first_node_in_group("PlayerCreator").CreateNewPlayers()
+		
+	$PlayerCreator.CreateNewPlayers()
+	
+	#get_tree().root.get_node("MasterScene/Game/HUD/PlayerViewports").Initialize()
 
 func AddNodeToShip(node: Node) -> void:
 	if node.get_parent() == null:

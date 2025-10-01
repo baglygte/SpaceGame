@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bept6u1sucpvp" path="res://Enemies/dabox.gd" id="1_sx6so"]
 [ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://sprites/sectionPreview.png" id="2_elafv"]
 [ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_x5o0o"]
-[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Systems/Starmap/starmap_blip_connector.tscn" id="4_suqjk"]
+[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://SectormapOverlay/sectormap_blip_connector.gd.tscn" id="4_suqjk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elafv"]
 size = Vector2(384, 384)

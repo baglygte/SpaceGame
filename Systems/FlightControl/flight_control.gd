@@ -4,12 +4,23 @@ extends Node2D
 var globalId: int
 var ship: Ship
 
+var isOverlayingSectorMap := false
+
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
 
-func ReceiveEnterExit() -> void:
-	var hud: HUD = get_tree().get_first_node_in_group("HUD")
-	hud.ToggleSkrt()
+func ReceiveEnterExit(player: Player) -> void:
+	var viewPorts: PlayerViewPorts = get_tree().get_first_node_in_group("PlayerViewPorts")
+	
+	if isOverlayingSectorMap:
+		var gameWorld = get_tree().get_first_node_in_group("GameWorld")
+		viewPorts.SwitchToSubView(gameWorld, player.viewSide)
+		isOverlayingSectorMap = false
+	else:
+		var sectorMapOverlay = get_tree().get_first_node_in_group("SectorMapOverlay")
+		viewPorts.SwitchToSubView(sectorMapOverlay, player.viewSide)
+		isOverlayingSectorMap = true
+	
 	
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:

@@ -18,6 +18,6 @@ func ReceiveLeftHand() -> void:
 		return
 	get_parent().ReceiveLeftHand()
 
-func ReceiveEnterExit() -> void:
+func ReceiveEnterExit(player: Player) -> void:
 	if get_parent().has_method("ReceiveEnterExit"):
-		get_parent().ReceiveEnterExit()
+		get_parent().ReceiveEnterExit(player)

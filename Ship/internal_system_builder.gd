@@ -10,8 +10,6 @@ func CreateInternalSystem(scenePath: String) -> Node2D:
 func CreateFromSave(variablesToSet: Dictionary) -> void:
 	var instance
 	match variablesToSet["systemType"]:
-		"starmap":
-			instance = CreateInternalSystem("res://Systems/Starmap/starmap.tscn")
 		"controlseat":
 			instance = CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn")
 		"flightcontrol":

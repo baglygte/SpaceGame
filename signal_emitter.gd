@@ -31,9 +31,9 @@ func SendLeftHandSignal() -> void:
 	for receiver in signalReceivers:
 		receiver.ReceiveLeftHand()
 
-func SendEnterExit() -> void:
+func SendEnterExit(player: Player) -> void:
 	if signalReceivers.size() < 1:
 		return
 		
 	for receiver in signalReceivers:
-		receiver.ReceiveEnterExit()
+		receiver.ReceiveEnterExit(player)
