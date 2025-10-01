@@ -16,7 +16,14 @@ func ReceiveLook(vector: Vector2) -> void:
 func ReceiveLeftHand() -> void:
 	if not get_parent().has_method("ReceiveLeftHand"):
 		return
+		
 	get_parent().ReceiveLeftHand()
+	
+func ReceiveRightHand() -> void:
+	if not get_parent().has_method("ReceiveRightHand"):
+		return
+		
+	get_parent().ReceiveRightHand()
 
 func ReceiveEnterExit(player: Player) -> void:
 	if get_parent().has_method("ReceiveEnterExit"):

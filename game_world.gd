@@ -23,7 +23,7 @@ func _ready() -> void:
 	
 	var instance = load("res://Enemies/dabox.tscn").instantiate()
 	add_child(instance)
-	instance.position = Vector2(5000,5000)
+	instance.position = Vector2(2000,2000)
 	
 func StartGameScene() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")

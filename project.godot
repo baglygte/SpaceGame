@@ -50,6 +50,7 @@ PlayerCreator=""
 GameWorld=""
 SectorMapOverlay=""
 PlayerViewPorts=""
+GunInterfaceOverlay=""
 
 [input]
 

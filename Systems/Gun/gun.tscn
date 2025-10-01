@@ -13,6 +13,16 @@ size = Vector2(60, 41)
 [node name="Gun" type="Node2D" groups=["ExternalSystem", "HammerCanEdit", "MustBeSaved", "PliersCanEdit"]]
 script = ExtResource("1_vwvcx")
 
+[node name="Barrel" type="Node2D" parent="."]
+position = Vector2(0, -25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Barrel"]
+position = Vector2(-1.4305115e-06, 32)
+texture = ExtResource("5_0rbit")
+
+[node name="SpawnPosition" type="Node2D" parent="Barrel"]
+position = Vector2(0, 49)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0rbit")
 
@@ -30,8 +40,3 @@ scale = Vector2(0.0703125, 0.07031251)
 texture = ExtResource("2_t5ng2")
 
 [node name="SignalReceiver" parent="." instance=ExtResource("3_t5ng2")]
-
-[node name="Barrel" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Barrel"]
-texture = ExtResource("5_0rbit")

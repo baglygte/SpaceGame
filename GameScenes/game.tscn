@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=17 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
 [ext_resource type="Texture2D" uid="uid://bjuvvce50vim5" path="res://sprites/compass.png" id="4_3g60v"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="12_xjp2s"]
 [ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="13_i5gbp"]
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="14_o2qad"]
+[ext_resource type="PackedScene" uid="uid://bsksunrso83ep" path="res://GunInterfaceOverlay/gun_interface_overlay.tscn" id="16_cub2r"]
 
 [node name="Game" type="Node"]
 
@@ -126,3 +127,5 @@ script = ExtResource("13_i5gbp")
 script = ExtResource("14_o2qad")
 
 [node name="SectormapOverlay" parent="." groups=["SectorMapOverlay"] instance=ExtResource("5_55g6r")]
+
+[node name="GunInterfaceOverlay" parent="." groups=["GunInterfaceOverlay"] instance=ExtResource("16_cub2r")]
