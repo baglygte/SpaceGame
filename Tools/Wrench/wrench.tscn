@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://b524521xbe6ya"]
+[gd_scene load_steps=8 format=3 uid="uid://b524521xbe6ya"]
 
 [ext_resource type="Script" uid="uid://d23i2bfaljqvb" path="res://Tools/Wrench/wrench.gd" id="1_mt1rw"]
 [ext_resource type="Texture2D" uid="uid://cgh0rwrlx4xmh" path="res://sprites/wrench.png" id="2_dk57q"]
 [ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://sprites/sectionPreview.png" id="3_nwces"]
+[ext_resource type="Shader" uid="uid://bw6vrksnp0ctm" path="res://section_preview.gdshader" id="3_vjkkf"]
 [ext_resource type="Script" uid="uid://bb5ri6m5vd3v7" path="res://Tools/Wrench/internal_system_builder_connection.gd" id="4_hwenn"]
 [ext_resource type="Script" uid="uid://c6o74qvcuy3r3" path="res://Tools/Wrench/external_system_builder_connection.gd" id="5_vjkkf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esswc"]
+shader = ExtResource("3_vjkkf")
+shader_parameter/shadedColor = Vector4(0, 0, 0, 0)
 
 [node name="Wrench" type="Node2D" groups=["Tool"]]
 script = ExtResource("1_mt1rw")
@@ -15,6 +20,7 @@ texture = ExtResource("2_dk57q")
 [node name="SystemPreview" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="SystemPreview"]
+material = SubResource("ShaderMaterial_esswc")
 texture = ExtResource("3_nwces")
 
 [node name="InternalSystemBuilderConnection" type="Node2D" parent="."]

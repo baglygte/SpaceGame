@@ -21,10 +21,10 @@ func _process(_delta: float) -> void:
 		return
 	
 	if otherHandItem.is_in_group("InternalSystem"):
-		systemPreview.position = $InternalSystemBuilderConnection.GetPreviewPosition()
+		$InternalSystemBuilderConnection.UpdatePreviewPosition(systemPreview)
 	elif otherHandItem.is_in_group("ExternalSystem"):
-		systemPreview.position = $ExternalSystemBuilderConnection.GetPreviewPosition()
-	
+		$ExternalSystemBuilderConnection.UpdatePreviewPosition(systemPreview)
+
 func Equip() -> void:
 	isEquipped = true
 	
@@ -38,6 +38,17 @@ func Equip() -> void:
 	var otherHand = get_parent().GetOtherHand()
 	otherHand.itemWasPickedUp.connect(UpdatePickedItem)
 	otherHand.itemWasDropped.connect(UpdatePickedItem)
+	UpdatePickedItem()
+	
+func SetPreviewShaderColor(isSystemPositionValid: bool) -> void:
+	var shadedColor
+	if isSystemPositionValid:
+		shadedColor = Vector4(0.387, 0.9, 0.592, 0.5)
+	else:
+		shadedColor = Vector4(1.0, 0.18, 0.317, 0.5)
+	
+	var sprite: Sprite2D = systemPreview.get_node("Sprite2D")
+	sprite.material.set("shader_parameter/shadedColor", shadedColor)
 
 func Unequip() -> void:
 	isEquipped = false
@@ -54,6 +65,7 @@ func Unequip() -> void:
 
 func UpdatePickedItem() -> void:
 	otherHandItem = get_parent().GetOtherHand().heldItem
+	systemPreview.rotation = 0
 	UpdatePreviewTexture()
 
 func Use() -> void:

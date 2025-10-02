@@ -20,3 +20,14 @@ func PlaceHeldSystem(system, angle: float) -> void:
 		system.OnPlace()
 		
 	$"..".get_parent().GetOtherHand().LoseItem()
+	
+func UpdatePreviewPosition(preview) -> void:
+	preview.position = GetPreviewPosition()
+	var sprite: Sprite2D = preview.get_node("Sprite2D")
+	
+	var shadedColor = Vector4(255,0,0,0.5)
+	
+	if internalSystemBuilder.IsSystemPositionValid(preview.position):
+		shadedColor = Vector4(0,255,0,0.5)
+		
+	sprite.material.set("shader_parameter/shadedColor", shadedColor)

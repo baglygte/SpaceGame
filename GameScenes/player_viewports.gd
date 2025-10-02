@@ -28,6 +28,7 @@ func SwitchToSubView(subViewToGet: SubViewport, side: String) -> void:
 		playerCamera = rightCamera
 	else:
 		return
+	
 
 	playerSubView.world_2d = subViewToGet.find_world_2d()
 	subViewToGet.size = playerSubView.get_parent().size

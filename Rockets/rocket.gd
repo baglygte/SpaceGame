@@ -8,7 +8,9 @@ func _ready() -> void:
 	$StarmapBlipConnector.Initialize()
 
 func _process(_delta: float) -> void:
-	apply_central_force(Vector2.UP.rotated(rotation) * 100)
+	if linear_velocity.length() > 10000:
+		return
+	apply_central_force(Vector2.UP.rotated(rotation) * 5000)
 	
 func Kill() -> void:
 	$StarmapBlipConnector.Kill()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ctwpaw248frfu" path="res://sprites/hammer.png" id="1_o8p1l"]
 [ext_resource type="Script" uid="uid://owvxkhgk5ylj" path="res://Tools/Hammer/hammer.gd" id="1_q7g0b"]
-[ext_resource type="Shader" uid="uid://bw6vrksnp0ctm" path="res://Tools/Hammer/section_preview.gdshader" id="3_y7kof"]
+[ext_resource type="Shader" uid="uid://bw6vrksnp0ctm" path="res://section_preview.gdshader" id="3_y7kof"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wf05t"]
 shader = ExtResource("3_y7kof")

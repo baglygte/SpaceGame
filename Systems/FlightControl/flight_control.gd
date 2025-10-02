@@ -17,7 +17,7 @@ func ReceiveEnterExit(player: Player) -> void:
 		viewPorts.SwitchToSubView(gameWorld, player.viewSide)
 		isOverlayingSectorMap = false
 	else:
-		var sectorMapOverlay = get_tree().get_first_node_in_group("SectorMapOverlay")
+		var sectorMapOverlay = get_tree().get_first_node_in_group("FlightControlOverlay")
 		viewPorts.SwitchToSubView(sectorMapOverlay, player.viewSide)
 		isOverlayingSectorMap = true
 	

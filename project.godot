@@ -51,6 +51,7 @@ GameWorld=""
 SectorMapOverlay=""
 PlayerViewPorts=""
 GunInterfaceOverlay=""
+FlightControlOverlay=""
 
 [input]
 

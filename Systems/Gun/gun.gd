@@ -4,6 +4,12 @@ var isOverlayingInterface
 const rocketScene = preload("res://Rockets/rocket.tscn")
 
 func ReceiveMovement(vector: Vector2) -> void:
+	if $Barrel.rotation > deg_to_rad(80) and vector.x > 0:
+		return
+		
+	if $Barrel.rotation < deg_to_rad(-80) and vector.x < 0:
+		return
+		
 	$Barrel.rotate(deg_to_rad(3) * sign(vector.x))
 	
 func ReceiveEnterExit(player: Player) -> void:
@@ -16,6 +22,7 @@ func ReceiveEnterExit(player: Player) -> void:
 	else:
 		var overlay = get_tree().get_first_node_in_group("GunInterfaceOverlay")
 		overlay.rotationReference = $Barrel
+		overlay.rotationOffset = -rotation
 		viewPorts.SwitchToSubView(overlay, player.viewSide)
 		isOverlayingInterface = true
 		
