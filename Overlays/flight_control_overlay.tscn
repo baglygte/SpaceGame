@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3mn0esc8to1o"]
+
+[ext_resource type="PackedScene" uid="uid://bni87pxm27ttb" path="res://Overlays/sector_map_overlay.tscn" id="1_4fa6q"]
+[ext_resource type="Script" uid="uid://cnipwsug1ai3m" path="res://Overlays/flight_control_overlay.gd" id="1_7exin"]
+[ext_resource type="Texture2D" uid="uid://buqglp8w0jp08" path="res://sprites/DemoUiBackgroundNineRect.png" id="3_w5ca8"]
+
+[node name="FlightControlOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_7exin")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SectorMapOverlay" parent="VBoxContainer" instance=ExtResource("1_4fa6q")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_w5ca8")
+patch_margin_left = 2
+patch_margin_top = 5
+patch_margin_right = 2
+patch_margin_bottom = 3

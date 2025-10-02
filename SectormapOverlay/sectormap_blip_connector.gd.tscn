@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://b50oswge8uvpv" path="res://SectormapOverlay/sectormap_blip_connector.gd" id="1_vl5vg"]
 
-[node name="StarmapBlipConnector" type="Node2D"]
+[node name="StarmapBlipConnector" type="Node2D" groups=["BlipConnector"]]
 script = ExtResource("1_vl5vg")

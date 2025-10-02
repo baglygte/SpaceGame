@@ -1,4 +1,5 @@
-extends SubViewport
+class_name  SectorMapOverlay
+extends Control
 
 var blipConnections: Dictionary
 var ship: Ship
@@ -8,18 +9,23 @@ const visibleRange: float = 10000
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
 	
-func AddBlip(connection: SectorMapBlipConnector, blipType: String) -> void:
-	var blip = GetBlip(blipType)
+	var blipConnectors = get_tree().get_nodes_in_group("BlipConnector")
+	
+	for blipConnector in blipConnectors:
+		AddBlip(blipConnector)
+	
+func AddBlip(connection: SectorMapBlipConnector) -> void:
+	var blip = GetBlip(connection.blipType)
 	
 	blipConnections[connection] = blip
 	$Control.add_child(blip)
 
 func RemoveBlip(connection: SectorMapBlipConnector) -> void:
+	return
 	blipConnections[connection].queue_free()
 	blipConnections.erase(connection)
 	
 func _process(_delta: float) -> void:
-	
 	for connection in blipConnections.keys():
 		var blip = blipConnections[connection]
 		var deltaPosition: Vector2 = connection.get_parent().position - ship.position

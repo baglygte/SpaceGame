@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://bni87pxm27ttb"]
+
+[ext_resource type="Script" uid="uid://g765curd1v16" path="res://Overlays/sector_map_overlay.gd" id="1_3icro"]
+[ext_resource type="Texture2D" uid="uid://c00qebdxcdafy" path="res://sprites/Blips/ShipBlip.png" id="1_4tnun"]
+[ext_resource type="Texture2D" uid="uid://cylfshjimf6vo" path="res://sprites/MapGrid.png" id="2_trlj6"]
+[ext_resource type="Shader" uid="uid://bc5ll8w4bmysx" path="res://vignette.gdshader" id="4_ixqtb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3lp2j"]
+shader = ExtResource("4_ixqtb")
+shader_parameter/radius = 0.7190000341525
+shader_parameter/softness = 1.0
+shader_parameter/intensity = 0.82400003914
+shader_parameter/contrast = 0.5
+shader_parameter/vignette_color = Color(1, 1, 1, 1)
+
+[node name="SectorMapOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3icro")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_trlj6")
+stretch_mode = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+texture = ExtResource("1_4tnun")
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3lp2j")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

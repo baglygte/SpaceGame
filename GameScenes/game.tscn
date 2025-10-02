@@ -1,7 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=18 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
-[ext_resource type="Texture2D" uid="uid://bjuvvce50vim5" path="res://sprites/compass.png" id="4_3g60v"]
+[ext_resource type="Script" uid="uid://b8dweplwcbn40" path="res://GameScenes/player_huds.gd" id="4_i5gbp"]
 [ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://game_world.gd" id="5_6ce2g"]
 [ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="5_q1v8x"]
 [ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://Ship/section_builder.gd" id="6_6ce2g"]
@@ -16,24 +16,8 @@
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="14_o2qad"]
 [ext_resource type="Texture2D" uid="uid://uygg8bqdqq0a" path="res://sprites/Blips/GunPointer.png" id="16_cub2r"]
 [ext_resource type="Script" uid="uid://cbp8rq6rqhaev" path="res://Overlays/gun_interface_overlay.gd" id="16_x1q6r"]
-[ext_resource type="Texture2D" uid="uid://c00qebdxcdafy" path="res://sprites/Blips/ShipBlip.png" id="17_x1q6r"]
-[ext_resource type="Script" uid="uid://245dpq787ppp" path="res://SectormapOverlay/sectormap_overlay.gd" id="17_xqwsi"]
-[ext_resource type="Shader" uid="uid://bc5ll8w4bmysx" path="res://vignette.gdshader" id="18_b24d7"]
-[ext_resource type="Texture2D" uid="uid://cylfshjimf6vo" path="res://sprites/MapGrid.png" id="19_pct3l"]
-[ext_resource type="Texture2D" uid="uid://ddt6uh2d6dafs" path="res://sprites/FlightControlPanel.png" id="21_xjp2s"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x1q6r"]
-viewport_path = NodePath("SectormapOverlay")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b24d7"]
-shader = ExtResource("18_b24d7")
-shader_parameter/radius = 0.7190000341525
-shader_parameter/softness = 1.0
-shader_parameter/intensity = 0.82400003914
-shader_parameter/contrast = 0.5
-shader_parameter/vignette_color = Color(1, 1, 1, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_b24d7"]
 viewport_path = NodePath("SectormapOverlay")
 
 [node name="Game" type="Node"]
@@ -77,35 +61,22 @@ handle_input_locally = false
 size = Vector2i(638, 720)
 render_target_update_mode = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="HUD"]
+[node name="PlayerHuds" type="HBoxContainer" parent="HUD" groups=["PlayerHuds"]]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 23.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_i5gbp")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/CenterContainer"]
+[node name="LeftPlayerHud" type="MarginContainer" parent="HUD/PlayerHuds"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/CenterContainer/HBoxContainer"]
+[node name="RightPlayerHud" type="MarginContainer" parent="HUD/PlayerHuds"]
 layout_mode = 2
-
-[node name="xCoorLabel" type="Label" parent="HUD/CenterContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "x"
-vertical_alignment = 1
-
-[node name="yCoorLabel" type="Label" parent="HUD/CenterContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "y"
-
-[node name="Control" type="Control" parent="HUD/CenterContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="HUD/CenterContainer/HBoxContainer/Control"]
-texture = ExtResource("4_3g60v")
+size_flags_horizontal = 3
 
 [node name="GameWorld" type="SubViewport" parent="." groups=["GameWorld"]]
 script = ExtResource("5_6ce2g")
@@ -145,17 +116,20 @@ script = ExtResource("13_i5gbp")
 [node name="PlayerCreator" type="Node2D" parent="GameWorld" groups=["PlayerCreator"]]
 script = ExtResource("14_o2qad")
 
-[node name="GunInterfaceOverlay" type="SubViewport" parent="." groups=["GunInterfaceOverlay"]]
+[node name="GunInterfaceOverlay2" type="SubViewport" parent="." groups=["GunInterfaceOverlay"]]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 0
 script = ExtResource("16_x1q6r")
 
-[node name="ColorRect" type="ColorRect" parent="GunInterfaceOverlay"]
+[node name="ColorRect" type="ColorRect" parent="GunInterfaceOverlay2"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="GunInterfaceOverlay"]
+[node name="MarginContainer" type="MarginContainer" parent="GunInterfaceOverlay2"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -168,87 +142,16 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="TextureRect" type="TextureRect" parent="GunInterfaceOverlay/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="GunInterfaceOverlay2/MarginContainer"]
 layout_mode = 2
 texture = SubResource("ViewportTexture_x1q6r")
 expand_mode = 2
 
-[node name="Control" type="Control" parent="GunInterfaceOverlay/MarginContainer"]
+[node name="Control" type="Control" parent="GunInterfaceOverlay2/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="GunInterfaceOverlay/MarginContainer/Control"]
+[node name="Sprite2D" type="Sprite2D" parent="GunInterfaceOverlay2/MarginContainer/Control"]
 texture = ExtResource("16_cub2r")
 offset = Vector2(0, -12)
-
-[node name="SectormapOverlay" type="SubViewport" parent="." groups=["SectorMapOverlay"]]
-script = ExtResource("17_xqwsi")
-
-[node name="TextureRect" type="TextureRect" parent="SectormapOverlay"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("19_pct3l")
-stretch_mode = 1
-
-[node name="Control" type="Control" parent="SectormapOverlay"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="SectormapOverlay/Control"]
-texture = ExtResource("17_x1q6r")
-
-[node name="Vignette" type="ColorRect" parent="SectormapOverlay"]
-material = SubResource("ShaderMaterial_b24d7")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="FlightControlOverlay" type="SubViewport" parent="." groups=["FlightControlOverlay"]]
-
-[node name="ColorRect" type="ColorRect" parent="FlightControlOverlay"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MarginContainer" type="MarginContainer" parent="FlightControlOverlay"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_bottom = 100
-
-[node name="TextureRect" type="TextureRect" parent="FlightControlOverlay/MarginContainer"]
-layout_mode = 2
-texture = SubResource("ViewportTexture_b24d7")
-
-[node name="TextureRect" type="TextureRect" parent="FlightControlOverlay"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
-size_flags_vertical = 8
-texture = ExtResource("21_xjp2s")
-expand_mode = 1
-stretch_mode = 2

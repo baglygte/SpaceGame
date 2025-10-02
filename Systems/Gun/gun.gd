@@ -13,18 +13,14 @@ func ReceiveMovement(vector: Vector2) -> void:
 	$Barrel.rotate(deg_to_rad(3) * sign(vector.x))
 	
 func ReceiveEnterExit(player: Player) -> void:
-	var viewPorts: PlayerViewPorts = get_tree().get_first_node_in_group("PlayerViewPorts")
+	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
 	
 	if isOverlayingInterface:
-		var gameWorld = get_tree().get_first_node_in_group("GameWorld")
-		viewPorts.SwitchToSubView(gameWorld, player.viewSide)
-		isOverlayingInterface = false
+		playerHuds.ClearHud(player.viewSide)
 	else:
-		var overlay = get_tree().get_first_node_in_group("GunInterfaceOverlay")
-		overlay.rotationReference = $Barrel
-		overlay.rotationOffset = -rotation
-		viewPorts.SwitchToSubView(overlay, player.viewSide)
-		isOverlayingInterface = true
+		playerHuds.ShowGunControlOverlay(player.viewSide)
+	
+	isOverlayingInterface = !isOverlayingInterface
 		
 func ReceiveRightHand() -> void:
 	var rocket: Node2D = rocketScene.instantiate()

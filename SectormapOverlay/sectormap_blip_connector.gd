@@ -5,11 +5,13 @@ extends Node2D
 var blipType
 	
 func Initialize() -> void:
-	var overlay: SectorMapOverlay = get_tree().get_first_node_in_group("SectorMapOverlay")
-
-	overlay.AddBlip(self, blipType)
+	return
+	#var overlay: SectorMapOverlay = get_tree().get_first_node_in_group("SectorMapOverlay")
+#
+	#overlay.AddBlip(self, blipType)
 
 func Kill() -> void:
-	var overlay: SectorMapOverlay = get_tree().get_first_node_in_group("SectorMapOverlay")
-		
-	overlay.RemoveBlip(self)
+	return
+	#var overlay: SectorMapOverlay = get_tree().get_first_node_in_group("SectorMapOverlay")
+		#
+	#overlay.RemoveBlip(self)
