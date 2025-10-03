@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=16 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
 [ext_resource type="Script" uid="uid://b8dweplwcbn40" path="res://GameScenes/player_huds.gd" id="4_i5gbp"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="12_xjp2s"]
 [ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="13_i5gbp"]
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="14_o2qad"]
+[ext_resource type="Script" uid="uid://saqi3llcutei" path="res://GameScenes/sector_swapper.gd" id="15_6ce2g"]
 
 [node name="Game" type="Node"]
 
@@ -112,3 +113,4 @@ script = ExtResource("13_i5gbp")
 script = ExtResource("14_o2qad")
 
 [node name="SectorSwapper" type="Node2D" parent="GameWorld"]
+script = ExtResource("15_6ce2g")
