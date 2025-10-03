@@ -11,7 +11,8 @@ func _ready() -> void:
 	
 	var blipConnectors = get_tree().get_nodes_in_group("BlipConnector")
 	
-	for blipConnector in blipConnectors:
+	for blipConnector: SectorMapBlipConnector in blipConnectors:
+		blipConnector.wasKilled.connect(RemoveBlip)
 		AddBlip(blipConnector)
 	
 func AddBlip(connection: SectorMapBlipConnector) -> void:
@@ -21,7 +22,6 @@ func AddBlip(connection: SectorMapBlipConnector) -> void:
 	$Control.add_child(blip)
 
 func RemoveBlip(connection: SectorMapBlipConnector) -> void:
-	return
 	blipConnections[connection].queue_free()
 	blipConnections.erase(connection)
 	
@@ -43,7 +43,7 @@ func GetBlip(blipType: String) -> Control:
 		"EnemyShip":
 			texturePath = "res://sprites/Blips/EnemyBlip.png"
 			
-	var blip = load("res://SectormapOverlay/blip.tscn").instantiate()
+	var blip = load("res://Overlays/blip.tscn").instantiate()
 	blip.get_node("Sprite2D").texture = load(texturePath)
 	
 	return blip

@@ -13,8 +13,7 @@ shader_parameter/intensity = 0.82400003914
 shader_parameter/contrast = 0.5
 shader_parameter/vignette_color = Color(1, 1, 1, 1)
 
-[node name="SectorMapOverlay" type="Control"]
-layout_mode = 3
+[node name="SectorMapOverlay" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,37 +22,22 @@ grow_vertical = 2
 script = ExtResource("1_3icro")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("2_trlj6")
 stretch_mode = 1
 
 [node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Control"]
 texture = ExtResource("1_4tnun")
 
 [node name="Vignette" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_3lp2j")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

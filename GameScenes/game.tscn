@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=15 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
 [ext_resource type="Script" uid="uid://b8dweplwcbn40" path="res://GameScenes/player_huds.gd" id="4_i5gbp"]
@@ -14,11 +14,6 @@
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="12_xjp2s"]
 [ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="13_i5gbp"]
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="14_o2qad"]
-[ext_resource type="Texture2D" uid="uid://uygg8bqdqq0a" path="res://sprites/Blips/GunPointer.png" id="16_cub2r"]
-[ext_resource type="Script" uid="uid://cbp8rq6rqhaev" path="res://Overlays/gun_interface_overlay.gd" id="16_x1q6r"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_x1q6r"]
-viewport_path = NodePath("SectormapOverlay")
 
 [node name="Game" type="Node"]
 
@@ -116,42 +111,4 @@ script = ExtResource("13_i5gbp")
 [node name="PlayerCreator" type="Node2D" parent="GameWorld" groups=["PlayerCreator"]]
 script = ExtResource("14_o2qad")
 
-[node name="GunInterfaceOverlay2" type="SubViewport" parent="." groups=["GunInterfaceOverlay"]]
-handle_input_locally = false
-size = Vector2i(1280, 720)
-render_target_update_mode = 0
-script = ExtResource("16_x1q6r")
-
-[node name="ColorRect" type="ColorRect" parent="GunInterfaceOverlay2"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="GunInterfaceOverlay2"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
-
-[node name="TextureRect" type="TextureRect" parent="GunInterfaceOverlay2/MarginContainer"]
-layout_mode = 2
-texture = SubResource("ViewportTexture_x1q6r")
-expand_mode = 2
-
-[node name="Control" type="Control" parent="GunInterfaceOverlay2/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="GunInterfaceOverlay2/MarginContainer/Control"]
-texture = ExtResource("16_cub2r")
-offset = Vector2(0, -12)
+[node name="SectorSwapper" type="Node2D" parent="GameWorld"]
