@@ -5,7 +5,7 @@ func _ready() -> void:
 	$Health.GainHealth(1)
 	
 	$StarmapBlipConnector.blipType = "EnemyRocket"
-	$StarmapBlipConnector.Initialize()
+	#$StarmapBlipConnector.Initialize()
 
 func _process(_delta: float) -> void:
 	if linear_velocity.length() > 10000:
