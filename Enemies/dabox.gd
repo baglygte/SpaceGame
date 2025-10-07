@@ -19,7 +19,8 @@ func SpawnRocket() -> void:
 	rocket.rotation = angle
 	rocket.position = position + $SpawnPosition.position
 	get_parent().add_child(rocket)
-	$Timer.start(20)
+	$Timer.stop()
+	#$Timer.start(20)
 
 func Kill() -> void:
 	$StarmapBlipConnector.Kill()

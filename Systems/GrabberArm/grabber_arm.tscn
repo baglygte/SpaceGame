@@ -40,7 +40,6 @@ modifications/0 = SubResource("SkeletonModification2DCCDIK_vqv8o")
 size = Vector2(60, 41)
 
 [node name="GrabberArm" type="Node2D" groups=["ExternalSystem", "HammerCanEdit", "MustBeSaved", "PliersCanEdit"]]
-position = Vector2(100, 100)
 script = ExtResource("1_3ulfp")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
