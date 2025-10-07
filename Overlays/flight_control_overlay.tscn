@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3mn0esc8to1o"]
+[gd_scene load_steps=9 format=3 uid="uid://c3mn0esc8to1o"]
 
 [ext_resource type="PackedScene" uid="uid://bni87pxm27ttb" path="res://Overlays/sector_map_overlay.tscn" id="1_4fa6q"]
 [ext_resource type="Script" uid="uid://cnipwsug1ai3m" path="res://Overlays/flight_control_overlay.gd" id="1_7exin"]
+[ext_resource type="Texture2D" uid="uid://dejq76wji0jf3" path="res://sprites/flightControlRulerV.png" id="3_ebwkg"]
 [ext_resource type="Texture2D" uid="uid://ddt6uh2d6dafs" path="res://sprites/FlightControlPanel.png" id="3_feo4l"]
+[ext_resource type="Texture2D" uid="uid://brd6ybg4mpsye" path="res://sprites/flightControlRulerH.png" id="4_51iy3"]
 [ext_resource type="Texture2D" uid="uid://bjuvvce50vim5" path="res://sprites/compass.png" id="4_feo4l"]
+[ext_resource type="Script" uid="uid://0efjblcro8p1" path="res://Overlays/sector_coordinate_display.gd" id="5_21q42"]
+[ext_resource type="Texture2D" uid="uid://cm4esrnkee6vm" path="res://sprites/floor.png" id="5_kc2og"]
 
 [node name="FlightControlOverlay" type="Control"]
 layout_mode = 3
@@ -25,6 +29,39 @@ grow_vertical = 2
 [node name="SectorMapOverlay" parent="MarginContainer" instance=ExtResource("1_4fa6q")]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="MarginContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="VerticalRuler" type="TextureRect" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 10.0
+offset_bottom = 40.0
+grow_vertical = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_ebwkg")
+stretch_mode = 1
+
+[node name="HorizontalRuler" type="TextureRect" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 40.0
+offset_bottom = 10.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+texture = ExtResource("4_51iy3")
+stretch_mode = 1
+
+[node name="RulerCorner" type="TextureRect" parent="MarginContainer/Control"]
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 200.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_kc2og")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -74,3 +111,15 @@ size_flags_vertical = 4
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 10
+
+[node name="SectorCoordinateDisplay" type="Label" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Sector"
+vertical_alignment = 1
+script = ExtResource("5_21q42")

@@ -9,7 +9,7 @@ func _ready() -> void:
 	$Health.maxHealth = 1
 	$Health.GainHealth(1)
 	
-	$StarmapBlipConnector.blipType = "EnemyShip"
+	$StarmapBlipConnector.Initialize("EnemyShip")
 	
 func SpawnRocket() -> void:
 	var ship = get_tree().get_first_node_in_group("Ship")

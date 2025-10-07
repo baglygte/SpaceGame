@@ -1,28 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://dw48tkk1cyb51"]
+[gd_scene load_steps=4 format=3 uid="uid://dw48tkk1cyb51"]
 
 [ext_resource type="PackedScene" uid="uid://bni87pxm27ttb" path="res://Overlays/sector_map_overlay.tscn" id="1_12q5g"]
+[ext_resource type="Script" uid="uid://cqvcww1r2jyde" path="res://Overlays/gun_control_overlay.gd" id="1_64dpn"]
+[ext_resource type="Texture2D" uid="uid://uygg8bqdqq0a" path="res://sprites/Blips/GunPointer.png" id="2_5bxlj"]
 
 [node name="GunControlOverlay" type="Control"]
 layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_64dpn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -210.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="SectorMapOverlay" parent="MarginContainer" instance=ExtResource("1_12q5g")]
 layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/Control"]
+position = Vector2(0, 5)
+texture = ExtResource("2_5bxlj")
+offset = Vector2(0, -10)

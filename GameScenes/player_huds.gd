@@ -15,8 +15,11 @@ func ShowFlightControlOverlay(side: String) -> void:
 	elif side == "Right":
 		$RightPlayerHud.add_child(overlay)
 	
-func ShowGunControlOverlay(side: String) -> void:
-	var overlay = load("res://Overlays/gun_control_overlay.tscn").instantiate()
+func ShowGunControlOverlay(side: String, rotationReference, rotationOffset) -> void:
+	var overlay: GunControlOverlay = load("res://Overlays/gun_control_overlay.tscn").instantiate()
+	
+	overlay.rotationReference = rotationReference
+	overlay.rotationOffset = rotationOffset
 	
 	if side == "Left":
 		$LeftPlayerHud.add_child(overlay)

@@ -5,5 +5,15 @@ extends Node2D
 var blipType
 signal wasKilled
 
+func Initialize(blipTypeToGet: String) -> void:
+	blipType = blipTypeToGet
+	
+	var sectorMapOverlay = get_tree().get_first_node_in_group("SectorMapOverlay")
+	
+	if sectorMapOverlay == null:
+		return
+	
+	sectorMapOverlay.AddBlip(self)
+
 func Kill() -> void:
 	wasKilled.emit(self)

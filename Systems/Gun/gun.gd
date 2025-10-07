@@ -18,7 +18,7 @@ func ReceiveEnterExit(player: Player) -> void:
 	if isOverlayingInterface:
 		playerHuds.ClearHud(player.viewSide)
 	else:
-		playerHuds.ShowGunControlOverlay(player.viewSide)
+		playerHuds.ShowGunControlOverlay(player.viewSide, $Barrel, rotation)
 	
 	isOverlayingInterface = !isOverlayingInterface
 		

@@ -18,12 +18,14 @@ func _ready() -> void:
 		$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))
 	for i in range(10):
 		$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Thruster/thruster.tscn"), Vector2(200,130))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/Gun/gun.tscn").instantiate(), Vector2(200,170))
+	$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Gun/gun.tscn"), Vector2(200,170))
+	$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/GrabberArm/grabber_arm.tscn"), Vector2(200,170))
 	$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(200,210))
 	
-	var instance = load("res://Enemies/dabox.tscn").instantiate()
-	add_child(instance)
-	instance.position = Vector2(2000,2000)
+	$ContainedItemCreator.SpawnItemInWorld(load("res://Items/ball.tscn").instantiate(), Vector2(-50,200))
+	#var instance = load("res://Enemies/dabox.tscn").instantiate()
+	#add_child(instance)
+	#instance.position = Vector2(2000,2000)
 	
 func StartGameScene() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")

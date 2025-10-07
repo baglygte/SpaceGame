@@ -13,7 +13,7 @@ shader_parameter/intensity = 0.82400003914
 shader_parameter/contrast = 0.5
 shader_parameter/vignette_color = Color(1, 1, 1, 1)
 
-[node name="SectorMapOverlay" type="MarginContainer"]
+[node name="SectorMapOverlay" type="MarginContainer" groups=["SectorMapOverlay"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
