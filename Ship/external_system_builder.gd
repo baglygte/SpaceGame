@@ -30,8 +30,6 @@ func CreateFromSave(variablesToSet: Dictionary) -> void:
 			instance = CreateExternalSystem("res://Systems/Thruster/thruster.tscn")
 		"gun":
 			instance = CreateExternalSystem("res://Systems/Gun/gun.tscn")
-		"grabberArm":
-			instance = CreateExternalSystem("res://Systems/GrabberArm/grabber_arm.tscn")
 			
 	$"../../GlobalSystemCounter".counterValue -= 1
 

@@ -14,7 +14,9 @@ func ConnectSystems(systemA, systemB) -> void:
 	connection.systemB = systemB
 	
 	connectionSets.append(connection)
-	
+	if systemA.has_method("OnConnection"): systemA.OnConnection(systemB)
+	if systemB.has_method("OnConnection"): systemB.OnConnection(systemA)
+		
 	var signalerA = GetSignaler(systemA)
 	var signalerB = GetSignaler(systemB)
 	
