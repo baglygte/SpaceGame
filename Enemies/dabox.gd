@@ -1,31 +1,26 @@
-extends RigidBody2D
+extends Node2D
 
-var canShoot := false
-var target
 const rocketScene = preload("res://Rockets/homing_rocket.tscn")
 
 func _ready() -> void:
-	$Timer.timeout.connect(Reload)
-	$Timer.start(1)
+	#$Timer.timeout.connect(SpawnRocket)
+	#$Timer.start(1)
+	
 	$Health.maxHealth = 1
 	$Health.GainHealth(1)
 	
-	$StarmapBlipConnector.Initialize("EnemyShip")
-
-func Reload():
-	canShoot = true
+	$StarmapBlipConnector.blipType = "EnemyShip"
+	$StarmapBlipConnector.Initialize()
 	
-func ShootRocket() -> void:
+func SpawnRocket() -> void:
 	var ship = get_tree().get_first_node_in_group("Ship")
-	var shipDirection: Vector2 = (ship.position - position).normalized()
+	var angle = position.angle_to_point(ship.position)
 	
 	var rocket = rocketScene.instantiate()
-	rocket.rotation = shipDirection.angle()
-	rocket.position = position + shipDirection * 500
+	rocket.rotation = angle
+	rocket.position = position + $SpawnPosition.position
 	get_parent().add_child(rocket)
-	
-	canShoot = false
-	$Timer.start(10)
+	$Timer.start(20)
 
 func Kill() -> void:
 	$StarmapBlipConnector.Kill()

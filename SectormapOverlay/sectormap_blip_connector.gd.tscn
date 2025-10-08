@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccxrvty1mk6wt"]
+
+[ext_resource type="Script" uid="uid://b50oswge8uvpv" path="res://SectormapOverlay/sectormap_blip_connector.gd" id="1_vl5vg"]
+
+[node name="StarmapBlipConnector" type="Node2D"]
+script = ExtResource("1_vl5vg")
