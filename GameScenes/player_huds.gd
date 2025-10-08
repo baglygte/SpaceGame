@@ -8,7 +8,7 @@ func ClearHud(side: String) -> void:
 		$RightPlayerHud.get_child(0).queue_free()
 
 func ShowFlightControlOverlay(side: String) -> void:
-	var overlay = load("res://Overlays/flight_control_overlay.tscn").instantiate()
+	var overlay = load("res://Overlays/FlightControl/flight_control_overlay.tscn").instantiate()
 	
 	if side == "Left":
 		$LeftPlayerHud.add_child(overlay)

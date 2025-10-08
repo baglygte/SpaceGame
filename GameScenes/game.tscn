@@ -75,6 +75,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GameWorld" type="SubViewport" parent="." groups=["GameWorld"]]
+audio_listener_enable_2d = true
 script = ExtResource("5_6ce2g")
 
 [node name="Ship" type="RigidBody2D" parent="GameWorld" groups=["Ship"]]

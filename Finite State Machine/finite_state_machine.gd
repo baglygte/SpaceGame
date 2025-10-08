@@ -1,37 +1,43 @@
 class_name FiniteStateMachine
 extends Node
 
-@export var initialState: State
-var currentState: State
-var states: Dictionary = {}
+@export var initialMoveState: MoveState
+@export var initialAttackState: AttackState
+
+var currentMoveState: MoveState
+var currentAttackState: AttackState
 
 func _ready():
-	for child in get_children():
-		if not child is State:
-			continue
-		states[child.name] = child
-		child.transitioned.connect(ChangeState)
+	for child: State in get_children():
+		if child is AttackState:
+			child.transitionToState.connect(ChangeAttackState)
+		elif child is MoveState:
+			child.transitionToState.connect(ChangeMoveState)
 	
-	if initialState == null:
-		return
+	initialMoveState.Enter()
+	currentMoveState = initialMoveState
 	
-	initialState.Enter()
-	currentState = initialState
+	initialAttackState.Enter()
+	currentAttackState = initialAttackState
 	
 func _process(_delta: float):
-	if currentState == null:
-		return
-		
-	currentState.Update()
+	currentMoveState.Update()
+	currentAttackState.Update()
 	
-func ChangeState(stateName: String):
-	if not stateName in states.keys():
-		return
+func ChangeMoveState(stateName: String):
+	currentMoveState.Exit()
 	
-	if currentState != null:
-		currentState.Exit()
+	var newMoveState = get_node(stateName)
 	
-	var newState: State = states[stateName]
-	newState.Enter()
+	newMoveState.Enter()
 	
-	currentState = newState
+	currentMoveState = newMoveState
+
+func ChangeAttackState(stateName: String):
+	currentAttackState.Exit()
+	
+	var newAttackState = get_node(stateName)
+	
+	newAttackState.Enter()
+	
+	currentAttackState = newAttackState

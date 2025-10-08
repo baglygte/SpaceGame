@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://c3mn0esc8to1o"]
 
-[ext_resource type="PackedScene" uid="uid://bni87pxm27ttb" path="res://Overlays/sector_map_overlay.tscn" id="1_4fa6q"]
-[ext_resource type="Script" uid="uid://cnipwsug1ai3m" path="res://Overlays/flight_control_overlay.gd" id="1_7exin"]
+[ext_resource type="PackedScene" uid="uid://bni87pxm27ttb" path="res://Overlays/SectorMap/sector_map_overlay.tscn" id="1_4fa6q"]
+[ext_resource type="Script" uid="uid://cnipwsug1ai3m" path="res://Overlays/FlightControl/flight_control_overlay.gd" id="1_7exin"]
 [ext_resource type="Texture2D" uid="uid://dejq76wji0jf3" path="res://sprites/flightControlRulerV.png" id="3_ebwkg"]
 [ext_resource type="Texture2D" uid="uid://ddt6uh2d6dafs" path="res://sprites/FlightControlPanel.png" id="3_feo4l"]
 [ext_resource type="Texture2D" uid="uid://brd6ybg4mpsye" path="res://sprites/flightControlRulerH.png" id="4_51iy3"]
 [ext_resource type="Texture2D" uid="uid://bjuvvce50vim5" path="res://sprites/compass.png" id="4_feo4l"]
-[ext_resource type="Script" uid="uid://0efjblcro8p1" path="res://Overlays/sector_coordinate_display.gd" id="5_21q42"]
+[ext_resource type="Script" uid="uid://0efjblcro8p1" path="res://Overlays/FlightControl/sector_coordinate_display.gd" id="5_21q42"]
 [ext_resource type="Texture2D" uid="uid://cm4esrnkee6vm" path="res://sprites/floor.png" id="5_kc2og"]
 
 [node name="FlightControlOverlay" type="Control"]

@@ -31,7 +31,9 @@ func _process(_delta: float) -> void:
 		var deltaPosition: Vector2 = connection.get_parent().position - ship.position
 		
 		blip.position = deltaPosition.rotated(-ship.rotation) * (size.x / visibleRange)
-		blip.rotation = connection.get_parent().rotation - ship.rotation
+		blip.get_node("Sprite2D").rotation = connection.get_parent().rotation - ship.rotation
+		
+		blip.get_node("Control/CenterContainer/Label").text = str(int(deltaPosition.length()))
 	
 func GetBlip(blipType: String) -> Control:
 	var texturePath: String
@@ -42,7 +44,7 @@ func GetBlip(blipType: String) -> Control:
 		"EnemyShip":
 			texturePath = "res://sprites/Blips/EnemyBlip.png"
 			
-	var blip = load("res://Overlays/blip.tscn").instantiate()
+	var blip = load("res://Overlays/SectorMap/blip.tscn").instantiate()
 	blip.get_node("Sprite2D").texture = load(texturePath)
 	
 	return blip

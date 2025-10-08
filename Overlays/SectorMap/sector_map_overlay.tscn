@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bni87pxm27ttb"]
 
-[ext_resource type="Script" uid="uid://g765curd1v16" path="res://Overlays/sector_map_overlay.gd" id="1_3icro"]
+[ext_resource type="Script" uid="uid://g765curd1v16" path="res://Overlays/SectorMap/sector_map_overlay.gd" id="1_3icro"]
 [ext_resource type="Texture2D" uid="uid://c00qebdxcdafy" path="res://sprites/Blips/ShipBlip.png" id="1_4tnun"]
 [ext_resource type="Texture2D" uid="uid://cylfshjimf6vo" path="res://sprites/MapGrid.png" id="2_trlj6"]
 [ext_resource type="Shader" uid="uid://bc5ll8w4bmysx" path="res://vignette.gdshader" id="4_ixqtb"]
