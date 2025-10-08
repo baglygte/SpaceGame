@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvw0q2wh5o6xq"]
+
+[ext_resource type="Script" uid="uid://dj7tqyfavy3fc" path="res://Rockets/Recipes/rocket_recipe.gd" id="1_g26ti"]
+
+[node name="RocketRecipe" type="Node2D"]
+script = ExtResource("1_g26ti")

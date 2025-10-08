@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgb0vy4wj2tpi"]
+
+[ext_resource type="Script" uid="uid://by1ysxcwd3jgr" path="res://Rockets/Recipes/rocket_recipes.gd" id="1_wmfre"]
+
+[node name="RocketRecipes" type="Node2D"]
+script = ExtResource("1_wmfre")
