@@ -25,6 +25,12 @@ window/size/viewport_height=720
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[file_customization]
+
+folder_colors={
+"res://Tools/": "green"
+}
+
 [global_group]
 
 HammerCanEdit=""
@@ -35,16 +41,18 @@ signaler=""
 Ship=""
 Player=""
 MustBeSaved=""
+Starmap=""
 ExternalSystem=""
 InternalSystem=""
+StarmapBlipConnection=""
 GameSceneManager=""
 PlayerCreator=""
 GameWorld=""
-PlayerViewPorts=""
-PlayerHuds=""
-BlipConnector=""
-test=""
 SectorMapOverlay=""
+PlayerViewPorts=""
+GunInterfaceOverlay=""
+FlightControlOverlay=""
+RocketRecipes=""
 
 [input]
 
