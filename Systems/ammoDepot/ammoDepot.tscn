@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://dubdno31bdo3h"]
+
+[ext_resource type="Script" uid="uid://cglykfnvpu2oe" path="res://Systems/ammoDepot/ammo_depot.gd" id="1_x2mpc"]
+[ext_resource type="Texture2D" uid="uid://dlgqxk7hyte2d" path="res://sprites/ammoDepot.png" id="2_r7q0t"]
+[ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_r7q0t"]
+[ext_resource type="PackedScene" uid="uid://c21tu7qhdabiw" path="res://editable_hover.tscn" id="4_crpqi"]
+[ext_resource type="PackedScene" uid="uid://clla0hc44fhq5" path="res://signal_emitter.tscn" id="5_brj2c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gq08n"]
+
+[node name="AmmoDepot" type="Node2D" groups=["InternalSystem", "MustBeSaved", "PliersCanEdit"]]
+script = ExtResource("1_x2mpc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r7q0t")
+
+[node name="interactiveRegion" type="Area2D" parent="."]
+script = ExtResource("3_r7q0t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactiveRegion"]
+shape = SubResource("RectangleShape2D_gq08n")
+
+[node name="editableHover" parent="." instance=ExtResource("4_crpqi")]
+
+[node name="SignalEmitter" parent="." instance=ExtResource("5_brj2c")]
