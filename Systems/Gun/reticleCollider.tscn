@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwoc1pg6ck7ku"]
+
+[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="1_7ngyl"]
+[ext_resource type="Script" uid="uid://cvmmyg6e8ukn7" path="res://Systems/Gun/reticle_collider.gd" id="1_7ysvq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13i4l"]
+size = Vector2(500, 500)
+
+[node name="ReticleCollider" type="Area2D"]
+script = ExtResource("1_7ysvq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_13i4l")
+
+[node name="StarmapBlipConnector" parent="." instance=ExtResource("1_7ngyl")]

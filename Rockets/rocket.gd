@@ -7,9 +7,9 @@ var acceleration: Vector2
 var Rotation
 var children = 0
 var isHoming = false
-var velocityTerminal = 1
-var velocityAcceleration = 10
-var velocityTurning = 0.05
+var velocityTerminal = 100
+var velocityAcceleration = 1000
+var velocityTurning = 5
 var startSpread = -PI/4
 var deltaSpread = PI/8
 const rocketScene = preload("res://Rockets/rocket.tscn")
@@ -18,23 +18,23 @@ const rocketScene = preload("res://Rockets/rocket.tscn")
 func _ready() -> void:
 	$Health.maxHealth = 1
 	$Health.GainHealth(1)
-	#$CollisionShape2D.disabled = true
 	Rotation = rotation
+	$CollisionShape2D.disabled = true
 	$StarmapBlipConnector.Initialize("EnemyRocket")
 	$Timer.timeout.connect(NextStage)
 	$Timer.start(0.00001)
 
-func _process(_delta: float) -> void:
-	linear_damp = velocityTerminal
+func _process(delta: float) -> void:
+	linear_damp = delta*velocityTerminal
 	if isHoming && homingTarget!=null:
 		var vectorToTarget: Vector2 = homingTarget.position - position
 		var angleToTarget = PI/2 + vectorToTarget.angle() - Rotation
 		if(angleToTarget>PI): angleToTarget -= 2*PI
 		angleToTarget = max(min(angleToTarget,velocityTurning),-velocityTurning)
-		Rotation += angleToTarget
+		Rotation += delta*angleToTarget
 	acceleration = Vector2.UP.rotated(Rotation) * velocityAcceleration
 	rotation = Rotation
-	apply_central_force(acceleration)
+	apply_central_force(delta*acceleration)
 	
 func Kill() -> void:
 	$StarmapBlipConnector.Kill()

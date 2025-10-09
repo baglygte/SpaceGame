@@ -16,6 +16,7 @@ func Reload():
 	canShoot = true
 	
 func ShootRocket() -> void:
+	return
 	var ship = get_tree().get_first_node_in_group("Ship")
 	var shipDirection: Vector2 = (ship.position - position).normalized()
 	

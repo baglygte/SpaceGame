@@ -56,7 +56,7 @@ func GetBlip(blipType: String) -> Control:
 			texturePath = "res://sprites/Blips/RocketBlip.png"
 		"EnemyShip":
 			texturePath = "res://sprites/Blips/EnemyBlip.png"
-		"GunReticle":
+		"Reticle":
 			texturePath = "res://sprites/Blips/ReticleBlip.png"
 		"GunLockOn":
 			texturePath = "res://sprites/Blips/ReticleBlip.png"

@@ -5,6 +5,7 @@ var player: Player
 var ship: Ship
 @onready var numberOfSlots = get_children().size()
 
+const wheelRadius = 50
 const toolSprites: Array = ["res://Sprites/Tools/hammer.png",
 							"res://Sprites/Tools/pliers.png",
 							"res://Sprites/Tools/wrench.png"]
@@ -17,7 +18,7 @@ func _ready():
 	for i in range(0,numberOfSlots):
 		var angle: float = 2*PI/numberOfSlots * i
 		var child = get_child(i)
-		child.position = Vector2.UP.rotated(angle) * 30
+		child.position = Vector2.UP.rotated(angle) * wheelRadius
 		child.get_child(0).get_child(0).texture = load(toolSprites[i])
 
 func _process(_delta: float) -> void:

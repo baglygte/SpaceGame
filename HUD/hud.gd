@@ -14,7 +14,7 @@ func CreatePlayerHud(player: Player) -> void:
 	playerHud.add_child.call_deferred(handContents)
 	$PlayerHuds.playerHandSets[player] = handContents
 	
-	var toolWheel: ToolWheel = load("res://Player/ToolWheel/tool_wheel.tscn").instantiate()
+	var toolWheel: ToolWheel = load("res://HUD/ToolWheel/tool_wheel.tscn").instantiate()
 	toolWheel.player = player
 	player.toolWheel = toolWheel
 	playerHud.add_child.call_deferred(toolWheel)

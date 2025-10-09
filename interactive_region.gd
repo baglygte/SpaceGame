@@ -29,14 +29,15 @@ func TakeControl(listener: PlayerInputListener):
 	listener.moveSignal.connect($"../SignalEmitter".SendMoveSignal)
 	listener.lookSignal.connect($"../SignalEmitter".SendLookSignal)
 	
-	
 	if get_parent().has_method("OnEnterExit"):
 		get_parent().OnEnterExit(listener.get_parent())
+		
 	if get_parent().has_method("OnRightHand"):
-		listener.interactRight.connect(get_parent().OnRightHand)
+		listener.interact.connect(get_parent().OnRightHand)
 	else:
-		listener.interactRight.connect($"../SignalEmitter".SendRightHandSignal)
+		listener.interact.connect($"../SignalEmitter".SendRightHandSignal)
+		
 	if get_parent().has_method("OnLeftHand"):
-		listener.interactLeft.connect(get_parent().OnLeftHand)
+		listener.drop.connect(get_parent().OnLeftHand)
 	else:
-		listener.interactLeftPressed.connect($"../SignalEmitter".SendLeftHandSignal)
+		listener.drop.connect($"../SignalEmitter".SendLeftHandSignal)

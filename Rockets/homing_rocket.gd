@@ -1,7 +1,8 @@
 extends RigidBody2D
 
 var ship: Ship
-var target
+var lockedOnNode: Node2D
+var target: Vector2
 
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
@@ -10,7 +11,7 @@ func _ready() -> void:
 	$StarmapBlipConnector.Initialize("EnemyRocket")
 
 func _process(_delta: float) -> void:
-	target = ship.global_position
+	target = lockedOnNode.global_position
 	
 func Kill() -> void:
 	$StarmapBlipConnector.Kill()

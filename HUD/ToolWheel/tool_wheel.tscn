@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkjhdkljd32mp"]
 
-[ext_resource type="Script" uid="uid://mniqa86x3y5m" path="res://Player/ToolWheel/tool_wheel.gd" id="1_v7l4f"]
-[ext_resource type="PackedScene" uid="uid://clx13x5v5mlx6" path="res://Player/ToolWheel/tool_wheel_slot.tscn" id="2_m7qmh"]
+[ext_resource type="Script" uid="uid://mniqa86x3y5m" path="res://HUD/ToolWheel/tool_wheel.gd" id="1_v7l4f"]
+[ext_resource type="PackedScene" uid="uid://clx13x5v5mlx6" path="res://HUD/ToolWheel/tool_wheel_slot.tscn" id="2_m7qmh"]
 
 [node name="ToolWheel" type="Control"]
 visible = false
