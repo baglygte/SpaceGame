@@ -17,6 +17,7 @@ func _ready() -> void:
 func AddBlip(connection: SectorMapBlipConnector) -> void:
 	if connection.blipType == null:
 		return
+		
 	var blip = GetBlip(connection.blipType)
 	connection.wasKilled.connect(RemoveBlip)
 	blips[connection] = blip
@@ -28,14 +29,24 @@ func RemoveBlip(connection: SectorMapBlipConnector) -> void:
 	
 func _process(_delta: float) -> void:
 	for connection in blips.keys():
-			
-		var blip = blips[connection]
-		var deltaPosition: Vector2 = connection.get_parent().position - ship.position
+		#if connection.blipType =="GunLockOn":
+			#for connection2 in blips.keys():
+				#if connection2.blipType=="GunLockOn": continue
+				#if connection2.blipType=="GunReticle": continue
+				#if abs(connection.get_parent().position.x - connection2.get_parent().position.x)<250:
+					#if abs(connection.get_parent().position.y - connection2.get_parent().position.y)<250:
+						#connection.sisterBlip = connection2.get_parent()
+						#break
+			#RemoveBlip(connection)
 		
-		blip.position = deltaPosition.rotated(-ship.rotation) * (size.x / visibleRange)
-		blip.get_node("Sprite2D").rotation = connection.get_parent().rotation - ship.rotation
-		
-		blip.get_node("Control/CenterContainer/Label").text = str(int(deltaPosition.length()))
+		UpdateBlipPosition(connection)
+
+
+func UpdateBlipPosition(connection):
+	var blip = blips[connection]
+	var deltaPosition: Vector2 = connection.get_parent().position - ship.position
+	blip.position = deltaPosition.rotated(-ship.rotation) * (size.x / visibleRange)
+	blip.rotation = connection.get_parent().rotation - ship.rotation
 	
 func GetBlip(blipType: String) -> Control:
 	var texturePath: String
@@ -45,6 +56,11 @@ func GetBlip(blipType: String) -> Control:
 			texturePath = "res://sprites/Blips/RocketBlip.png"
 		"EnemyShip":
 			texturePath = "res://sprites/Blips/EnemyBlip.png"
+		"GunReticle":
+			texturePath = "res://sprites/Blips/ReticleBlip.png"
+		"GunLockOn":
+			texturePath = "res://sprites/Blips/ReticleBlip.png"
+			
 			
 	var blip = load("res://Overlays/SectorMap/blip.tscn").instantiate()
 	blip.get_node("Sprite2D").texture = load(texturePath)

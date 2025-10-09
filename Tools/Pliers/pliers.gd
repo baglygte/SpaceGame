@@ -36,9 +36,10 @@ func Use() -> void:
 		
 		if signalerToLink != null:
 			line = lineScene.instantiate()
-			get_tree().root.get_child(0).get_node("Game").add_child(line)
-			line.add_point(global_position)
-			line.add_point(signalerToLink.global_position)
+			var ship = get_tree().get_first_node_in_group("Ship")
+			ship.add_child(line)
+			line.add_point(position)
+			line.add_point(signalerToLink.global_position + ship.position)
 	else:
 		EstablishLink(systemInReach)
 	

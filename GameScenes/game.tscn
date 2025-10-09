@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="12_xjp2s"]
 [ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="13_i5gbp"]
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="14_o2qad"]
-[ext_resource type="Script" uid="uid://saqi3llcutei" path="res://GameScenes/sector_swapper.gd" id="15_6ce2g"]
+[ext_resource type="Script" uid="uid://61tdi4g8q3rx" path="res://Audio/sound_system.gd" id="15_6ce2g"]
 
 [node name="Game" type="Node"]
 
@@ -113,5 +113,6 @@ script = ExtResource("13_i5gbp")
 [node name="PlayerCreator" type="Node2D" parent="GameWorld" groups=["PlayerCreator"]]
 script = ExtResource("14_o2qad")
 
-[node name="SectorSwapper" type="Node2D" parent="GameWorld"]
+[node name="SoundSystem" type="Node" parent="."]
 script = ExtResource("15_6ce2g")
+metadata/_custom_type_script = "uid://61tdi4g8q3rx"

@@ -33,8 +33,8 @@ func ReceiveEnterExit(player: Player) -> void:
 		$Reticle/StarmapBlipConnector.Kill()
 	else:
 		playerHuds.ShowGunControlOverlay(player.viewSide, $Barrel, rotation)
-		#var recipes = get_tree().get_first_node_in_group("RocketRecipes")
-		#ammunitionrecipe = recipes.Recipes["Main"]
+		var recipes = get_tree().get_first_node_in_group("RocketRecipes")
+		ammunitionrecipe = recipes.Recipes["SplitRocket"]
 		
 		if isHoming:
 			$Reticle/StarmapBlipConnector.Initialize("GunReticle")
@@ -46,12 +46,16 @@ func ReceiveRightHand() -> void:
 		$LockOn/StarmapBlipConnector.Initialize("GunLockOn")
 		$LockOn.position = $Reticle.position
 		return
+	
 	if !logNode.RemoveItem():
 		return
+	
 	var rocket: Node2D = rocketScene.instantiate()
 	rocket.recipe = logNode.item
+	
 	if isHoming:
 		rocket.homingTarget = $LockOn/StarmapBlipConnector.sisterBlip
+	
 	rocket.rotation = $Barrel.rotation + get_tree().get_first_node_in_group("Ship").rotation - rotation
 	rocket.global_position = $Barrel/SpawnPosition.global_position
 	var gameScene = get_tree().get_first_node_in_group("GameWorld")
