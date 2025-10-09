@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dgb0vy4wj2tpi"]
 
 [ext_resource type="Script" uid="uid://by1ysxcwd3jgr" path="res://Rockets/Recipes/rocket_recipes.gd" id="1_wmfre"]
-[ext_resource type="Texture2D" uid="uid://d3kqqoocoiq21" path="res://sprites/RocketTiles.png" id="2_r0gn5"]
+[ext_resource type="Texture2D" uid="uid://d1r58mv2htcyu" path="res://sprites/RocketTiles.png" id="2_r0gn5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_361fm"]
 resource_name = "RocketParts"

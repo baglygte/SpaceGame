@@ -1,12 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://crhndw50dy0eb"]
+[gd_scene load_steps=15 format=3 uid="uid://crhndw50dy0eb"]
 
 [ext_resource type="Script" uid="uid://bept6u1sucpvp" path="res://Enemies/dabox.gd" id="1_sx6so"]
 [ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://sprites/sectionPreview.png" id="2_elafv"]
 [ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_x5o0o"]
-[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://SectormapOverlay/sectormap_blip_connector.gd.tscn" id="4_suqjk"]
+[ext_resource type="Script" uid="uid://kltvhqmrneja" path="res://Finite State Machine/finite_state_machine.gd" id="5_rh42n"]
+[ext_resource type="Script" uid="uid://dsij007i43qf8" path="res://Finite State Machine/Move states/state_circle.gd" id="6_hbvgm"]
+[ext_resource type="Script" uid="uid://cftjgcj55h1es" path="res://Finite State Machine/Move states/state_idle.gd" id="7_hbvgm"]
+[ext_resource type="Script" uid="uid://ehx0vi2rax3v" path="res://Finite State Machine/Move states/state_approach.gd" id="8_1iaue"]
+[ext_resource type="Script" uid="uid://bp5265xfeewsh" path="res://Finite State Machine/Move states/state_retreat.gd" id="9_r6ntq"]
+[ext_resource type="Script" uid="uid://cx4cm2esicvsp" path="res://Finite State Machine/Attack states/state_inactive.gd" id="10_734nf"]
+[ext_resource type="Script" uid="uid://d0di16lasoub3" path="res://Finite State Machine/Attack states/state_shooting.gd" id="11_rnve6"]
+[ext_resource type="Script" uid="uid://bxbx4o75byv5l" path="res://Enemies/forceApplicator.gd" id="12_rnve6"]
+[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="12_xcoga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elafv"]
 size = Vector2(384, 384)
+
+[sub_resource type="GDScript" id="GDScript_xhbee"]
+script/source = "class_name StateReload
+extends AttackState
+@export var enemy: RigidBody2D
+
+var ship: Ship
+
+func Enter():
+	ship = get_tree().get_first_node_in_group(\"Ship\")
+	
+func Update():
+	if enemy.canShoot:
+		transitionToState.emit(\"StateShoot\")
+
+func Exit():
+	return
+"
 
 [node name="dabox" type="RigidBody2D"]
 collision_layer = 2
@@ -27,7 +53,43 @@ shape = SubResource("RectangleShape2D_elafv")
 [node name="Health" parent="." instance=ExtResource("3_x5o0o")]
 position = Vector2(-185.9, -455.7)
 
-[node name="StarmapBlipConnector" parent="." instance=ExtResource("4_suqjk")]
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialMoveState", "initialAttackState")]
+script = ExtResource("5_rh42n")
+initialMoveState = NodePath("StateIdle")
+initialAttackState = NodePath("StateInactive")
+metadata/_custom_type_script = "uid://kltvhqmrneja"
 
-[node name="SpawnPosition" type="Node2D" parent="."]
-position = Vector2(0, -384)
+[node name="StateCircle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("6_hbvgm")
+metadata/_custom_type_script = "uid://dsij007i43qf8"
+
+[node name="StateIdle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("7_hbvgm")
+metadata/_custom_type_script = "uid://cftjgcj55h1es"
+
+[node name="StateApproach" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("8_1iaue")
+metadata/_custom_type_script = "uid://ehx0vi2rax3v"
+
+[node name="StateRetreat" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("9_r6ntq")
+metadata/_custom_type_script = "uid://bp5265xfeewsh"
+
+[node name="StateInactive" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("10_734nf")
+metadata/_custom_type_script = "uid://cx4cm2esicvsp"
+
+[node name="StateShoot" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("11_rnve6")
+metadata/_custom_type_script = "uid://d0di16lasoub3"
+
+[node name="StateReload" type="Node" parent="FiniteStateMachine"]
+script = SubResource("GDScript_xhbee")
+
+[node name="ForceApplicator" type="Node" parent="."]
+script = ExtResource("12_rnve6")
+torque = 10000.0
+forceMultiplier = 1000.0
+metadata/_custom_type_script = "uid://bxbx4o75byv5l"
+
+[node name="StarmapBlipConnector" parent="." instance=ExtResource("12_xcoga")]

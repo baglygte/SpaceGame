@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buqglp8w0jp08"
-path="res://.godot/imported/DemoUiBackgroundNineRect.png-01fe3f39e7bc0d3780a31059a5391328.ctex"
+uid="uid://d1r58mv2htcyu"
+path="res://.godot/imported/RocketTiles.png-bb7a8bf9300bdd25a8f4a546fb294045.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/DemoUiBackgroundNineRect.png"
-dest_files=["res://.godot/imported/DemoUiBackgroundNineRect.png-01fe3f39e7bc0d3780a31059a5391328.ctex"]
+source_file="res://sprites/RocketTiles.png"
+dest_files=["res://.godot/imported/RocketTiles.png-bb7a8bf9300bdd25a8f4a546fb294045.ctex"]
 
 [params]
 

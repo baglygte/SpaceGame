@@ -1,7 +1,7 @@
 class_name ExternalSystemBuilder
 extends Node2D
 
-func IsSystemPositionValid(positionToCheck: Vector2) -> bool:
+func IsSystemPositionValid(_positionToCheck: Vector2) -> bool:
 	return true
 	
 func CreateExternalSystem(scenePath: String) -> Node2D:
@@ -30,6 +30,8 @@ func CreateFromSave(variablesToSet: Dictionary) -> void:
 			instance = CreateExternalSystem("res://Systems/Thruster/thruster.tscn")
 		"gun":
 			instance = CreateExternalSystem("res://Systems/Gun/gun.tscn")
+		"grabberArm":
+			instance = CreateExternalSystem("res://Systems/GrabberArm/grabber_arm.tscn")
 			
 	$"../../GlobalSystemCounter".counterValue -= 1
 

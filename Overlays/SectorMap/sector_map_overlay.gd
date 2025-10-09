@@ -15,6 +15,8 @@ func _ready() -> void:
 		AddBlip(blipConnector)
 	
 func AddBlip(connection: SectorMapBlipConnector) -> void:
+	if connection.blipType == null:
+		return
 	var blip = GetBlip(connection.blipType)
 	connection.wasKilled.connect(RemoveBlip)
 	blips[connection] = blip

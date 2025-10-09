@@ -34,3 +34,15 @@ func OnRightHand() -> void:
 
 func OnLeftHand() -> void:
 	logNode.RemoveItem()
+
+func GetSaveData() -> Dictionary:
+	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}
+	
+	dictionaryToSave["systemType"] = "ammoDepot"
+	var section: Section = get_parent().get_parent()
+	dictionaryToSave["position.x"] = position.x + section.position.x
+	dictionaryToSave["position.y"] = position.y + section.position.y
+	dictionaryToSave["rotation"] = rotation
+	dictionaryToSave["globalId"] = globalId
+	
+	return dictionaryToSave

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="2_t5ng2"]
 [ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="3_t5ng2"]
 [ext_resource type="Texture2D" uid="uid://cap7s2ipr0rg0" path="res://sprites/barrel.png" id="5_0rbit"]
-[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://SectormapOverlay/sectormap_blip_connector.gd.tscn" id="7_ccd6o"]
+[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="7_ccd6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbmh6"]
 size = Vector2(60, 41)

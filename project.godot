@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="FirstGame"
+config/name="SpaceGame"
 run/main_scene="uid://btxq4v2vo5anu"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
@@ -24,12 +24,6 @@ window/size/viewport_height=720
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
-
-[file_customization]
-
-folder_colors={
-"res://Tools/": "green"
-}
 
 [global_group]
 

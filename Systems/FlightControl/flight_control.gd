@@ -10,17 +10,14 @@ func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
 
 func ReceiveEnterExit(player: Player) -> void:
-	var viewPorts: PlayerViewPorts = get_tree().get_first_node_in_group("PlayerViewPorts")
+	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
 	
 	if isOverlayingSectorMap:
-		var gameWorld = get_tree().get_first_node_in_group("GameWorld")
-		viewPorts.SwitchToSubView(gameWorld, player.viewSide)
-		isOverlayingSectorMap = false
+		playerHuds.ClearHud(player.viewSide)
 	else:
-		var sectorMapOverlay = get_tree().get_first_node_in_group("FlightControlOverlay")
-		viewPorts.SwitchToSubView(sectorMapOverlay, player.viewSide)
-		isOverlayingSectorMap = true
-	
+		playerHuds.ShowFlightControlOverlay(player.viewSide)
+		
+	isOverlayingSectorMap = !isOverlayingSectorMap
 	
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:

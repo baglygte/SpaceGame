@@ -14,6 +14,8 @@ func CreateFromSave(variablesToSet: Dictionary) -> void:
 			instance = CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn")
 		"flightcontrol":
 			instance = CreateInternalSystem("res://Systems/FlightControl/flightControl.tscn")
+		"ammoDepot":
+			instance = CreateInternalSystem("res://Systems/AmmoDepot/ammoDepot.tscn")
 			
 	$"../../../GlobalSystemCounter".counterValue -= 1
 

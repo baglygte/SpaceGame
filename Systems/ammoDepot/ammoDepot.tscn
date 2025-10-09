@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dubdno31bdo3h"]
 
-[ext_resource type="Script" uid="uid://cglykfnvpu2oe" path="res://Systems/ammoDepot/ammo_depot.gd" id="1_x2mpc"]
+[ext_resource type="Script" uid="uid://cglykfnvpu2oe" path="res://Systems/AmmoDepot/ammo_depot.gd" id="1_x2mpc"]
 [ext_resource type="Texture2D" uid="uid://dlgqxk7hyte2d" path="res://sprites/ammoDepot.png" id="2_r7q0t"]
 [ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_r7q0t"]
 [ext_resource type="PackedScene" uid="uid://c21tu7qhdabiw" path="res://editable_hover.tscn" id="4_crpqi"]

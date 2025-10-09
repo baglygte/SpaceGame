@@ -19,34 +19,31 @@ func ReceiveMovement(vector: Vector2) -> void:
 			return
 	if $Barrel.rotation > deg_to_rad(80) and vector.x > 0:
 		return
+		
 	if $Barrel.rotation < deg_to_rad(-80) and vector.x < 0:
 		return
+		
 	$Barrel.rotate(deg_to_rad(3) * sign(vector.x))
 	
 func ReceiveEnterExit(player: Player) -> void:
-	var viewPorts: PlayerViewPorts = get_tree().get_first_node_in_group("PlayerViewPorts")
+	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
 	
 	if isOverlayingInterface:
-		var gameWorld = get_tree().get_first_node_in_group("GameWorld")
-		viewPorts.SwitchToSubView(gameWorld, player.viewSide)
-		isOverlayingInterface = false
+		playerHuds.ClearHud(player.viewSide)
 		$Reticle/StarmapBlipConnector.Kill()
 	else:
-		var overlay = get_tree().get_first_node_in_group("GunInterfaceOverlay")
-		var recipes = get_tree().get_first_node_in_group("RocketRecipes")
-		ammunitionrecipe = recipes.Recipes["Main"]
-		overlay.rotationReference = $Barrel
+		playerHuds.ShowGunControlOverlay(player.viewSide, $Barrel, rotation)
+		#var recipes = get_tree().get_first_node_in_group("RocketRecipes")
+		#ammunitionrecipe = recipes.Recipes["Main"]
+		
 		if isHoming:
-			$Reticle/StarmapBlipConnector.blipType = "GunReticle"
-			$Reticle/StarmapBlipConnector.Initialize()
-		overlay.rotationOffset = -rotation
-		viewPorts.SwitchToSubView(overlay, player.viewSide)
-		isOverlayingInterface = true
+			$Reticle/StarmapBlipConnector.Initialize("GunReticle")
+			
+	isOverlayingInterface = !isOverlayingInterface
 		
 func ReceiveRightHand() -> void:
 	if isHoming && ($LockOn/StarmapBlipConnector.sisterBlip == null):
-		$LockOn/StarmapBlipConnector.blipType = "GunLockOn"
-		$LockOn/StarmapBlipConnector.Initialize()
+		$LockOn/StarmapBlipConnector.Initialize("GunLockOn")
 		$LockOn.position = $Reticle.position
 		return
 	if !logNode.RemoveItem():
@@ -68,4 +65,5 @@ func GetSaveData() -> Dictionary:
 	dictionaryToSave["position.y"] = position.y
 	dictionaryToSave["rotation"] = rotation
 	dictionaryToSave["globalId"] = globalId
+	
 	return dictionaryToSave

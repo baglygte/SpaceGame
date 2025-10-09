@@ -73,6 +73,9 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Target" type="Bone2D" parent="Skeleton2D/FirstArm/SecondArm/EndEffector"]
 position = Vector2(-0.011342764, 12.451155)
 rest = Transform2D(1, 0, 0, 1, -0.011342764, 12.451155)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="Node2D" type="Node2D" parent="Skeleton2D/FirstArm/SecondArm/EndEffector"]
 

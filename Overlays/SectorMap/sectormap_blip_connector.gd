@@ -4,6 +4,7 @@ extends Node2D
 
 var blipType
 signal wasKilled
+var sisterBlip
 
 func Initialize(blipTypeToGet: String) -> void:
 	blipType = blipTypeToGet
