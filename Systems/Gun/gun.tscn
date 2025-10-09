@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqtderr4jbub3"]
+[gd_scene load_steps=9 format=3 uid="uid://cqtderr4jbub3"]
 
 [ext_resource type="Script" uid="uid://dmgtkfejwsm0s" path="res://Sections/section_hover.gd" id="1_n5udb"]
 [ext_resource type="Script" uid="uid://b4db6eeeehvfd" path="res://Systems/Gun/gun.gd" id="1_vwvcx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="2_t5ng2"]
 [ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="3_t5ng2"]
 [ext_resource type="Texture2D" uid="uid://cap7s2ipr0rg0" path="res://sprites/barrel.png" id="5_0rbit"]
+[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://SectormapOverlay/sectormap_blip_connector.gd.tscn" id="7_ccd6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbmh6"]
 size = Vector2(60, 41)
@@ -40,3 +41,11 @@ scale = Vector2(0.0703125, 0.07031251)
 texture = ExtResource("2_t5ng2")
 
 [node name="SignalReceiver" parent="." instance=ExtResource("3_t5ng2")]
+
+[node name="Reticle" type="Node2D" parent="."]
+
+[node name="StarmapBlipConnector" parent="Reticle" instance=ExtResource("7_ccd6o")]
+
+[node name="LockOn" type="Node2D" parent="."]
+
+[node name="StarmapBlipConnector" parent="LockOn" instance=ExtResource("7_ccd6o")]

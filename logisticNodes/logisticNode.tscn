@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy7shmg4lm1r"]
+
+[ext_resource type="Script" uid="uid://blcppy8u0bqot" path="res://logisticNodes/logistic_node.gd" id="1_kbrbw"]
+[ext_resource type="Script" uid="uid://dcrktbspqkwyw" path="res://logisticNodes/logistics_debugger.gd" id="2_nbrym"]
+
+[node name="LogisticNode" type="Node2D"]
+script = ExtResource("1_kbrbw")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="LogisticsDebugger" type="Node2D" parent="."]
+script = ExtResource("2_nbrym")

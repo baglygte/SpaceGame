@@ -1,6 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgb0vy4wj2tpi"]
+[gd_scene load_steps=5 format=3 uid="uid://dgb0vy4wj2tpi"]
 
 [ext_resource type="Script" uid="uid://by1ysxcwd3jgr" path="res://Rockets/Recipes/rocket_recipes.gd" id="1_wmfre"]
+[ext_resource type="Texture2D" uid="uid://d3kqqoocoiq21" path="res://sprites/RocketTiles.png" id="2_r0gn5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_361fm"]
+resource_name = "RocketParts"
+texture = ExtResource("2_r0gn5")
+texture_region_size = Vector2i(4, 4)
+0:0/size_in_atlas = Vector2i(6, 3)
+0:0/0 = 0
+0:4/size_in_atlas = Vector2i(7, 2)
+0:4/0 = 0
+7:4/size_in_atlas = Vector2i(5, 2)
+7:4/0 = 0
+10:1/size_in_atlas = Vector2i(2, 2)
+10:1/0 = 0
+6:1/size_in_atlas = Vector2i(3, 2)
+6:1/0 = 0
+0:6/size_in_atlas = Vector2i(3, 2)
+0:6/0 = 0
+4:6/size_in_atlas = Vector2i(2, 2)
+4:6/0 = 0
+7:7/0 = 0
+12:0/size_in_atlas = Vector2i(2, 2)
+12:0/0 = 0
+13:2/0 = 0
+12:3/size_in_atlas = Vector2i(2, 2)
+12:3/0 = 0
+12:5/size_in_atlas = Vector2i(2, 2)
+12:5/0 = 0
+14:7/size_in_atlas = Vector2i(2, 2)
+14:7/0 = 0
+16:8/size_in_atlas = Vector2i(1, 2)
+16:8/0 = 0
+16:6/size_in_atlas = Vector2i(3, 2)
+16:6/0 = 0
+16:4/size_in_atlas = Vector2i(2, 2)
+16:4/0 = 0
+14:5/size_in_atlas = Vector2i(2, 2)
+14:5/0 = 0
+14:3/size_in_atlas = Vector2i(2, 2)
+14:3/0 = 0
+14:1/size_in_atlas = Vector2i(2, 2)
+14:1/0 = 0
+14:0/size_in_atlas = Vector2i(2, 1)
+14:0/0 = 0
+16:0/0 = 0
+16:1/0 = 0
+16:2/size_in_atlas = Vector2i(2, 2)
+16:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kofko"]
+sources/0 = SubResource("TileSetAtlasSource_361fm")
 
 [node name="RocketRecipes" type="Node2D"]
 script = ExtResource("1_wmfre")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_kofko")

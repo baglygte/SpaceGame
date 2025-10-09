@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://8c7jpm0ppqat"]
+
+[ext_resource type="Script" uid="uid://245dpq787ppp" path="res://SectormapOverlay/sectormap_overlay.gd" id="1_f3mcg"]
+
+[node name="SectormapOverlay" type="SubViewport"]
+size = Vector2i(640, 720)
+script = ExtResource("1_f3mcg")
