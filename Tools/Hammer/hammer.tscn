@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://da67althap6r3"]
 
-[ext_resource type="Texture2D" uid="uid://ctwpaw248frfu" path="res://sprites/hammer.png" id="1_o8p1l"]
-[ext_resource type="Script" uid="uid://owvxkhgk5ylj" path="res://Tools/Hammer/hammer.gd" id="1_q7g0b"]
-[ext_resource type="Shader" uid="uid://bw6vrksnp0ctm" path="res://section_preview.gdshader" id="3_y7kof"]
+[ext_resource type="Script" uid="uid://owvxkhgk5ylj" path="res://Tools/Hammer/hammer.gd" id="1_ptqim"]
+[ext_resource type="Texture2D" uid="uid://ctwpaw248frfu" path="res://Sprites/Tools/hammer.png" id="2_7ly1d"]
+[ext_resource type="Shader" uid="uid://bw6vrksnp0ctm" path="res://section_preview.gdshader" id="3_5pkpe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wf05t"]
-shader = ExtResource("3_y7kof")
+shader = ExtResource("3_5pkpe")
 shader_parameter/shadedColor = Vector4(0, 0, 0, 0)
 
 [node name="Hammer" type="Node2D" groups=["Tool"]]
-script = ExtResource("1_q7g0b")
+script = ExtResource("1_ptqim")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_o8p1l")
+texture = ExtResource("2_7ly1d")
 
 [node name="SectionPreview" type="Node2D" parent="."]
 

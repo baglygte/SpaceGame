@@ -42,19 +42,19 @@ func ReceiveEnterExit(player: Player) -> void:
 	isOverlayingInterface = !isOverlayingInterface
 		
 func ReceiveRightHand() -> void:
-	if isHoming && ($LockOn/StarmapBlipConnector.sisterBlip == null):
-		$LockOn/StarmapBlipConnector.Initialize("GunLockOn")
-		$LockOn.position = $Reticle.position
-		return
+	#if isHoming && ($LockOn/StarmapBlipConnector.sisterBlip == null):
+		#$LockOn/StarmapBlipConnector.Initialize("GunLockOn")
+		#$LockOn.position = $Reticle.position
+		#return
+	#
+	#if !logNode.RemoveItem():
+		#return
 	
-	if !logNode.RemoveItem():
-		return
+	var rocket: RigidBody2D = rocketScene.instantiate()
+	#rocket.recipe = logNode.item
 	
-	var rocket: Node2D = rocketScene.instantiate()
-	rocket.recipe = logNode.item
-	
-	if isHoming:
-		rocket.homingTarget = $LockOn/StarmapBlipConnector.sisterBlip
+	#if isHoming:
+		#rocket.homingTarget = $LockOn/StarmapBlipConnector.sisterBlip
 	
 	rocket.rotation = $Barrel.rotation + get_tree().get_first_node_in_group("Ship").rotation - rotation
 	rocket.global_position = $Barrel/SpawnPosition.global_position

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpbckf7lnq03t"]
+[gd_scene load_steps=10 format=3 uid="uid://dpbckf7lnq03t"]
 
 [ext_resource type="Script" uid="uid://bbnj1feh4run6" path="res://Player/player.gd" id="1_oy2p6"]
-[ext_resource type="Texture2D" uid="uid://dl66md7spe4bw" path="res://sprites/player.png" id="1_v6yc6"]
+[ext_resource type="Texture2D" uid="uid://dl66md7spe4bw" path="res://Sprites/player.png" id="1_v6yc6"]
+[ext_resource type="Script" uid="uid://ypsg463eunfu" path="res://Player/off_hand.gd" id="6_fhl08"]
 [ext_resource type="Script" uid="uid://c52pdvklcahfb" path="res://Player/player_reach.gd" id="6_g6k8r"]
 [ext_resource type="Script" uid="uid://uiel7kkctjvv" path="res://Player/player_input_listener.gd" id="7_boad6"]
-[ext_resource type="Script" uid="uid://bln2amxfs46vt" path="res://Player/hand.gd" id="7_rgyib"]
+[ext_resource type="Script" uid="uid://bln2amxfs46vt" path="res://Player/main_hand.gd" id="7_rgyib"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuf4o"]
 radius = 11.0454
@@ -19,6 +20,9 @@ b = Vector2(55, 0)
 z_index = 1000
 script = ExtResource("1_oy2p6")
 
+[node name="PlayerInputListener" type="Node2D" parent="."]
+script = ExtResource("7_boad6")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v6yc6")
 
@@ -31,16 +35,13 @@ script = ExtResource("6_g6k8r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerReach"]
 shape = SubResource("SegmentShape2D_boad6")
 
-[node name="PlayerInputListener" type="Node2D" parent="."]
-script = ExtResource("7_boad6")
-
-[node name="LeftHand" type="Node2D" parent="."]
-script = ExtResource("7_rgyib")
-
-[node name="RightHand" type="Node2D" parent="."]
-script = ExtResource("7_rgyib")
-
 [node name="EnterExitArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnterExitArea"]
 shape = SubResource("CircleShape2D_vtle1")
+
+[node name="OffHand" type="Node2D" parent="."]
+script = ExtResource("6_fhl08")
+
+[node name="MainHand" type="Node2D" parent="."]
+script = ExtResource("7_rgyib")

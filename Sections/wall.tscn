@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cf2scpr8a85te"]
 
 [ext_resource type="Script" uid="uid://dul3idbs8qiw6" path="res://Sections/wall.gd" id="1_cjut5"]
-[ext_resource type="Texture2D" uid="uid://ckotnxib5v5x2" path="res://sprites/wall.png" id="1_g6to0"]
+[ext_resource type="Texture2D" uid="uid://ckotnxib5v5x2" path="res://Sprites/wall.png" id="1_g6to0"]
 [ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_j0cip"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_cjut5"]

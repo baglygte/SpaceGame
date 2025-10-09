@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d2wljla6hp2qi"]
 
 [ext_resource type="Script" uid="uid://b11ix1pwkufs1" path="res://Rockets/rocket.gd" id="1_5gt1y"]
-[ext_resource type="Texture2D" uid="uid://dv4psqxgyd4xa" path="res://sprites/rocket.png" id="1_ptmd8"]
+[ext_resource type="Texture2D" uid="uid://dv4psqxgyd4xa" path="res://Sprites/rocket.png" id="1_ptmd8"]
 [ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_r2l15"]
 [ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="4_tpb7v"]
 [ext_resource type="PackedScene" uid="uid://b2i0pprx4byav" path="res://Rockets/base_rocket_behavior.tscn" id="5_cutj6"]

@@ -8,11 +8,6 @@ func _ready() -> void:
 	for i in range(20):
 		$ContainedItemCreator.SpawnItemInWorld(load("res://Sections/section.tscn").instantiate(), Vector2(250,50))
 		
-	# Tools
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Hammer/hammer.tscn").instantiate(), Vector2(50,25))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Wrench/wrench.tscn").instantiate(), Vector2(50,50))
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Tools/Pliers/pliers.tscn").instantiate(), Vector2(50,75))
-	
 	# Systems
 	for i in range(5):
 		$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))

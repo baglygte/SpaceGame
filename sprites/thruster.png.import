@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fpaw53oftt7h"
-path="res://.godot/imported/thruster.png-16e260ff184a3bd34f4b3f25c8eb25f3.ctex"
+path="res://.godot/imported/thruster.png-09303dd31d13ded7213d7707aace879e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/thruster.png"
-dest_files=["res://.godot/imported/thruster.png-16e260ff184a3bd34f4b3f25c8eb25f3.ctex"]
+source_file="res://Sprites/thruster.png"
+dest_files=["res://.godot/imported/thruster.png-09303dd31d13ded7213d7707aace879e.ctex"]
 
 [params]
 

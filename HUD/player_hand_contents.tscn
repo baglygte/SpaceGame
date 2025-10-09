@@ -2,40 +2,47 @@
 
 [ext_resource type="Script" uid="uid://lpmg5ja2eaox" path="res://HUD/player_hand_contents.gd" id="1_kndhw"]
 
-[node name="playerHandContents" type="HBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="playerHandContents" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 136.0
+offset_bottom = 39.0
 script = ExtResource("1_kndhw")
 
-[node name="LeftHand" type="MarginContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 136.0
+offset_bottom = 39.0
+
+[node name="OffHand" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="inhandbackground" type="ColorRect" parent="LeftHand"]
+[node name="inhandbackground" type="ColorRect" parent="HBoxContainer/OffHand"]
 layout_mode = 2
 color = Color(0.2885008, 0.5857665, 0.3389583, 1)
 
-[node name="Label" type="Label" parent="LeftHand"]
+[node name="Label" type="Label" parent="HBoxContainer/OffHand"]
 layout_mode = 2
 text = "empty"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RightHand" type="MarginContainer" parent="."]
+[node name="MainHand" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="inhandbackground" type="ColorRect" parent="RightHand"]
+[node name="inhandbackground" type="ColorRect" parent="HBoxContainer/MainHand"]
 layout_mode = 2
 color = Color(0.65500003, 1, 0.100000024, 1)
 
-[node name="Label" type="Label" parent="RightHand"]
+[node name="Label" type="Label" parent="HBoxContainer/MainHand"]
 layout_mode = 2
 text = "empty"
 horizontal_alignment = 1

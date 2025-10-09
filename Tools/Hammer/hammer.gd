@@ -1,10 +1,8 @@
+extends Tool
 class_name Hammer
-extends Node2D
 
-var isEquipped: bool = false
 var ship: Ship
 var sectionBuilder: SectionBuilder
-var player: Player
 @onready var sectionPreview = $SectionPreview
 const previewTexture = preload("res://sprites/sectionPreview.png")
 
@@ -18,6 +16,8 @@ const previewOffsetMap: Dictionary = {-180: Vector2(-64,0),
 										135: Vector2(-64,64),
 										180: Vector2(-64,0)}
 func _ready() -> void:
+	player = get_parent().get_parent()
+	mainHand = player.get_node("MainHand")
 	ship = get_tree().get_first_node_in_group("Ship")
 	sectionBuilder = ship.get_node("SectionBuilder")
 
@@ -34,10 +34,8 @@ func _process(_delta: float) -> void:
 		
 	sectionPreview.get_child(0).material.set("shader_parameter/shadedColor", shadedColor)
 
-func RotateSection() -> void:
-	var otherHand = get_parent().GetOtherHand()
-	
-	if otherHand.heldItem == null:
+func RotateSection() -> void:	
+	if mainHand.heldItem == null:
 		return
 		
 	sectionPreview.rotate(deg_to_rad(90))
@@ -54,14 +52,12 @@ func GetPreviewPosition() -> Vector2:
 	return snappedPlayerPosition + previewOffset
 
 func UpdatePreviewTexture() -> void:
-	var item: Node2D = get_parent().GetOtherHand().heldItem
-	
 	var textureToGet: Texture = null
 	
-	if item == null:
+	if mainHand.heldItem == null:
 		textureToGet = previewTexture
 	else:
-		textureToGet = item.get_node("Sprite2D").texture
+		textureToGet = mainHand.heldItem.get_node("Sprite2D").texture
 	
 	sectionPreview.get_child(0).texture = textureToGet
 	sectionPreview.show()
@@ -72,28 +68,26 @@ func Equip() -> void:
 	player.get_node("PlayerReach").AddHoverGroup("HammerCanEdit")
 	sectionPreview.reparent(ship)
 	sectionPreview.rotation = 0
-	
-	var otherHand = get_parent().GetOtherHand()
 
 	UpdatePreviewTexture()
 		
-	otherHand.itemWasPickedUp.connect(UpdatePreviewTexture)
-	otherHand.itemWasDropped.connect(UpdatePreviewTexture)
+	mainHand.itemWasPickedUp.connect(UpdatePreviewTexture)
+	mainHand.itemWasDropped.connect(UpdatePreviewTexture)
 	
 func Unequip() -> void:
 	isEquipped = false
 	sectionPreview.hide()
 	player.get_node("PlayerReach").RemoveHoverGroup("HammerCanEdit")
 	player = null
-	var otherHand = get_parent().GetOtherHand()
-	otherHand.itemWasPickedUp.disconnect(UpdatePreviewTexture)
-	otherHand.itemWasDropped.disconnect(UpdatePreviewTexture)
+
+	mainHand.itemWasPickedUp.disconnect(UpdatePreviewTexture)
+	mainHand.itemWasDropped.disconnect(UpdatePreviewTexture)
 
 func Use() -> void:
 	if not isEquipped:
 		return
 	
-	if get_parent().GetOtherHand().heldItem == null:
+	if mainHand.heldItem == null:
 		PickUpSection()
 		return
 	
@@ -103,18 +97,17 @@ func PickUpSection() -> void:
 	var previewPosition = GetPreviewPosition()
 	
 	var section = sectionBuilder.ExtractSectionAtPosition(previewPosition)
-	get_parent().GetOtherHand().PutItemIntoHand(section)
+	mainHand.PutItemIntoHand(section)
 
 func PlaceHeldSection() -> void:
 	if !sectionBuilder.IsSectionPositionValid(sectionPreview.position):
 		return
 		
-	var otherHand: Hand = get_parent().GetOtherHand()
-	var section = otherHand.heldItem
+	var section = mainHand.heldItem
 	
 	if not section is Section:
 		return
 	
-	otherHand.LoseItem()
+	mainHand.LoseItem()
 
 	sectionBuilder.AddSectionAtPosition(section, sectionPreview.position, sectionPreview.rotation)	

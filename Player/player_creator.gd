@@ -39,5 +39,5 @@ func CreatePlayerInstance(deviceId) -> Player:
 	
 	playerInstance.get_node("PlayerInputListener").deviceId = deviceId
 	$"../Ship".add_child(playerInstance)
-	get_tree().get_first_node_in_group("HUD").CreatePlayerHands(playerInstance)
+	get_tree().get_first_node_in_group("HUD").CreatePlayerHud(playerInstance)
 	return playerInstance

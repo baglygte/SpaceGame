@@ -4,7 +4,20 @@ class_name Player
 const SPEED = 100.0
 var canMove := true
 var viewSide := "Left"
+var toolWheel: ToolWheel
 #var camera: Camera2D
+
+func ShowWheel():
+	if toolWheel == null:
+		return
+	
+	toolWheel.ShowWheel()
+
+func HideWheel():
+	if toolWheel == null:
+		return
+		
+	toolWheel.HideWheel()
 
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:
@@ -20,7 +33,7 @@ func ReceiveLook(lookVector: Vector2) -> void:
 	if lookVector.length() == 0:
 		return
 		
-	self.rotation = lookVector.angle()
+	rotation = lookVector.angle()
 
 func ToggleEnterExit() -> void:
 	var area: EnterExitArea = GetEnterExitArea()

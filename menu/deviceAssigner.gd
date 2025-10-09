@@ -10,7 +10,7 @@ func _input(event: InputEvent) -> void:
 	if event is not InputEventJoypadButton:
 		return
 		
-	if !event.is_action_pressed("interact"):
+	if !event.is_action_pressed("start"):
 		return
 	
 	if event.device not in deviceDetector.connectedDeviceIds.keys():

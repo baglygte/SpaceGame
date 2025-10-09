@@ -18,10 +18,9 @@ const rocketScene = preload("res://Rockets/rocket.tscn")
 func _ready() -> void:
 	$Health.maxHealth = 1
 	$Health.GainHealth(1)
-	$CollisionShape2D.disabled = true
+	#$CollisionShape2D.disabled = true
 	Rotation = rotation
-	$StarmapBlipConnector.blipType = "EnemyRocket"
-	$StarmapBlipConnector.Initialize()
+	$StarmapBlipConnector.Initialize("EnemyRocket")
 	$Timer.timeout.connect(NextStage)
 	$Timer.start(0.00001)
 
@@ -39,6 +38,8 @@ func _process(_delta: float) -> void:
 	
 func Kill() -> void:
 	$StarmapBlipConnector.Kill()
+	var soundSystem = get_tree().get_first_node_in_group("SoundSystem")
+	soundSystem.PlaySoundAtPosition("res://Audio/explosion.wav", global_position)
 	queue_free()
 
 func NextStage() -> void:

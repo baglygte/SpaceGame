@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ck4u6wvq0frj5"]
 
-[ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://sprites/sectionPreview.png" id="1_3hxqp"]
+[ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://Sprites/sectionPreview.png" id="1_3hxqp"]
 [ext_resource type="Shader" uid="uid://bw6vrksnp0ctm" path="res://section_preview.gdshader" id="1_dnbgs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8or0"]

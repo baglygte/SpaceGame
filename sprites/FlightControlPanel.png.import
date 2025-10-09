@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddt6uh2d6dafs"
-path="res://.godot/imported/FlightControlPanel.png-a4398628655eb18936f7a90f58fee493.ctex"
+path="res://.godot/imported/FlightControlPanel.png-2e6095c13eab07cd029a55a37ce02320.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/FlightControlPanel.png"
-dest_files=["res://.godot/imported/FlightControlPanel.png-a4398628655eb18936f7a90f58fee493.ctex"]
+source_file="res://Sprites/FlightControlPanel.png"
+dest_files=["res://.godot/imported/FlightControlPanel.png-2e6095c13eab07cd029a55a37ce02320.ctex"]
 
 [params]
 

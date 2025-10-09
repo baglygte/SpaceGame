@@ -9,19 +9,22 @@ var deviceId
 
 signal moveSignal
 signal lookSignal
-signal interactRight
-signal interactLeft
-signal dropRight
-signal dropLeft
-signal modify
-signal enterexit
+
+signal selectToolPressed
+signal selectToolReleased
+signal useTool
+
+signal interact # A
+signal drop # B
+signal modify # X
+signal enterexit # Y
+
 signal toggleCameraZoom
 
 func _ready() -> void:
 	SetDefaultInputs()
 	
 	enterexit.connect($"..".ToggleEnterExit)
-	#toggleCameraZoom.connect($"..".camera.ToggleZoom)
 	
 func _process(_delta: float) -> void:
 	SendMoveSignal()
@@ -30,18 +33,15 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("start"):
 		var saveManager = get_tree().get_first_node_in_group("SaveManager")
 		saveManager.SaveGame()
+	
+	if Input.is_action_just_pressed(str(deviceId) + "_use_tool"):
+		useTool.emit()
 		
-	if Input.is_action_just_pressed(str(deviceId) + "_interact_right"):
-		interactRight.emit()
+	if Input.is_action_just_pressed(str(deviceId) + "_select_tool"):
+		selectToolPressed.emit()
 		
-	if Input.is_action_just_pressed(str(deviceId) + "_interact_left"):
-		interactLeft.emit()
-		
-	if Input.is_action_just_pressed(str(deviceId) + "_drop_right"):
-		dropRight.emit()
-		
-	if Input.is_action_just_pressed(str(deviceId) + "_drop_left"):
-		dropLeft.emit()
+	if Input.is_action_just_released(str(deviceId) + "_select_tool"):
+		selectToolReleased.emit()
 	
 	if Input.is_action_just_pressed(str(deviceId) + "_enterexit"):
 		enterexit.emit()
@@ -51,6 +51,12 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed(str(deviceId) + "_toggle_camera_zoom"):
 		toggleCameraZoom.emit()
+	
+	if Input.is_action_just_pressed(str(deviceId) + "_drop"):
+		drop.emit()
+		
+	if Input.is_action_just_pressed(str(deviceId) + "_interact"):
+		interact.emit()
 
 func SendMoveSignal() -> void:
 	var prefix = str(deviceId) + "_move"
@@ -71,35 +77,30 @@ func SendLookSignal() -> void:
 	
 	var lookVector = Input.get_vector(leftString, rightString, upString, downString)
 	lookSignal.emit(lookVector)
-	
-#func _input(event) -> void:
-	#canMove = event.device == deviceId
-	#if event.device != deviceId:
-		#return
 
 func SetDefaultInputs() -> void:
-	ResetInputs()
+	ClearAllSignals()
 	
 	moveSignal.connect($"..".ReceiveMovement)
 	lookSignal.connect($"..".ReceiveLook)
-	
-	interactRight.connect($"../RightHand".Interact)
-	interactLeft.connect($"../LeftHand".Interact)
-	
-	dropRight.connect($"../RightHand".Drop)
-	dropLeft.connect($"../LeftHand".Drop)
-	
-	modify.connect($"../RightHand".Modify)
-	modify.connect($"../LeftHand".Modify)
 
-func ResetInputs() -> void:
+	interact.connect($"../MainHand".Interact)
+	drop.connect($"../MainHand".Drop)
+	
+	selectToolPressed.connect($"..".ShowWheel)
+	selectToolReleased.connect($"..".HideWheel)
+	useTool.connect($"../OffHand".UseHeldTool)
+
+func ClearAllSignals() -> void:
 	ClearInputSignal(moveSignal)
 	ClearInputSignal(lookSignal)
-	ClearInputSignal(interactRight)
-	ClearInputSignal(interactLeft)
-	ClearInputSignal(dropRight)
-	ClearInputSignal(dropLeft)
-	ClearInputSignal(modify)
+	
+	ClearInputSignal(interact)
+	ClearInputSignal(drop)
+	
+	ClearInputSignal(selectToolPressed)
+	ClearInputSignal(selectToolReleased)
+	ClearInputSignal(useTool)
 
 func ClearInputSignal(signalToClear: Signal) -> void:
 	for connection in signalToClear.get_connections():

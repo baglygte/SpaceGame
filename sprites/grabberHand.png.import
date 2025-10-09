@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0wtlxroshbfb"
-path="res://.godot/imported/grabberHand.png-cbb0ac9174366ecc9d363d4936a7fb2f.ctex"
+path="res://.godot/imported/grabberHand.png-1236776f3cd0a422edf2087bccf1a0db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/grabberHand.png"
-dest_files=["res://.godot/imported/grabberHand.png-cbb0ac9174366ecc9d363d4936a7fb2f.ctex"]
+source_file="res://Sprites/grabberHand.png"
+dest_files=["res://.godot/imported/grabberHand.png-1236776f3cd0a422edf2087bccf1a0db.ctex"]
 
 [params]
 

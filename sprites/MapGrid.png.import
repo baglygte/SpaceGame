@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cylfshjimf6vo"
-path="res://.godot/imported/MapGrid.png-18cff249fa6d2ad5eb31eafc124b4671.ctex"
+path="res://.godot/imported/MapGrid.png-aee580c072947da7eb4d0f64c7bb771e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/MapGrid.png"
-dest_files=["res://.godot/imported/MapGrid.png-18cff249fa6d2ad5eb31eafc124b4671.ctex"]
+source_file="res://Sprites/MapGrid.png"
+dest_files=["res://.godot/imported/MapGrid.png-aee580c072947da7eb4d0f64c7bb771e.ctex"]
 
 [params]
 

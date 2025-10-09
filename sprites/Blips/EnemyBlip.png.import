@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djhx3dr6kmujq"
-path="res://.godot/imported/EnemyBlip.png-4562e669535bef8e2b7fba11c5b58bb3.ctex"
+path="res://.godot/imported/EnemyBlip.png-ab63e0531a11a5989ed2462239efe2c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Blips/EnemyBlip.png"
-dest_files=["res://.godot/imported/EnemyBlip.png-4562e669535bef8e2b7fba11c5b58bb3.ctex"]
+source_file="res://Sprites/Blips/EnemyBlip.png"
+dest_files=["res://.godot/imported/EnemyBlip.png-ab63e0531a11a5989ed2462239efe2c0.ctex"]
 
 [params]
 

@@ -24,7 +24,7 @@ func ReleaseControl() -> void:
 
 func TakeControl(listener: PlayerInputListener):
 	listenerInControl = listener
-	listener.ResetInputs()
+	listener.ClearAllSignals()
 	
 	listener.moveSignal.connect($"../SignalEmitter".SendMoveSignal)
 	listener.lookSignal.connect($"../SignalEmitter".SendLookSignal)
@@ -39,4 +39,4 @@ func TakeControl(listener: PlayerInputListener):
 	if get_parent().has_method("OnLeftHand"):
 		listener.interactLeft.connect(get_parent().OnLeftHand)
 	else:
-		listener.interactLeft.connect($"../SignalEmitter".SendLeftHandSignal)
+		listener.interactLeftPressed.connect($"../SignalEmitter".SendLeftHandSignal)

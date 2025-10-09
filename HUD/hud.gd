@@ -1,18 +1,20 @@
 extends Control
 class_name HUD
 
-var playerHandSets: Dictionary
-
-func CreatePlayerHands(playerInstance: Player) -> void:
+func CreatePlayerHud(player: Player) -> void:
 	
-	var instance: PlayerHandContents = preload("res://HUD/player_hand_contents.tscn").instantiate()
-	playerHandSets[playerInstance] = instance
+	var handContents: PlayerHandContents = preload("res://HUD/player_hand_contents.tscn").instantiate()
+	var playerHud
 	
-	if playerHandSets.size() == 1:
-		$PlayerViewports/LeftPlayerView.add_child.call_deferred(instance)
-	elif playerHandSets.size() == 2:
-		$PlayerViewports/RightPlayerView.add_child.call_deferred(instance)
-
-func AddItemToHands(instance: Player, hand, item) -> void:
-	playerHandSets[instance].AddItem(hand, item)
-
+	if player.viewSide == "Left":
+		playerHud = $PlayerHuds/LeftPlayerHud
+	elif player.viewSide == "Right":
+		playerHud = $PlayerHuds/RightPlayerHud
+	
+	playerHud.add_child.call_deferred(handContents)
+	$PlayerHuds.playerHandSets[player] = handContents
+	
+	var toolWheel: ToolWheel = load("res://Player/ToolWheel/tool_wheel.tscn").instantiate()
+	toolWheel.player = player
+	player.toolWheel = toolWheel
+	playerHud.add_child.call_deferred(toolWheel)

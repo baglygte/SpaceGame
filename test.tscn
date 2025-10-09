@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://lidgdiifqmxt"]
 
-[ext_resource type="Texture2D" uid="uid://cgh0rwrlx4xmh" path="res://sprites/wrench.png" id="1_6uqi0"]
+[ext_resource type="Texture2D" uid="uid://cgh0rwrlx4xmh" path="res://Sprites/Tools/wrench.png" id="1_6uqi0"]
 [ext_resource type="Script" uid="uid://co43ojjexd6vg" path="res://test.gd" id="1_8uh7m"]
-[ext_resource type="Texture2D" uid="uid://dvl16nx20cxen" path="res://sprites/pliers.png" id="2_6uqi0"]
+[ext_resource type="Texture2D" uid="uid://dvl16nx20cxen" path="res://Sprites/Tools/pliers.png" id="2_6uqi0"]
 
 [node name="test" type="Node2D"]
 

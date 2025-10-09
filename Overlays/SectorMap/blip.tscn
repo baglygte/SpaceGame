@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cudq3j0q8so2f"]
 
-[ext_resource type="Texture2D" uid="uid://nv5x7apuomff" path="res://sprites/Blips/RocketBlip.png" id="1_ukxbf"]
+[ext_resource type="Texture2D" uid="uid://nv5x7apuomff" path="res://Sprites/Blips/RocketBlip.png" id="1_ukxbf"]
 [ext_resource type="FontFile" uid="uid://xe60mng5jenb" path="res://Dedicool.ttf" id="2_6na1m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kfqgc"]

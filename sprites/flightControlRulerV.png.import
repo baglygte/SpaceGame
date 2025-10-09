@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dejq76wji0jf3"
-path="res://.godot/imported/flightControlRulerV.png-7abb089f54cd0ec13ff4bdd8f58c3857.ctex"
+path="res://.godot/imported/flightControlRulerV.png-a42757d29a20c6c8458a5ae0fc425ecc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/flightControlRulerV.png"
-dest_files=["res://.godot/imported/flightControlRulerV.png-7abb089f54cd0ec13ff4bdd8f58c3857.ctex"]
+source_file="res://Sprites/flightControlRulerV.png"
+dest_files=["res://.godot/imported/flightControlRulerV.png-a42757d29a20c6c8458a5ae0fc425ecc.ctex"]
 
 [params]
 

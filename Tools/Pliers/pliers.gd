@@ -1,5 +1,5 @@
-extends Node2D
 class_name Pliers
+extends Tool
 
 var playerReach: PlayerReach
 var signalerToLink: Node2D

@@ -1,12 +1,17 @@
 class_name PlayerHuds
 extends HBoxContainer
 
+var playerHandSets: Dictionary
+
 func ClearHud(side: String) -> void:
 	if side == "Left":
 		$LeftPlayerHud.get_child(0).queue_free()
 	elif side == "Right":
 		$RightPlayerHud.get_child(0).queue_free()
-
+		
+func AddItemToHands(instance: Player, hand, item) -> void:
+	playerHandSets[instance].AddItem(hand, item)
+	
 func ShowFlightControlOverlay(side: String) -> void:
 	var overlay = load("res://Overlays/FlightControl/flight_control_overlay.tscn").instantiate()
 	

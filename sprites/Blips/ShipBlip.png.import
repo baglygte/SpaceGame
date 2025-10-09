@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c00qebdxcdafy"
-path="res://.godot/imported/ShipBlip.png-3194e1d6617ea5cd7b1c82d16bdfd744.ctex"
+path="res://.godot/imported/ShipBlip.png-f7f68d22e3a42dae31a258d66f179b7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Blips/ShipBlip.png"
-dest_files=["res://.godot/imported/ShipBlip.png-3194e1d6617ea5cd7b1c82d16bdfd744.ctex"]
+source_file="res://Sprites/Blips/ShipBlip.png"
+dest_files=["res://.godot/imported/ShipBlip.png-f7f68d22e3a42dae31a258d66f179b7a.ctex"]
 
 [params]
 

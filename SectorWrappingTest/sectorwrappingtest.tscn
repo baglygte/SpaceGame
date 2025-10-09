@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://4dgqx6l5k0kp" path="res://SectorWrappingTest/testship.gd" id="2_3jxgj"]
 [ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="3_me61o"]
 [ext_resource type="Script" uid="uid://dee3kk0cylmdu" path="res://SectorWrappingTest/testrigidbody.gd" id="4_dfee4"]
-[ext_resource type="Texture2D" uid="uid://c00qebdxcdafy" path="res://sprites/Blips/ShipBlip.png" id="5_nlu5h"]
-[ext_resource type="Texture2D" uid="uid://bk3ssgoaro0n2" path="res://sprites/Sprite-0001.png" id="6_dqita"]
+[ext_resource type="Texture2D" uid="uid://c00qebdxcdafy" path="res://Sprites/Blips/ShipBlip.png" id="5_nlu5h"]
+[ext_resource type="Texture2D" path="res://sprites/Sprite-0001.png" id="6_dqita"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_1xbl2")

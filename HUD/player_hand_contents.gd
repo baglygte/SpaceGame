@@ -1,5 +1,5 @@
-extends HBoxContainer
 class_name PlayerHandContents
+extends Control
 
 func AddItem(hand: String, item) -> void:
 	var labelText
@@ -9,8 +9,8 @@ func AddItem(hand: String, item) -> void:
 	else:
 		labelText = item.name
 		
-	if hand == "LeftHand":
-		$LeftHand/Label.text = labelText
+	if hand == "OffHand":
+		$HBoxContainer/OffHand/Label.text = labelText
 	
-	if hand == "RightHand":
-		$RightHand/Label.text = labelText
+	if hand == "MainHand":
+		$HBoxContainer/MainHand/Label.text = labelText

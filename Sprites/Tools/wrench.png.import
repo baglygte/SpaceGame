@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvl16nx20cxen"
-path="res://.godot/imported/pliers.png-db9e71f962023ce2b2cd35a6872b1129.ctex"
+uid="uid://cgh0rwrlx4xmh"
+path="res://.godot/imported/wrench.png-5797b956139178fc72c4442ff00b86a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/pliers.png"
-dest_files=["res://.godot/imported/pliers.png-db9e71f962023ce2b2cd35a6872b1129.ctex"]
+source_file="res://Sprites/Tools/wrench.png"
+dest_files=["res://.godot/imported/wrench.png-5797b956139178fc72c4442ff00b86a8.ctex"]
 
 [params]
 

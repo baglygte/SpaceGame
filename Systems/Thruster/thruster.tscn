@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bt4wngy5qigs7"]
 
 [ext_resource type="Script" uid="uid://dx87tfcjg1fup" path="res://Systems/Thruster/thruster.gd" id="1_0hj6a"]
-[ext_resource type="Texture2D" uid="uid://fpaw53oftt7h" path="res://sprites/thruster.png" id="1_7bk4a"]
+[ext_resource type="Texture2D" uid="uid://fpaw53oftt7h" path="res://Sprites/thruster.png" id="1_7bk4a"]
 [ext_resource type="Script" uid="uid://dmgtkfejwsm0s" path="res://Sections/section_hover.gd" id="2_ymiq1"]
 [ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="3_xjhfb"]
 

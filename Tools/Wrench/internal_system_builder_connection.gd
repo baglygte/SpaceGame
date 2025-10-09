@@ -19,7 +19,7 @@ func PlaceHeldSystem(system, angle: float) -> void:
 	if system.has_method("OnPlace"):
 		system.OnPlace()
 		
-	$"..".get_parent().GetOtherHand().LoseItem()
+	$"..".mainHand.LoseItem()
 	
 func UpdatePreviewPosition(preview) -> void:
 	preview.position = GetPreviewPosition()

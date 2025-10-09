@@ -1,28 +1,26 @@
 class_name Wrench
-extends Node2D
+extends Tool
 
-var player: Player
 var ship: Ship
-var isEquipped := false
 @onready var systemPreview = $SystemPreview
-var otherHandItem
 
 func _ready() -> void:
-	ship = get_tree().get_first_node_in_group("Ship")
 	player = get_parent().get_parent()
+	mainHand = player.get_node("MainHand")
+	ship = get_tree().get_first_node_in_group("Ship")
 	$InternalSystemBuilderConnection.initialize()
 	$ExternalSystemBuilderConnection.initialize()
 
 func _process(_delta: float) -> void:
 	if !isEquipped:
 		return
-	
-	if otherHandItem == null:
+		
+	if mainHand.heldItem == null:
 		return
 	
-	if otherHandItem.is_in_group("InternalSystem"):
+	if mainHand.heldItem.is_in_group("InternalSystem"):
 		$InternalSystemBuilderConnection.UpdatePreviewPosition(systemPreview)
-	elif otherHandItem.is_in_group("ExternalSystem"):
+	elif mainHand.heldItem.is_in_group("ExternalSystem"):
 		$ExternalSystemBuilderConnection.UpdatePreviewPosition(systemPreview)
 
 func Equip() -> void:
@@ -35,9 +33,8 @@ func Equip() -> void:
 	systemPreview.show()
 	systemPreview.rotation = 0
 	
-	var otherHand = get_parent().GetOtherHand()
-	otherHand.itemWasPickedUp.connect(UpdatePickedItem)
-	otherHand.itemWasDropped.connect(UpdatePickedItem)
+	mainHand.itemWasPickedUp.connect(UpdatePickedItem)
+	mainHand.itemWasDropped.connect(UpdatePickedItem)
 	UpdatePickedItem()
 	
 func SetPreviewShaderColor(isSystemPositionValid: bool) -> void:
@@ -58,25 +55,23 @@ func Unequip() -> void:
 	
 	systemPreview.reparent(self)
 	systemPreview.hide()
-	
-	var otherHand = get_parent().GetOtherHand()
-	otherHand.itemWasPickedUp.disconnect(UpdatePickedItem)
-	otherHand.itemWasDropped.disconnect(UpdatePickedItem)
+
+	mainHand.itemWasPickedUp.disconnect(UpdatePickedItem)
+	mainHand.itemWasDropped.disconnect(UpdatePickedItem)
 
 func UpdatePickedItem() -> void:
-	otherHandItem = get_parent().GetOtherHand().heldItem
 	systemPreview.rotation = 0
 	UpdatePreviewTexture()
 
 func Use() -> void:
-	if otherHandItem == null:
+	if mainHand.heldItem == null:
 		PickUpSystem()
 		return
 	
-	if otherHandItem.is_in_group("InternalSystem"):
-		$InternalSystemBuilderConnection.PlaceHeldSystem(otherHandItem, systemPreview.rotation)
-	elif otherHandItem.is_in_group("ExternalSystem"):
-		$ExternalSystemBuilderConnection.PlaceHeldSystem(otherHandItem, systemPreview.rotation)
+	if mainHand.heldItem.is_in_group("InternalSystem"):
+		$InternalSystemBuilderConnection.PlaceHeldSystem(mainHand.heldItem, systemPreview.rotation)
+	elif mainHand.heldItem.is_in_group("ExternalSystem"):
+		$ExternalSystemBuilderConnection.PlaceHeldSystem(mainHand.heldItem, systemPreview.rotation)
 
 func RotateSystem() -> void:
 	systemPreview.rotate(PI/2)
@@ -87,9 +82,9 @@ func PickUpSystem() -> void:
 func UpdatePreviewTexture() -> void:
 	var textureToGet: Texture = null
 	
-	if otherHandItem == null:
+	if mainHand.heldItem == null:
 		textureToGet = null
 	else:
-		textureToGet = otherHandItem.get_node("Sprite2D").texture
+		textureToGet = mainHand.heldItem.get_node("Sprite2D").texture
 	
 	systemPreview.get_child(0).texture = textureToGet

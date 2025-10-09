@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://b1w3l8uc6nh2h"]
 
 [ext_resource type="Script" uid="uid://b80ql3n383i7" path="res://Systems/GrabberArm/grabber_arm.gd" id="1_3ulfp"]
-[ext_resource type="Texture2D" uid="uid://d0wtlxroshbfb" path="res://sprites/grabberHand.png" id="2_42i7w"]
-[ext_resource type="Texture2D" uid="uid://h6x88fm4noye" path="res://sprites/grabberArm.png" id="2_vqv8o"]
+[ext_resource type="Texture2D" uid="uid://d0wtlxroshbfb" path="res://Sprites/grabberHand.png" id="2_42i7w"]
+[ext_resource type="Texture2D" uid="uid://h6x88fm4noye" path="res://Sprites/grabberArm.png" id="2_vqv8o"]
 [ext_resource type="Script" uid="uid://c52pdvklcahfb" path="res://Player/player_reach.gd" id="3_42i7w"]
-[ext_resource type="Texture2D" uid="uid://0pmfkmmgftnw" path="res://sprites/gun.png" id="3_fyybk"]
+[ext_resource type="Texture2D" uid="uid://0pmfkmmgftnw" path="res://Sprites/gun.png" id="3_fyybk"]
 [ext_resource type="Script" uid="uid://dmgtkfejwsm0s" path="res://Sections/section_hover.gd" id="4_bwbso"]
 [ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="5_w52l3"]
 [ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="6_067bv"]

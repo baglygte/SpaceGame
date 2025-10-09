@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bni87pxm27ttb" path="res://Overlays/SectorMap/sector_map_overlay.tscn" id="1_12q5g"]
 [ext_resource type="Script" uid="uid://cqvcww1r2jyde" path="res://Overlays/gun_control_overlay.gd" id="1_64dpn"]
-[ext_resource type="Texture2D" uid="uid://uygg8bqdqq0a" path="res://sprites/Blips/GunPointer.png" id="2_5bxlj"]
+[ext_resource type="Texture2D" uid="uid://uygg8bqdqq0a" path="res://Sprites/Blips/GunPointer.png" id="2_5bxlj"]
 
 [node name="GunControlOverlay" type="Control"]
 layout_mode = 3
