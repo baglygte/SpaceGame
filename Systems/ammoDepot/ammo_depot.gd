@@ -30,7 +30,7 @@ func OnEnterExit(player: Player) -> void:
 		logNode.get_node("LogisticsDebugger").DrawHUD()
 
 func OnRightHand() -> void:
-	logNode.AddItem(recipes.Recipes["Main"])
+	logNode.AddItem(recipes.Recipes["SplitRocket"])
 
 func OnLeftHand() -> void:
 	logNode.RemoveItem()
