@@ -45,16 +45,10 @@ func NextStage() -> void:
 	if recipe == null: return
 	if stageCounter>=0: SpawnChildren()
 	stageCounter += 1
-	match stageCounter:
-		0: stage = recipe.stage0
-		1: stage = recipe.stage1
-		2: stage = recipe.stage2
-		3: stage = recipe.stage3
-		4: stage = recipe.stage4
-		5: stage = null
-	if stage==null:
+	if stageCounter>=recipe.stages.size():
 		Kill()
 		return
+	stage = recipe.stages[stageCounter]
 	$Timer.start(stage.time)
 	isHoming = stage.isHoming
 	velocityTerminal = stage.velocityTerminal

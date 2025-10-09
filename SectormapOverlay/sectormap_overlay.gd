@@ -20,7 +20,6 @@ func RemoveBlip(connection: SectorMapBlipConnector) -> void:
 	blipConnections.erase(connection)
 	
 func _process(_delta: float) -> void:
-	
 	for connection in blipConnections.keys():
 		var blip = blipConnections[connection]
 		if blip.blipType =="GunLockOn":

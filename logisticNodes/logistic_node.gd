@@ -23,44 +23,50 @@ func Propagate(giveortake: bool) -> void:
 				target.giveTo = self
 				target.giveToFinal = giveToFinal
 				target.giveDistance = giveDistance + 1
-			if target.giveDistance>giveDistance:
-				target.Activate()
+			if (target.giveToFinal == giveToFinal) && (target.giveDistance == giveDistance + 1):
+				target.ActivateGive()
 		else:
 			if (target.takeFromFinal != takeFromFinal) || (target.takeDistance>takeDistance+1):
 				target.takeFrom = self
 				target.takeFromFinal = takeFromFinal
 				target.takeDistance = takeDistance + 1
-			if target.takeDistance>takeDistance:
-				target.Activate()
+			if (target.takeFromFinal == takeFromFinal) && (target.takeDistance == takeDistance + 1):
+				target.ActivateTake()
 	$Timer.start(time)
 
-func Activate() -> void:
+func ActivateGive() -> void:
 	if giveTo != null:
 		if (store[storeOutputIndex] != null) && (giveTo.store[giveTo.storeInputIndex] == null):
 			giveTo.store[giveTo.storeInputIndex] = store[storeOutputIndex]
 			giveTo.storeInputIndex = (giveTo.storeInputIndex + 1) % giveTo.store.size()
 			store[storeOutputIndex] = null
 			storeOutputIndex = (storeOutputIndex + 1) % store.size()
-			giveTo.Activate()
+			giveTo.ActivateGive()
 			if giveTo != null:  if giveTo.giveDistance == 0: giveTo.giveDistance = INF
 			giveTo = null
 			giveToFinal = null
 			giveDistance = INF
 		else:
 			Propagate(true)
+
+func ActivateTake() -> void:
 	if takeFrom != null:
 		if (store[storeInputIndex] == null) && (takeFrom.store[takeFrom.storeOutputIndex] != null):
 			store[storeInputIndex] = takeFrom.store[takeFrom.storeOutputIndex]
 			storeInputIndex = (storeInputIndex + 1) % store.size()
 			takeFrom.store[takeFrom.storeOutputIndex] = null
 			takeFrom.storeOutputIndex = (takeFrom.storeOutputIndex + 1) % takeFrom.store.size()
-			takeFrom.Activate()
+			takeFrom.ActivateGive()
 			if takeFrom != null:  if takeFrom.takeDistance == 0: takeFrom.takeDistance = INF
 			takeFrom = null
 			takeFromFinal = null
 			takeDistance = INF
 		else:
 			Propagate(false)
+
+func Activate() -> void:
+	ActivateGive()
+	ActivateTake()
 
 func AddConnection(target) -> void:
 	var index = connections.find(target)
