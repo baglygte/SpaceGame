@@ -12,7 +12,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6nwi0"]
 
-[node name="ControlSeat" type="Node2D" groups=["InternalSystem", "MustBeSaved", "PliersCanEdit"]]
+[node name="ControlSeat" type="Node2D" groups=["InternalSystem", "MustBeSaved"]]
 script = ExtResource("1_uw5wt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -27,11 +27,11 @@ shape = SubResource("RectangleShape2D_uw5wt")
 
 [node name="SignalEmitter" parent="." instance=ExtResource("5_yoneg")]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
 script = ExtResource("5_47y8b")
 hoverFilter = Array[String](["Wrench", "Pliers"])
 hoverArea = NodePath("../HoverArea")
-spriteToShade = NodePath("../Sprite2D")
+spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"
 
 [node name="HoverArea" type="Area2D" parent="."]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb8xy6b74lxtc"
-path="res://.godot/imported/toolWheelSlot.png-4532b0b185d3f984a9e3096ab9aee476.ctex"
+uid="uid://cngtyjgtb2s30"
+path="res://.godot/imported/toolWheelSlot.png-98d6a3f26937d2cfe18648889e8615b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/toolWheelSlot.png"
-dest_files=["res://.godot/imported/toolWheelSlot.png-4532b0b185d3f984a9e3096ab9aee476.ctex"]
+source_file="res://Sprites/UI/toolWheelSlot.png"
+dest_files=["res://.godot/imported/toolWheelSlot.png-98d6a3f26937d2cfe18648889e8615b2.ctex"]
 
 [params]
 

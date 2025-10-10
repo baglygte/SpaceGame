@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehu3e"]
 size = Vector2(22, 26)
 
-[node name="FlightControl" type="Node2D" groups=["HammerCanEdit", "InternalSystem", "MustBeSaved", "PliersCanEdit"]]
+[node name="FlightControl" type="Node2D" groups=["InternalSystem", "MustBeSaved"]]
 script = ExtResource("1_ehu3e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -21,9 +21,9 @@ shape = SubResource("RectangleShape2D_ehu3e")
 
 [node name="SignalReceiver" parent="." instance=ExtResource("5_dk1d5")]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
 script = ExtResource("4_1ywjk")
 hoverFilter = Array[String](["Wrench", "Pliers"])
 hoverArea = NodePath("../hoverRegion")
-spriteToShade = NodePath("../Sprite2D")
+spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"

@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="10_uxwsy"]
 
 [node name="GameWorld" type="SubViewport"]
+use_hdr_2d = true
 script = ExtResource("1_fk3ie")
 
 [node name="Ship" type="RigidBody2D" parent="." groups=["Ship"]]

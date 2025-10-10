@@ -3,15 +3,11 @@ extends Node
 
 @export var hoverFilter: Array[String]
 @export var hoverArea: Area2D
-@export var spriteToShade: Node
+@export var spriteToModulate: Sprite2D
 
 var hoverRequesters: Array[PlayerReach]
 
-func _ready():
-	spriteToShade.material = ShaderMaterial.new()
-	spriteToShade.material.shader = preload("res://section_preview.gdshader")
-	spriteToShade.material.set("shader_parameter/shadedColor", Vector4(255,255,255,1))
-	
+func _ready():	
 	hoverArea.area_entered.connect(RequestHover)
 	hoverArea.area_exited.connect(UnrequestHover)
 
@@ -34,10 +30,7 @@ func UnrequestHover(area: Area2D) -> void:
 	ToggleShader()
 	
 func ToggleShader() -> void:
-	var shadedColor
 	if hoverRequesters.size() > 0:
-		shadedColor = Vector4(0,255,0,1)
+		spriteToModulate.modulate = Color(0.914, 1.353, 0.793, 1.0)
 	else:
-		shadedColor = Vector4(255,255,0,1)
-		
-	spriteToShade.material.set("shader_parameter/shadedColor", shadedColor)
+		spriteToModulate.modulate = Color(1,1,1,1)

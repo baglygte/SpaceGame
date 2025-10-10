@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=9 format=3 uid="uid://b6d5ttlwacwny"]
 
 [ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
 [ext_resource type="Script" uid="uid://b8dweplwcbn40" path="res://GameScenes/player_huds.gd" id="4_i5gbp"]
 [ext_resource type="PackedScene" uid="uid://d0xa3n8ogb0wy" path="res://GameScenes/game_world.tscn" id="5_55g6r"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
 [ext_resource type="Script" uid="uid://61tdi4g8q3rx" path="res://Audio/sound_system.gd" id="15_6ce2g"]
+
+[sub_resource type="Gradient" id="Gradient_55g6r"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_55g6r"]
+gradient = SubResource("Gradient_55g6r")
+
+[sub_resource type="Environment" id="Environment_55g6r"]
+background_mode = 3
+glow_enabled = true
+glow_normalized = true
+adjustment_color_correction = SubResource("GradientTexture1D_55g6r")
 
 [node name="Game" type="Node"]
 
@@ -34,6 +46,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HUD/PlayerViewports/LeftPlayerView"]
 handle_input_locally = false
+use_hdr_2d = true
 size = Vector2i(638, 720)
 render_target_update_mode = 4
 
@@ -44,6 +57,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HUD/PlayerViewports/RightPlayerView"]
 handle_input_locally = false
+use_hdr_2d = true
 size = Vector2i(638, 720)
 render_target_update_mode = 4
 
@@ -69,3 +83,7 @@ script = ExtResource("15_6ce2g")
 metadata/_custom_type_script = "uid://61tdi4g8q3rx"
 
 [node name="GameWorld" parent="." instance=ExtResource("5_55g6r")]
+use_hdr_2d = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_55g6r")

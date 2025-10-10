@@ -3,11 +3,38 @@
 [ext_resource type="Texture2D" uid="uid://dvl16nx20cxen" path="res://Sprites/Tools/pliers.png" id="1_8v1ni"]
 [ext_resource type="Shader" uid="uid://bw6vrksnp0ctm" path="res://section_preview.gdshader" id="1_m33hk"]
 [ext_resource type="Script" uid="uid://7vf8x5kvj671" path="res://HUD/ToolWheel/tool_wheel_slot.gd" id="2_ilevq"]
-[ext_resource type="Texture2D" uid="uid://bb8xy6b74lxtc" path="res://Sprites/toolWheelSlot.png" id="2_m33hk"]
+[ext_resource type="Texture2D" uid="uid://cngtyjgtb2s30" path="res://Sprites/UI/toolWheelSlot.png" id="3_ilevq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2tfm7"]
 shader = ExtResource("1_m33hk")
 shader_parameter/shadedColor = Vector4(255, 255, 255, 0.1)
+
+[sub_resource type="Animation" id="Animation_ilevq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_0p5e5"]
 resource_name = "appear"
@@ -37,33 +64,6 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(0, -50)]
 }
 
-[sub_resource type="Animation" id="Animation_ilevq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mknnn"]
 _data = {
 &"RESET": SubResource("Animation_ilevq"),
@@ -79,7 +79,7 @@ size_flags_vertical = 4
 script = ExtResource("2_ilevq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_m33hk")
+texture = ExtResource("3_ilevq")
 hframes = 2
 
 [node name="TextureRect" type="Sprite2D" parent="Sprite2D"]

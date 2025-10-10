@@ -19,7 +19,7 @@ initial_velocity_min = 109.45
 initial_velocity_max = 195.65999
 gravity = Vector3(0, 0, 0)
 
-[node name="Thruster" type="Node2D" groups=["ExternalSystem", "HammerCanEdit", "MustBeSaved", "PliersCanEdit"]]
+[node name="Thruster" type="Node2D" groups=["ExternalSystem", "MustBeSaved"]]
 script = ExtResource("1_0hj6a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -37,9 +37,9 @@ amount = 100
 lifetime = 0.29000000000000004
 process_material = SubResource("ParticleProcessMaterial_0hj6a")
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
 script = ExtResource("3_xjhfb")
 hoverFilter = Array[String](["Wrench", "Pliers"])
 hoverArea = NodePath("../hoverRegion")
-spriteToShade = NodePath("../Sprite2D")
+spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"

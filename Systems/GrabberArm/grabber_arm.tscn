@@ -38,7 +38,7 @@ modifications/0 = SubResource("SkeletonModification2DCCDIK_vqv8o")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbmh6"]
 size = Vector2(60, 41)
 
-[node name="GrabberArm" type="Node2D" groups=["ExternalSystem", "HammerCanEdit", "MustBeSaved", "PliersCanEdit"]]
+[node name="GrabberArm" type="Node2D" groups=["ExternalSystem", "MustBeSaved"]]
 script = ExtResource("1_3ulfp")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
@@ -114,9 +114,9 @@ shape = SubResource("RectangleShape2D_fbmh6")
 
 [node name="SignalReceiver" parent="." instance=ExtResource("6_067bv")]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
 script = ExtResource("7_vqv8o")
 hoverFilter = Array[String](["Wrench", "Pliers"])
 hoverArea = NodePath("../hoverRegion")
-spriteToShade = NodePath("../Sprite2D")
+spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"

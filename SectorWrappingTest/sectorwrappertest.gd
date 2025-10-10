@@ -20,7 +20,7 @@ func _ready() -> void:
 			sectorBank[Vector2i(x,y)] = []
 			childrenToRemove[Vector2i(x,y)] = []
 	
-	$Sprite2D2.apply_central_force(Vector2(5000,0))
+	#$Sprite2D2.
 
 #func _physics_process(_delta: float) -> void:
 
@@ -67,10 +67,11 @@ func ScheduleForBanking(node) -> void:
 	var skrtSector = Vector2i(int(modXPos / sectorSize), int(modYPos / sectorSize))
 	
 	var sectorToBankInto = GetWrappedSector(skrtSector)
-	print("Will bank into: " + str(sectorToBankInto))
+	#print("Will bank into: " + str(sectorToBankInto))
 	var newPosition: Vector2
 	newPosition.x = fposmod(node.position.x, sectorSize)
 	newPosition.y = fposmod(node.position.y, sectorSize)
+	
 	
 	if node is RigidBody2D:
 		PhysicsServer2D.body_set_state(node.get_rid(),
@@ -96,13 +97,15 @@ func ReleaseNodes() -> void:
 			var nodes = sectorBank[sectorToRelease]
 			var node = nodes[0]
 			
-			var newPosition = sectorDelta * sectorSize
+			var newPosition = (globalSector + sectorDelta) * sectorSize
+			
 			sectorBank[sectorToRelease].remove_at(0)
+			
 			add_child(node)
 			
 			if node is RigidBody2D:
 				PhysicsServer2D.body_set_state(node.get_rid(),
 				PhysicsServer2D.BODY_STATE_TRANSFORM,
-				Transform2D.IDENTITY.translated(Vector2(-500,0)))
+				Transform2D.IDENTITY.translated(newPosition))
 			else:
-				node.position += newPosition
+				node.position = newPosition

@@ -8,7 +8,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gq08n"]
 
-[node name="AmmoDepot" type="Node2D" groups=["InternalSystem", "MustBeSaved", "PliersCanEdit"]]
+[node name="AmmoDepot" type="Node2D" groups=["InternalSystem", "MustBeSaved"]]
 script = ExtResource("1_x2mpc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -22,9 +22,9 @@ shape = SubResource("RectangleShape2D_gq08n")
 
 [node name="SignalEmitter" parent="." instance=ExtResource("5_brj2c")]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
 script = ExtResource("5_nhgw0")
 hoverFilter = Array[String](["Wrench", "Pliers"])
 hoverArea = NodePath("../interactiveRegion")
-spriteToShade = NodePath("../Sprite2D")
+spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"

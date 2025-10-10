@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://lidgdiifqmxt"]
+[gd_scene load_steps=8 format=3 uid="uid://lidgdiifqmxt"]
 
 [ext_resource type="Script" uid="uid://yf1fltjmpf40" path="res://SectorWrappingTest/sectorwrappertest.gd" id="1_1xbl2"]
 [ext_resource type="Script" uid="uid://4dgqx6l5k0kp" path="res://SectorWrappingTest/testship.gd" id="2_3jxgj"]
 [ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="3_me61o"]
 [ext_resource type="Script" uid="uid://dee3kk0cylmdu" path="res://SectorWrappingTest/testrigidbody.gd" id="4_dfee4"]
 [ext_resource type="Texture2D" uid="uid://c00qebdxcdafy" path="res://Sprites/Blips/ShipBlip.png" id="5_nlu5h"]
-[ext_resource type="Texture2D" path="res://sprites/Sprite-0001.png" id="6_dqita"]
+[ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://Sprites/sectionPreview.png" id="6_dqita"]
+[ext_resource type="Texture2D" uid="uid://bocyl0yugqfsv" path="res://Sprites/UI/hand.png" id="7_ox3r6"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_1xbl2")
@@ -41,7 +42,12 @@ offset_right = 350.0
 offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.563, 1.563)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("6_dqita")
 stretch_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["test"]]
+visible = false
+texture = ExtResource("7_ox3r6")
