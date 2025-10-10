@@ -64,6 +64,8 @@ func UpdatePreviewTexture() -> void:
 
 func Equip() -> void:
 	isEquipped = true
+	hide()
+	
 	player = get_parent().get_parent()
 	player.get_node("PlayerReach").AddHoverGroup("HammerCanEdit")
 	sectionPreview.reparent(ship)
@@ -76,6 +78,8 @@ func Equip() -> void:
 	
 func Unequip() -> void:
 	isEquipped = false
+	show()
+	
 	sectionPreview.hide()
 	player.get_node("PlayerReach").RemoveHoverGroup("HammerCanEdit")
 	player = null

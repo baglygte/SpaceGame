@@ -13,7 +13,6 @@ func _ready() -> void:
 	add_child(logNode)
 	logNode.store.resize(5)
 	logNode.itemType = "Rockets"
-	recipes = get_tree().get_first_node_in_group("RocketRecipes")
 
 func OnConnection(target) -> void:
 	if not "logNode" in target: return
@@ -30,6 +29,7 @@ func OnEnterExit(player: Player) -> void:
 		logNode.get_node("LogisticsDebugger").DrawHUD()
 
 func OnRightHand() -> void:
+	recipes = get_tree().get_first_node_in_group("RocketRecipes")
 	logNode.AddItem(recipes.Recipes["SplitRocket"])
 
 func OnLeftHand() -> void:

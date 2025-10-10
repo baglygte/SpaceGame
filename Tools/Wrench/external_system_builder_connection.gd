@@ -34,7 +34,7 @@ func PlaceHeldSystem(system, angle: float) -> void:
 	
 	externalSystemBuilder.AddSystemAtPosition(system, previewPosition, angle)	
 	
-	$"..".get_parent().GetOtherHand().LoseItem()
+	$"..".mainHand.LoseItem()
 
 func UpdatePreviewPosition(preview) -> void:
 	preview.position = GetPreviewPosition()

@@ -25,6 +25,7 @@ func _process(_delta: float) -> void:
 
 func Equip() -> void:
 	isEquipped = true
+	hide()
 	
 	player.get_node("PlayerReach").AddHoverGroup("InternalSystem")
 	player.get_node("PlayerReach").AddHoverGroup("ExternalSystem")
@@ -49,6 +50,7 @@ func SetPreviewShaderColor(isSystemPositionValid: bool) -> void:
 
 func Unequip() -> void:
 	isEquipped = false
+	show()
 	
 	player.get_node("PlayerReach").RemoveHoverGroup("InternalSystem")
 	player.get_node("PlayerReach").RemoveHoverGroup("ExternalSystem")

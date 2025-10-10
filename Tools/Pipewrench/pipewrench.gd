@@ -1,4 +1,4 @@
-class_name Pliers
+class_name Pipewrench
 extends Tool
 
 var playerReach: PlayerReach
