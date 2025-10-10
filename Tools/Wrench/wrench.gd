@@ -8,6 +8,7 @@ func _ready() -> void:
 	player = get_parent().get_parent()
 	mainHand = player.get_node("MainHand")
 	ship = get_tree().get_first_node_in_group("Ship")
+	hoverName = "Wrench"
 	$InternalSystemBuilderConnection.initialize()
 	$ExternalSystemBuilderConnection.initialize()
 

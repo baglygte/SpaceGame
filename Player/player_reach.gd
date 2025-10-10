@@ -3,9 +3,8 @@ extends Area2D
 
 var hoverGroups: Array
 
-func _ready() -> void:
-	area_entered.connect(AreaEntered)
-	area_exited.connect(AreaExited)
+func WhatIsRequestingHover() -> String:
+	return $"../OffHand".GetToolHoverFilter()
 
 func AddHoverGroup(groupName: String) -> void:
 	if groupName in hoverGroups:

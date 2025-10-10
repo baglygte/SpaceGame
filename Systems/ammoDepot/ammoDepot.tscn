@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cglykfnvpu2oe" path="res://Systems/AmmoDepot/ammo_depot.gd" id="1_x2mpc"]
 [ext_resource type="Texture2D" uid="uid://dlgqxk7hyte2d" path="res://Sprites/ammoDepot.png" id="2_r7q0t"]
 [ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_r7q0t"]
-[ext_resource type="PackedScene" uid="uid://c21tu7qhdabiw" path="res://editable_hover.tscn" id="4_crpqi"]
 [ext_resource type="PackedScene" uid="uid://clla0hc44fhq5" path="res://signal_emitter.tscn" id="5_brj2c"]
+[ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="5_nhgw0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gq08n"]
 
@@ -20,6 +20,11 @@ script = ExtResource("3_r7q0t")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactiveRegion"]
 shape = SubResource("RectangleShape2D_gq08n")
 
-[node name="editableHover" parent="." instance=ExtResource("4_crpqi")]
-
 [node name="SignalEmitter" parent="." instance=ExtResource("5_brj2c")]
+
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
+script = ExtResource("5_nhgw0")
+hoverFilter = Array[String](["Wrench", "Pliers"])
+hoverArea = NodePath("../interactiveRegion")
+spriteToShade = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://cklwast5n2502"

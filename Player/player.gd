@@ -5,7 +5,6 @@ const SPEED = 100.0
 var canMove := true
 var viewSide := "Left"
 var toolWheel: ToolWheel
-#var camera: Camera2D
 
 func ShowWheel():
 	if toolWheel == null:

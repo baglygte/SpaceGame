@@ -29,7 +29,6 @@ version_control/autoload_on_startup=true
 
 HammerCanEdit=""
 PliersCanEdit=""
-Tool=""
 Hoverable=""
 signaler=""
 Ship=""

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://fpp0o0nvk1sq" path="res://Tools/Pipewrench/pipewrench.gd" id="1_aa3ie"]
 [ext_resource type="Texture2D" uid="uid://xaftuofdqghq" path="res://Sprites/Tools/pipewrench.png" id="2_5psfq"]
 
-[node name="Pipewrench" type="Node2D" groups=["Tool"]]
+[node name="Pipewrench" type="Node2D"]
 script = ExtResource("1_aa3ie")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

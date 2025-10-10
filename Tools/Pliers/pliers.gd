@@ -14,6 +14,7 @@ func _process(_delta: float) -> void:
 		
 func _ready() -> void:
 	playerReach = get_parent().get_parent().get_node("PlayerReach")
+	hoverName = "Pliers"
 	
 func Equip() -> void:
 	hide()

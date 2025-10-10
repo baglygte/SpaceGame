@@ -20,7 +20,6 @@ func AddSectionAtPosition(section, positionToGet: Vector2, rotationToGet: float)
 	$WallBuilder.UpdateExternalWalls()
 	
 	$"..".center_of_mass = GetCenterOfMass()
-	$"../Node2D".position = $"..".center_of_mass
 	
 	var distance: float = ($"..".center_of_mass - section.position).length()
 	$"..".inertia += section.mass * pow(distance,2)

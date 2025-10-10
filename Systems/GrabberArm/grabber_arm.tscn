@@ -1,13 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1w3l8uc6nh2h"]
+[gd_scene load_steps=12 format=3 uid="uid://b1w3l8uc6nh2h"]
 
 [ext_resource type="Script" uid="uid://b80ql3n383i7" path="res://Systems/GrabberArm/grabber_arm.gd" id="1_3ulfp"]
 [ext_resource type="Texture2D" uid="uid://d0wtlxroshbfb" path="res://Sprites/grabberHand.png" id="2_42i7w"]
 [ext_resource type="Texture2D" uid="uid://h6x88fm4noye" path="res://Sprites/grabberArm.png" id="2_vqv8o"]
 [ext_resource type="Script" uid="uid://c52pdvklcahfb" path="res://Player/player_reach.gd" id="3_42i7w"]
 [ext_resource type="Texture2D" uid="uid://0pmfkmmgftnw" path="res://Sprites/gun.png" id="3_fyybk"]
-[ext_resource type="Script" uid="uid://dmgtkfejwsm0s" path="res://Sections/section_hover.gd" id="4_bwbso"]
-[ext_resource type="Texture2D" uid="uid://brqega3intb1r" path="res://icon.svg" id="5_w52l3"]
 [ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="6_067bv"]
+[ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="7_vqv8o"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_vqv8o"]
 target_nodepath = NodePath("../ArmEnd")
@@ -108,16 +107,16 @@ position = Vector2(56, 107)
 texture = ExtResource("3_fyybk")
 
 [node name="hoverRegion" type="Area2D" parent="."]
-script = ExtResource("4_bwbso")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hoverRegion"]
 position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_fbmh6")
 
-[node name="Sprite2D2" type="Sprite2D" parent="hoverRegion"]
-visible = false
-position = Vector2(0.50000095, -0.50000095)
-scale = Vector2(0.0703125, 0.07031251)
-texture = ExtResource("5_w52l3")
-
 [node name="SignalReceiver" parent="." instance=ExtResource("6_067bv")]
+
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
+script = ExtResource("7_vqv8o")
+hoverFilter = Array[String](["Wrench", "Pliers"])
+hoverArea = NodePath("../hoverRegion")
+spriteToShade = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://cklwast5n2502"

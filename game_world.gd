@@ -23,12 +23,12 @@ func _ready() -> void:
 			#var instance = load("res://Enemies/dabox.tscn").instantiate()
 			#add_child(instance)
 			#instance.position = Vector2(j,i)
-	add_child(load("res://Rockets/Recipes/rocket_recipes.tscn").instantiate())
+	#add_child(load("res://Rockets/Recipes/rocket_recipes.tscn").instantiate())
 	
-	$ContainedItemCreator.SpawnItemInWorld(load("res://Items/ball.tscn").instantiate(), Vector2(-50,200))
-	var instance = load("res://Enemies/dabox.tscn").instantiate()
-	add_child(instance)
-	instance.position = Vector2(2000,2000)
+	#$ContainedItemCreator.SpawnItemInWorld(load("res://Items/ball.tscn").instantiate(), Vector2(-50,200))
+	#var instance = load("res://Enemies/dabox.tscn").instantiate()
+	#add_child(instance)
+	#instance.position = Vector2(2000,2000)
 	
 func StartGameScene() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")

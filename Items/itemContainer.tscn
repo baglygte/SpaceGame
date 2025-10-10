@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://rkvsx7yyajhh" path="res://Items/itemContainer.gd" id="1_yc5jj"]
 [ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="2_fhy34"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_y0e62"]
-radius = 12.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhy34"]
 
 [node name="itemContainer" type="Node2D" groups=["CanPickUp"]]
 script = ExtResource("1_yc5jj")
@@ -27,23 +26,14 @@ pivot_offset = Vector2(12, 12)
 layout_mode = 2
 expand_mode = 1
 
-[node name="Area2D" type="Area2D" parent="." groups=["Hoverable"]]
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
 script = ExtResource("2_fhy34")
+hoverFilter = Array[String](["Hands", "Pliers", "Hammer", "Wrench", "Pipewrench"])
+hoverArea = NodePath("../Area2D")
+spriteToShade = NodePath("../PanelContainer/TextureRect")
+metadata/_custom_type_script = "uid://cklwast5n2502"
+
+[node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_y0e62")
-
-[node name="Label" type="Label" parent="Area2D"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.0
-offset_top = -11.5
-offset_right = 28.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Pick up"
+shape = SubResource("RectangleShape2D_fhy34")

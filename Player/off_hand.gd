@@ -22,4 +22,10 @@ func UseHeldTool():
 
 func UpdateHud() -> void:
 	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
-	playerHuds.AddItemToHands(get_parent(), name, heldTool)
+	playerHuds.AddItemToHands(get_parent(), name, heldTool.get_node("Sprite2D").texture)
+
+func GetToolHoverFilter() -> String:
+	if heldTool == null:
+		return "Hands"
+
+	return heldTool.hoverName

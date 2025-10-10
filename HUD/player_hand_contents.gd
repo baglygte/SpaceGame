@@ -1,16 +1,16 @@
 class_name PlayerHandContents
 extends Control
 
-func AddItem(hand: String, item) -> void:
-	var labelText
-	
-	if item == null:
-		labelText = "empty"
-	else:
-		labelText = item.name
-		
+func AddItem(hand: String, itemTexture: Texture) -> void:
 	if hand == "OffHand":
-		$HBoxContainer/OffHand/Label.text = labelText
+		$HBoxContainer/OffHand/HeldTool.texture = itemTexture
 	
 	if hand == "MainHand":
-		$HBoxContainer/MainHand/Label.text = labelText
+		$HBoxContainer/MainHand/HeldItem.texture = itemTexture
+
+func RemoveItem(hand: String) -> void:
+	if hand == "OffHand":
+		$HBoxContainer/OffHand/HeldTool.texture = null
+	
+	if hand == "MainHand":
+		$HBoxContainer/MainHand/HeldItem.texture = null

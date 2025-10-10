@@ -48,7 +48,8 @@ func PutItemIntoHand(item) -> void:
 	
 	itemWasPickedUp.emit()
 	
-	UpdateHud()
+	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
+	playerHuds.AddItemToHands(get_parent(), name, heldItem.get_node("Sprite2D").texture)
 	#
 func Drop() -> void:
 	if heldItem == null:
@@ -58,10 +59,6 @@ func Drop() -> void:
 	creator.SpawnItemInShip(heldItem, global_position)
 	
 	LoseItem()
-#
-func UpdateHud() -> void:
-	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
-	playerHuds.AddItemToHands(get_parent(), name, heldItem)
 
 func LoseItem() -> void:
 	heldItem.show()
@@ -76,4 +73,5 @@ func LoseItem() -> void:
 	
 	itemWasDropped.emit()
 	
-	UpdateHud()
+	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
+	playerHuds.RemoveItemFromHands(get_parent(), name)

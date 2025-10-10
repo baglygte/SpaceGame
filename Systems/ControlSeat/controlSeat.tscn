@@ -1,17 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://41dy2fh6uvup"]
+[gd_scene load_steps=9 format=3 uid="uid://41dy2fh6uvup"]
 
 [ext_resource type="Texture2D" uid="uid://bdgleq1jjl0s5" path="res://Sprites/controlSeat.png" id="1_suegr"]
 [ext_resource type="Script" uid="uid://cu0fs5qhfrl2w" path="res://Systems/ControlSeat/control_seat.gd" id="1_uw5wt"]
 [ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_14183"]
-[ext_resource type="PackedScene" uid="uid://c21tu7qhdabiw" path="res://editable_hover.tscn" id="4_c58h8"]
+[ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="5_47y8b"]
 [ext_resource type="PackedScene" uid="uid://clla0hc44fhq5" path="res://signal_emitter.tscn" id="5_yoneg"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yoneg"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uw5wt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nwi0"]
 
 [node name="ControlSeat" type="Node2D" groups=["InternalSystem", "MustBeSaved", "PliersCanEdit"]]
 script = ExtResource("1_uw5wt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yoneg")
 texture = ExtResource("1_suegr")
 
 [node name="interactiveRegion" type="Area2D" parent="."]
@@ -20,6 +25,16 @@ script = ExtResource("3_14183")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactiveRegion"]
 shape = SubResource("RectangleShape2D_uw5wt")
 
-[node name="editableHover" parent="." instance=ExtResource("4_c58h8")]
-
 [node name="SignalEmitter" parent="." instance=ExtResource("5_yoneg")]
+
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToShade")]
+script = ExtResource("5_47y8b")
+hoverFilter = Array[String](["Wrench", "Pliers"])
+hoverArea = NodePath("../HoverArea")
+spriteToShade = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://cklwast5n2502"
+
+[node name="HoverArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
+shape = SubResource("RectangleShape2D_6nwi0")

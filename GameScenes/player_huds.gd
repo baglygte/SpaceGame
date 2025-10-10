@@ -19,8 +19,11 @@ func SetActiveOverlay(side: String, overlay):
 		$RightPlayerHud.add_child(overlay)
 		activeOverlayRight = overlay
 	
-func AddItemToHands(instance: Player, hand, item) -> void:
-	playerHandSets[instance].AddItem(hand, item)
+func AddItemToHands(player: Player, hand, item) -> void:
+	playerHandSets[player].AddItem(hand, item)
+	
+func RemoveItemFromHands(player: Player, hand) -> void:
+	playerHandSets[player].RemoveItem(hand)
 	
 func ShowFlightControlOverlay(side: String) -> void:
 	var overlay = load("res://Overlays/FlightControl/flight_control_overlay.tscn").instantiate()

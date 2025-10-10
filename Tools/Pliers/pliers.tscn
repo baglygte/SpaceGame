@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cqegq08rwb05o" path="res://Tools/Pliers/pliers.gd" id="2_ke2bu"]
 [ext_resource type="Texture2D" uid="uid://dvl16nx20cxen" path="res://Sprites/Tools/pliers.png" id="3_fkqf4"]
 
-[node name="Pliers" type="Node2D" groups=["Tool"]]
+[node name="Pliers" type="Node2D"]
 script = ExtResource("2_ke2bu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

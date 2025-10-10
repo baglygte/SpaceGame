@@ -20,6 +20,7 @@ func _ready() -> void:
 	mainHand = player.get_node("MainHand")
 	ship = get_tree().get_first_node_in_group("Ship")
 	sectionBuilder = ship.get_node("SectionBuilder")
+	hoverName = "Hammer"
 
 func _process(_delta: float) -> void:
 	if !isEquipped:

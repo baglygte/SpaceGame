@@ -11,7 +11,7 @@
 shader = ExtResource("3_vjkkf")
 shader_parameter/shadedColor = Vector4(0, 0, 0, 0)
 
-[node name="Wrench" type="Node2D" groups=["Tool"]]
+[node name="Wrench" type="Node2D"]
 script = ExtResource("1_mt1rw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
