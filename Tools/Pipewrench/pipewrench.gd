@@ -4,7 +4,7 @@ extends Tool
 var playerReach: PlayerReach
 var signalerToLink: Node2D
 var line: Line2D
-const lineScene = preload("res://Tools/Pliers/line_2d.tscn")
+const lineScene = preload("res://Tools/Pipewrench/line_2d.tscn")
 	
 func _process(_delta: float) -> void:
 	if line == null:
@@ -18,14 +18,14 @@ func _ready() -> void:
 	
 func Equip() -> void:
 	hide()
-	playerReach.AddHoverGroup("PliersCanEdit")
+	playerReach.AddHoverGroup("PipewrenchCanEdit")
 
 func Unequip() -> void:
 	show()
-	playerReach.RemoveHoverGroup("PliersCanEdit")
+	playerReach.RemoveHoverGroup("PipewrenchCanEdit")
 	
 func Use() -> void:
-	var systemInReach = playerReach.GetNearestItemInGroup("PliersCanEdit")
+	var systemInReach = playerReach.GetNearestItemInGroup("PipewrenchCanEdit")
 	
 	if systemInReach == null or systemInReach == signalerToLink:
 		if line != null:

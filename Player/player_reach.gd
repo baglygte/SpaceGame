@@ -53,6 +53,11 @@ func IsAreaInAnyAllowedHoverGroups(area: Area2D) -> bool:
 	return areaIsInHoverGroups
 
 func GetNearestItemInGroup(groupName: String) -> Node2D:
+	var overlaps = get_overlapping_areas()
+	for i in overlaps.size():
+		var node = overlaps[i].get_parent()
+		if groupName in node:
+			return node
 	var areas = FilterGroupName(get_overlapping_areas(), groupName)
 	
 	if areas.size() < 1:

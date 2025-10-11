@@ -5,6 +5,7 @@ var connectionSets : Array
 const connectionScene = preload("res://Ship/system_connection.tscn")
 
 func ConnectSystems(systemA, systemB) -> void:
+	if not ValidConnection(systemA, systemB): return
 	var connection: SystemConnection = connectionScene.instantiate()
 	add_child(connection)
 	
@@ -24,7 +25,22 @@ func ConnectSystems(systemA, systemB) -> void:
 		signalerA.AddReceiver(signalerB)
 	elif signalerB is SignalEmitter:
 		signalerB.AddReceiver(signalerA)
-		
+	elif signalerA is SignalHybrid:
+		signalerA.AddReceiver(signalerB)
+		signalerB.AddReceiver(signalerA)
+
+func ValidConnection(systemA, systemB) -> bool:
+	var signalerA = GetSignaler(systemA)
+	var signalerB = GetSignaler(systemB)
+	
+	if (signalerA is SignalEmitter) and (signalerB is SignalReceiver):
+		return true
+	elif (signalerB is SignalEmitter) and (signalerA is SignalReceiver):
+		return true
+	elif (signalerA is SignalHybrid) and (signalerB is SignalHybrid):
+		return true
+	return false
+
 func GetSignaler(item: Node2D) -> Node2D:
 	if item == null:
 		return null

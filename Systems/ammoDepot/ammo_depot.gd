@@ -6,6 +6,7 @@ var ship: Ship
 var logNode
 var isOverlay = false
 var recipes
+const PipewrenchCanEdit = true
 
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://davpxbjbf5wey"]
+
+[ext_resource type="Script" uid="uid://537i10k7inne" path="res://signal_hybrid.gd" id="1_x5gcb"]
+
+[node name="SignalHybrid" type="Node2D" groups=["signaler"]]
+script = ExtResource("1_x5gcb")

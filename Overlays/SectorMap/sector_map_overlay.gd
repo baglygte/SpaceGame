@@ -29,16 +29,6 @@ func RemoveBlip(connection: SectorMapBlipConnector) -> void:
 	
 func _process(_delta: float) -> void:
 	for connection in blips.keys():
-		#if connection.blipType =="GunLockOn":
-			#for connection2 in blips.keys():
-				#if connection2.blipType=="GunLockOn": continue
-				#if connection2.blipType=="GunReticle": continue
-				#if abs(connection.get_parent().position.x - connection2.get_parent().position.x)<250:
-					#if abs(connection.get_parent().position.y - connection2.get_parent().position.y)<250:
-						#connection.sisterBlip = connection2.get_parent()
-						#break
-			#RemoveBlip(connection)
-		
 		UpdateBlipPosition(connection)
 
 

@@ -2,6 +2,7 @@ extends Node2D
 
 var globalId: int
 var playerInSeat: Player
+const PliersCanEdit = true
 
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}

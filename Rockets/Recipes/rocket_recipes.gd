@@ -16,18 +16,26 @@ func _ready() -> void:
 	stage.time = 0.5
 	recipe.stages.resize(2)
 	recipe.stages[0] = stage
+	add_child(stage)
 	stage = StageInitialize("ChildS1")
 	recipe.stages[1] = stage
+	add_child(stage)
 	stage = StageInitialize("SplitRocketS1")
 	stage.isHoming = true
 	stage.childrecipe = recipe
 	stage.children = 3
+	stage.time = 0.5
+	add_child(recipe)
 	recipe = RecipeInitialize("SplitRocket")
 	recipe.isHoming = true
 	recipe.stages.resize(2)
 	recipe.stages[1] = stage
+	add_child(stage)
 	stage = StageInitialize("SplitRocketS0")
+	stage.isHoming = true
 	recipe.stages[0] = stage
+	add_child(stage)
+	add_child(recipe)
 
 func RecipeInitialize(rname: String) -> RocketRecipe:
 	var recipe = recipeScene.instantiate()
