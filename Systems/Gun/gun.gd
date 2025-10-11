@@ -13,8 +13,9 @@ func _ready() -> void:
 	add_child(logNode)
 	logNode.store.resize(5)
 	logNode.itemType = "Rockets"
-	reticle = reticleColliderScene.instantiate()
-	get_tree().get_first_node_in_group("GameWorld").add_child(reticle)
+	if get_tree().get_first_node_in_group("GameWorld") != null:
+		reticle = reticleColliderScene.instantiate()
+		get_tree().get_first_node_in_group("GameWorld").add_child(reticle)
 
 func ReceiveMovement(vector: Vector2) -> void:
 	reticle.position += vector * 100
