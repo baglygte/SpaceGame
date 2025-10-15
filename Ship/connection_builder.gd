@@ -26,8 +26,8 @@ func ConnectSystems(systemA, systemB) -> void:
 	elif signalerB is SignalEmitter:
 		signalerB.AddReceiver(signalerA)
 	elif signalerA is SignalHybrid:
-		signalerA.AddReceiver(signalerB)
-		signalerB.AddReceiver(signalerA)
+		signalerA.AddConnection(signalerB)
+		signalerB.AddConnection(signalerA)
 
 func ValidConnection(systemA, systemB) -> bool:
 	var signalerA = GetSignaler(systemA)
@@ -37,7 +37,7 @@ func ValidConnection(systemA, systemB) -> bool:
 		return true
 	elif (signalerB is SignalEmitter) and (signalerA is SignalReceiver):
 		return true
-	elif (signalerA is SignalHybrid) and (signalerB is SignalHybrid):
+	elif (signalerA is SignalHybrid) or (signalerB is SignalHybrid):
 		return true
 	return false
 

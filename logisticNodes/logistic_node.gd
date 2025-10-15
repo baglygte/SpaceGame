@@ -1,3 +1,4 @@
+class_name LogisticNode
 extends Node2D
 var itemType
 var store = []

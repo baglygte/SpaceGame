@@ -10,8 +10,7 @@ const PipewrenchCanEdit = true
 
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
-	logNode = load("res://logisticNodes/logisticNode.tscn").instantiate()
-	add_child(logNode)
+	logNode = get_node("LogisticNode")
 	logNode.store.resize(5)
 	logNode.itemType = "Rockets"
 

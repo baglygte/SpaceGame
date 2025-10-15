@@ -26,7 +26,7 @@ func _ready() -> void:
 	add_child(load("res://Rockets/Recipes/rocket_recipes.tscn").instantiate())
 	
 	#$ContainedItemCreator.SpawnItemInWorld(load("res://Items/ball.tscn").instantiate(), Vector2(-50,200))
-	var instance = load("res://Enemies/dabox.tscn").instantiate()
+	var instance = load("res://Enemies/Rock.tscn").instantiate()
 	add_child(instance)
 	instance.position = Vector2(2000,2000)
 	
