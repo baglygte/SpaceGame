@@ -23,7 +23,6 @@ func ReceiveMovement(vector: Vector2) -> void:
 	reticle.position += vector * 100
 			
 	var barrelRotation = (reticle.position - global_position).angle() + PI/2
-	
 	$Barrel.rotation = clamp(barrelRotation, -PI/2, PI/2)
 	
 func ReceiveEnterExit(player: Player) -> void:

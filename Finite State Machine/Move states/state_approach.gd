@@ -1,6 +1,9 @@
 class_name StateApproach
 extends MoveState
 
+@export var CloseState: String = "StateCircle"
+@export var FarState: String = "StateIdle"
+
 var ship: Ship
 
 func Enter():
@@ -12,9 +15,9 @@ func Update():
 	stateExecutor.target = ship.global_position
 	
 	if deltaPosition.length() < 5000:
-		transitionToState.emit("StateCircle")
+		transitionToState.emit(CloseState)
 	if deltaPosition.length() > 8000:
-		transitionToState.emit("StateIdle")
+		transitionToState.emit(FarState)
 
 func Exit():
 	return

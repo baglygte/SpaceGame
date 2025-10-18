@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://crhndw50dy0eb"]
 
-[ext_resource type="Script" uid="uid://b5qqiqq6k4yvy" path="res://Enemies/rock.gd" id="1_rnve6"]
+[ext_resource type="Script" uid="uid://bept6u1sucpvp" path="res://Enemies/dabox.gd" id="1_rnve6"]
 [ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://Sprites/sectionPreview.png" id="2_elafv"]
 [ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_x5o0o"]
 [ext_resource type="Script" uid="uid://kltvhqmrneja" path="res://Finite State Machine/finite_state_machine.gd" id="5_rh42n"]

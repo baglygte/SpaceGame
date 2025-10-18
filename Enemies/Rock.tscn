@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://cditpudc1yotc"]
+[gd_scene load_steps=14 format=3 uid="uid://cditpudc1yotc"]
 
-[ext_resource type="Script" uid="uid://bept6u1sucpvp" path="res://Enemies/dabox.gd" id="1_iajnt"]
+[ext_resource type="Script" uid="uid://b5qqiqq6k4yvy" path="res://Enemies/rock.gd" id="1_iajnt"]
 [ext_resource type="Texture2D" uid="uid://dd0rkajpkx8dh" path="res://Sprites/EnemyRock.png" id="2_iajnt"]
 [ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_fymn7"]
 [ext_resource type="Script" uid="uid://kltvhqmrneja" path="res://Finite State Machine/finite_state_machine.gd" id="4_ysnn3"]
@@ -9,46 +9,31 @@
 [ext_resource type="Script" uid="uid://ehx0vi2rax3v" path="res://Finite State Machine/Move states/state_approach.gd" id="7_ael4b"]
 [ext_resource type="Script" uid="uid://bp5265xfeewsh" path="res://Finite State Machine/Move states/state_retreat.gd" id="8_3plc6"]
 [ext_resource type="Script" uid="uid://cx4cm2esicvsp" path="res://Finite State Machine/Attack states/state_inactive.gd" id="9_cxr3f"]
-[ext_resource type="Script" uid="uid://d0di16lasoub3" path="res://Finite State Machine/Attack states/state_shooting.gd" id="10_ejgxo"]
+[ext_resource type="Script" uid="uid://dk1li8ky2fl4w" path="res://Finite State Machine/Move states/state_ram.gd" id="10_iajnt"]
 [ext_resource type="Script" uid="uid://bxbx4o75byv5l" path="res://Enemies/forceApplicator.gd" id="11_py401"]
 [ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="12_vrthe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elafv"]
-size = Vector2(1320, 1060)
+size = Vector2(429, 361)
 
-[sub_resource type="GDScript" id="GDScript_xhbee"]
-script/source = "class_name StateReload
-extends AttackState
-@export var enemy: RigidBody2D
-
-var ship: Ship
-
-func Enter():
-	ship = get_tree().get_first_node_in_group(\"Ship\")
-	
-func Update():
-	if enemy.canShoot:
-		transitionToState.emit(\"StateShoot\")
-
-func Exit():
-	return
-"
-
-[node name="dabox" type="RigidBody2D"]
+[node name="rock" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 2
+mass = 10.0
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_iajnt")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(6, 6)
+position = Vector2(13, 5)
+scale = Vector2(2, 2)
 texture = ExtResource("2_iajnt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-43, -16)
 shape = SubResource("RectangleShape2D_elafv")
 
 [node name="Health" parent="." instance=ExtResource("3_fymn7")]
@@ -70,6 +55,7 @@ metadata/_custom_type_script = "uid://cftjgcj55h1es"
 
 [node name="StateApproach" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("7_ael4b")
+CloseState = "StateRam"
 metadata/_custom_type_script = "uid://ehx0vi2rax3v"
 
 [node name="StateRetreat" type="Node" parent="FiniteStateMachine"]
@@ -78,19 +64,18 @@ metadata/_custom_type_script = "uid://bp5265xfeewsh"
 
 [node name="StateInactive" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("9_cxr3f")
+CloseState = "StateInactive"
 metadata/_custom_type_script = "uid://cx4cm2esicvsp"
 
-[node name="StateShoot" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("10_ejgxo")
-metadata/_custom_type_script = "uid://d0di16lasoub3"
-
-[node name="StateReload" type="Node" parent="FiniteStateMachine"]
-script = SubResource("GDScript_xhbee")
+[node name="StateRam" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("10_iajnt")
+metadata/_custom_type_script = "uid://dk1li8ky2fl4w"
 
 [node name="ForceApplicator" type="Node" parent="."]
 script = ExtResource("11_py401")
-torque = 10000.0
-forceMultiplier = 1000.0
+maxSpeed = 1000.0
+torque = 100000.0
+forceMultiplier = 10000.0
 metadata/_custom_type_script = "uid://bxbx4o75byv5l"
 
 [node name="StarmapBlipConnector" parent="." instance=ExtResource("12_vrthe")]
