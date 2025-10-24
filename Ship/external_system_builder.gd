@@ -1,5 +1,5 @@
 class_name ExternalSystemBuilder
-extends Node2D
+extends Node
 
 func IsSystemPositionValid(_positionToCheck: Vector2) -> bool:
 	return true

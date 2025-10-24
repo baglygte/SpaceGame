@@ -21,7 +21,7 @@ func GetSystemFromId(id: int) -> Node2D:
 	return null
 	
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "SectionBuilder"}
+	var dictionaryToSave: Dictionary
 	
 	dictionaryToSave["position.x"] = position.x
 	dictionaryToSave["position.y"] = position.y

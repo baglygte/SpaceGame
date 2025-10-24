@@ -1,4 +1,5 @@
-extends Node2D
+class_name WallBuilder
+extends Node
 
 const wallScene = preload("res://Sections/wall.tscn")
 const sectionAngles := [-PI/2, 0, PI/2, PI]
@@ -10,24 +11,29 @@ func DeleteWallsInSection(section: Node2D) -> void:
 			continue
 		child.queue_free()
 	
-func UpdateExternalWalls() -> void:
-	var sectionMap = $"..".sectionMap
+func UpdateExternalWalls(ship) -> void:
+	var sections = ship.GetSections()
 	
-	for section in sectionMap.keys():
+	for section in sections:
 		DeleteWallsInSection(section)
 		
 		for angle in sectionAngles:
-			if HasSectionAtRotation(sectionMap[section], angle):
+			if HasSectionAtRotation(section.position, angle, ship):
 				continue
 			AddWallToSection(section, angle)
 
-func HasSectionAtRotation(sectionCoordinates: Vector2, angle: float) -> bool:
-	var sectionMap = $"..".sectionMap
+func HasSectionAtRotation(sectionCoordinates: Vector2, angle: float, ship: Ship) -> bool:
+	var sections = ship.GetSections()
 	
-	var rotatedVector = round(Vector2(64,0).rotated(angle))
-	var coordinates = sectionCoordinates + rotatedVector
+	for section in sections:
+		var rotatedVector = round(Vector2(64,0).rotated(angle))
+		
+		var coordinates = sectionCoordinates + rotatedVector
+		
+		if section.position == coordinates:
+			return true
 	
-	return coordinates in sectionMap.values()
+	return false
 
 func AddWallToSection(section: Node2D, angle: float) -> void:
 	var wall = wallScene.instantiate()

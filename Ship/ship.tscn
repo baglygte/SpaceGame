@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx871mn3f8xhp"]
+
+[ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="1_1p84g"]
+
+[node name="Ship" type="RigidBody2D" groups=["MustBeSaved", "Ship"]]
+gravity_scale = 0.0
+script = ExtResource("1_1p84g")
+
+[node name="Sections" type="Node2D" parent="."]
+
+[node name="ExternalSystems" type="Node2D" parent="."]

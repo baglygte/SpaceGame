@@ -2,22 +2,23 @@ extends SubViewport
 class_name GameWorld
 
 func _ready() -> void:	
-	StartGameScene()
+	CreateGameWorld()
 	
+	var creator = $"../ContainedItemCreator"
 	# Sections
 	for i in range(20):
-		$ContainedItemCreator.SpawnItemInWorld(load("res://Sections/section.tscn").instantiate(), Vector2(250,50))
-		
-	# Systems
-	for i in range(5):
-		$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))
-	for i in range(10):
-		$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Thruster/thruster.tscn"), Vector2(200,130))
-	$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Gun/gun.tscn"), Vector2(200,170))
-	$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/GrabberArm/grabber_arm.tscn"), Vector2(200,170))
-	$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(200,210))
-	for i in range(10):
-		$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/ammoDepot/ammoDepot.tscn").instantiate(), Vector2(200,40))
+		creator.SpawnItemInWorld(load("res://Sections/section.tscn").instantiate(), Vector2(0,0))
+		#
+	## Systems
+	#for i in range(5):
+		#$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))
+	#for i in range(10):
+		#$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Thruster/thruster.tscn"), Vector2(200,130))
+	#$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Gun/gun.tscn"), Vector2(200,170))
+	#$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/GrabberArm/grabber_arm.tscn"), Vector2(200,170))
+	#$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(200,210))
+	#for i in range(10):
+		#$ContainedItemCreator.SpawnItemInWorld(load("res://Systems/ammoDepot/ammoDepot.tscn").instantiate(), Vector2(200,40))
 	#for i in [-2000,-1000,0,1000,2000]:
 		#for j in [-2000,2000]:
 			#var instance = load("res://Enemies/dabox.tscn").instantiate()
@@ -30,15 +31,16 @@ func _ready() -> void:
 	#add_child(instance)
 	#instance.position = Vector2(2000,2000)
 	
-func StartGameScene() -> void:
+func CreateGameWorld() -> void:
 	var saveManager = get_tree().get_first_node_in_group("SaveManager")
 	
 	if saveManager.shouldLoadGame:
 		saveManager.LoadGame()
-		
-	$PlayerCreator.CreateNewPlayers()
-	
-	#get_tree().root.get_node("MasterScene/Game/HUD/PlayerViewports").Initialize()
+		var someShip = get_tree().get_first_node_in_group("Ship")
+		$"../PlayerCreator".CreateNewPlayers(someShip)
+	else:
+		var ship = $"../ShipCreator".CreateShip()
+		$"../PlayerCreator".CreateNewPlayers(ship)
 
 func AddNodeToShip(node: Node) -> void:
 	if node.get_parent() == null:

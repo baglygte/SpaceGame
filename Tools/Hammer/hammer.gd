@@ -1,7 +1,6 @@
 extends Tool
 class_name Hammer
 
-var ship: Ship
 var sectionBuilder: SectionBuilder
 @onready var sectionPreview = $SectionPreview
 const previewTexture = preload("res://sprites/sectionPreview.png")
@@ -18,8 +17,7 @@ const previewOffsetMap: Dictionary = {-180: Vector2(-64,0),
 func _ready() -> void:
 	player = get_parent().get_parent()
 	mainHand = player.get_node("MainHand")
-	ship = get_tree().get_first_node_in_group("Ship")
-	sectionBuilder = ship.get_node("SectionBuilder")
+	sectionBuilder = get_tree().get_first_node_in_group("ShipCreator").get_node("SectionBuilder")
 	hoverName = "Hammer"
 
 func _process(_delta: float) -> void:
@@ -30,7 +28,8 @@ func _process(_delta: float) -> void:
 	sectionPreview.position = previewPosition
 	
 	var shadedColor = Vector4(255,0,0,0.5)
-	if sectionBuilder.IsSectionPositionValid(previewPosition):
+	var ship = player.get_parent()
+	if sectionBuilder.IsSectionPositionValid(previewPosition, ship):
 		shadedColor = Vector4(0,255,0,0.5)
 		
 	sectionPreview.get_child(0).material.set("shader_parameter/shadedColor", shadedColor)
@@ -42,11 +41,12 @@ func RotateSection() -> void:
 	sectionPreview.rotate(deg_to_rad(90))
 	
 func GetPreviewPosition() -> Vector2:
+	var ship = player.get_parent()
 	var snappedRotation : int = snapped(rad_to_deg(player.rotation), 45)
 	
 	var snappedPlayerPosition : Vector2
-	snappedPlayerPosition.x = round(player.position.x/64)*64
-	snappedPlayerPosition.y = round(player.position.y/64)*64
+	snappedPlayerPosition.x = round((ship.position.x + player.position.x/64))*64
+	snappedPlayerPosition.y = round((ship.position.y + player.position.y/64))*64
 	
 	var previewOffset: Vector2 = previewOffsetMap[snappedRotation]
 	
@@ -65,11 +65,11 @@ func UpdatePreviewTexture() -> void:
 
 func Equip() -> void:
 	isEquipped = true
-	hide()
+	#hide()
 	
 	player = get_parent().get_parent()
 	player.get_node("PlayerReach").AddHoverGroup("HammerCanEdit")
-	sectionPreview.reparent(ship)
+	#sectionPreview.reparent(ship)
 	sectionPreview.rotation = 0
 
 	UpdatePreviewTexture()
@@ -79,7 +79,7 @@ func Equip() -> void:
 	
 func Unequip() -> void:
 	isEquipped = false
-	show()
+	#show()
 	
 	sectionPreview.hide()
 	player.get_node("PlayerReach").RemoveHoverGroup("HammerCanEdit")
@@ -101,11 +101,13 @@ func Use() -> void:
 func PickUpSection() -> void:
 	var previewPosition = GetPreviewPosition()
 	
-	var section = sectionBuilder.ExtractSectionAtPosition(previewPosition)
+	var ship = player.get_parent()
+	var section = sectionBuilder.ExtractSectionAtPosition(previewPosition, ship)
 	mainHand.PutItemIntoHand(section)
 
 func PlaceHeldSection() -> void:
-	if !sectionBuilder.IsSectionPositionValid(sectionPreview.position):
+	var ship = player.get_parent()
+	if !sectionBuilder.IsSectionPositionValid(sectionPreview.position, ship):
 		return
 		
 	var section = mainHand.heldItem
@@ -115,4 +117,4 @@ func PlaceHeldSection() -> void:
 	
 	mainHand.LoseItem()
 
-	sectionBuilder.AddSectionAtPosition(section, sectionPreview.position, sectionPreview.rotation)	
+	sectionBuilder.AddSectionAtPosition(section, sectionPreview.position, sectionPreview.rotation, ship)	

@@ -1,5 +1,5 @@
 class_name ConnectionBuilder
-extends Node2D
+extends Node
 
 var connectionSets : Array
 const connectionScene = preload("res://Ship/system_connection.tscn")

@@ -12,7 +12,8 @@ func _process(_delta: float) -> void:
 		return
 		
 	global_position = connectedPlayer.global_position
-	rotation = get_tree().get_first_node_in_group("Ship").rotation
+	
+	rotation = connectedPlayer.get_parent().rotation
 	
 	Zoom()
 

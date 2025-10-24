@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://chk7u5opokgh7"]
+
+[ext_resource type="Script" uid="uid://c0bcbe37sunoj" path="res://Ship/ship_creator.gd" id="1_3k8ts"]
+[ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://Ship/section_builder.gd" id="2_fpgbs"]
+[ext_resource type="Script" uid="uid://d0pmrbwvyke8v" path="res://Ship/wall_builder.gd" id="3_a08nv"]
+[ext_resource type="Script" uid="uid://7bp6m8is2glc" path="res://Ship/internal_system_builder.gd" id="4_4qy6u"]
+[ext_resource type="Script" uid="uid://bbkmldkx6wsbo" path="res://breadth_first_search.gd" id="4_4yhic"]
+[ext_resource type="Script" uid="uid://bxxhfivskxbb1" path="res://Ship/external_system_builder.gd" id="5_w3hio"]
+[ext_resource type="Script" uid="uid://cpsruny863qje" path="res://Ship/connection_builder.gd" id="6_w3hio"]
+
+[node name="ShipCreator" type="Node2D" groups=["ShipCreator"]]
+script = ExtResource("1_3k8ts")
+
+[node name="SectionBuilder" type="Node" parent="."]
+script = ExtResource("2_fpgbs")
+metadata/_custom_type_script = "uid://dl8qra4nvhch4"
+
+[node name="WallBuilder" type="Node" parent="SectionBuilder"]
+script = ExtResource("3_a08nv")
+metadata/_custom_type_script = "uid://d0pmrbwvyke8v"
+
+[node name="BreadthFirstSearcher" type="Node" parent="SectionBuilder"]
+script = ExtResource("4_4yhic")
+metadata/_custom_type_script = "uid://bbkmldkx6wsbo"
+
+[node name="InternalSystemBuilder" type="Node" parent="."]
+script = ExtResource("4_4qy6u")
+metadata/_custom_type_script = "uid://7bp6m8is2glc"
+
+[node name="ExternalSystemBuilder" type="Node" parent="."]
+script = ExtResource("5_w3hio")
+metadata/_custom_type_script = "uid://bxxhfivskxbb1"
+
+[node name="ConnectionBuilder" type="Node" parent="."]
+script = ExtResource("6_w3hio")
+metadata/_custom_type_script = "uid://cpsruny863qje"

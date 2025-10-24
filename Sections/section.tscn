@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aun71"]
 size = Vector2(62, 62)
 
-[node name="Section" type="Node2D" groups=["MustBeSaved"]]
+[node name="Section" type="Node2D"]
 z_index = -4000
 z_as_relative = false
 script = ExtResource("1_0jeb5")

@@ -1,5 +1,5 @@
 class_name InternalSystemBuilder
-extends Node2D
+extends Node
 
 func CreateInternalSystem(scenePath: String) -> Node2D:
 	var instance = load(scenePath).instantiate()

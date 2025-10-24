@@ -56,7 +56,8 @@ func Drop() -> void:
 		return
 		
 	var creator: ContainedItemCreator = get_tree().get_first_node_in_group("ContainedItemCreator")
-	creator.SpawnItemInShip(heldItem, global_position)
+	var ship = get_parent().get_parent()
+	creator.SpawnItemInShip(heldItem, global_position, ship)
 	
 	LoseItem()
 
