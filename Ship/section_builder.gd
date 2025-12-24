@@ -13,16 +13,18 @@ func CreateSectionAtPosition(sectionPosition: Vector2, sectionRotation: float) -
 
 func AddSectionToShip(section: Section, ship: Ship):
 	ship.AddSection(section)
+	
 	$WallBuilder.UpdateExternalWalls(ship)
 
 func IsSectionPositionValid(positionToCheck: Vector2, ship: Ship) -> bool:
 	if IsPositionOccupied(positionToCheck, ship):
 		return false
+		
 	return true
 
 func IsPositionOccupied(positionToCheck: Vector2, ship: Ship) -> bool:
 	for section in ship.GetSections():
-		if section.position == positionToCheck:
+		if section.global_position == positionToCheck:
 			return true
 		
 	return false
@@ -41,8 +43,9 @@ func WillRemovalLeadToDisconnection(positionToCheck: Vector2, ship: Ship) -> boo
 	return numberOfRegions > 1
 
 func AddSectionAtPosition(section, positionToGet: Vector2, rotationToGet: float, ship: Ship) -> void:
-	section.position = positionToGet
+	section.global_position = positionToGet
 	section.rotation = rotationToGet
+	
 	AddSectionToShip(section, ship)
 	
 	#$"..".center_of_mass = GetCenterOfMass()
@@ -98,7 +101,10 @@ func CreateFromSave(variablesToSet: Dictionary, ship: Ship) -> void:
 	var rotationToGet = variablesToSet["rotation"]
 	
 	AddSectionAtPosition(section, positionToGet, rotationToGet,ship)
-
+	
+	for systemToSet in variablesToSet["internalSystems"]:
+		$"../InternalSystemBuilder".CreateFromSave(systemToSet, section)
+		
 func SplitShip(ship):
 	var shipSections = ship.get_node("Sections").get_children()
 	var regions = $BreadthFirstSearcher.ExtractAllRegions(shipSections)

@@ -10,10 +10,10 @@ func CreateExternalSystem(scenePath: String) -> Node2D:
 	$"../../GlobalSystemCounter".counterValue += 1
 	return instance
 
-func GetSystemFromId(id: int) -> Node2D:
+func GetSystemFromId(id: int, ship: Ship) -> Node2D:
 	var system = null
 	
-	for child in get_children():
+	for child in ship.get_children():
 		if !child.is_in_group("ExternalSystem"):
 			continue
 		
@@ -23,8 +23,9 @@ func GetSystemFromId(id: int) -> Node2D:
 				
 	return system
 	
-func CreateFromSave(variablesToSet: Dictionary) -> void:
+func CreateFromSave(variablesToSet: Dictionary, ship: Ship) -> void:
 	var instance
+	
 	match variablesToSet["systemType"]:
 		"thruster":
 			instance = CreateExternalSystem("res://Systems/Thruster/thruster.tscn")
@@ -43,15 +44,16 @@ func CreateFromSave(variablesToSet: Dictionary) -> void:
 	var positionToGet = Vector2(variablesToSet["position.x"], variablesToSet["position.y"])
 	var rotationToGet = variablesToSet["rotation"]
 	
-	AddSystemAtPosition(instance, positionToGet, rotationToGet)
+	AddSystemAtPosition(instance, positionToGet, rotationToGet, ship)
 
-func AddSystemAtPosition(system, positionToGet, rotationToGet) -> void:
+func AddSystemAtPosition(system, positionToGet, rotationToGet, ship: Ship) -> void:
 	if system.get_parent() == null:
-		add_child(system)
+		ship.get_node("ExternalSystems").add_child(system)
 	else:
-		system.reparent(self)
+		system.reparent(ship.get_node("ExternalSystems"))
 	
 	system.position = positionToGet
 	system.rotation = rotationToGet
+	
 	if system is Thruster:
-		$"..".assignedThrusters.append(system)
+		ship.assignedThrusters.append(system)

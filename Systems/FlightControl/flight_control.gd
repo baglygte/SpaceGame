@@ -39,7 +39,7 @@ func ReceiveLook(lookVector: Vector2) -> void:
 		ship.apply_force(forceToApply, thruster.position)
 	
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "InternalSystemBuilder"}
+	var dictionaryToSave: Dictionary
 	
 	dictionaryToSave["systemType"] = "flightcontrol"
 	var section: Section = get_parent().get_parent()

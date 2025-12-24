@@ -27,6 +27,13 @@ func GetSaveData() -> Dictionary:
 	dictionaryToSave["position.y"] = position.y
 	dictionaryToSave["rotation"] = rotation
 	
+	var internalSystemDictionary: Array
+	
+	for internalSystem in $Systems.get_children():
+		internalSystemDictionary.append(internalSystem.GetSaveData())
+	
+	dictionaryToSave["internalSystems"] = internalSystemDictionary
+	
 	return dictionaryToSave
 
 func Kill() -> void:

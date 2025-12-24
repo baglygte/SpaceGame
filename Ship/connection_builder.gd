@@ -4,9 +4,9 @@ extends Node
 var connectionSets : Array
 const connectionScene = preload("res://Ship/system_connection.tscn")
 
-func ConnectSystems(systemA, systemB) -> void:
+func ConnectSystems(systemA, systemB, ship: Ship) -> void:
 	var connection: SystemConnection = connectionScene.instantiate()
-	add_child(connection)
+	ship.get_node("Connections").add_child(connection)
 	
 	connection.add_point(systemA.global_position)
 	connection.add_point(systemB.global_position)
@@ -14,6 +14,7 @@ func ConnectSystems(systemA, systemB) -> void:
 	connection.systemB = systemB
 	
 	connectionSets.append(connection)
+	
 	if systemA.has_method("OnConnection"): systemA.OnConnection(systemB)
 	if systemB.has_method("OnConnection"): systemB.OnConnection(systemA)
 		
@@ -37,11 +38,11 @@ func GetSignaler(item: Node2D) -> Node2D:
 		
 	return null
 
-func CreateFromSave(variablesToSet: Dictionary) -> void:
+func CreateFromSave(variablesToSet: Dictionary, ship) -> void:
 	var systemAId = variablesToSet["systemAId"]
 	var systemBId = variablesToSet["systemBId"]
 	
 	var systemA = $"../../GlobalSystemCounter".GetSystemFromId(systemAId)
 	var systemB = $"../../GlobalSystemCounter".GetSystemFromId(systemBId)
 	
-	ConnectSystems(systemA, systemB)
+	ConnectSystems(systemA, systemB, ship)

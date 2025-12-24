@@ -8,15 +8,6 @@ signal itemWasDropped
 
 func _ready() -> void:
 	playerReach.AddHoverGroup("CanPickUp")
-
-#func Modify() -> void:
-	#if heldItem == null:
-		#return
-	#
-	#if heldItem is Hammer:
-		#heldItem.RotateSection()
-	#if heldItem is Wrench:
-		#heldItem.RotateSystem()
 		
 func Interact() -> void:
 	if heldItem == null:
@@ -32,7 +23,7 @@ func PickUpItem() -> void:
 	var creator = get_tree().get_first_node_in_group("ContainedItemCreator")
 	
 	PutItemIntoHand(creator.ExtractItemFromContainer(itemContainer))
-	#
+
 func PutItemIntoHand(item) -> void:
 	if item == null:
 		return
@@ -50,7 +41,7 @@ func PutItemIntoHand(item) -> void:
 	
 	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
 	playerHuds.AddItemToHands(get_parent(), name, heldItem.get_node("Sprite2D").texture)
-	#
+
 func Drop() -> void:
 	if heldItem == null:
 		return

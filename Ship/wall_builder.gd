@@ -6,9 +6,12 @@ const sectionAngles := [-PI/2, 0, PI/2, PI]
 
 func DeleteWallsInSection(section: Node2D) -> void:
 	var sectionChildren = section.get_children()
+	
 	for child in sectionChildren:
+		
 		if not child.is_in_group("Wall"):
 			continue
+			
 		child.queue_free()
 	
 func UpdateExternalWalls(ship) -> void:
@@ -18,19 +21,20 @@ func UpdateExternalWalls(ship) -> void:
 		DeleteWallsInSection(section)
 		
 		for angle in sectionAngles:
-			if HasSectionAtRotation(section.position, angle, ship):
+			if HasSectionAtRotation(section.global_position, angle, ship):
 				continue
+				
 			AddWallToSection(section, angle)
 
 func HasSectionAtRotation(sectionCoordinates: Vector2, angle: float, ship: Ship) -> bool:
 	var sections = ship.GetSections()
 	
 	for section in sections:
-		var rotatedVector = round(Vector2(64,0).rotated(angle))
+		var rotatedVector = Vector2(64,0).rotated(angle)
 		
-		var coordinates = sectionCoordinates + rotatedVector
-		
-		if section.position == coordinates:
+		var coordinates = round(sectionCoordinates + rotatedVector)
+
+		if section.global_position == coordinates:
 			return true
 	
 	return false

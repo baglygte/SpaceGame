@@ -9,3 +9,5 @@ script = ExtResource("1_1p84g")
 [node name="Sections" type="Node2D" parent="."]
 
 [node name="ExternalSystems" type="Node2D" parent="."]
+
+[node name="Connections" type="Node2D" parent="."]

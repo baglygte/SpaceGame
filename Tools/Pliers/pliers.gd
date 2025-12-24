@@ -4,6 +4,7 @@ extends Tool
 var playerReach: PlayerReach
 var signalerToLink: Node2D
 var line: Line2D
+var ship: Ship
 const lineScene = preload("res://Tools/Pliers/line_2d.tscn")
 	
 func _process(_delta: float) -> void:
@@ -15,6 +16,7 @@ func _process(_delta: float) -> void:
 func _ready() -> void:
 	playerReach = get_parent().get_parent().get_node("PlayerReach")
 	hoverName = "Pliers"
+	ship = get_tree().get_first_node_in_group("Ship")
 	
 func Equip() -> void:
 	hide()
@@ -39,7 +41,6 @@ func Use() -> void:
 		
 		if signalerToLink != null:
 			line = lineScene.instantiate()
-			var ship = get_tree().get_first_node_in_group("Ship")
 			ship.add_child(line)
 			line.add_point(position)
 			line.add_point(signalerToLink.global_position + ship.position)
@@ -47,8 +48,8 @@ func Use() -> void:
 		EstablishLink(systemInReach)
 	
 func EstablishLink(item) -> void:	
-	var builder: ConnectionBuilder = get_tree().get_first_node_in_group("Ship").get_node("ConnectionBuilder")
-	builder.ConnectSystems(item, signalerToLink)
+	var builder: ConnectionBuilder = get_tree().get_first_node_in_group("ShipCreator").get_node("ConnectionBuilder")
+	builder.ConnectSystems(item, signalerToLink, ship)
 	
 	if not line == null:
 		line.queue_free()

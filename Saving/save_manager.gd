@@ -28,10 +28,9 @@ func LoadGame() -> void:
 	
 	LoadObjectsOfCreator("PlayerCreator")
 
-	
 	#LoadObjectsOfCreator("SectionBuilder")
 	#
-	#LoadObjectsOfCreator("InternalSystemBuilder")
+	LoadObjectsOfCreator("InternalSystemBuilder")
 	#
 	#LoadObjectsOfCreator("ExternalSystemBuilder")
 	#

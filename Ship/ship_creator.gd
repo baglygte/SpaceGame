@@ -40,6 +40,12 @@ func CreateFromSave(variablesToSet: Dictionary):
 	
 	for sectionVariables in variablesToSet["sections"]:
 		$SectionBuilder.CreateFromSave(sectionVariables, ship)
+		
+	for externalSystemVariables in variablesToSet["externalSystems"]:
+		$ExternalSystemBuilder.CreateFromSave(externalSystemVariables, ship)
+		
+	for connectionVariables in variablesToSet["connections"]:
+		$ConnectionBuilder.CreateFromSave(connectionVariables, ship)
 
 func FindShipWithId(shipId: int) -> Ship:
 	var ships = get_tree().get_nodes_in_group("Ship")

@@ -5,15 +5,19 @@ func _ready() -> void:
 	CreateGameWorld()
 	
 	var creator = $"../ContainedItemCreator"
+	var internalBuilder = $"../ShipCreator/InternalSystemBuilder"
 	# Sections
 	for i in range(20):
+		
 		creator.SpawnItemInWorld(load("res://Sections/section.tscn").instantiate(), Vector2(0,0))
 		#
 	## Systems
 	#for i in range(5):
-		#$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(200,90))
-	#for i in range(10):
-		#$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Thruster/thruster.tscn"), Vector2(200,130))
+	creator.SpawnItemInWorld(internalBuilder.CreateInternalSystem("res://Systems/ControlSeat/controlSeat.tscn"), Vector2(-50,-25))
+	creator.SpawnItemInWorld(internalBuilder.CreateInternalSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(-75,-25))
+	
+	for i in range(10):
+		creator.SpawnItemInWorld(internalBuilder.CreateInternalSystem("res://Systems/Thruster/thruster.tscn"), Vector2(-25,25))
 	#$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/Gun/gun.tscn"), Vector2(200,170))
 	#$ContainedItemCreator.SpawnItemInWorld($Ship/ExternalSystemBuilder.CreateExternalSystem("res://Systems/GrabberArm/grabber_arm.tscn"), Vector2(200,170))
 	#$ContainedItemCreator.SpawnItemInWorld($Ship/SectionBuilder/InternalSystemBuilder.CreateInternalSystem("res://Systems/FlightControl/flightControl.tscn"), Vector2(200,210))

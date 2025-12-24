@@ -5,7 +5,7 @@ var systemA
 var systemB
 
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "ConnectionBuilder"}
+	var dictionaryToSave: Dictionary
 	
 	dictionaryToSave["systemAId"] = systemA.globalId
 	dictionaryToSave["systemBId"] = systemB.globalId
