@@ -13,6 +13,7 @@ func GetNumberOfRegions(sections: Array[Node]) -> int:
 
 func ExtractAllRegions(sections: Array[Node]) -> Array[Array]:
 	unvisitedSections = sections
+	
 	for section in unvisitedSections:
 		unvisitedPositions.append(section.position)
 		
@@ -31,7 +32,7 @@ func ExtractRegion() -> Array[Node]:
 	unvisitedPositions.remove_at(0)
 
 	while queue.size() > 0:
-		var checkedSection: Section = queue.pop_front()
+		var checkedSection: Node2D = queue.pop_front()
 		region.append(checkedSection)
 		# Get neighbours
 		var neighbours: Array[Node] = GetNeighbours(checkedSection)

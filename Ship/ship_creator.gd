@@ -24,7 +24,10 @@ func CreateShipWithSections(sections: Array[Node]) -> Ship:
 	$"../GameWorld".add_child(ship)
 	
 	for section in sections:
-		$SectionBuilder.AddSectionToShip(section, ship)
+		if section.get_parent().name == "Sections":
+			$SectionBuilder.AddSectionToShip(section, ship)
+		elif section.get_parent().name == "ExternalSystems":
+			$ExternalSystemBuilder.AddSystemAtPosition(section, section.position, section.rotation, ship)
 	
 	return ship
 

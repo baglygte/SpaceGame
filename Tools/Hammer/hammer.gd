@@ -55,9 +55,9 @@ func GetPreviewPosition() -> Vector2:
 	
 	var snappedPlayerPosition : Vector2
 	
-	snappedPlayerPosition.x = round((ship.position.x + player.position.x/64))*64
+	snappedPlayerPosition.x = ship.position.x + round((player.position.x/64))*64
 	
-	snappedPlayerPosition.y = round((ship.position.y + player.position.y/64))*64
+	snappedPlayerPosition.y = ship.position.y + round((player.position.y/64))*64
 	
 	var previewOffset: Vector2 = previewOffsetMap[snappedRotation]
 	
@@ -111,7 +111,8 @@ func Use() -> void:
 
 func PickUpSection() -> void:
 	previewPosition = GetPreviewPosition()
-	
+	print(previewPosition)
+
 	var ship = player.get_parent()
 	
 	var section = sectionBuilder.ExtractSectionAtPosition(previewPosition, ship)
@@ -131,4 +132,4 @@ func PlaceHeldSection() -> void:
 
 	mainHand.LoseItem()
 
-	sectionBuilder.AddSectionAtPosition(section, GetPreviewPosition(), previewRotation, ship)	
+	sectionBuilder.AddSectionAtPosition(section, GetPreviewPosition() - ship.position, previewRotation, ship)	

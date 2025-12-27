@@ -8,7 +8,6 @@ func _ready() -> void:
 	var internalBuilder = $"../ShipCreator/InternalSystemBuilder"
 	# Sections
 	for i in range(20):
-		
 		creator.SpawnItemInWorld(load("res://Sections/section.tscn").instantiate(), Vector2(0,0))
 		#
 	## Systems

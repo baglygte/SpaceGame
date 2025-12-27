@@ -14,6 +14,12 @@ func CreateSectionAtPosition(sectionPosition: Vector2, sectionRotation: float) -
 func AddSectionToShip(section: Section, ship: Ship):
 	ship.AddSection(section)
 	
+	for system in section.get_node("Systems").get_children():
+		if not system.has_method("SetShip"):
+			continue
+			
+		system.SetShip(ship)
+	
 	$WallBuilder.UpdateExternalWalls(ship)
 
 func IsSectionPositionValid(positionToCheck: Vector2, ship: Ship) -> bool:
@@ -82,7 +88,7 @@ func ExtractSectionAtPosition(positionToRemove: Vector2, ship: Ship) -> Node2D:
 	var extractedSection
 	
 	for section in ship.GetSections():	
-		if section.position != positionToRemove:
+		if section.global_position != positionToRemove:
 			continue
 			
 		ship.get_node("Sections").remove_child(section)
@@ -105,9 +111,12 @@ func CreateFromSave(variablesToSet: Dictionary, ship: Ship) -> void:
 	for systemToSet in variablesToSet["internalSystems"]:
 		$"../InternalSystemBuilder".CreateFromSave(systemToSet, section)
 		
-func SplitShip(ship):
-	var shipSections = ship.get_node("Sections").get_children()
-	var regions = $BreadthFirstSearcher.ExtractAllRegions(shipSections)
+func SplitShip(ship: Ship):
+	var sectionsAndExternalSystems = ship.GetSections()
+	
+	sectionsAndExternalSystems.append_array(ship.assignedThrusters)
+	
+	var regions = $BreadthFirstSearcher.ExtractAllRegions(sectionsAndExternalSystems)
 	
 	for region in regions:
 		var newShip: Ship = $"..".CreateShipWithSections(region)

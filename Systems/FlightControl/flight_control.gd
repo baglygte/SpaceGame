@@ -7,7 +7,10 @@ var ship: Ship
 var isOverlayingSectorMap := false
 
 func _ready() -> void:
-	ship = get_tree().get_first_node_in_group("Ship")
+	SetShip(get_tree().get_first_node_in_group("Ship"))
+	
+func SetShip(shipToSet: Ship) -> void:
+	ship = shipToSet
 
 func ReceiveEnterExit(player: Player) -> void:
 	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")

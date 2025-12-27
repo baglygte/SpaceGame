@@ -21,7 +21,7 @@ func UpdateExternalWalls(ship) -> void:
 		DeleteWallsInSection(section)
 		
 		for angle in sectionAngles:
-			if HasSectionAtRotation(section.global_position, angle, ship):
+			if HasSectionAtRotation(section.position, angle, ship):
 				continue
 				
 			AddWallToSection(section, angle)
@@ -34,7 +34,7 @@ func HasSectionAtRotation(sectionCoordinates: Vector2, angle: float, ship: Ship)
 		
 		var coordinates = round(sectionCoordinates + rotatedVector)
 
-		if section.global_position == coordinates:
+		if section.position == coordinates:
 			return true
 	
 	return false
