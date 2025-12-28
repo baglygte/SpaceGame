@@ -50,7 +50,7 @@ func AddSystemAtPosition(system, positionToGet, rotationToGet, ship: Ship) -> vo
 	if system.get_parent() == null:
 		ship.get_node("ExternalSystems").add_child(system)
 	else:
-		system.reparent(ship.get_node("ExternalSystems"))
+		system.reparent(ship.get_node("ExternalSystems"), true)
 	
 	system.position = positionToGet
 	system.rotation = rotationToGet

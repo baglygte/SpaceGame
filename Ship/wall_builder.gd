@@ -41,5 +41,7 @@ func HasSectionAtRotation(sectionCoordinates: Vector2, angle: float, ship: Ship)
 
 func AddWallToSection(section: Node2D, angle: float) -> void:
 	var wall = wallScene.instantiate()
+	
 	wall.rotate(angle - section.rotation)
+	
 	section.add_child(wall)

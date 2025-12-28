@@ -17,6 +17,9 @@ func _physics_process(_delta: float) -> void:
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "ShipCreator"}
 	dictionaryToSave["id"] = shipId
+	dictionaryToSave["position.x"] = position.x
+	dictionaryToSave["position.y"] = position.y
+	dictionaryToSave["rotation"] = rotation
 	
 	dictionaryToSave["sections"] = []
 	
@@ -43,3 +46,10 @@ func AddSection(section: Node2D):
 
 func GetSections() -> Array[Node]:
 	return $Sections.get_children()
+
+func GetSectionsAndExternalSystems() -> Array[Node]:
+	var sections = GetSections()
+	
+	sections.append_array(assignedThrusters)
+	
+	return sections

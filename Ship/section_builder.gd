@@ -11,7 +11,7 @@ func CreateSectionAtPosition(sectionPosition: Vector2, sectionRotation: float) -
 	
 	return section
 
-func AddSectionToShip(section: Section, ship: Ship):
+func AddSectionToShip(section: Section, ship: Ship):	
 	ship.AddSection(section)
 	
 	for system in section.get_node("Systems").get_children():
@@ -22,25 +22,19 @@ func AddSectionToShip(section: Section, ship: Ship):
 	
 	$WallBuilder.UpdateExternalWalls(ship)
 
-func IsSectionPositionValid(positionToCheck: Vector2, ship: Ship) -> bool:
-	if IsPositionOccupied(positionToCheck, ship):
-		return false
-		
-	return true
-
-func IsPositionOccupied(positionToCheck: Vector2, ship: Ship) -> bool:
+func IsPositionOccupied(localPositionShip: Vector2, ship: Ship) -> bool:
 	for section in ship.GetSections():
-		if section.global_position == positionToCheck:
+		if section.position == localPositionShip:
 			return true
 		
 	return false
 
-func WillRemovalLeadToDisconnection(positionToCheck: Vector2, ship: Ship) -> bool:
-	var sections = ship.GetSections()
+func WillRemovalLeadToDisconnection(localPositionShip: Vector2, ship: Ship) -> bool:
+	var sections = ship.GetSectionsAndExternalSystems()
 	var copiedSections: Array[Node]
 	
 	for section in sections:
-		if section.position == positionToCheck:
+		if section.position == localPositionShip:
 			continue
 		copiedSections.append(section.duplicate())
 		
@@ -48,8 +42,8 @@ func WillRemovalLeadToDisconnection(positionToCheck: Vector2, ship: Ship) -> boo
 	
 	return numberOfRegions > 1
 
-func AddSectionAtPosition(section, positionToGet: Vector2, rotationToGet: float, ship: Ship) -> void:
-	section.global_position = positionToGet
+func AddSectionAtPosition(section, globalPositionToGet: Vector2, rotationToGet: float, ship: Ship) -> void:
+	section.global_position = globalPositionToGet
 	section.rotation = rotationToGet
 	
 	AddSectionToShip(section, ship)
@@ -76,19 +70,19 @@ func GetCenterOfMass() -> Vector2:
 	
 	return centerOfMass
 
-func ExtractSectionAtPosition(positionToRemove: Vector2, ship: Ship) -> Node2D:
-	if not IsPositionOccupied(positionToRemove, ship):
+func ExtractSectionAtPosition(localPositionOnShip: Vector2, ship: Ship) -> Node2D:
+	if not IsPositionOccupied(localPositionOnShip, ship):
 		return null
 		
 	var splitShip := false
 	
-	if WillRemovalLeadToDisconnection(positionToRemove, ship):
+	if WillRemovalLeadToDisconnection(localPositionOnShip, ship):
 		splitShip = true
 		
 	var extractedSection
 	
 	for section in ship.GetSections():	
-		if section.global_position != positionToRemove:
+		if section.position != localPositionOnShip:
 			continue
 			
 		ship.get_node("Sections").remove_child(section)
@@ -112,9 +106,7 @@ func CreateFromSave(variablesToSet: Dictionary, ship: Ship) -> void:
 		$"../InternalSystemBuilder".CreateFromSave(systemToSet, section)
 		
 func SplitShip(ship: Ship):
-	var sectionsAndExternalSystems = ship.GetSections()
-	
-	sectionsAndExternalSystems.append_array(ship.assignedThrusters)
+	var sectionsAndExternalSystems = ship.GetSectionsAndExternalSystems()
 	
 	var regions = $BreadthFirstSearcher.ExtractAllRegions(sectionsAndExternalSystems)
 	
@@ -131,20 +123,23 @@ func SplitShip(ship: Ship):
 	ship.queue_free()
 
 func IsPlayerInRegion(region: Array[Node], player: Player) -> bool:
-	for section in region:
-		var isRightOfEdge =  player.position.x >= section.position.x - 64.0/2
+	var playerPosition: Vector2 = player.global_position
+	for section: Node2D in region:
+		var sectionPosition: Vector2 = section.global_position
+		
+		var isRightOfEdge =  playerPosition.x >= sectionPosition.x - 64.0/2
 		if not isRightOfEdge:
 			continue
 			
-		var isLeftOfEdge =  player.position.x <= section.position.x + 64.0/2
+		var isLeftOfEdge =  playerPosition.x <= sectionPosition.x + 64.0/2
 		if not isLeftOfEdge:
 			continue
 		
-		var isAboveEdge = player.position.y >= section.position.y - 64.0/2
+		var isAboveEdge = playerPosition.y >= sectionPosition.y - 64.0/2
 		if not isAboveEdge:
 			continue
 		
-		var isBelowEdge = player.position.y <= section.position.y + 64.0/2
+		var isBelowEdge = playerPosition.y <= sectionPosition.y + 64.0/2
 		if not isBelowEdge:
 			continue
 		

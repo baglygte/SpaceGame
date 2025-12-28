@@ -18,16 +18,17 @@ func CreateShip() -> Ship:
 
 func CreateShipWithSections(sections: Array[Node]) -> Ship:
 	var ship: Ship = shipScene.instantiate()
+	ship.global_position = sections[0].global_position
 	
 	shipIdCounter += 1
 	ship.shipId = shipIdCounter
 	$"../GameWorld".add_child(ship)
 	
-	for section in sections:
+	for section: Node in sections:
 		if section.get_parent().name == "Sections":
 			$SectionBuilder.AddSectionToShip(section, ship)
 		elif section.get_parent().name == "ExternalSystems":
-			$ExternalSystemBuilder.AddSystemAtPosition(section, section.position, section.rotation, ship)
+			$ExternalSystemBuilder.AddSystemAtPosition(section, section.global_position - ship.position, section.rotation, ship)
 	
 	return ship
 
@@ -40,6 +41,8 @@ func CreateFromSave(variablesToSet: Dictionary):
 		shipIdCounter = shipIdtoGet + 1
 		
 	$"../GameWorld".add_child(ship)
+	ship.position = Vector2(variablesToSet["position.x"], variablesToSet["position.y"])
+	ship.rotation = variablesToSet["rotation"]
 	
 	for sectionVariables in variablesToSet["sections"]:
 		$SectionBuilder.CreateFromSave(sectionVariables, ship)

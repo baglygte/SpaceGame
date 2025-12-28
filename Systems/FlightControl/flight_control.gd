@@ -36,10 +36,14 @@ func ReceiveMovement(movementVector: Vector2) -> void:
 func ReceiveLook(lookVector: Vector2) -> void:
 	if lookVector.length() == 0:
 		return
-		
+
+	ship.apply_torque(lookVector.x * 10000)
+	
 	for thruster: Thruster in ship.assignedThrusters:
-		var forceToApply = thruster.GetThrustLookContribution(lookVector.x, ship)
-		ship.apply_force(forceToApply, thruster.position)
+		var _forceToApply = thruster.GetThrustLookContribution(lookVector.x, ship)
+		#ship.apply_force(forceToApply, thruster.position)
+	
+
 	
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary

@@ -28,16 +28,16 @@ func _process(_delta: float) -> void:
 		return
 	
 	previewPosition = GetPreviewPosition()
+	
+	var ship = player.get_parent()
 
-	sectionPreview.global_position = previewPosition
+	sectionPreview.global_position = previewPosition + ship.position
 	
 	sectionPreview.rotation = previewRotation - player.rotation
 	
 	var shadedColor = Vector4(255,0,0,0.5)
 	
-	var ship = player.get_parent()
-	
-	if sectionBuilder.IsSectionPositionValid(previewPosition, ship):
+	if not sectionBuilder.IsPositionOccupied(previewPosition, ship):
 		shadedColor = Vector4(0,255,0,0.5)
 		
 	sectionPreview.get_child(0).material.set("shader_parameter/shadedColor", shadedColor)
@@ -48,16 +48,14 @@ func RotateSection() -> void:
 		
 	previewRotation += PI/2
 	
-func GetPreviewPosition() -> Vector2:
-	var ship = player.get_parent()
-	
+func GetPreviewPosition() -> Vector2:	
 	var snappedRotation : int = snapped(rad_to_deg(player.rotation), 45)
 	
 	var snappedPlayerPosition : Vector2
 	
-	snappedPlayerPosition.x = ship.position.x + round((player.position.x/64))*64
+	snappedPlayerPosition.x = round((player.position.x/64))*64
 	
-	snappedPlayerPosition.y = ship.position.y + round((player.position.y/64))*64
+	snappedPlayerPosition.y = round((player.position.y/64))*64
 	
 	var previewOffset: Vector2 = previewOffsetMap[snappedRotation]
 	
@@ -111,7 +109,6 @@ func Use() -> void:
 
 func PickUpSection() -> void:
 	previewPosition = GetPreviewPosition()
-	print(previewPosition)
 
 	var ship = player.get_parent()
 	
@@ -127,9 +124,9 @@ func PlaceHeldSection() -> void:
 		
 	var ship = player.get_parent()
 	
-	if !sectionBuilder.IsSectionPositionValid(GetPreviewPosition(), ship):
+	if sectionBuilder.IsPositionOccupied(GetPreviewPosition(), ship):
 		return
 
 	mainHand.LoseItem()
 
-	sectionBuilder.AddSectionAtPosition(section, GetPreviewPosition() - ship.position, previewRotation, ship)	
+	sectionBuilder.AddSectionAtPosition(section, GetPreviewPosition(), previewRotation, ship)	
