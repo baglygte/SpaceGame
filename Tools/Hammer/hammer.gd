@@ -30,8 +30,8 @@ func _process(_delta: float) -> void:
 	previewPosition = GetPreviewPosition()
 	
 	var ship = player.get_parent()
-
-	sectionPreview.global_position = previewPosition + ship.position
+	
+	sectionPreview.global_position = ship.position + previewPosition.rotated(ship.rotation)
 	
 	sectionPreview.rotation = previewRotation - player.rotation
 	
@@ -74,16 +74,19 @@ func UpdatePreviewTexture() -> void:
 
 func Equip() -> void:
 	isEquipped = true
-	#hide()
-	
+
 	player = get_parent().get_parent()
+	
 	player.get_node("PlayerReach").AddHoverGroup("HammerCanEdit")
-	#sectionPreview.reparent(ship)
+	
+	#sectionPreview.reparent(player.get_parent(), true)
+	
 	sectionPreview.rotation = 0
 
 	UpdatePreviewTexture()
 		
 	mainHand.itemWasPickedUp.connect(UpdatePreviewTexture)
+	
 	mainHand.itemWasDropped.connect(UpdatePreviewTexture)
 	
 func Unequip() -> void:

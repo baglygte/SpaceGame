@@ -46,13 +46,13 @@ func CreateFromSave(variablesToSet: Dictionary, ship: Ship) -> void:
 	
 	AddSystemAtPosition(instance, positionToGet, rotationToGet, ship)
 
-func AddSystemAtPosition(system, positionToGet, rotationToGet, ship: Ship) -> void:
+func AddSystemAtPosition(system, localPosition, rotationToGet, ship: Ship) -> void:
 	if system.get_parent() == null:
 		ship.get_node("ExternalSystems").add_child(system)
 	else:
 		system.reparent(ship.get_node("ExternalSystems"), true)
 	
-	system.position = positionToGet
+	system.position = localPosition
 	system.rotation = rotationToGet
 	
 	if system is Thruster:

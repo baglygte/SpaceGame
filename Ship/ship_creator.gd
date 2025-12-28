@@ -16,9 +16,10 @@ func CreateShip() -> Ship:
 	
 	return ship
 
-func CreateShipWithSections(sections: Array[Node]) -> Ship:
+func CreateShipWithSections(sections: Array[Node], globalPositionToGet: Vector2, rotationToGet: float) -> Ship:
 	var ship: Ship = shipScene.instantiate()
-	ship.global_position = sections[0].global_position
+	ship.global_position = globalPositionToGet
+	ship.rotation = rotationToGet
 	
 	shipIdCounter += 1
 	ship.shipId = shipIdCounter
@@ -28,7 +29,7 @@ func CreateShipWithSections(sections: Array[Node]) -> Ship:
 		if section.get_parent().name == "Sections":
 			$SectionBuilder.AddSectionToShip(section, ship)
 		elif section.get_parent().name == "ExternalSystems":
-			$ExternalSystemBuilder.AddSystemAtPosition(section, section.global_position - ship.position, section.rotation, ship)
+			$ExternalSystemBuilder.AddSystemAtPosition(section, section.position, section.rotation, ship)
 	
 	return ship
 

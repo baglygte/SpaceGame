@@ -111,7 +111,7 @@ func SplitShip(ship: Ship):
 	var regions = $BreadthFirstSearcher.ExtractAllRegions(sectionsAndExternalSystems)
 	
 	for region in regions:
-		var newShip: Ship = $"..".CreateShipWithSections(region)
+		var newShip: Ship = $"..".CreateShipWithSections(region, ship.position, ship.rotation)
 		
 		for child in ship.get_children():
 			if not child is Player:
