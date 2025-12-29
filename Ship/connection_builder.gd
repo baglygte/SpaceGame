@@ -4,21 +4,38 @@ extends Node
 var connectionSets : Array
 const connectionScene = preload("res://Ship/system_connection.tscn")
 
+func BreakConnection(connection: SystemConnection):
+	var signalerA = GetSignaler(connection.systemA)
+	
+	var signalerB = GetSignaler(connection.systemB)
+	
+	if signalerA is SignalEmitter:
+		signalerA.RemoveReciever(signalerB)
+	elif signalerB is SignalEmitter:
+		signalerB.RemoveReciever(signalerA)
+	
+	
 func ConnectSystems(systemA, systemB, ship: Ship) -> void:
 	var connection: SystemConnection = connectionScene.instantiate()
-	ship.get_node("Connections").add_child(connection)
+	
+	ship.AddConnection(connection)
 	
 	connection.add_point(systemA.global_position)
+	
 	connection.add_point(systemB.global_position)
+	
 	connection.systemA = systemA
+	
 	connection.systemB = systemB
 	
 	connectionSets.append(connection)
 	
 	if systemA.has_method("OnConnection"): systemA.OnConnection(systemB)
+	
 	if systemB.has_method("OnConnection"): systemB.OnConnection(systemA)
 		
 	var signalerA = GetSignaler(systemA)
+	
 	var signalerB = GetSignaler(systemB)
 	
 	if signalerA is SignalEmitter:

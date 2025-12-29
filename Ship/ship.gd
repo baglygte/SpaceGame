@@ -42,8 +42,16 @@ func AddSection(section: Node2D):
 	if section.get_parent() == null:
 		$Sections.add_child(section)
 	else:
-		section.reparent($Sections, true)
+		section.reparent($Sections)
+	
+	section.position = round(section.position) # To mitigate problems when converting from global to local coordinates	
 
+func AddConnection(connection: SystemConnection):
+	if connection.get_parent() == null:
+		$Connections.add_child(connection)
+	else:
+		connection.reparent($Connections, true)
+	
 func GetSections() -> Array[Node]:
 	return $Sections.get_children()
 
@@ -53,3 +61,6 @@ func GetSectionsAndExternalSystems() -> Array[Node]:
 	sections.append_array(assignedThrusters)
 	
 	return sections
+
+func GetConnections() -> Array[Node]:
+	return $Connections.get_children()

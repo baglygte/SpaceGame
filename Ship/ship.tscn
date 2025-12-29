@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx871mn3f8xhp"]
+[gd_scene load_steps=2 format=3 uid="uid://bx871mn3f8xhp"]
 
 [ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="1_1p84g"]
-[ext_resource type="Texture2D" uid="uid://dlgqxk7hyte2d" path="res://Sprites/ammoDepot.png" id="2_q4ev1"]
 
 [node name="Ship" type="RigidBody2D" groups=["MustBeSaved", "Ship"]]
 gravity_scale = 0.0
@@ -13,6 +12,3 @@ script = ExtResource("1_1p84g")
 [node name="ExternalSystems" type="Node2D" parent="."]
 
 [node name="Connections" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_q4ev1")

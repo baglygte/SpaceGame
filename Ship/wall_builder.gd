@@ -8,11 +8,8 @@ func DeleteWallsInSection(section: Node2D) -> void:
 	var sectionChildren = section.get_children()
 	
 	for child in sectionChildren:
-		
-		if not child.is_in_group("Wall"):
-			continue
-			
-		child.queue_free()
+		if child.is_in_group("Wall"):
+			child.queue_free()
 	
 func UpdateExternalWalls(ship) -> void:
 	var sections = ship.GetSections()
@@ -29,11 +26,11 @@ func UpdateExternalWalls(ship) -> void:
 func HasSectionAtRotation(sectionCoordinates: Vector2, angle: float, ship: Ship) -> bool:
 	var sections = ship.GetSections()
 	
+	var rotatedVector = Vector2(64,0).rotated(angle)
+	
+	var coordinates = round(sectionCoordinates + rotatedVector)
+	
 	for section in sections:
-		var rotatedVector = Vector2(64,0).rotated(angle)
-		
-		var coordinates = round(sectionCoordinates + rotatedVector)
-
 		if section.position == coordinates:
 			return true
 	

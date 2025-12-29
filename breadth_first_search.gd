@@ -9,7 +9,7 @@ const sectorWidth: float = 64
 
 func GetNumberOfRegions(sections: Array[Node]) -> int:
 	var regions: Array[Array] = ExtractAllRegions(sections)
-	print(regions.size())
+
 	return regions.size()
 
 func ExtractAllRegions(sections: Array[Node]) -> Array[Array]:

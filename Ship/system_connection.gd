@@ -11,3 +11,10 @@ func GetSaveData() -> Dictionary:
 	dictionaryToSave["systemBId"] = systemB.globalId
 	
 	return dictionaryToSave
+
+func Kill():
+	var builder = get_tree().get_first_node_in_group("ShipCreator").get_node("ConnectionBuilder")
+	
+	builder.BreakConnection(self)
+	
+	queue_free()

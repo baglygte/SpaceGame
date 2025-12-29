@@ -3,7 +3,11 @@ extends Node2D
 
 var signalReceivers: Array
 
-func AddReceiver(reciever) -> void:
+func RemoveReciever(receiver: SignalReceiver):
+	var recieverIndex = signalReceivers.find(receiver)
+	signalReceivers.remove_at(recieverIndex)
+	
+func AddReceiver(reciever: SignalReceiver):
 	signalReceivers.append(reciever)
 	
 func SendMoveSignal(vector: Vector2) -> void:
