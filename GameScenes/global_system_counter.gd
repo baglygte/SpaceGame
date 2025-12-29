@@ -4,13 +4,14 @@ extends Node2D
 var counterValue: int = 1
 
 func GetSystemFromId(id: int) -> Node2D:
-	var internalSystem = $"../Ship/SectionBuilder/InternalSystemBuilder".GetSystemFromId(id)
-	var externalSystem = $"../Ship/ExternalSystemBuilder".GetSystemFromId(id)
-	
-	if internalSystem != null:
-		return internalSystem
+	for ship in get_tree().get_nodes_in_group("Ship"):
+		var internalSystem = $"../ShipCreator/InternalSystemBuilder".GetSystemFromId(id, ship)
+		var externalSystem = $"../ShipCreator/ExternalSystemBuilder".GetSystemFromId(id, ship)
 		
-	if externalSystem != null:
-		return externalSystem
-		
+		if internalSystem != null:
+			return internalSystem
+			
+		if externalSystem != null:
+			return externalSystem
+			
 	return null

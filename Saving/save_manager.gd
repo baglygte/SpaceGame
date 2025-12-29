@@ -24,15 +24,17 @@ func SaveGame() -> void:
 func LoadGame() -> void:
 	ReadFile()
 	
+	LoadObjectsOfCreator("ShipCreator")
+	
 	LoadObjectsOfCreator("PlayerCreator")
-	
-	LoadObjectsOfCreator("SectionBuilder")
-	
+
+	#LoadObjectsOfCreator("SectionBuilder")
+	#
 	LoadObjectsOfCreator("InternalSystemBuilder")
-	
-	LoadObjectsOfCreator("ExternalSystemBuilder")
-	
-	LoadObjectsOfCreator("ConnectionBuilder")
+	#
+	#LoadObjectsOfCreator("ExternalSystemBuilder")
+	#
+	#LoadObjectsOfCreator("ConnectionBuilder")
 
 func ReadFile() -> void:
 	var save_file = FileAccess.open(savePath, FileAccess.READ)

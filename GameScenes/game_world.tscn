@@ -1,45 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0xa3n8ogb0wy"]
+[gd_scene load_steps=2 format=3 uid="uid://d0xa3n8ogb0wy"]
 
 [ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://game_world.gd" id="1_fk3ie"]
-[ext_resource type="Script" uid="uid://lfy02wtbmoc0" path="res://Ship/ship.gd" id="1_mx2ei"]
-[ext_resource type="Script" uid="uid://dl8qra4nvhch4" path="res://Ship/section_builder.gd" id="2_x6rgt"]
-[ext_resource type="Script" uid="uid://d0pmrbwvyke8v" path="res://Ship/wall_builder.gd" id="3_jdlxa"]
-[ext_resource type="Script" uid="uid://7bp6m8is2glc" path="res://Ship/internal_system_builder.gd" id="4_nbq6r"]
-[ext_resource type="Script" uid="uid://cpsruny863qje" path="res://Ship/connection_builder.gd" id="5_fk3ie"]
-[ext_resource type="Script" uid="uid://bxxhfivskxbb1" path="res://Ship/external_system_builder.gd" id="6_uxwsy"]
-[ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="8_nbq6r"]
-[ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="9_fk3ie"]
-[ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="10_uxwsy"]
 
 [node name="GameWorld" type="SubViewport"]
 use_hdr_2d = true
 script = ExtResource("1_fk3ie")
-
-[node name="Ship" type="RigidBody2D" parent="." groups=["Ship"]]
-gravity_scale = 0.0
-center_of_mass_mode = 1
-script = ExtResource("1_mx2ei")
-
-[node name="SectionBuilder" type="Node2D" parent="Ship" groups=["SectionBuilder"]]
-script = ExtResource("2_x6rgt")
-
-[node name="WallBuilder" type="Node2D" parent="Ship/SectionBuilder"]
-script = ExtResource("3_jdlxa")
-
-[node name="InternalSystemBuilder" type="Node2D" parent="Ship/SectionBuilder" groups=["InternalSystemBuilder"]]
-script = ExtResource("4_nbq6r")
-
-[node name="ConnectionBuilder" type="Node2D" parent="Ship" groups=["ConnectionBuilder"]]
-script = ExtResource("5_fk3ie")
-
-[node name="ExternalSystemBuilder" type="Node2D" parent="Ship" groups=["ExternalSystemBuilder"]]
-script = ExtResource("6_uxwsy")
-
-[node name="ContainedItemCreator" type="Node2D" parent="." groups=["ContainedItemCreator"]]
-script = ExtResource("9_fk3ie")
-
-[node name="GlobalSystemCounter" type="Node2D" parent="."]
-script = ExtResource("10_uxwsy")
-
-[node name="PlayerCreator" type="Node2D" parent="." groups=["PlayerCreator"]]
-script = ExtResource("8_nbq6r")

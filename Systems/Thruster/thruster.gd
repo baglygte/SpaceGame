@@ -54,7 +54,7 @@ func GetThrustLookContribution(lookMagnitude: float, ship: Ship) -> Vector2:
 	return contribution * strength * abs(lookMagnitude) * strength
 
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "ExternalSystemBuilder"}
+	var dictionaryToSave: Dictionary
 	
 	dictionaryToSave["systemType"] = "thruster"
 	dictionaryToSave["position.x"] = position.x

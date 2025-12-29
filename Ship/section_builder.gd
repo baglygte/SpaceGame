@@ -1,28 +1,44 @@
 class_name SectionBuilder
-extends Node2D
+extends Node
 
 var sectionMap: Dictionary
 var sectionScene =  preload("res://Sections/section.tscn")
 
-func IsSectionPositionValid(positionToCheck: Vector2) -> bool:
-	if IsPositionOccupied(positionToCheck):
-		return false
-	return true
+func CreateSectionAtPosition(sectionPosition: Vector2, sectionRotation: float) -> Section:
+	var section: Section = sectionScene.instantiate()
+	section.position = sectionPosition
+	section.rotation = sectionRotation
+	
+	return section
 
-func IsPositionOccupied(positionToCheck: Vector2) -> bool:
-	return positionToCheck in sectionMap.values()
+func AddSectionToShip(section: Section, ship: Ship):
+	ship.AddSection(section)
 	
-func AddSectionAtPosition(section, positionToGet: Vector2, rotationToGet: float) -> void:
-	add_child(section)
-	section.position = positionToGet
+	for system in section.get_node("Systems").get_children():
+		if not system.has_method("SetShip"):
+			continue
+			
+		system.SetShip(ship)
+	
+	$WallBuilder.UpdateExternalWalls(ship)
+
+func IsPositionOccupied(localPositionShip: Vector2, ship: Ship) -> bool:
+	for section in ship.GetSections():
+		if section.position == localPositionShip:
+			return true
+		
+	return false
+
+func AddSectionAtPosition(section, globalPositionToGet: Vector2, rotationToGet: float, ship: Ship) -> void:
+	section.global_position = globalPositionToGet
 	section.rotation = rotationToGet
-	sectionMap[section] = positionToGet
-	$WallBuilder.UpdateExternalWalls()
+
+	AddSectionToShip(section, ship)
 	
-	$"..".center_of_mass = GetCenterOfMass()
-	
-	var distance: float = ($"..".center_of_mass - section.position).length()
-	$"..".inertia += section.mass * pow(distance,2)
+	#$"..".center_of_mass = GetCenterOfMass()
+	#
+	#var distance: float = ($"..".center_of_mass - section.position).length()
+	#$"..".inertia += section.mass * pow(distance,2)
 
 func GetCenterOfMass() -> Vector2:
 	var totalMass: float = 0
@@ -41,24 +57,37 @@ func GetCenterOfMass() -> Vector2:
 	
 	return centerOfMass
 
-func ExtractSectionAtPosition(positionToRemove: Vector2) -> Node2D:
-	if not IsPositionOccupied(positionToRemove):
+func ExtractSectionAtPosition(localPositionOnShip: Vector2, ship: Ship) -> Node2D:
+	if not IsPositionOccupied(localPositionOnShip, ship):
 		return null
-	
-	for section in sectionMap.keys():
-		var sectionPosition = sectionMap[section]
 		
-		if sectionPosition == positionToRemove:
-			$"..".RemoveSection(section)
-			sectionMap.erase(section)
-			$WallBuilder.UpdateExternalWalls()
-			return section
+	var splitShip := false
 	
-	return null
+	if $"../ShipSplitter".WillRemovalLeadToDisconnection(localPositionOnShip, ship):
+		splitShip = true
+		
+	var extractedSection
 	
-func CreateFromSave(variablesToSet: Dictionary) -> void:
+	for section in ship.GetSections():	
+		if section.position != localPositionOnShip:
+			continue
+			
+		ship.get_node("Sections").remove_child(section)
+		$WallBuilder.UpdateExternalWalls(ship)
+		extractedSection = section
+		break
+	
+	if splitShip:
+		$"../ShipSplitter".SplitShip(ship)
+		
+	return extractedSection
+	
+func CreateFromSave(variablesToSet: Dictionary, ship: Ship) -> void:
 	var section = sectionScene.instantiate()
 	var positionToGet = Vector2(variablesToSet["position.x"], variablesToSet["position.y"])
 	var rotationToGet = variablesToSet["rotation"]
 	
-	AddSectionAtPosition(section, positionToGet, rotationToGet)
+	AddSectionAtPosition(section, positionToGet, rotationToGet,ship)
+	
+	for systemToSet in variablesToSet["internalSystems"]:
+		$"../InternalSystemBuilder".CreateFromSave(systemToSet, section)

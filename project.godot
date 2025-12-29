@@ -46,6 +46,8 @@ FlightControlOverlay=""
 RocketRecipes=""
 SoundSystem=""
 PlayerHuds=""
+ShipCreator=""
+PliersCanEdit=""
 
 [input]
 

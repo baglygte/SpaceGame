@@ -21,11 +21,18 @@ func GetSystemFromId(id: int) -> Node2D:
 	return null
 	
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "SectionBuilder"}
+	var dictionaryToSave: Dictionary
 	
 	dictionaryToSave["position.x"] = position.x
 	dictionaryToSave["position.y"] = position.y
 	dictionaryToSave["rotation"] = rotation
+	
+	var internalSystemDictionary: Array
+	
+	for internalSystem in $Systems.get_children():
+		internalSystemDictionary.append(internalSystem.GetSaveData())
+	
+	dictionaryToSave["internalSystems"] = internalSystemDictionary
 	
 	return dictionaryToSave
 

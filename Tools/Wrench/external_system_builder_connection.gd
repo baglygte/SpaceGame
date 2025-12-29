@@ -12,8 +12,10 @@ const previewOffsetMap: Dictionary = {-180: Vector2(-64,0),
 										135: Vector2(-64,64),
 										180: Vector2(-64,0)}
 										
-func initialize() -> void:
-	externalSystemBuilder = $"..".ship.get_node("ExternalSystemBuilder")
+var ship: Ship
+func initialize(inputShip: Ship) -> void:
+	externalSystemBuilder = get_tree().get_first_node_in_group("ShipCreator").get_node("ExternalSystemBuilder")
+	ship = inputShip
 
 func GetPreviewPosition() -> Vector2:	
 	var snappedRotation : int = snapped(rad_to_deg($"..".player.rotation), 45)
@@ -32,7 +34,7 @@ func PlaceHeldSystem(system, angle: float) -> void:
 	if !externalSystemBuilder.IsSystemPositionValid(previewPosition):
 		return
 	
-	externalSystemBuilder.AddSystemAtPosition(system, previewPosition, angle)	
+	externalSystemBuilder.AddSystemAtPosition(system, previewPosition, angle, ship)	
 	
 	$"..".mainHand.LoseItem()
 

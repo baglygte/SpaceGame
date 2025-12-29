@@ -20,6 +20,15 @@ func UseHeldTool():
 	
 	heldTool.Use()
 
+func Modify() -> void:
+	if heldTool == null:
+		return
+	
+	if heldTool is Hammer:
+		heldTool.RotateSection()
+	if heldTool is Wrench:
+		heldTool.RotateSystem()
+
 func UpdateHud() -> void:
 	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
 	playerHuds.AddItemToHands(get_parent(), name, heldTool.get_node("Sprite2D").texture)

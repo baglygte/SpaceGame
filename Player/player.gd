@@ -22,8 +22,7 @@ func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:
 		return
 	
-	var ship = get_tree().get_first_node_in_group("Ship")
-	movementVector = movementVector.rotated(ship.rotation)
+	movementVector = movementVector.rotated(get_parent().rotation)
 	
 	velocity = movementVector * SPEED
 	move_and_slide()
@@ -54,6 +53,7 @@ func GetEnterExitArea() -> EnterExitArea:
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "PlayerCreator"}
 	
+	dictionaryToSave["shipId"] = get_parent().shipId
 	dictionaryToSave["position.x"] = position.x
 	dictionaryToSave["position.y"] = position.y
 	

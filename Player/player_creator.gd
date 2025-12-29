@@ -1,43 +1,56 @@
 extends Node2D
 class_name PlayerCreator
 
-const player = preload("res://player/player.tscn")
+const playerScene = preload("res://player/player.tscn")
 const cameraScene = preload("res://Player/player_camera.tscn")
 
 var playerCount: int = 0
 var playerPositionsToLoad: Array
 
-func CreateNewPlayers() -> void:
-	var deviceIds = get_tree().get_first_node_in_group("GameSceneManager").persistentData["deviceIds"]
+func GetAvailableDeviceId() -> int:
+	var sceneManager = get_tree().get_first_node_in_group("GameSceneManager")
+	var deviceId = sceneManager.persistentData["deviceIds"].pop_front()
 	
-	while deviceIds.size() > 0:
-		CreatePlayerInstance(deviceIds[0])
+	if deviceId == null:
+		deviceId = -1
 		
-		deviceIds.remove_at(0)
-		get_tree().get_first_node_in_group("GameSceneManager").persistentData["deviceIds"] = deviceIds
+	return deviceId
+
+func CreateNewPlayers(ship: Ship) -> void:
+	var deviceId = GetAvailableDeviceId()
+	
+	while deviceId != -1:
+		var player = CreatePlayerInstance(deviceId)
+		ship.add_child(player)
+		deviceId = GetAvailableDeviceId()
 
 func CreateFromSave(variablesToSet: Dictionary) -> void:
-	var skrt = Vector2(variablesToSet["position.x"], variablesToSet["position.y"])
-	playerPositionsToLoad.append(skrt)
-
-func CreatePlayerInstance(deviceId) -> Player:
-	var playerInstance: Player = player.instantiate()
+	var deviceId = GetAvailableDeviceId()
 	
-	if playerPositionsToLoad.size() > 0:
-		playerInstance.position = playerPositionsToLoad[0]
-		playerPositionsToLoad.remove_at(0)
+	if deviceId == -1:
+		return
+	
+	var player = CreatePlayerInstance(deviceId)
+	player.position = Vector2(variablesToSet["position.x"], variablesToSet["position.y"])
+	
+	var shipCreator: ShipCreator = get_tree().get_first_node_in_group("ShipCreator")
+	var ship = shipCreator.FindShipWithId(variablesToSet["shipId"])
+	ship.add_child(player)
+	
+func CreatePlayerInstance(deviceId: int) -> Player:
+	var player: Player = playerScene.instantiate()
 	
 	playerCount += 1
 	
 	if playerCount == 2:
-		playerInstance.viewSide = "Right"
+		player.viewSide = "Right"
 		
 	var camera = cameraScene.instantiate()
-	camera.connectedPlayer = playerInstance
+	camera.connectedPlayer = player
 	
 	get_tree().root.get_node("MasterScene/Game/HUD/PlayerViewports").AddPlayerCamera(camera, playerCount)
 	
-	playerInstance.get_node("PlayerInputListener").deviceId = deviceId
-	$"../Ship".add_child(playerInstance)
-	get_tree().get_first_node_in_group("HUD").CreatePlayerHud(playerInstance)
-	return playerInstance
+	player.get_node("PlayerInputListener").deviceId = deviceId
+	get_tree().get_first_node_in_group("HUD").CreatePlayerHud(player)
+	
+	return player

@@ -90,6 +90,7 @@ func SetDefaultInputs() -> void:
 	selectToolPressed.connect($"..".ShowWheel)
 	selectToolReleased.connect($"..".HideWheel)
 	useTool.connect($"../OffHand".UseHeldTool)
+	modify.connect($"../OffHand".Modify)
 
 func ClearAllSignals() -> void:
 	ClearInputSignal(moveSignal)
@@ -97,6 +98,7 @@ func ClearAllSignals() -> void:
 	
 	ClearInputSignal(interact)
 	ClearInputSignal(drop)
+	ClearInputSignal(modify)
 	
 	ClearInputSignal(selectToolPressed)
 	ClearInputSignal(selectToolReleased)

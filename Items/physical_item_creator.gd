@@ -15,13 +15,13 @@ func ExtractItemFromContainer(container: ItemContainer) -> Node2D:
 	
 	return extractedItem
 
-func SpawnItemInShip(item: Node2D, itemPosition: Vector2) -> void:
+func SpawnItemInShip(item: Node2D, itemPosition: Vector2, ship: Ship) -> void:
 	var itemContainer = CreateItemContainer(item)
 	
-	$"../Ship".add_child(itemContainer)
+	ship.add_child(itemContainer)
 	itemContainer.position = itemPosition
 
 func SpawnItemInWorld(item: Node2D, itemPosition: Vector2) -> void:
 	var itemContainer = CreateItemContainer(item)
-	$"..".add_child(itemContainer)
+	$"../GameWorld".add_child(itemContainer)
 	itemContainer.position = itemPosition
