@@ -31,7 +31,7 @@ func GetPreviewPosition() -> Vector2:
 func PlaceHeldSystem(system, angle: float) -> void:
 	var previewPosition = GetPreviewPosition()
 	
-	if !externalSystemBuilder.IsSystemPositionValid(previewPosition):
+	if not system.IsPlacePositionValid(previewPosition, ship):
 		return
 	
 	externalSystemBuilder.AddSystemAtPosition(system, previewPosition, angle, ship)	
@@ -44,7 +44,9 @@ func UpdatePreviewPosition(preview) -> void:
 	
 	var shadedColor = Vector4(255,0,0,0.5)
 	
-	if externalSystemBuilder.IsSystemPositionValid(preview.position):
+	var system = $"..".mainHand.heldItem
+	
+	if system.IsPlacePositionValid(preview.position, ship):
 		shadedColor = Vector4(0,255,0,0.5)
 		
 	sprite.material.set("shader_parameter/shadedColor", shadedColor)

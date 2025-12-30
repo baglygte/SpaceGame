@@ -19,8 +19,11 @@ func AddBlip(connection: SectorMapBlipConnector) -> void:
 		return
 		
 	var blip = GetBlip(connection.blipType)
+	
 	connection.wasKilled.connect(RemoveBlip)
+	
 	blips[connection] = blip
+	
 	$Control.add_child(blip)
 
 func RemoveBlip(connection: SectorMapBlipConnector) -> void:

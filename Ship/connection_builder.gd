@@ -14,15 +14,17 @@ func BreakConnection(connection: SystemConnection):
 	elif signalerB is SignalEmitter:
 		signalerB.RemoveReciever(signalerA)
 	
-	
 func ConnectSystems(systemA, systemB, ship: Ship) -> void:
+	if not ValidConnection(systemA, systemB):
+		return
+		
 	var connection: SystemConnection = connectionScene.instantiate()
 	
 	ship.AddConnection(connection)
+		
+	connection.add_point(systemA.position + systemA.get_parent().get_parent().position)
 	
-	connection.add_point(systemA.global_position)
-	
-	connection.add_point(systemB.global_position)
+	connection.add_point(systemB.position + systemB.get_parent().get_parent().position)
 	
 	connection.systemA = systemA
 	

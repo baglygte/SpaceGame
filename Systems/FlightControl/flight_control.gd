@@ -30,7 +30,7 @@ func ReceiveMovement(movementVector: Vector2) -> void:
 		var forceToApply = thruster.GetThrustMoveContribution(self, movementVector)
 		
 		forceToApply = forceToApply.rotated(ship.rotation)
-		
+
 		ship.apply_force(forceToApply, thruster.position)
 
 func ReceiveLook(lookVector: Vector2) -> void:

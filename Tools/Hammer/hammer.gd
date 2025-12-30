@@ -37,9 +37,20 @@ func _process(_delta: float) -> void:
 	
 	var shadedColor = Vector4(255,0,0,0.5)
 	
-	if not sectionBuilder.IsPositionOccupied(previewPosition, ship):
-		shadedColor = Vector4(0,255,0,0.5)
+	if mainHand.heldItem == null:
+		var positionHasSection = sectionBuilder.IsSectionAtPosition(previewPosition, ship) 
+		if not positionHasSection:
+			sectionPreview.hide()
+			return
+		else:
+			sectionPreview.show()
+			shadedColor = Vector4(0,255,0,0.5)
+	else:
+		sectionPreview.show() 
 		
+		if sectionBuilder.CanPlaceSectionAtPosition(previewPosition, ship):
+			shadedColor = Vector4(0,255,0,0.5)
+
 	sectionPreview.get_child(0).material.set("shader_parameter/shadedColor", shadedColor)
 
 func RotateSection() -> void:	
@@ -77,10 +88,6 @@ func Equip() -> void:
 
 	player = get_parent().get_parent()
 	
-	player.get_node("PlayerReach").AddHoverGroup("HammerCanEdit")
-	
-	#sectionPreview.reparent(player.get_parent(), true)
-	
 	sectionPreview.rotation = 0
 
 	UpdatePreviewTexture()
@@ -91,13 +98,15 @@ func Equip() -> void:
 	
 func Unequip() -> void:
 	isEquipped = false
-	#show()
 	
 	sectionPreview.hide()
+	
 	player.get_node("PlayerReach").RemoveHoverGroup("HammerCanEdit")
+	
 	player = null
 
 	mainHand.itemWasPickedUp.disconnect(UpdatePreviewTexture)
+	
 	mainHand.itemWasDropped.disconnect(UpdatePreviewTexture)
 
 func Use() -> void:
@@ -127,7 +136,7 @@ func PlaceHeldSection() -> void:
 		
 	var ship = player.get_parent()
 	
-	if sectionBuilder.IsPositionOccupied(GetPreviewPosition(), ship):
+	if not sectionBuilder.CanPlaceSectionAtPosition(GetPreviewPosition(), ship):
 		return
 
 	mainHand.LoseItem()

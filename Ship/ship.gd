@@ -13,7 +13,14 @@ func _physics_process(_delta: float) -> void:
 		return
 		
 	apply_central_force(moveDirection * 200)
-
+	
+func PositionHasSection(localPosition: Vector2) -> bool:
+	for section: Section in GetSections():
+		if section.position == localPosition:
+			return true
+	
+	return false
+	
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary = {"creator": "ShipCreator"}
 	dictionaryToSave["id"] = shipId
@@ -50,7 +57,7 @@ func AddConnection(connection: SystemConnection):
 	if connection.get_parent() == null:
 		$Connections.add_child(connection)
 	else:
-		connection.reparent($Connections, true)
+		connection.reparent($Connections)
 	
 func GetSections() -> Array[Node]:
 	return $Sections.get_children()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6d5ttlwacwny"]
+[gd_scene load_steps=14 format=3 uid="uid://b6d5ttlwacwny"]
 
-[ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://game_world.gd" id="1_q3a5i"]
+[ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://GameScenes/game_world.gd" id="1_q3a5i"]
 [ext_resource type="Script" uid="uid://d1dcepv2p8wv3" path="res://GameScenes/player_viewports.gd" id="2_fimsf"]
 [ext_resource type="Script" uid="uid://b8dweplwcbn40" path="res://GameScenes/player_huds.gd" id="4_i5gbp"]
 [ext_resource type="Script" uid="uid://bl3m0jtr0kvdb" path="res://HUD/hud.gd" id="6_68ns4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bpi5ko7fcipwy" path="res://Player/player_creator.gd" id="7_rcqf4"]
 [ext_resource type="Script" uid="uid://dpsvvnvmud5v8" path="res://Items/physical_item_creator.gd" id="8_g60ea"]
 [ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="9_q3a5i"]
+[ext_resource type="Script" uid="uid://do74rmf0cs88y" path="res://GameScenes/asteroid_creator.gd" id="10_w3as4"]
 [ext_resource type="Script" uid="uid://61tdi4g8q3rx" path="res://Audio/sound_system.gd" id="15_6ce2g"]
 
 [sub_resource type="Gradient" id="Gradient_55g6r"]
@@ -102,3 +103,6 @@ script = ExtResource("8_g60ea")
 
 [node name="GlobalSystemCounter" type="Node2D" parent="."]
 script = ExtResource("9_q3a5i")
+
+[node name="AsteroidCreator" type="Node" parent="."]
+script = ExtResource("10_w3as4")

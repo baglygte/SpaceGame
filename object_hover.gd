@@ -9,6 +9,7 @@ var hoverRequesters: Array[PlayerReach]
 
 func _ready():	
 	hoverArea.area_entered.connect(RequestHover)
+	
 	hoverArea.area_exited.connect(UnrequestHover)
 
 func RequestHover(area: Area2D) -> void:
@@ -19,6 +20,7 @@ func RequestHover(area: Area2D) -> void:
 		return
 		
 	hoverRequesters.append(area)
+	
 	ToggleShader()
 	
 func UnrequestHover(area: Area2D) -> void:

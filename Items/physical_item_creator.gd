@@ -19,6 +19,7 @@ func SpawnItemInShip(item: Node2D, itemPosition: Vector2, ship: Ship) -> void:
 	var itemContainer = CreateItemContainer(item)
 	
 	ship.add_child(itemContainer)
+	
 	itemContainer.position = itemPosition
 
 func SpawnItemInWorld(item: Node2D, itemPosition: Vector2) -> void:

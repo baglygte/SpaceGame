@@ -6,10 +6,15 @@ var ship: Ship
 
 func _ready() -> void:
 	player = get_parent().get_parent()
+	
 	mainHand = player.get_node("MainHand")
+	
 	ship = get_tree().get_first_node_in_group("Ship")
+	
 	hoverName = "Wrench"
+	
 	$InternalSystemBuilderConnection.initialize(ship)
+	
 	$ExternalSystemBuilderConnection.initialize(ship)
 
 func _process(_delta: float) -> void:
@@ -29,15 +34,20 @@ func Equip() -> void:
 	hide()
 	
 	player.get_node("PlayerReach").AddHoverGroup("InternalSystem")
+	
 	player.get_node("PlayerReach").AddHoverGroup("ExternalSystem")
 	
 	systemPreview.reparent(ship)
+	
 	systemPreview.show()
+	
 	systemPreview.rotation = 0
 	
-	mainHand.itemWasPickedUp.connect(UpdatePickedItem)
-	mainHand.itemWasDropped.connect(UpdatePickedItem)
-	UpdatePickedItem()
+	mainHand.itemWasPickedUp.connect(UpdatePreviewTexture)
+	
+	mainHand.itemWasDropped.connect(UpdatePreviewTexture)
+	
+	UpdatePreviewTexture()
 	
 func SetPreviewShaderColor(isSystemPositionValid: bool) -> void:
 	var shadedColor
@@ -59,12 +69,9 @@ func Unequip() -> void:
 	systemPreview.reparent(self)
 	systemPreview.hide()
 
-	mainHand.itemWasPickedUp.disconnect(UpdatePickedItem)
-	mainHand.itemWasDropped.disconnect(UpdatePickedItem)
-
-func UpdatePickedItem() -> void:
-	systemPreview.rotation = 0
-	UpdatePreviewTexture()
+	mainHand.itemWasPickedUp.disconnect(UpdatePreviewTexture)
+	
+	mainHand.itemWasDropped.disconnect(UpdatePreviewTexture)
 
 func Use() -> void:
 	if mainHand.heldItem == null:
@@ -78,11 +85,24 @@ func Use() -> void:
 
 func RotateSystem() -> void:
 	systemPreview.rotate(PI/2)
+	
+	mainHand.heldItem.rotate(PI/2)
 
 func PickUpSystem() -> void:
-	print("PickUpSystem")
+	var reach: PlayerReach = mainHand.get_parent().get_node("PlayerReach")
+	
+	var system = reach.GetNearestItemInGroup("WrenchCanEdit")
+	
+	if system == null:
+		return
+		
+	mainHand.PutItemIntoHand(system)
+	
+	system.rotation = 0
 
 func UpdatePreviewTexture() -> void:
+	systemPreview.rotation = 0
+	
 	var textureToGet: Texture = null
 	
 	if mainHand.heldItem == null:

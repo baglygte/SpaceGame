@@ -3,9 +3,11 @@ extends Node
 
 func CreateInternalSystem(scenePath: String) -> Node2D:
 	var instance = load(scenePath).instantiate()
+	
 	instance.globalId = $"../../GlobalSystemCounter".counterValue
 	
 	$"../../GlobalSystemCounter".counterValue += 1
+	
 	return instance
 
 func CreateFromSave(variablesToSet: Dictionary, section: Section) -> void:

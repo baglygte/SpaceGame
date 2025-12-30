@@ -19,7 +19,7 @@ initial_velocity_min = 109.45
 initial_velocity_max = 195.65999
 gravity = Vector3(0, 0, 0)
 
-[node name="Thruster" type="Node2D" groups=["ExternalSystem", "PliersCanEdit"]]
+[node name="Thruster" type="Node2D" groups=["ExternalSystem", "WrenchCanEdit"]]
 script = ExtResource("1_0hj6a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

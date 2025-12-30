@@ -22,9 +22,41 @@ func AddSectionToShip(section: Section, ship: Ship):
 	
 	$WallBuilder.UpdateExternalWalls(ship)
 
-func IsPositionOccupied(localPositionShip: Vector2, ship: Ship) -> bool:
+func CanPlaceSectionAtPosition(localPositionOnShip: Vector2, ship: Ship) -> bool:
+	if IsPositionOccupied(localPositionOnShip, ship):
+		return false
+
+	return IsNeighbouringSectorAtPosition(localPositionOnShip, ship)
+	
+func IsNeighbouringSectorAtPosition(localPositionOnShip: Vector2, ship: Ship) -> bool:
+	var sections = ship.GetSections()
+	
+	var positions: Array[Vector2]
+	
+	positions.append(localPositionOnShip + Vector2.UP * 64)
+	
+	positions.append(localPositionOnShip + Vector2.RIGHT * 64)
+	
+	positions.append(localPositionOnShip + Vector2.DOWN * 64)
+	
+	positions.append(localPositionOnShip + Vector2.LEFT * 64)
+	
+	for section: Section in sections:
+		if section.position in positions:
+			return true
+		
+	return false
+
+func IsSectionAtPosition(localPositionShip: Vector2, ship: Ship) -> bool:
 	for section in ship.GetSections():
 		if section.position == localPositionShip:
+			return true
+		
+	return false
+	
+func IsPositionOccupied(localPositionShip: Vector2, ship: Ship) -> bool:
+	for node in ship.GetSectionsAndExternalSystems():
+		if node.position == localPositionShip:
 			return true
 		
 	return false

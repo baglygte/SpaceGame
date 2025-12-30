@@ -38,7 +38,7 @@ modifications/0 = SubResource("SkeletonModification2DCCDIK_vqv8o")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbmh6"]
 size = Vector2(60, 41)
 
-[node name="GrabberArm" type="Node2D" groups=["ExternalSystem", "MustBeSaved"]]
+[node name="GrabberArm" type="Node2D" groups=["ExternalSystem"]]
 script = ExtResource("1_3ulfp")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]

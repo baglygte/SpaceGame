@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0xa3n8ogb0wy"]
 
-[ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://game_world.gd" id="1_fk3ie"]
+[ext_resource type="Script" uid="uid://cgt5j5xe5fe5a" path="res://GameScenes/game_world.gd" id="1_fk3ie"]
 
 [node name="GameWorld" type="SubViewport"]
 use_hdr_2d = true

@@ -47,7 +47,9 @@ RocketRecipes=""
 SoundSystem=""
 PlayerHuds=""
 ShipCreator=""
+WrenchCanEdit=""
 PliersCanEdit=""
+PipewrenchCanEdit=""
 
 [input]
 

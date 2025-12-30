@@ -19,6 +19,15 @@ func _ready() -> void:
 		reticle = reticleColliderScene.instantiate()
 		get_node("/root/MasterScene/Game/GameWorld").add_child(reticle)
 
+func IsPlacePositionValid(localPositionOnShip: Vector2, ship: Ship) -> bool:
+	var positionInFrontOfMe = localPositionOnShip + round(Vector2.UP.rotated(rotation)) * 64
+	
+	var isSectionInFront = ship.PositionHasSection(positionInFrontOfMe)
+	
+	var isSectionOnMe = ship.PositionHasSection(localPositionOnShip)
+	
+	return isSectionInFront and not isSectionOnMe
+	
 func ReceiveMovement(vector: Vector2) -> void:
 	reticle.position += vector * 100
 			
@@ -53,8 +62,7 @@ func ReceiveRightHand() -> void:
 
 	if lockedOnTarget == null:
 		return
-		
-		
+
 	#if !logNode.RemoveItem():
 		#return
 	
@@ -70,7 +78,7 @@ func ReceiveRightHand() -> void:
 	gameScene.add_child(rocket)
 
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "ExternalSystemBuilder"}
+	var dictionaryToSave: Dictionary
 	
 	dictionaryToSave["systemType"] = "gun"
 	dictionaryToSave["position.x"] = position.x

@@ -8,8 +8,6 @@ const flipHMap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1]
 const flipVMap = [0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
 const rotateMap = [0, 0, 0, -90, 90, 90, 0, 0, 0, 0, 0, -90, -90, -90, -90, 0]
 
-
-
 func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
 	compassSprite = $MarginContainer2/Control/CenterContainer/Sprite2D

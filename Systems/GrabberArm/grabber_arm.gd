@@ -3,6 +3,15 @@ var globalId: int
 const armLinkLength = 55
 var heldItem
 
+func IsPlacePositionValid(localPositionOnShip: Vector2, ship: Ship) -> bool:
+	var positionInFrontOfMe = localPositionOnShip + round(Vector2.UP.rotated(rotation)) * 64
+	
+	var isSectionInFront = ship.PositionHasSection(positionInFrontOfMe)
+	
+	var isSectionOnMe = ship.PositionHasSection(localPositionOnShip)
+	
+	return isSectionInFront and not isSectionOnMe
+
 func ReceiveMovement(vector: Vector2) -> void:
 	if vector.length() == 0:
 		return
@@ -41,13 +50,19 @@ func PickUpItem() -> void:
 	
 func DropItem() -> void:
 	var creator: ContainedItemCreator = get_tree().get_first_node_in_group("ContainedItemCreator")
+	
 	var positionToGet = $Skeleton2D/FirstArm/SecondArm/EndEffector/Node2D.global_position
-	creator.SpawnItemInShip(heldItem, positionToGet)
+	
+	var ship = get_parent().get_parent()
+	
+	creator.SpawnItemInShip(heldItem, positionToGet, ship)
+	
 	$Skeleton2D/FirstArm/SecondArm/EndEffector/Node2D.remove_child(heldItem)
+	
 	heldItem = null
 	
 func GetSaveData() -> Dictionary:
-	var dictionaryToSave: Dictionary = {"creator": "ExternalSystemBuilder"}
+	var dictionaryToSave: Dictionary
 	
 	dictionaryToSave["systemType"] = "grabberArm"
 	dictionaryToSave["position.x"] = position.x

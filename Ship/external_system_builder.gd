@@ -1,22 +1,19 @@
 class_name ExternalSystemBuilder
 extends Node
-
-func IsSystemPositionValid(_positionToCheck: Vector2) -> bool:
-	return true
 	
 func CreateExternalSystem(scenePath: String) -> Node2D:
 	var instance = load(scenePath).instantiate()
+	
 	instance.globalId = $"../../GlobalSystemCounter".counterValue
+	
 	$"../../GlobalSystemCounter".counterValue += 1
+	
 	return instance
 
 func GetSystemFromId(id: int, ship: Ship) -> Node2D:
 	var system = null
 	
-	for child in ship.get_children():
-		if !child.is_in_group("ExternalSystem"):
-			continue
-		
+	for child in ship.get_node("ExternalSystems").get_children():	
 		if child.globalId == id:
 			system = child
 			break

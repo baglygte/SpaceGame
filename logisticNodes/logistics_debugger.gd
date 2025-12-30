@@ -34,15 +34,12 @@ func _process(_delta: float) -> void:
 		signalGivetext = signalGivetext + ", " + str(get_parent().giveTo).substr(20,10)
 	signalGiveText.text = signalGivetext
 	
-	
-	
-
 func DrawHUD() -> void:
 	hud = get_node("/root/MasterScene/Game/HUD")
 	selfText = Label.new()
 	selfText.position.x = 50
 	selfText.position.y = 50
-	selfText.text = "Own ID: " + str(get_parent()).substr(20,10) + "     RT: Add Rocket, LT: Remove Rocket"
+	selfText.text = "Own ID: " + str(get_parent()).substr(20,10) + "     x: Add Rocket, o: Remove Rocket"
 	connectionText = Label.new()
 	connectionText.position.x = 50
 	connectionText.position.y = 90

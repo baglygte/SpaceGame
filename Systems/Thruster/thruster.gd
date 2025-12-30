@@ -8,6 +8,15 @@ var isContributing: bool = false
 func _process(_delta: float) -> void:
 	$GPUParticles2D.emitting = false
 	
+func IsPlacePositionValid(localPositionOnShip: Vector2, ship: Ship) -> bool:
+	var positionInFrontOfMe = localPositionOnShip + round(Vector2.UP.rotated(rotation)) * 64
+	
+	var isSectionInFront = ship.PositionHasSection(positionInFrontOfMe)
+	
+	var isSectionOnMe = ship.PositionHasSection(localPositionOnShip)
+	
+	return isSectionInFront and not isSectionOnMe
+
 func GetThrustMoveContribution(flightControl: FlightControl, movementVector: Vector2) -> Vector2:
 	var contribution = Vector2.UP.rotated(rotation)
 	var rotatedMovement = movementVector.rotated(flightControl.rotation)
