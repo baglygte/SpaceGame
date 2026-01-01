@@ -12,6 +12,9 @@ func AddSystem(system) -> void:
 		$Systems.add_child(system)
 	else:
 		system.reparent($Systems)
+	
+	if system.has_method("SetShip"):
+		system.SetShip(get_parent().get_parent())
 
 func GetSystemFromId(id: int) -> Node2D:
 	for child in $Systems.get_children():
@@ -44,7 +47,10 @@ func Kill() -> void:
 			continue
 			
 		system.Kill()
-		
+	
+	var builder = get_tree().get_first_node_in_group("ShipCreator").get_node("SectionBuilder")
+	builder.DestroySection(self)
+	
 	queue_free()
 
 func IsPositionOnMe(positionToCheck: Vector2) -> bool:

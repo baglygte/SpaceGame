@@ -1,7 +1,9 @@
+# Can send a signal (stemming from player input) to an array of connected
+# signal receivers
 class_name SignalEmitter
 extends Node2D
 
-var signalReceivers: Array
+var signalReceivers: Array[SignalReceiver]
 
 func RemoveReciever(receiver: SignalReceiver):
 	var recieverIndex = signalReceivers.find(receiver)
@@ -15,8 +17,6 @@ func SendMoveSignal(vector: Vector2) -> void:
 		return
 		
 	for receiver in signalReceivers:
-		if receiver is SignalEmitter:
-			continue
 		receiver.ReceiveMovement(vector)
 
 func SendLookSignal(vector: Vector2) -> void:
@@ -24,8 +24,6 @@ func SendLookSignal(vector: Vector2) -> void:
 		return
 		
 	for receiver in signalReceivers:
-		if receiver is SignalEmitter:
-			continue
 		receiver.ReceiveLook(vector)
 
 func SendLeftHandSignal() -> void:

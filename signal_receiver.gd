@@ -1,3 +1,5 @@
+# Can receive signals from signal emitters. The emitters query these methods
+# which are connected to methods in the parent node
 class_name SignalReceiver
 extends Node2D
 

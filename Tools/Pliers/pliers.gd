@@ -38,12 +38,10 @@ func Use() -> void:
 		
 	if signalerToLink == null:
 		signalerToLink = systemInReach
-		
-		if signalerToLink != null:
-			line = lineScene.instantiate()
-			ship.add_child(line)
-			line.add_point(position)
-			line.add_point(signalerToLink.global_position + ship.position)
+		line = lineScene.instantiate()
+		ship.add_child(line)
+		line.add_point(position)
+		line.add_point(signalerToLink.global_position + ship.position)
 	else:
 		EstablishLink(systemInReach)
 	

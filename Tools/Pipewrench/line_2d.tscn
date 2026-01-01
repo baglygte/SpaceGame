@@ -1,4 +1,4 @@
 [gd_scene format=3 uid="uid://dgbm034hf2aa2"]
 
 [node name="Line2D" type="Line2D"]
-default_color = Color(0.93339616, 0.37441203, 0.37301406, 1)
+default_color = Color(0.10765619, 0.6043283, 0.96977895, 1)

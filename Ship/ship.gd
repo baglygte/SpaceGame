@@ -65,7 +65,7 @@ func GetSections() -> Array[Node]:
 func GetSectionsAndExternalSystems() -> Array[Node]:
 	var sections = GetSections()
 	
-	sections.append_array(assignedThrusters)
+	sections.append_array($ExternalSystems.get_children())
 	
 	return sections
 

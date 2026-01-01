@@ -3,11 +3,15 @@ extends Node
 
 func SplitShip(ship: Ship):
 	var sectionsAndExternalSystems = ship.GetSectionsAndExternalSystems()
-	
+
 	var regions = $BreadthFirstSearcher.ExtractAllRegions(sectionsAndExternalSystems)
+	
+	var originalVelocity = ship.linear_velocity
 	
 	for region in regions:
 		var newShip: Ship = $"..".CreateShipWithSections(region, ship.position, ship.rotation)
+		
+		newShip.linear_velocity = originalVelocity
 		
 		for section: Section in newShip.GetSections():
 			for system in section.get_node("Systems").get_children():
@@ -20,11 +24,13 @@ func SplitShip(ship: Ship):
 				
 			if IsPlayerInRegion(region, child):
 				child.reparent(newShip)
+				var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
+				playerHuds.RefreshOverlaysWithNewShip(child.viewSide, newShip)
 	
 	for connection in ship.GetConnections():
-		var aShip = connection.systemA.get_parent().get_parent().get_parent().get_parent()
+		var aShip = GetSystemShip(connection.systemA)
 		
-		var bShip = connection.systemB.get_parent().get_parent().get_parent().get_parent()
+		var bShip = GetSystemShip(connection.systemB)
 		
 		if aShip == bShip:
 			aShip.AddConnection(connection)
@@ -32,6 +38,12 @@ func SplitShip(ship: Ship):
 			connection.Kill()
 			
 	ship.queue_free()
+
+func GetSystemShip(system) -> Ship:
+	if system.get_parent().get_parent() is Section:
+		return system.get_parent().get_parent().get_parent().get_parent()
+	else:
+		return system.get_parent().get_parent()
 
 func IsPlayerInRegion(region: Array[Node], player: Player) -> bool:
 	var playerPosition: Vector2 = player.global_position

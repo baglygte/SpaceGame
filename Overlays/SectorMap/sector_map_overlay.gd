@@ -6,14 +6,15 @@ var ship: Ship
 
 const visibleRange: float = 10000
 		
-func _ready() -> void:
-	ship = get_tree().get_first_node_in_group("Ship")
-	
+func _ready() -> void:	
 	var blipConnectors = get_tree().get_nodes_in_group("BlipConnector")
 	
 	for blipConnector: SectorMapBlipConnector in blipConnectors:
 		AddBlip(blipConnector)
-	
+
+func SetShip(shipToSet: Ship):
+	ship = shipToSet
+
 func AddBlip(connection: SectorMapBlipConnector) -> void:
 	if connection.blipType == null:
 		return
@@ -33,7 +34,6 @@ func RemoveBlip(connection: SectorMapBlipConnector) -> void:
 func _process(_delta: float) -> void:
 	for connection in blips.keys():
 		UpdateBlipPosition(connection)
-
 
 func UpdateBlipPosition(connection):
 	var blip = blips[connection]

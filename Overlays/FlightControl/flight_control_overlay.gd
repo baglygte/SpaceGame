@@ -9,9 +9,12 @@ const flipVMap = [0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
 const rotateMap = [0, 0, 0, -90, 90, 90, 0, 0, 0, 0, 0, -90, -90, -90, -90, 0]
 
 func _ready() -> void:
-	ship = get_tree().get_first_node_in_group("Ship")
 	compassSprite = $MarginContainer2/Control/CenterContainer/Sprite2D
-	
+
+func SetShip(shipToSet: Ship):
+	ship = shipToSet
+	$MarginContainer/SectorMapOverlay.SetShip(shipToSet)
+
 func _process(_delta: float) -> void:
 	if ship == null:
 		return
@@ -22,7 +25,6 @@ func _process(_delta: float) -> void:
 	$MarginContainer/Control/HorizontalRuler.position.x = fposmod(rotatedPosition.x, 40) - 40
 	$MarginContainer/Control/VerticalRuler.position.y = fposmod(rotatedPosition.y, 40) - 40
 	
-
 func UpdateCompassFrame() -> void:
 	var shipAngle = ship.rotation_degrees
 	if shipAngle < 0:

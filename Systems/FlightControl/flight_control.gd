@@ -3,22 +3,18 @@ extends Node2D
 
 var globalId: int
 var ship: Ship
-
 var isOverlayingSectorMap := false
-
-func _ready() -> void:
-	SetShip(get_tree().get_first_node_in_group("Ship"))
 	
 func SetShip(shipToSet: Ship) -> void:
-	ship = shipToSet
-
+	ship = shipToSet	
+	
 func ReceiveEnterExit(player: Player) -> void:
 	var playerHuds: PlayerHuds = get_tree().get_first_node_in_group("PlayerHuds")
 	
 	if isOverlayingSectorMap:
 		playerHuds.ClearHud(player.viewSide)
 	else:
-		playerHuds.ShowFlightControlOverlay(player.viewSide)
+		playerHuds.ShowFlightControlOverlay(player.viewSide, ship)
 		
 	isOverlayingSectorMap = !isOverlayingSectorMap
 

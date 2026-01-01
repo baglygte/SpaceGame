@@ -36,18 +36,19 @@ func Use() -> void:
 		
 	if signalerToLink == null:
 		signalerToLink = systemInReach
-		
-		if signalerToLink != null:
-			line = lineScene.instantiate()
-			ship.add_child(line)
-			line.add_point(position)
-			line.add_point(signalerToLink.global_position + ship.position)
+		line = lineScene.instantiate()
+		ship.add_child(line)
+		line.add_point(position)
+		line.add_point(signalerToLink.position)
 	else:
 		EstablishLink(systemInReach)
 	
 func EstablishLink(item) -> void:		
-	var builder: ConnectionBuilder = get_tree().get_first_node_in_group("ShipCreator").get_node("ConnectionBuilder")
-	builder.ConnectSystems(item, signalerToLink, ship)
+	var systemA = signalerToLink.get_node("SignalHybrid")
+	var systemB = item.get_node("SignalHybrid")
+	
+	systemA.AddConnection(systemB)
+	systemB.AddConnection(systemA)
 	
 	if not line == null:
 		line.queue_free()

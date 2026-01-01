@@ -113,7 +113,19 @@ func ExtractSectionAtPosition(localPositionOnShip: Vector2, ship: Ship) -> Node2
 		$"../ShipSplitter".SplitShip(ship)
 		
 	return extractedSection
+
+func DestroySection(section: Section):	
+	var splitShip := false
+	var ship: Ship = section.get_parent().get_parent()
 	
+	if $"../ShipSplitter".WillRemovalLeadToDisconnection(section.position, ship):
+		splitShip = true
+	
+	section.reparent(self)
+	
+	if splitShip:
+		$"../ShipSplitter".SplitShip(ship)
+
 func CreateFromSave(variablesToSet: Dictionary, ship: Ship) -> void:
 	var section = sectionScene.instantiate()
 	var positionToGet = Vector2(variablesToSet["position.x"], variablesToSet["position.y"])
