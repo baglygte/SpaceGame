@@ -37,23 +37,36 @@ func ReceiveRightHand() -> void:
 		DropItem()
 		
 func PickUpItem() -> void:
-	var area: PlayerReach = $Skeleton2D/FirstArm/SecondArm/EndEffector/Node2D/Area2D
-	var item = area.GetNearestItemInGroup("CanPickUp")
+	var reach: Area2D = $Skeleton2D/FirstArm/SecondArm/EndEffector/Node2D/Area2D
 	
-	if item == null:
+	var nearestArea: Area2D = null
+	var minimumLength = INF
+	
+	var areas = reach.get_overlapping_areas()
+	
+	for area: Area2D in areas:
+		if not area.get_parent().is_in_group("CanPickUp"):
+			continue
+		var distance = (area.position - $"..".position).length()
+		if distance < minimumLength:
+			minimumLength = distance
+			nearestArea = area
+	
+	if nearestArea == null:
 		return
 	
-	var creator = get_tree().get_first_node_in_group("ContainedItemCreator")
+	var creator = get_node("/root/MasterScene/Game/ContainedItemCreator")
 	
-	heldItem = creator.ExtractItemFromContainer(item)
+	heldItem = creator.ExtractItemFromContainer(nearestArea.get_parent())
+	
 	$Skeleton2D/FirstArm/SecondArm/EndEffector/Node2D.add_child(heldItem)
 	
 func DropItem() -> void:
 	var creator: ContainedItemCreator = get_tree().get_first_node_in_group("ContainedItemCreator")
 	
-	var positionToGet = $Skeleton2D/FirstArm/SecondArm/EndEffector/Node2D.global_position
-	
 	var ship = get_parent().get_parent()
+	
+	var positionToGet = $Skeleton2D/FirstArm/SecondArm/EndEffector/Node2D.to_local(ship.position)
 	
 	creator.SpawnItemInShip(heldItem, positionToGet, ship)
 	

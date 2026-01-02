@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp6y8v5gc2cqa"]
+[gd_scene load_steps=6 format=3 uid="uid://dp6y8v5gc2cqa"]
 
 [ext_resource type="Script" uid="uid://rkvsx7yyajhh" path="res://Items/itemContainer.gd" id="1_yc5jj"]
 [ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="2_fhy34"]
 [ext_resource type="Texture2D" uid="uid://cngtyjgtb2s30" path="res://Sprites/UI/toolWheelSlot.png" id="2_y0e62"]
+[ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="4_52usb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhy34"]
 
@@ -27,3 +28,5 @@ metadata/_custom_type_script = "uid://cklwast5n2502"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_fhy34")
+
+[node name="StarmapBlipConnector" parent="." instance=ExtResource("4_52usb")]

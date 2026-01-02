@@ -53,6 +53,10 @@ func GetBlip(blipType: String) -> Control:
 			texturePath = "res://sprites/Blips/ReticleBlip.png"
 		"GunLockOn":
 			texturePath = "res://sprites/Blips/ReticleBlip.png"
+		"Neutral":
+			texturePath = "res://sprites/Blips/CircleBlip.png"
+		"Star":
+			texturePath = "res://sprites/Blips/StarBlip.png"
 			
 			
 	var blip = load("res://Overlays/SectorMap/blip.tscn").instantiate()

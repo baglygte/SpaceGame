@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://clcqxqdtu7srf"]
+
+[ext_resource type="Texture2D" uid="uid://ba4vqykhbm81m" path="res://Sprites/chest.png" id="2_fabfv"]
+[ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_lpdvn"]
+[ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="4_yg8rc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gq08n"]
+size = Vector2(30, 30)
+
+[node name="Container" type="Node2D" groups=["InternalSystem", "WrenchCanEdit"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fabfv")
+
+[node name="interactiveRegion" type="Area2D" parent="."]
+script = ExtResource("3_lpdvn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactiveRegion"]
+shape = SubResource("RectangleShape2D_gq08n")
+
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
+script = ExtResource("4_yg8rc")
+hoverFilter = Array[String](["Wrench", "Hands"])
+hoverArea = NodePath("../interactiveRegion")
+spriteToModulate = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://cklwast5n2502"

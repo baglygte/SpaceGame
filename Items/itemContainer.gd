@@ -12,3 +12,8 @@ func _process(delta: float) -> void:
 func ContainItem(itemToContain) -> void:
 	containedItem = itemToContain
 	$Sprite2D/ContainedItemSprite.texture = itemToContain.get_node("Sprite2D").texture
+	
+func Kill():
+	$StarmapBlipConnector.Kill()
+	
+	queue_free()

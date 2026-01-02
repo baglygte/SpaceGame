@@ -49,6 +49,9 @@ func AddSystemAtPosition(system, localPosition, rotationToGet, ship: Ship) -> vo
 	else:
 		system.reparent(ship.get_node("ExternalSystems"), true)
 	
+	if system.has_method("SetShip"):
+		system.SetShip(ship)
+		
 	system.position = localPosition
 	system.rotation = rotationToGet
 	

@@ -8,10 +8,12 @@ var isOverlay = false
 var recipes
 
 func _ready() -> void:
-	ship = get_tree().get_first_node_in_group("Ship")
-	logNode = get_node("LogisticNode")
+	logNode = $LogisticNode
 	logNode.store.resize(5)
 	logNode.itemType = "Rockets"
+
+func SetShip(shipToSet: Ship):
+	ship = shipToSet
 
 func OnConnection(target) -> void:
 	if not "logNode" in target: return
@@ -19,7 +21,9 @@ func OnConnection(target) -> void:
 	logNode.AddConnection(target.logNode)
 
 func OnEnterExit(player: Player) -> void:
-	if player == null: return
+	if player == null:
+		return
+	
 	if isOverlay:
 		isOverlay = false
 		logNode.get_node("LogisticsDebugger").eraseHUD()

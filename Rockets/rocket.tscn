@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://b11ix1pwkufs1" path="res://Rockets/rocket.gd" id="1_5gt1y"]
 [ext_resource type="Texture2D" uid="uid://dv4psqxgyd4xa" path="res://Sprites/rocket.png" id="1_ptmd8"]
-[ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_r2l15"]
 [ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="4_tpb7v"]
 [ext_resource type="PackedScene" uid="uid://b2i0pprx4byav" path="res://Rockets/base_rocket_behavior.tscn" id="5_cutj6"]
 [ext_resource type="PackedScene" uid="uid://day26uov32qel" path="res://inactivityDestructor.tscn" id="6_6tgvo"]
+[ext_resource type="Script" uid="uid://wytevps4fcgd" path="res://health.gd" id="6_md1gv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cutj6"]
 size = Vector2(8, 36)
@@ -17,8 +17,6 @@ gravity_scale = 0.0
 script = ExtResource("1_5gt1y")
 
 [node name="BaseRocketBehavior" parent="." instance=ExtResource("5_cutj6")]
-
-[node name="Health" parent="." instance=ExtResource("3_r2l15")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5707964
@@ -33,3 +31,8 @@ shape = SubResource("RectangleShape2D_cutj6")
 [node name="InactivityDestructor" parent="." instance=ExtResource("6_6tgvo")]
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("6_md1gv")
+maxHealth = 1
+metadata/_custom_type_script = "uid://wytevps4fcgd"

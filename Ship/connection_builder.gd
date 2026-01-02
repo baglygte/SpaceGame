@@ -13,7 +13,7 @@ func BreakConnection(connection: SystemConnection):
 		signalerA.RemoveReciever(signalerB)
 	elif signalerB is SignalEmitter:
 		signalerB.RemoveReciever(signalerA)
-	
+
 func ConnectSystems(systemA, systemB, ship: Ship) -> void:
 	if not ValidConnection(systemA, systemB):
 		return
@@ -22,9 +22,9 @@ func ConnectSystems(systemA, systemB, ship: Ship) -> void:
 	
 	ship.AddConnection(connection)
 		
-	connection.add_point(systemA.position + systemA.get_parent().get_parent().position)
+	connection.add_point(GetSystemConnectionPoint(systemA))
 	
-	connection.add_point(systemB.position + systemB.get_parent().get_parent().position)
+	connection.add_point(GetSystemConnectionPoint(systemB))
 	
 	connection.systemA = systemA
 	
@@ -47,7 +47,13 @@ func ConnectSystems(systemA, systemB, ship: Ship) -> void:
 	elif signalerA is SignalHybrid:
 		signalerA.AddConnection(signalerB)
 		signalerB.AddConnection(signalerA)
-
+		
+func GetSystemConnectionPoint(system) -> Vector2:
+	if system.get_parent().get_parent() is Section:
+		return system.position + system.get_parent().get_parent().position
+	else:
+		return system.position
+	
 func ValidConnection(systemA, systemB) -> bool:
 	var signalerA = GetSignaler(systemA)
 	var signalerB = GetSignaler(systemB)

@@ -1,9 +1,12 @@
 class_name Health
-extends Node2D
+extends Node
 
-var maxHealth
+@export var maxHealth: int
 var healthAmount = 0
 
+func _ready():
+	GainHealth(maxHealth)
+	
 func LoseHealth(amountToLose: int) -> void:
 	healthAmount -= amountToLose
 	

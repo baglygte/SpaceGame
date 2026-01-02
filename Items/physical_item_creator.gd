@@ -24,5 +24,9 @@ func SpawnItemInShip(item: Node2D, itemPosition: Vector2, ship: Ship) -> void:
 
 func SpawnItemInWorld(item: Node2D, itemPosition: Vector2) -> void:
 	var itemContainer = CreateItemContainer(item)
+	
 	$"../GameWorld".add_child(itemContainer)
+	
 	itemContainer.position = itemPosition
+	
+	itemContainer.get_node("StarmapBlipConnector").Initialize("Star")

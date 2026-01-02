@@ -15,8 +15,6 @@ var oldRot = 0
 var oldPos: Vector2
 
 func _ready() -> void:
-	$Health.maxHealth = 1
-	$Health.GainHealth(1)
 	$CollisionShape2D.disabled = true
 	$StarmapBlipConnector.Initialize("EnemyRocket")
 	$Timer.timeout.connect(NextStage)

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bept6u1sucpvp" path="res://Enemies/dabox.gd" id="1_rnve6"]
 [ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://Sprites/sectionPreview.png" id="2_elafv"]
-[ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_x5o0o"]
 [ext_resource type="Script" uid="uid://kltvhqmrneja" path="res://Finite State Machine/finite_state_machine.gd" id="5_rh42n"]
 [ext_resource type="Script" uid="uid://dsij007i43qf8" path="res://Finite State Machine/Move states/state_circle.gd" id="6_hbvgm"]
 [ext_resource type="Script" uid="uid://cftjgcj55h1es" path="res://Finite State Machine/Move states/state_idle.gd" id="7_hbvgm"]
@@ -10,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bp5265xfeewsh" path="res://Finite State Machine/Move states/state_retreat.gd" id="9_r6ntq"]
 [ext_resource type="Script" uid="uid://cx4cm2esicvsp" path="res://Finite State Machine/Attack states/state_inactive.gd" id="10_734nf"]
 [ext_resource type="Script" uid="uid://d0di16lasoub3" path="res://Finite State Machine/Attack states/state_shooting.gd" id="11_rnve6"]
+[ext_resource type="Script" uid="uid://wytevps4fcgd" path="res://health.gd" id="12_iawbh"]
 [ext_resource type="Script" uid="uid://bxbx4o75byv5l" path="res://Enemies/forceApplicator.gd" id="12_rnve6"]
 [ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="12_xcoga"]
 
@@ -49,9 +49,6 @@ texture = ExtResource("2_elafv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_elafv")
-
-[node name="Health" parent="." instance=ExtResource("3_x5o0o")]
-position = Vector2(-185.9, -455.7)
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialMoveState", "initialAttackState")]
 script = ExtResource("5_rh42n")
@@ -93,3 +90,8 @@ forceMultiplier = 1000.0
 metadata/_custom_type_script = "uid://bxbx4o75byv5l"
 
 [node name="StarmapBlipConnector" parent="." instance=ExtResource("12_xcoga")]
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("12_iawbh")
+maxHealth = 1
+metadata/_custom_type_script = "uid://wytevps4fcgd"

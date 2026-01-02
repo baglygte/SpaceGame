@@ -21,7 +21,7 @@ func RequestHover(area: Area2D) -> void:
 		
 	hoverRequesters.append(area)
 	
-	ToggleShader()
+	ToggleModulation()
 	
 func UnrequestHover(area: Area2D) -> void:
 	if not area is PlayerReach:
@@ -29,9 +29,9 @@ func UnrequestHover(area: Area2D) -> void:
 	
 	hoverRequesters.erase(area)
 	
-	ToggleShader()
+	ToggleModulation()
 	
-func ToggleShader() -> void:
+func ToggleModulation() -> void:
 	if hoverRequesters.size() > 0:
 		spriteToModulate.modulate = Color(0.914, 1.353, 0.793, 1.0)
 	else:

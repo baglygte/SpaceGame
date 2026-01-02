@@ -46,9 +46,11 @@ func Drop() -> void:
 	if heldItem == null:
 		return
 		
-	var creator: ContainedItemCreator = get_tree().get_first_node_in_group("ContainedItemCreator")
+	var creator: ContainedItemCreator = get_node("/root/MasterScene/Game/ContainedItemCreator")
+	
 	var ship = get_parent().get_parent()
-	creator.SpawnItemInShip(heldItem, global_position, ship)
+	
+	creator.SpawnItemInShip(heldItem, get_parent().position, ship)
 	
 	LoseItem()
 

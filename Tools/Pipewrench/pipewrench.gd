@@ -38,17 +38,14 @@ func Use() -> void:
 		signalerToLink = systemInReach
 		line = lineScene.instantiate()
 		ship.add_child(line)
-		line.add_point(position)
-		line.add_point(signalerToLink.position)
+		line.add_point(playerReach.get_parent().position)
+		line.add_point(signalerToLink.get_parent().get_parent().position)
 	else:
 		EstablishLink(systemInReach)
 	
 func EstablishLink(item) -> void:		
-	var systemA = signalerToLink.get_node("SignalHybrid")
-	var systemB = item.get_node("SignalHybrid")
-	
-	systemA.AddConnection(systemB)
-	systemB.AddConnection(systemA)
+	var builder: ConnectionBuilder = get_tree().get_first_node_in_group("ShipCreator").get_node("ConnectionBuilder")
+	builder.ConnectSystems(item, signalerToLink, ship)
 	
 	if not line == null:
 		line.queue_free()

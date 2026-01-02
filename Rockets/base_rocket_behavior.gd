@@ -3,7 +3,6 @@ extends Node2D
 var parent: RigidBody2D
 
 func _ready() -> void:
-	assert(get_parent() is RigidBody2D)
 	parent = get_parent()
 	
 	parent.max_contacts_reported = 1

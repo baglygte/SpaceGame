@@ -7,8 +7,6 @@ const rocketScene = preload("res://Rockets/homing_rocket.tscn")
 func _ready() -> void:
 	$Timer.timeout.connect(Reload)
 	$Timer.start(1)
-	$Health.maxHealth = 1
-	$Health.GainHealth(1)
 	
 	$StarmapBlipConnector.Initialize("EnemyShip")
 

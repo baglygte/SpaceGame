@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dul3idbs8qiw6" path="res://Sections/wall.gd" id="1_cjut5"]
 [ext_resource type="Texture2D" uid="uid://ckotnxib5v5x2" path="res://Sprites/wall.png" id="1_g6to0"]
-[ext_resource type="PackedScene" uid="uid://b1hgfre0yfmtx" path="res://health.tscn" id="3_j0cip"]
+[ext_resource type="Script" uid="uid://wytevps4fcgd" path="res://health.gd" id="3_j0cip"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_cjut5"]
 a = Vector2(32, -32)
@@ -22,4 +22,7 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("SegmentShape2D_cjut5")
 
-[node name="Health" parent="." instance=ExtResource("3_j0cip")]
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_j0cip")
+maxHealth = 4
+metadata/_custom_type_script = "uid://wytevps4fcgd"

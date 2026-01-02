@@ -46,12 +46,11 @@ func ShowFlightControlOverlay(side: String, ship:Ship) -> void:
 	
 	SetActiveOverlay(side, overlay)
 	
-func ShowGunControlOverlay(side: String, rotationReference, rotationOffset, ship: Ship) -> void:
+func ShowGunControlOverlay(side: String, rotationReference, ship: Ship) -> void:
 	var overlay: GunControlOverlay = load("res://Overlays/gun_control_overlay.tscn").instantiate()
 	
 	overlay.SetShip(ship)
 	
 	overlay.rotationReference = rotationReference
-	overlay.rotationOffset = rotationOffset
 	
 	SetActiveOverlay(side, overlay)
