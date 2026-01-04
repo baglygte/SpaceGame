@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqtderr4jbub3"]
+[gd_scene load_steps=9 format=3 uid="uid://cqtderr4jbub3"]
 
 [ext_resource type="Script" uid="uid://b4db6eeeehvfd" path="res://Systems/Gun/gun.gd" id="1_vwvcx"]
 [ext_resource type="Texture2D" uid="uid://0pmfkmmgftnw" path="res://Sprites/gun.png" id="2_0rbit"]
 [ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="3_t5ng2"]
 [ext_resource type="Texture2D" uid="uid://cap7s2ipr0rg0" path="res://Sprites/barrel.png" id="5_0rbit"]
 [ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="6_0rbit"]
-[ext_resource type="PackedScene" uid="uid://davpxbjbf5wey" path="res://signal_hybrid.tscn" id="6_ccd6o"]
 [ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="7_ccd6o"]
 [ext_resource type="PackedScene" uid="uid://dy7shmg4lm1r" path="res://logisticNodes/logisticNode.tscn" id="8_flwvr"]
 
@@ -50,7 +49,5 @@ hoverFilter = Array[String](["Pliers", "Wrench", "Pipewrench"])
 hoverArea = NodePath("../hoverRegion")
 spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"
-
-[node name="SignalHybrid" parent="." instance=ExtResource("6_ccd6o")]
 
 [node name="LogisticNode" parent="." instance=ExtResource("8_flwvr")]

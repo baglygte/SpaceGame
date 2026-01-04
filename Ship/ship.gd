@@ -53,7 +53,7 @@ func AddSection(section: Node2D):
 	
 	section.position = round(section.position) # To mitigate problems when converting from global to local coordinates	
 
-func AddConnection(connection: SystemConnection):
+func AddConnection(connection):
 	if connection.get_parent() == null:
 		$Connections.add_child(connection)
 	else:

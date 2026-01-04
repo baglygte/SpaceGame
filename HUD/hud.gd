@@ -2,7 +2,6 @@ extends Control
 class_name HUD
 
 func CreatePlayerHud(player: Player) -> void:
-	
 	var handContents: PlayerHandContents = preload("res://HUD/player_hand_contents.tscn").instantiate()
 	var playerHud
 	
@@ -18,3 +17,6 @@ func CreatePlayerHud(player: Player) -> void:
 	toolWheel.player = player
 	player.toolWheel = toolWheel
 	playerHud.add_child.call_deferred(toolWheel)
+	
+	var interactableButtons: InteractableButtons = load("res://HUD/interactable_buttons.tscn").instantiate()
+	playerHud.add_child.call_deferred(interactableButtons)

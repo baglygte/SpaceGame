@@ -14,6 +14,28 @@ func BreakConnection(connection: SystemConnection):
 	elif signalerB is SignalEmitter:
 		signalerB.RemoveReciever(signalerA)
 
+func CreatePipeConnection(systemA, systemB, ship: Ship):
+	var connection: PipeConnection = load("res://Ship/pipe_connection.tscn").instantiate()
+	
+	ship.AddConnection(connection)
+	
+	connection.add_point(GetSystemConnectionPoint(systemA))
+	
+	connection.add_point(GetSystemConnectionPoint(systemB))
+	
+	connection.systemA = systemA
+	
+	connection.systemB = systemB
+	
+	var logA: LogisticNode = systemA.get_node("LogisticNode")
+	var logB: LogisticNode = systemB.get_node("LogisticNode")
+	
+	if logA.itemType != logB.itemType:
+		return
+	
+	logA.AddConnection(logB)
+	logB.AddConnection(logA)
+	
 func ConnectSystems(systemA, systemB, ship: Ship) -> void:
 	if not ValidConnection(systemA, systemB):
 		return
@@ -44,9 +66,6 @@ func ConnectSystems(systemA, systemB, ship: Ship) -> void:
 		signalerA.AddReceiver(signalerB)
 	elif signalerB is SignalEmitter:
 		signalerB.AddReceiver(signalerA)
-	elif signalerA is SignalHybrid:
-		signalerA.AddConnection(signalerB)
-		signalerB.AddConnection(signalerA)
 		
 func GetSystemConnectionPoint(system) -> Vector2:
 	if system.get_parent().get_parent() is Section:
@@ -61,8 +80,6 @@ func ValidConnection(systemA, systemB) -> bool:
 	if (signalerA is SignalEmitter) and (signalerB is SignalReceiver):
 		return true
 	elif (signalerB is SignalEmitter) and (signalerA is SignalReceiver):
-		return true
-	elif (signalerA is SignalHybrid) or (signalerB is SignalHybrid):
 		return true
 	return false
 
@@ -85,4 +102,7 @@ func CreateFromSave(variablesToSet: Dictionary, ship) -> void:
 	var systemA = $"../../GlobalSystemCounter".GetSystemFromId(systemAId)
 	var systemB = $"../../GlobalSystemCounter".GetSystemFromId(systemBId)
 	
-	ConnectSystems(systemA, systemB, ship)
+	if variablesToSet["type"] == "wire":
+		ConnectSystems(systemA, systemB, ship)
+	elif variablesToSet["type"] == "pipe":
+		CreatePipeConnection(systemA, systemB, ship)

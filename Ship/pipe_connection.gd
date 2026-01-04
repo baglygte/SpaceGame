@@ -1,4 +1,4 @@
-class_name SystemConnection
+class_name PipeConnection
 extends Line2D
 
 var systemA
@@ -7,7 +7,7 @@ var systemB
 func GetSaveData() -> Dictionary:
 	var dictionaryToSave: Dictionary
 	
-	dictionaryToSave["type"] = "wire"
+	dictionaryToSave["type"] = "pipe"
 	dictionaryToSave["systemAId"] = systemA.globalId
 	dictionaryToSave["systemBId"] = systemB.globalId
 	

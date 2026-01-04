@@ -9,7 +9,18 @@ func CreateInternalSystem(scenePath: String) -> Node2D:
 	$"../../GlobalSystemCounter".counterValue += 1
 	
 	return instance
-
+	
+func GetSystemFromId(id: int, ship: Ship) -> Node2D:
+	var system = null
+	
+	for section: Section in ship.GetSections():
+		system = section.GetSystemFromId(id)
+		
+		if system != null:
+			break
+	
+	return system
+	
 func CreateFromSave(variablesToSet: Dictionary, section: Section) -> void:
 	var instance: Node2D
 	
@@ -37,17 +48,6 @@ func CreateFromSave(variablesToSet: Dictionary, section: Section) -> void:
 	instance.rotation = rotationToGet - section.rotation
 	
 	#AddSystemAtPosition(instance, positionToGet, rotationToGet, ship)
-
-func GetSystemFromId(id: int, ship: Ship) -> Node2D:
-	var system = null
-	
-	for section: Section in ship.GetSections():
-		system = section.GetSystemFromId(id)
-		
-		if system != null:
-			break
-	
-	return system
 	
 func AddSystemAtPosition(system, positionToGet, rotationToGet, ship) -> void:		
 	var section: Section = GetSectionAtPosition(positionToGet, ship)

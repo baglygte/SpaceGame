@@ -25,13 +25,13 @@ func _process(_delta: float) -> void:
 		if store[i] != null: 
 			storetext = storetext + str(store[i].Name)
 	storeText.text = storetext
-	signalTaketext = "Take From: Dist: " + str(get_parent().takeDistance)
-	if get_parent().takeFrom != null:
-		signalTaketext = signalTaketext + ", " + str(get_parent().takeFrom).substr(20,10)
+	signalTaketext = "Take From: Dist: " + str(get_parent().pullDistance)
+	if get_parent().pullFrom != null:
+		signalTaketext = signalTaketext + ", " + str(get_parent().pullFrom).substr(20,10)
 	signalTakeText.text = signalTaketext
-	signalGivetext = "Give To: Dist: " + str(get_parent().giveDistance)
-	if get_parent().giveTo != null:
-		signalGivetext = signalGivetext + ", " + str(get_parent().giveTo).substr(20,10)
+	signalGivetext = "Give To: Dist: " + str(get_parent().pushDistance)
+	if get_parent().pushTo != null:
+		signalGivetext = signalGivetext + ", " + str(get_parent().pushTo).substr(20,10)
 	signalGiveText.text = signalGivetext
 	
 func DrawHUD() -> void:

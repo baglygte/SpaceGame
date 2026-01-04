@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dubdno31bdo3h"]
+[gd_scene load_steps=8 format=3 uid="uid://dubdno31bdo3h"]
 
 [ext_resource type="Script" uid="uid://cglykfnvpu2oe" path="res://Systems/AmmoDepot/ammo_depot.gd" id="1_x2mpc"]
 [ext_resource type="Texture2D" uid="uid://dlgqxk7hyte2d" path="res://Sprites/ammoDepot.png" id="2_r7q0t"]
 [ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_r7q0t"]
 [ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="5_nhgw0"]
-[ext_resource type="Script" path="res://signal_hybrid.gd" id="5_r7q0t"]
 [ext_resource type="Script" uid="uid://bdyhbi1gpav6q" path="res://signal_emitter.gd" id="7_brj2c"]
 [ext_resource type="PackedScene" uid="uid://dy7shmg4lm1r" path="res://logisticNodes/logisticNode.tscn" id="7_gq08n"]
 
@@ -28,9 +27,6 @@ hoverFilter = Array[String](["Wrench", "Pliers", "Pipewrench"])
 hoverArea = NodePath("../interactiveRegion")
 spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"
-
-[node name="SignalHybrid" type="Node2D" parent="." groups=["signaler"]]
-script = ExtResource("5_r7q0t")
 
 [node name="SignalEmitter" type="Node2D" parent="."]
 script = ExtResource("7_brj2c")

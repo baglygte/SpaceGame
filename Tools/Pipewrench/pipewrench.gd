@@ -43,9 +43,9 @@ func Use() -> void:
 	else:
 		EstablishLink(systemInReach)
 	
-func EstablishLink(item) -> void:		
+func EstablishLink(item) -> void:
 	var builder: ConnectionBuilder = get_tree().get_first_node_in_group("ShipCreator").get_node("ConnectionBuilder")
-	builder.ConnectSystems(item, signalerToLink, ship)
+	builder.CreatePipeConnection(item, signalerToLink, ship)
 	
 	if not line == null:
 		line.queue_free()

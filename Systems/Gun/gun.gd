@@ -71,14 +71,14 @@ func ReceiveRightHand() -> void:
 	#if lockedOnTarget == null:
 		#return
 
-	var wasItemAvailable = logNode.RemoveItem()
+	var item = logNode.RemoveItem()
 	
-	if not wasItemAvailable:
+	if item == null:
 		return
 	
 	var rocket: RigidBody2D = rocketScene.instantiate()
 	
-	rocket.recipe = logNode.item
+	rocket.recipe = item
 	
 	rocket.recipe = ammunitionrecipe
 	

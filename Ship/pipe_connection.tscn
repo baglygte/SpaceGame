@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxhyl4c63gr0w"]
+
+[ext_resource type="Script" uid="uid://csb1vyitor4m3" path="res://Ship/pipe_connection.gd" id="1_s7ki2"]
+
+[node name="PipeConnection" type="Line2D"]
+width = 2.0
+default_color = Color(0.2562856, 0.5825513, 0.90264374, 1)
+script = ExtResource("1_s7ki2")
