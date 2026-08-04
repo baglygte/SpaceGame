@@ -8,7 +8,6 @@ var lockedOnTarget: Node2D
 var reticle
 const PliersCanEdit = true
 const PipewrenchCanEdit = true
-var ship: Ship
 
 func _ready() -> void:
 	logNode = $LogisticNode
@@ -19,11 +18,8 @@ func _ready() -> void:
 		reticle = load("res://Systems/Gun/reticleCollider.tscn").instantiate()
 		
 		get_node("/root/MasterScene/Game/GameWorld").add_child(reticle)
-
-func SetShip(shipToSet: Ship):
-	ship = shipToSet
 	
-func IsPlacePositionValid(localPositionOnShip: Vector2) -> bool:
+func IsPlacePositionValid(localPositionOnShip: Vector2, ship: Ship) -> bool:
 	var positionInFrontOfMe = localPositionOnShip + round(Vector2.UP.rotated(rotation)) * 64
 	
 	var isSectionInFront = ship.PositionHasSection(positionInFrontOfMe)
@@ -33,6 +29,8 @@ func IsPlacePositionValid(localPositionOnShip: Vector2) -> bool:
 	return isSectionInFront and not isSectionOnMe
 	
 func ReceiveMovement(vector: Vector2) -> void:
+	var ship = get_parent()
+	
 	reticle.global_position += vector.rotated(ship.rotation) * 100
 	
 	var barrelRotation = (reticle.global_position - global_position).angle()
@@ -48,7 +46,7 @@ func ReceiveEnterExit(player: Player) -> void:
 		playerHuds.ClearHud(player.viewSide)
 		$Reticle/StarmapBlipConnector.Kill()
 	else:
-		playerHuds.ShowGunControlOverlay(player.viewSide, $Barrel, ship)
+		playerHuds.ShowGunControlOverlay(player.viewSide, $Barrel, get_parent().get_parent())
 		var recipes = get_tree().get_first_node_in_group("RocketRecipes")
 		ammunitionrecipe = recipes.Recipes["SplitRocket"]
 			
@@ -84,7 +82,7 @@ func ReceiveRightHand() -> void:
 	
 	rocket.homingTarget = lockedOnTarget
 	
-	rocket.rotation = $Barrel.rotation + ship.rotation - rotation
+	rocket.rotation = $Barrel.rotation - rotation
 	
 	rocket.global_position = $Barrel/SpawnPosition.global_position
 	
