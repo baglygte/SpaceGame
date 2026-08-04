@@ -17,16 +17,13 @@ hframes = 2
 
 [node name="ContainedItemSprite" type="Sprite2D" parent="Sprite2D"]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
+[node name="ObjectHover" type="Node" parent="."]
 script = ExtResource("2_fhy34")
-hoverFilter = Array[String](["Hands", "Pliers", "Hammer", "Wrench", "Pipewrench"])
-hoverArea = NodePath("../Area2D")
-spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HoverArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
 shape = SubResource("RectangleShape2D_fhy34")
 
 [node name="StarmapBlipConnector" parent="." instance=ExtResource("4_52usb")]

@@ -99,15 +99,15 @@ func Equip() -> void:
 func Unequip() -> void:
 	isEquipped = false
 	
-	sectionPreview.hide()
+	#sectionPreview.hide()
 	
-	player.get_node("PlayerReach").RemoveHoverGroup("HammerCanEdit")
+	#player.get_node("PlayerReach").RemoveHoverGroup("HammerCanEdit")
 	
-	player = null
+	#player = null
 
-	mainHand.itemWasPickedUp.disconnect(UpdatePreviewTexture)
+	#mainHand.itemWasPickedUp.disconnect(UpdatePreviewTexture)
 	
-	mainHand.itemWasDropped.disconnect(UpdatePreviewTexture)
+	#mainHand.itemWasDropped.disconnect(UpdatePreviewTexture)
 
 func Use() -> void:
 	if not isEquipped:

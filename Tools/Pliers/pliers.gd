@@ -19,15 +19,18 @@ func _ready() -> void:
 	ship = get_tree().get_first_node_in_group("Ship")
 	
 func Equip() -> void:
-	hide()
-	playerReach.AddHoverGroup("PliersCanEdit")
+	pass
 
 func Unequip() -> void:
-	show()
-	playerReach.RemoveHoverGroup("PliersCanEdit")
+	pass
 	
 func Use() -> void:
-	var systemInReach = playerReach.GetNearestItemInGroup("PliersCanEdit")
+	var areaInReach = playerReach.GetNearestHoverAreaWithFilter(hoverName)
+	
+	if areaInReach == null:
+		return
+		
+	var systemInReach = areaInReach.get_parent()
 	
 	if systemInReach == null or systemInReach == signalerToLink:
 		if line != null:

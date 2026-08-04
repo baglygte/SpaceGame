@@ -5,17 +5,17 @@ var heldItem: Node
 signal itemWasPickedUp
 signal itemWasDropped
 @onready var playerReach: PlayerReach = $"../PlayerReach"
-
-func _ready() -> void:
-	playerReach.AddHoverGroup("CanPickUp")
-		
+#
+#func _ready() -> void:
+	#playerReach.AddHoverGroup("CanPickUp")
+		#
 func Interact() -> void:
 	if heldItem == null:
 		PickUpItem()
 		return
 	
 func PickUpItem() -> void:
-	var itemContainer = playerReach.GetNearestItemInGroup("CanPickUp")
+	var itemContainer = playerReach.GetNearestHoverAreaWithFilter("CanPickUp")
 	
 	if itemContainer == null:
 		return

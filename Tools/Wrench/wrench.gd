@@ -33,9 +33,9 @@ func Equip() -> void:
 	isEquipped = true
 	hide()
 	
-	player.get_node("PlayerReach").AddHoverGroup("InternalSystem")
-	
-	player.get_node("PlayerReach").AddHoverGroup("ExternalSystem")
+	#player.get_node("PlayerReach").AddHoverGroup("InternalSystem")
+	#
+	#player.get_node("PlayerReach").AddHoverGroup("ExternalSystem")
 	
 	systemPreview.reparent(ship)
 	
@@ -63,8 +63,8 @@ func Unequip() -> void:
 	isEquipped = false
 	show()
 	
-	player.get_node("PlayerReach").RemoveHoverGroup("InternalSystem")
-	player.get_node("PlayerReach").RemoveHoverGroup("ExternalSystem")
+	#player.get_node("PlayerReach").RemoveHoverGroup("InternalSystem")
+	#player.get_node("PlayerReach").RemoveHoverGroup("ExternalSystem")
 	
 	systemPreview.reparent(self)
 	systemPreview.hide()
@@ -89,16 +89,16 @@ func RotateSystem() -> void:
 	mainHand.heldItem.rotate(PI/2)
 
 func PickUpSystem() -> void:
-	var reach: PlayerReach = mainHand.get_parent().get_node("PlayerReach")
+	var playerReach: PlayerReach = mainHand.get_parent().get_node("PlayerReach")
 	
-	var system = reach.GetNearestItemInGroup("WrenchCanEdit")
+	var areaInReach = playerReach.GetNearestHoverAreaWithFilter(hoverName)
 	
-	if system == null:
+	if areaInReach == null:
 		return
 		
-	mainHand.PutItemIntoHand(system)
+	mainHand.PutItemIntoHand(areaInReach.get_parent())
 	
-	system.rotation = 0
+	areaInReach.get_parent().rotation = 0
 
 func UpdatePreviewTexture() -> void:
 	systemPreview.rotation = 0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1w3l8uc6nh2h"]
+[gd_scene load_steps=12 format=3 uid="uid://b1w3l8uc6nh2h"]
 
 [ext_resource type="Script" uid="uid://b80ql3n383i7" path="res://Systems/GrabberArm/grabber_arm.gd" id="1_3ulfp"]
 [ext_resource type="Texture2D" uid="uid://d0wtlxroshbfb" path="res://Sprites/grabberHand.png" id="2_42i7w"]
 [ext_resource type="Texture2D" uid="uid://h6x88fm4noye" path="res://Sprites/grabberArm.png" id="2_vqv8o"]
 [ext_resource type="Texture2D" uid="uid://0pmfkmmgftnw" path="res://Sprites/gun.png" id="3_fyybk"]
 [ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="6_067bv"]
+[ext_resource type="Script" uid="uid://d157ee2jm7rbv" path="res://hoverGroup.gd" id="7_42i7w"]
 [ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="7_vqv8o"]
 
 [sub_resource type="SkeletonModification2DCCDIK" id="SkeletonModification2DCCDIK_vqv8o"]
@@ -104,17 +105,28 @@ position = Vector2(56, 107)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_fyybk")
 
-[node name="hoverRegion" type="Area2D" parent="."]
+[node name="HoverArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hoverRegion"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
 position = Vector2(0, -11.5)
 shape = SubResource("RectangleShape2D_fbmh6")
 
 [node name="SignalReceiver" parent="." instance=ExtResource("6_067bv")]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
+[node name="ObjectHover" type="Node" parent="."]
 script = ExtResource("7_vqv8o")
-hoverFilter = Array[String](["Wrench", "Pliers"])
-hoverArea = NodePath("../hoverRegion")
-spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"
+
+[node name="HoverGroup" type="Node" parent="ObjectHover"]
+script = ExtResource("7_42i7w")
+hoverName = "Pliers"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Connect wire"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"
+
+[node name="HoverGroup2" type="Node" parent="ObjectHover"]
+script = ExtResource("7_42i7w")
+hoverName = "Wrench"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Pick up"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"

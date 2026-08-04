@@ -17,6 +17,7 @@ const toolScenes: Array = ["res://Tools/Hammer/hammer.tscn",
 						   "res://Tools/Pipewrench/pipewrench.tscn"]
 func _ready():
 	ship = get_tree().get_first_node_in_group("Ship")
+	
 	for i in range(0,numberOfSlots):
 		var angle: float = 2*PI/numberOfSlots * i
 		var child: ToolWheelSlot = get_child(i)

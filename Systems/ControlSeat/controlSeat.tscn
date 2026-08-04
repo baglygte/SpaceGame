@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://41dy2fh6uvup"]
+[gd_scene load_steps=10 format=3 uid="uid://41dy2fh6uvup"]
 
 [ext_resource type="Texture2D" uid="uid://bdgleq1jjl0s5" path="res://Sprites/controlSeat.png" id="1_suegr"]
 [ext_resource type="Script" uid="uid://cu0fs5qhfrl2w" path="res://Systems/ControlSeat/control_seat.gd" id="1_uw5wt"]
 [ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_14183"]
 [ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="5_47y8b"]
 [ext_resource type="PackedScene" uid="uid://clla0hc44fhq5" path="res://signal_emitter.tscn" id="5_yoneg"]
+[ext_resource type="Script" uid="uid://d157ee2jm7rbv" path="res://hoverGroup.gd" id="6_47y8b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoneg"]
 
@@ -27,12 +28,23 @@ shape = SubResource("RectangleShape2D_uw5wt")
 
 [node name="SignalEmitter" parent="." instance=ExtResource("5_yoneg")]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
+[node name="ObjectHover" type="Node" parent="."]
 script = ExtResource("5_47y8b")
-hoverFilter = Array[String](["Wrench", "Pliers"])
-hoverArea = NodePath("../HoverArea")
-spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"
+
+[node name="HoverGroup" type="Node" parent="ObjectHover"]
+script = ExtResource("6_47y8b")
+hoverName = "Pliers"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Connect wire"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"
+
+[node name="HoverGroup2" type="Node" parent="ObjectHover"]
+script = ExtResource("6_47y8b")
+hoverName = "Wrench"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Pick up"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"
 
 [node name="HoverArea" type="Area2D" parent="."]
 

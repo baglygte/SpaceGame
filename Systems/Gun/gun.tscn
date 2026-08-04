@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqtderr4jbub3"]
+[gd_scene load_steps=10 format=3 uid="uid://cqtderr4jbub3"]
 
 [ext_resource type="Script" uid="uid://b4db6eeeehvfd" path="res://Systems/Gun/gun.gd" id="1_vwvcx"]
 [ext_resource type="Texture2D" uid="uid://0pmfkmmgftnw" path="res://Sprites/gun.png" id="2_0rbit"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cap7s2ipr0rg0" path="res://Sprites/barrel.png" id="5_0rbit"]
 [ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="6_0rbit"]
 [ext_resource type="PackedScene" uid="uid://ccxrvty1mk6wt" path="res://Overlays/SectorMap/sectormap_blip_connector.tscn" id="7_ccd6o"]
+[ext_resource type="Script" uid="uid://d157ee2jm7rbv" path="res://hoverGroup.gd" id="7_flwvr"]
 [ext_resource type="PackedScene" uid="uid://dy7shmg4lm1r" path="res://logisticNodes/logisticNode.tscn" id="8_flwvr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbmh6"]
@@ -27,9 +28,9 @@ position = Vector2(0, 49)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_0rbit")
 
-[node name="hoverRegion" type="Area2D" parent="."]
+[node name="HoverArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hoverRegion"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_fbmh6")
 
@@ -43,11 +44,29 @@ shape = SubResource("RectangleShape2D_fbmh6")
 
 [node name="StarmapBlipConnector" parent="LockOn" instance=ExtResource("7_ccd6o")]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
+[node name="ObjectHover" type="Node" parent="."]
 script = ExtResource("6_0rbit")
-hoverFilter = Array[String](["Pliers", "Wrench", "Pipewrench"])
-hoverArea = NodePath("../hoverRegion")
-spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"
+
+[node name="HoverGroup" type="Node" parent="ObjectHover"]
+script = ExtResource("7_flwvr")
+hoverName = "Pliers"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Connect wire"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"
+
+[node name="HoverGroup2" type="Node" parent="ObjectHover"]
+script = ExtResource("7_flwvr")
+hoverName = "Wrench"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Pick up"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"
+
+[node name="HoverGroup3" type="Node" parent="ObjectHover"]
+script = ExtResource("7_flwvr")
+hoverName = "Pipewrench"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Connect pipe"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"
 
 [node name="LogisticNode" parent="." instance=ExtResource("8_flwvr")]

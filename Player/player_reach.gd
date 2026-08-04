@@ -1,84 +1,84 @@
 class_name PlayerReach
 extends Area2D
 
-var hoverGroups: Array
+var interactableButtons: InteractableButtons
+var objectHighlight: ObjectHighlight
 
-func WhatIsRequestingHover() -> String:
-	return $"../OffHand".GetToolHoverFilter()
+func _ready() -> void:
+	area_exited.connect(AreaExited)
 
-func AddHoverGroup(groupName: String) -> void:
-	if groupName in hoverGroups:
+func _process(_delta: float) -> void:
+	var nearestArea = GetNearestHoverArea()
+	
+	SetNearestHover(nearestArea)
+	
+	var nonNearestAreas = GetNonNearestHoverAreas(nearestArea)
+	
+	for area in nonNearestAreas:
+		var objectHover: ObjectHover = area.get_parent().get_node("ObjectHover")
+	
+		objectHover.RemoveButtonsFromHUD(interactableButtons)
+
+func SetNearestHover(nearestArea: Area2D):
+	if nearestArea == null:
 		return
 		
-	hoverGroups.append(groupName)
+	var objectHover: ObjectHover = nearestArea.get_parent().get_node("ObjectHover")
+	
+	objectHover.SendInteractableButtonsToHUD(interactableButtons, $"../OffHand".GetToolHoverFilter())
+	
+	objectHighlight.SetObjectToHighlight(get_parent(), nearestArea.get_parent())
 
-func RemoveHoverGroup(groupName: String) -> void:
-	if groupName not in hoverGroups:
-		return
+func GetNearestHoverAreaWithFilter(hoverFilter: String) -> Area2D:
+	var area = GetNearestHoverArea()
 	
-	hoverGroups.erase(groupName)
-	
-	for area in get_overlapping_areas():
-		if not area.is_in_group("Hoverable"):
-			continue
-		if area.get_parent().is_in_group(groupName):
-			area.UnrequestHover()
-	
-func AreaEntered(area: Area2D) -> void:
-	if not area.is_in_group("Hoverable"):
-		return
+	if area == null:
+		return area
 		
-	if not IsAreaInAnyAllowedHoverGroups(area):
-		return
+	var objectHover: ObjectHover = area.get_parent().get_node("ObjectHover")
 	
-	area.RequestHover()
-
-func AreaExited(area: Area2D) -> void:
-	if not area.is_in_group("Hoverable"):
-		return
-		
-	if not IsAreaInAnyAllowedHoverGroups(area):
-		return
-		
-	area.UnrequestHover()
-
-func IsAreaInAnyAllowedHoverGroups(area: Area2D) -> bool:
-	var areaIsInHoverGroups = false
-	
-	for groupName in hoverGroups:
-		if area.get_parent().is_in_group(groupName):
-			areaIsInHoverGroups = true
-			break
-			
-	return areaIsInHoverGroups
-
-func GetNearestItemInGroup(groupName: String) -> Node2D:
-	var areas = FilterGroupName(get_overlapping_areas(), groupName)
-	
-	if areas.size() < 1:
+	if objectHover.IsValidHover(hoverFilter):
+		return area
+	else:
 		return null
-		
-	return FilterNearest(areas).get_parent()
 
-func FilterGroupName(areas: Array, groupName: String) -> Array:
-	var filteredAreas: Array
+func GetNearestHoverArea() -> Area2D:
+	var nearestArea: Area2D = null
 	
-	for area in areas:
-		if not area.get_parent().is_in_group(groupName):
+	var distanceToNearest: float = INF
+	
+	for area: Area2D in get_overlapping_areas():
+		if not area.name == "HoverArea":
 			continue
-		
-		filteredAreas.append(area)
-		
-	return filteredAreas
-
-func FilterNearest(areas: Array) -> Area2D:
-	var nearestArea: Area2D
-	var minimumLength = INF
-	
-	for area: Area2D in areas:
-		var distance = (area.position - $"..".position).length()
-		if distance < minimumLength:
-			minimumLength = distance
-			nearestArea = area
 			
+		var distanceToArea = (global_position - area.global_position).length()
+		
+		if  distanceToArea < distanceToNearest:                      
+			distanceToNearest = distanceToArea
+			nearestArea = area
+	
 	return nearestArea
+	
+func GetNonNearestHoverAreas(nearestArea: Area2D) -> Array[Area2D]:
+	var areas: Array[Area2D]
+	
+	for area: Area2D in get_overlapping_areas():
+		if not area.name == "HoverArea":
+			continue
+			
+		if area == nearestArea:
+			continue
+			
+		areas.append(area)
+	
+	return areas
+	
+func AreaExited(area: Area2D):
+	var node = area.get_parent()
+	
+	if not node.has_node("ObjectHover"):
+		return
+	
+	var objectHover: ObjectHover = node.get_node("ObjectHover")
+	
+	objectHover.RemoveButtonsFromHUD(interactableButtons)

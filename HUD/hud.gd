@@ -20,3 +20,8 @@ func CreatePlayerHud(player: Player) -> void:
 	
 	var interactableButtons: InteractableButtons = load("res://HUD/interactable_buttons.tscn").instantiate()
 	playerHud.add_child.call_deferred(interactableButtons)
+	player.get_node("PlayerReach").interactableButtons = interactableButtons
+	
+	var objectHighlight: ObjectHighlight = load("res://HUD/ObjectHighlight.tscn").instantiate()
+	playerHud.add_child.call_deferred(objectHighlight)
+	player.get_node("PlayerReach").objectHighlight = objectHighlight

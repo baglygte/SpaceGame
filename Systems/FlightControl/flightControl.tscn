@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1qadh1eqnr4k"]
+[gd_scene load_steps=7 format=3 uid="uid://b1qadh1eqnr4k"]
 
 [ext_resource type="Script" uid="uid://1416e8yqq1pv" path="res://Systems/FlightControl/flight_control.gd" id="1_ehu3e"]
 [ext_resource type="Texture2D" uid="uid://bsotc5uk7stfd" path="res://Sprites/flightControl.png" id="1_hocbs"]
 [ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="4_1ywjk"]
 [ext_resource type="PackedScene" uid="uid://ut51d0u04hri" path="res://signal_receiver.tscn" id="5_dk1d5"]
+[ext_resource type="Script" uid="uid://d157ee2jm7rbv" path="res://hoverGroup.gd" id="5_ehu3e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehu3e"]
 size = Vector2(22, 26)
@@ -14,16 +15,27 @@ script = ExtResource("1_ehu3e")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_hocbs")
 
-[node name="hoverRegion" type="Area2D" parent="."]
+[node name="HoverArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hoverRegion"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
 shape = SubResource("RectangleShape2D_ehu3e")
 
 [node name="SignalReceiver" parent="." instance=ExtResource("5_dk1d5")]
 
-[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
+[node name="ObjectHover" type="Node" parent="."]
 script = ExtResource("4_1ywjk")
-hoverFilter = Array[String](["Wrench", "Pliers"])
-hoverArea = NodePath("../hoverRegion")
-spriteToModulate = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cklwast5n2502"
+
+[node name="HoverGroup" type="Node" parent="ObjectHover"]
+script = ExtResource("5_ehu3e")
+hoverName = "Pliers"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Connect wire"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"
+
+[node name="HoverGroup2" type="Node" parent="ObjectHover"]
+script = ExtResource("5_ehu3e")
+hoverName = "Wrench"
+buttons = Array[String](["RB"])
+buttonDescriptions = Array[String](["Pick up"])
+metadata/_custom_type_script = "uid://d157ee2jm7rbv"

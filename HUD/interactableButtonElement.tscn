@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1q3eahtg3o0c"]
+
+[ext_resource type="Texture2D" uid="uid://ik58b3yvrhqt" path="res://Sprites/UI/buttons/button_Y.png" id="1_hbpgf"]
+
+[node name="InteractableButtonElement" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "textToDisplay"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_hbpgf")
+expand_mode = 2
+stretch_mode = 3
