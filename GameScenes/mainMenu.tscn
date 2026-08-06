@@ -32,3 +32,7 @@ text = "New game"
 [node name="LoadGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Load game"
+
+[node name="ShipDesigner" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Ship designer"

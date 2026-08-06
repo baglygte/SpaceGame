@@ -1,62 +1,84 @@
 extends Node
 class_name SaveManager
 
-const savePath = "user://savegame.save"
+const saveDirectories: Array = ["saves", "saves//ships"]
 
 var shouldLoadGame: bool = false
-var objectsToLoad: Array
 
 func SaveGame() -> void:
+	EnsureDirectoriesExist()
+	
 	var nodesToSave = get_tree().get_nodes_in_group("MustBeSaved")
 	
-	var dataToSave: Array
+	var saveData: Array
 	
 	for node in nodesToSave:
-		var saveInfo = node.GetSaveData()
-		dataToSave.append(saveInfo)
-	
-	var save_file = FileAccess.open(savePath, FileAccess.WRITE)
-
-	var json_string = JSON.stringify(dataToSave)
-
-	save_file.store_line(json_string)
-
-func LoadGame() -> void:
-	ReadFile()
-	
-	LoadObjectsOfCreator("ShipCreator")
-	
-	LoadObjectsOfCreator("PlayerCreator")
-
-	#LoadObjectsOfCreator("SectionBuilder")
-	#
-	LoadObjectsOfCreator("InternalSystemBuilder")
-	#
-	#LoadObjectsOfCreator("ExternalSystemBuilder")
-	#
-	#LoadObjectsOfCreator("ConnectionBuilder")
-
-func ReadFile() -> void:
-	var save_file = FileAccess.open(savePath, FileAccess.READ)
-	
-	while save_file.get_position() < save_file.get_length():
-		var json_string = save_file.get_line()
-
-		var json = JSON.new()
-
-		var parse_result = json.parse(json_string)
+		var nodeSaveData: Dictionary = node.GetSaveData()
 		
-		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+		if node.is_in_group("Ship"):		
+			SaveData([nodeSaveData], "ships//ship.save")
+			
+			saveData.append({"shipDir": "ships//ship.save"})
+			
 			continue
 
-		# Get the data from the JSON object.
-		objectsToLoad = json.data
+		saveData.append(nodeSaveData)
+	
+	SaveData(saveData, "game.save")
+
+func SaveData(dataToSave: Array, savePath: String) -> void:	
+	var saveFile = FileAccess.open("user://saves//" + savePath, FileAccess.WRITE)
+
+	saveFile.store_line(JSON.stringify(dataToSave))
+	
+func LoadGame() -> void:
+	var fileContents: Array = ReadFile("game.save")
+	
+	for content: Dictionary in fileContents:
+		if content.has("shipDir"):
+			var shipFileContents = ReadFile(content["shipDir"])
 			
-func LoadObjectsOfCreator(creatorName: String) -> void:
-	for objectToLoad in objectsToLoad:
+			var shipCreator = get_tree().get_first_node_in_group("ShipCreator")
+		
+			shipCreator.CreateFromSave(shipFileContents[0])
+			
+			continue
+	
+	#LoadObjectsOfCreator("ShipCreator")
+	
+	LoadObjectsOfCreator("PlayerCreator", fileContents)
+
+	LoadObjectsOfCreator("InternalSystemBuilder", fileContents)
+
+func ReadFile(pathInSavesDirectory: String) -> Array:
+	var file = FileAccess.open("user://saves//" + pathInSavesDirectory, FileAccess.READ)
+	
+	var json = JSON.new()
+	
+	while file.get_position() < file.get_length():
+		var jsonString = file.get_line()
+
+		json.parse(jsonString)
+
+	return json.data
+			
+func LoadObjectsOfCreator(creatorName: String, fileContents: Array) -> void:
+	for objectToLoad: Dictionary in fileContents:
+		if not objectToLoad.has("creator"):
+			continue
+			
 		if objectToLoad["creator"] != creatorName:
 			continue
 			
 		var creator = get_tree().get_first_node_in_group(creatorName)
+		
 		creator.CreateFromSave(objectToLoad)
+
+func EnsureDirectoriesExist() -> void:	
+	var dir = DirAccess.open("user://")
+	
+	for expectedDirectory: String in saveDirectories:
+		if dir.dir_exists(expectedDirectory):
+			continue
+		
+		dir.make_dir("user://" + expectedDirectory)

@@ -29,7 +29,7 @@ func CheckAllPlayersReady() -> void:
 			
 	CreatePlayerControllers()
 	
-	get_tree().get_first_node_in_group("GameSceneManager").ChangeActiveScene("res://GameScenes/game.tscn")
+	get_tree().get_first_node_in_group("GameSceneManager").GoToDestinationScene()
 
 func CreatePlayerControllers() -> void:
 	get_tree().get_first_node_in_group("GameSceneManager").AddPersistentData({"deviceIds": deviceDetector.connectedDeviceIds.keys()})

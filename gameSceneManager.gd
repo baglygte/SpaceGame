@@ -1,6 +1,7 @@
 extends Node
 class_name GameSceneManager
 var activeScene
+var destinationScene: String # Go to this scene after assigning device(s)
 var persistentData: Dictionary
 
 func _ready() -> void:
@@ -15,7 +16,13 @@ func ChangeActiveScene(scenePath: String) -> void:
 	activeScene = scene
 	
 	get_parent().add_child(scene)
-	
+
+func SetDestinationScene(path: String) -> void:
+	destinationScene = path
+
+func GoToDestinationScene() -> void:
+	ChangeActiveScene(destinationScene)
+
 func AddPersistentChild(node: Node) -> void:
 	get_parent().add_child(node)
 
