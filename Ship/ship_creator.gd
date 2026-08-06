@@ -8,10 +8,13 @@ func CreateShip() -> Ship:
 	var ship: Ship = shipScene.instantiate()
 	
 	shipIdCounter += 1
+	
 	ship.shipId = shipIdCounter
+	
 	$"../GameWorld".add_child(ship)
 	
 	var section = $SectionBuilder.CreateSectionAtPosition(Vector2.ZERO, 0)
+	
 	$SectionBuilder.AddSectionToShip(section, ship)
 	
 	return ship

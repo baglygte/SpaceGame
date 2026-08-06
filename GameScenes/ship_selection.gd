@@ -11,11 +11,18 @@ func _ready() -> void:
 	var dir: DirAccess = DirAccess.open("user://saves//ships")
 	
 	var files = dir.get_files()
-
-	for fileName in files:
-		var button: Button = skrt.instantiate()
+	
+	if files.size() < 1:
+		var manager: GameSceneManager = get_tree().get_first_node_in_group("GameSceneManager")
 		
-		button.text = fileName
+		manager.ChangeActiveScene("res://GameScenes/game.tscn")
+		
+		return
+		
+	for fileName in files:
+		var button = skrt.instantiate()
+		
+		button.SetText(fileName)
 		
 		button.shipSelection = self
 		

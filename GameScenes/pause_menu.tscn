@@ -34,6 +34,10 @@ text = "Resume"
 layout_mode = 2
 text = "Save game"
 
+[node name="SaveShip" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Save ship"
+
 [node name="ReturnToMenu" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Return to menu"

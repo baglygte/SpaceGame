@@ -30,9 +30,11 @@ func _process(_delta: float) -> void:
 	SendMoveSignal()
 	
 	SendLookSignal()
-		
+	
 	if Input.is_action_just_pressed("start"):
 		var pauseMenu: PauseMenu = get_tree().get_first_node_in_group("PauseMenu")
+		
+		pauseMenu.playerThatPaused = get_parent()
 		
 		pauseMenu.TogglePause()
 	

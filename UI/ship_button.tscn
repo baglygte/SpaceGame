@@ -2,11 +2,18 @@
 
 [ext_resource type="Script" uid="uid://dpyas4ona88u5" path="res://UI/ship_button.gd" id="1_8hdhu"]
 
-[node name="ShipButton" type="Button"]
+[node name="ShipButton" type="HBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "???"
 script = ExtResource("1_8hdhu")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "???"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 2
+text = "Del"

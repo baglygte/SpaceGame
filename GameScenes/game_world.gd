@@ -43,9 +43,16 @@ func CreateGameWorld() -> void:
 	else:
 		var manager: GameSceneManager = get_tree().get_first_node_in_group("GameSceneManager")
 		
-		var data = saveManager.ReadFile("ships//" + manager.persistentData["savedShipFilePath"])
+		var ship: Ship
+		
+		if manager.persistentData.has("savedShipFilePath"):
+			var data = saveManager.ReadFile("ships//" + manager.persistentData["savedShipFilePath"])
 
-		var ship = $"../ShipCreator".CreateFromSave(data[0])
+			ship = $"../ShipCreator".CreateFromSave(data[0])
+			
+			ship.position = Vector2.ZERO
+		else:
+			ship = $"../ShipCreator".CreateShip()
 		
 		$"../PlayerCreator".CreateNewPlayers(ship)
 
