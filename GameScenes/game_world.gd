@@ -34,14 +34,19 @@ func _ready() -> void:
 	#instance.position = Vector2(2000,2000)
 	
 func CreateGameWorld() -> void:
-	var saveManager = get_tree().get_first_node_in_group("SaveManager")
+	var saveManager: SaveManager = get_tree().get_first_node_in_group("SaveManager")
 	
 	if saveManager.shouldLoadGame:
 		saveManager.LoadGame()
 		var someShip = get_tree().get_first_node_in_group("Ship")
 		$"../PlayerCreator".CreateNewPlayers(someShip)
 	else:
-		var ship = $"../ShipCreator".CreateShip()
+		var manager: GameSceneManager = get_tree().get_first_node_in_group("GameSceneManager")
+		
+		var data = saveManager.ReadFile("ships//" + manager.persistentData["savedShipFilePath"])
+
+		var ship = $"../ShipCreator".CreateFromSave(data[0])
+		
 		$"../PlayerCreator".CreateNewPlayers(ship)
 
 func AddNodeToShip(node: Node) -> void:

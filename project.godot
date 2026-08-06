@@ -50,6 +50,7 @@ ShipCreator=""
 WrenchCanEdit=""
 PliersCanEdit=""
 PipewrenchCanEdit=""
+PauseMenu=""
 
 [input]
 

@@ -28,3 +28,9 @@ func AddPersistentChild(node: Node) -> void:
 
 func AddPersistentData(data: Dictionary) -> void:
 	persistentData.merge(data)
+
+func RemovePersistentData(key: String) -> void:
+	if !persistentData.has(key):
+		return
+	
+	persistentData.erase(key)

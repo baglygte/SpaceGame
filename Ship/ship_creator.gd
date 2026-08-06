@@ -33,7 +33,7 @@ func CreateShipWithSections(sections: Array[Node], globalPositionToGet: Vector2,
 	
 	return ship
 
-func CreateFromSave(variablesToSet: Dictionary):
+func CreateFromSave(variablesToSet: Dictionary) -> Ship:
 	var ship: Ship = shipScene.instantiate()
 	
 	var shipIdtoGet = variablesToSet["id"]
@@ -53,6 +53,8 @@ func CreateFromSave(variablesToSet: Dictionary):
 		
 	for connectionVariables in variablesToSet["connections"]:
 		$ConnectionBuilder.CreateFromSave(connectionVariables, ship)
+		
+	return ship
 
 func FindShipWithId(shipId: int) -> Ship:
 	var ships = get_tree().get_nodes_in_group("Ship")

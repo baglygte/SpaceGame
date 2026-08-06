@@ -28,11 +28,13 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	SendMoveSignal()
-	SendLookSignal()
 	
-	if Input.is_action_just_pressed("select"):
-		var saveManager = get_tree().get_first_node_in_group("SaveManager")
-		saveManager.SaveGame()
+	SendLookSignal()
+		
+	if Input.is_action_just_pressed("start"):
+		var pauseMenu: PauseMenu = get_tree().get_first_node_in_group("PauseMenu")
+		
+		pauseMenu.TogglePause()
 	
 	if Input.is_action_just_pressed(str(deviceId) + "_use_tool"):
 		useTool.emit()

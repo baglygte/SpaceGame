@@ -5,7 +5,7 @@ const saveDirectories: Array = ["saves", "saves//ships"]
 
 var shouldLoadGame: bool = false
 
-func SaveGame() -> void:
+func Save() -> void:
 	EnsureDirectoriesExist()
 	
 	var nodesToSave = get_tree().get_nodes_in_group("MustBeSaved")
@@ -15,7 +15,7 @@ func SaveGame() -> void:
 	for node in nodesToSave:
 		var nodeSaveData: Dictionary = node.GetSaveData()
 		
-		if node.is_in_group("Ship"):		
+		if node.is_in_group("Ship"):
 			SaveData([nodeSaveData], "ships//ship.save")
 			
 			saveData.append({"shipDir": "ships//ship.save"})
@@ -38,13 +38,11 @@ func LoadGame() -> void:
 		if content.has("shipDir"):
 			var shipFileContents = ReadFile(content["shipDir"])
 			
-			var shipCreator = get_tree().get_first_node_in_group("ShipCreator")
-		
+			var shipCreator: ShipCreator = get_tree().get_first_node_in_group("ShipCreator")
+			
 			shipCreator.CreateFromSave(shipFileContents[0])
 			
 			continue
-	
-	#LoadObjectsOfCreator("ShipCreator")
 	
 	LoadObjectsOfCreator("PlayerCreator", fileContents)
 

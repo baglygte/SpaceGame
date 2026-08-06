@@ -8,7 +8,7 @@ func _ready() -> void:
 	$VBoxContainer/ShipDesigner.pressed.connect(GoToShipDesigner)
 	
 func StartNewGame() -> void:
-	ChangeToScene("res://GameScenes/game.tscn")
+	ChangeToScene("res://GameScenes/ship_selection.tscn")
 	
 func LoadGame() -> void:
 	var saveManager: SaveManager = get_tree().get_first_node_in_group("SaveManager")
