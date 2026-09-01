@@ -14,17 +14,24 @@ func Reload():
 	canShoot = true
 	
 func ShootRocket() -> void:
-	return
 	var ship = get_tree().get_first_node_in_group("Ship")
-	var shipDirection: Vector2 = (ship.position - position).normalized()
 	
-	var rocket = rocketScene.instantiate()
-	rocket.rotation = shipDirection.angle()
-	rocket.position = position + shipDirection * 500
+	#var shipDirection: Vector2 = (ship.position - position).normalized()
+	
+	var rocket: HomingRocket = rocketScene.instantiate()
+	
+	rocket.lockedOnNode = ship
+
+	rocket.global_position = $RocketLaunchPosition.global_position
+	
+	var skrt = Vector2.UP.angle_to($RocketLaunchPosition.position)
+	
+	rocket.rotation = skrt
+	
 	get_parent().add_child(rocket)
 	
 	canShoot = false
-	$Timer.start(10)
+	#$Timer.start(1)
 
 func Kill() -> void:
 	$StarmapBlipConnector.Kill()

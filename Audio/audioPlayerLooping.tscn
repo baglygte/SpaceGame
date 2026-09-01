@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xapf0gfqajov"]
+
+[ext_resource type="Script" uid="uid://cde30gsdta4fc" path="res://Audio/audio_player.gd" id="1_dva42"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+max_distance = 10000.0
+attenuation = 7.999997
+script = ExtResource("1_dva42")

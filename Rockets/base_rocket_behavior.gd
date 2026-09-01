@@ -1,12 +1,17 @@
 extends Node2D
 
 var parent: RigidBody2D
+var soundSystem: SoundSystem
 
 func _ready() -> void:
 	parent = get_parent()
 	
 	parent.max_contacts_reported = 1
 	parent.contact_monitor = true
+	
+	soundSystem = get_tree().get_first_node_in_group("SoundSystem")
+	
+	soundSystem.PlayLoopingSoundAtNode("res://Audio/rocketLoop.wav", self)
 
 func _process(_delta: float) -> void:
 	var bodies = parent.get_colliding_bodies()

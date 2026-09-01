@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://crhndw50dy0eb"]
+[gd_scene load_steps=14 format=3 uid="uid://crhndw50dy0eb"]
 
 [ext_resource type="Script" uid="uid://bept6u1sucpvp" path="res://Enemies/dabox.gd" id="1_rnve6"]
-[ext_resource type="Texture2D" uid="uid://du4b8a78yh0iw" path="res://Sprites/sectionPreview.png" id="2_elafv"]
+[ext_resource type="Texture2D" uid="uid://dkua36j8c0ml0" path="res://Sprites/dabox.png" id="2_rnve6"]
 [ext_resource type="Script" uid="uid://kltvhqmrneja" path="res://Finite State Machine/finite_state_machine.gd" id="5_rh42n"]
 [ext_resource type="Script" uid="uid://dsij007i43qf8" path="res://Finite State Machine/Move states/state_circle.gd" id="6_hbvgm"]
 [ext_resource type="Script" uid="uid://cftjgcj55h1es" path="res://Finite State Machine/Move states/state_idle.gd" id="7_hbvgm"]
@@ -16,24 +16,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elafv"]
 size = Vector2(384, 384)
 
-[sub_resource type="GDScript" id="GDScript_xhbee"]
-script/source = "class_name StateReload
-extends AttackState
-@export var enemy: RigidBody2D
-
-var ship: Ship
-
-func Enter():
-	ship = get_tree().get_first_node_in_group(\"Ship\")
-	
-func Update():
-	if enemy.canShoot:
-		transitionToState.emit(\"StateShoot\")
-
-func Exit():
-	return
-"
-
 [node name="dabox" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -42,10 +24,11 @@ script = ExtResource("1_rnve6")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
+one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(6, 6)
-texture = ExtResource("2_elafv")
+texture = ExtResource("2_rnve6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_elafv")
@@ -80,18 +63,16 @@ metadata/_custom_type_script = "uid://cx4cm2esicvsp"
 script = ExtResource("11_rnve6")
 metadata/_custom_type_script = "uid://d0di16lasoub3"
 
-[node name="StateReload" type="Node" parent="FiniteStateMachine"]
-script = SubResource("GDScript_xhbee")
-
 [node name="ForceApplicator" type="Node" parent="."]
 script = ExtResource("12_rnve6")
-torque = 10000.0
-forceMultiplier = 1000.0
+maxTorque = 5000.0
 metadata/_custom_type_script = "uid://bxbx4o75byv5l"
 
 [node name="StarmapBlipConnector" parent="." instance=ExtResource("12_xcoga")]
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("12_iawbh")
-maxHealth = 1
 metadata/_custom_type_script = "uid://wytevps4fcgd"
+
+[node name="RocketLaunchPosition" type="Node2D" parent="."]
+position = Vector2(-250, 0)

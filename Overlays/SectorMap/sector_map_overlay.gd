@@ -4,7 +4,7 @@ extends Control
 var blips: Dictionary
 var ship: Ship
 
-const visibleRange: float = 10000
+const visibleRange: float = 50000
 		
 func _ready() -> void:	
 	var blipConnectors = get_tree().get_nodes_in_group("BlipConnector")
@@ -37,9 +37,15 @@ func _process(_delta: float) -> void:
 
 func UpdateBlipPosition(connection):
 	var blip = blips[connection]
-	var deltaPosition: Vector2 = connection.get_parent().position - ship.position
-	blip.position = deltaPosition.rotated(-ship.rotation) * (size.x / visibleRange)
-	blip.rotation = connection.get_parent().rotation - ship.rotation
+	#var deltaPosition: Vector2 = connection.get_parent().position - ship.position
+	#blip.position = deltaPosition.rotated(-ship.rotation) * (size.x / visibleRange)
+	#blip.rotation = connection.get_parent().rotation - ship.rotation
+	
+	var connectionPosition = connection.get_parent().position
+	
+	blip.position = (connectionPosition)/visibleRange * size
+	
+	blip.rotation = connection.get_parent().rotation
 	
 func GetBlip(blipType: String) -> Control:
 	var texturePath: String
@@ -57,7 +63,8 @@ func GetBlip(blipType: String) -> Control:
 			texturePath = "res://sprites/Blips/CircleBlip.png"
 		"Star":
 			texturePath = "res://sprites/Blips/StarBlip.png"
-			
+		"Ship":
+			texturePath = "res://sprites/Blips/ShipBlip.png"
 			
 	var blip = load("res://Overlays/SectorMap/blip.tscn").instantiate()
 	blip.get_node("Sprite2D").texture = load(texturePath)

@@ -1,7 +1,7 @@
 class_name WallBuilder
 extends Node
 
-const wallScene = preload("res://Sections/wall.tscn")
+const wallScene = preload("res://Systems/wall.tscn")
 const sectionAngles := [-PI/2, 0, PI/2, PI]
 
 func DeleteWallsInSection(section: Node2D) -> void:

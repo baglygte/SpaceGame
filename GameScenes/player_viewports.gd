@@ -15,7 +15,7 @@ func AddPlayerCamera(camera, playerCount) -> void:
 	elif playerCount == 2:
 		$RightPlayerView/SubViewport.add_child.call_deferred(camera)
 		rightCamera = camera
-	
+
 func SwitchToSubView(subViewToGet: SubViewport, side: String) -> void:
 	var playerSubView: SubViewport
 	var playerCamera: Camera2D
@@ -28,7 +28,6 @@ func SwitchToSubView(subViewToGet: SubViewport, side: String) -> void:
 		playerCamera = rightCamera
 	else:
 		return
-	
 
 	playerSubView.world_2d = subViewToGet.find_world_2d()
 	subViewToGet.size = playerSubView.get_parent().size

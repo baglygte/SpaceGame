@@ -10,7 +10,7 @@ func Enter():
 	ship = get_tree().get_first_node_in_group("Ship")
 	
 	
-func Update():
+func Update(_delta: float):
 	var deltaPosition = stateExecutor.global_position - ship.global_position
 	var deltaVelocity = stateExecutor.linear_velocity - ship.linear_velocity
 	

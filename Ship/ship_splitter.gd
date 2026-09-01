@@ -39,11 +39,19 @@ func SplitShip(ship: Ship):
 			
 	ship.queue_free()
 
-func GetSystemShip(system) -> Ship:
-	if system.get_parent().get_parent() is Section:
-		return system.get_parent().get_parent().get_parent().get_parent()
+func GetSystemShip(system) -> Ship:	
+	var grandparent = system.get_parent().get_parent()
+	
+	if grandparent is Section:
+		if grandparent.get_parent() == null:
+			return null
+		
+		if grandparent.get_parent().get_parent() is ShipCreator:
+			return null
+			
+		return grandparent.get_parent().get_parent()
 	else:
-		return system.get_parent().get_parent()
+		return grandparent
 
 func IsPlayerInRegion(region: Array[Node], player: Player) -> bool:
 	var playerPosition: Vector2 = player.global_position

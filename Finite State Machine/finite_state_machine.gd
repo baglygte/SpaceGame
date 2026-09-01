@@ -3,6 +3,7 @@ extends Node
 
 @export var initialMoveState: MoveState
 @export var initialAttackState: AttackState
+@export var bodyToMove: RigidBody2D
 
 var currentMoveState: MoveState
 var currentAttackState: AttackState
@@ -17,12 +18,19 @@ func _ready():
 	initialMoveState.Enter()
 	currentMoveState = initialMoveState
 	
+	if initialAttackState == null:
+		return
+		
 	initialAttackState.Enter()
 	currentAttackState = initialAttackState
 	
-func _process(_delta: float):
-	currentMoveState.Update()
-	currentAttackState.Update()
+func _process(delta: float):
+	currentMoveState.Update(delta)
+	
+	if initialAttackState == null:
+		return
+		
+	currentAttackState.Update(delta)
 	
 func ChangeMoveState(stateName: String):
 	currentMoveState.Exit()

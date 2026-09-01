@@ -15,25 +15,36 @@ func ReceiveEnterExit(player: Player) -> void:
 		playerHuds.ClearHud(player.viewSide)
 	else:
 		playerHuds.ShowFlightControlOverlay(player.viewSide, ship)
-		
+	
 	isOverlayingSectorMap = !isOverlayingSectorMap
+	#var playerViewports: PlayerViewPorts = get_tree().get_first_node_in_group("PlayerViewports")
+	#
+	#var playerCamera: PlayerCamera
+	#
+	#if player.viewSide == "Left":
+		#playerCamera = playerViewports.leftCamera
+	#else:
+		#playerCamera = playerViewports.rightCamera
+	#
+	#playerCamera.ToggleZoom()
 
 func ReceiveMovement(movementVector: Vector2) -> void:
 	if movementVector.length() == 0:
 		return
 	
-	for thruster: Thruster in ship.assignedThrusters:
-		var forceToApply = thruster.GetThrustMoveContribution(self, movementVector)
+	#for thruster: Thruster in ship.assignedThrusters:
+		#var forceToApply = thruster.GetThrustMoveContribution(self, movementVector)
 		
-		forceToApply = forceToApply.rotated(ship.rotation)
+		#forceToApply = forceToApply.rotated(ship.rotation)
 
-		ship.apply_force(forceToApply, thruster.position)
+		#ship.apply_force(forceToApply, thruster.position)
+	ship.apply_central_force(movementVector.rotated(ship.rotation) * 10)
 
 func ReceiveLook(lookVector: Vector2) -> void:
 	if lookVector.length() == 0:
 		return
 
-	ship.apply_torque(lookVector.x * 10000)
+	ship.apply_torque(lookVector.x * 500)
 	
 	for thruster: Thruster in ship.assignedThrusters:
 		var _forceToApply = thruster.GetThrustLookContribution(lookVector.x, ship)

@@ -9,7 +9,7 @@ func _ready() -> void:
 	var externalBuilder = $"../ShipCreator/ExternalSystemBuilder"
 	# Sections
 	for i in range(20):
-		creator.SpawnItemInWorld(load("res://Sections/section.tscn").instantiate(), Vector2(0,0))
+		creator.SpawnItemInWorld(load("res://Systems/section.tscn").instantiate(), Vector2(0,0))
 		#
 	## Systems
 	for i in range(5):
@@ -20,14 +20,14 @@ func _ready() -> void:
 		
 	creator.SpawnItemInWorld(externalBuilder.CreateExternalSystem("res://Systems/Gun/gun.tscn"), Vector2(-25,50))
 	creator.SpawnItemInWorld(externalBuilder.CreateExternalSystem("res://Systems/GrabberArm/grabber_arm.tscn"), Vector2(-25,100))
+	creator.SpawnItemInWorld(externalBuilder.CreateExternalSystem("res://Systems/FuelTank/fuelTank.tscn"), Vector2(-25,150))
 		
-	#for i in [-2000,-1000,0,1000,2000]:
-		#for j in [-2000,2000]:
-			#var instance = load("res://Enemies/dabox.tscn").instantiate()
-			#add_child(instance)
-			#instance.position = Vector2(j,i)
+	var instance = load("res://Enemies/dabox.tscn").instantiate()
+	add_child(instance)
+	instance.position = Vector2(-10000,10000)
+			
 	add_child(load("res://Rockets/Recipes/rocket_recipes.tscn").instantiate())
-	
+			
 	#$ContainedItemCreator.SpawnItemInWorld(load("res://Items/ball.tscn").instantiate(), Vector2(-50,200))
 	#var instance = load("res://Enemies/Rock.tscn").instantiate()
 	#add_child(instance)

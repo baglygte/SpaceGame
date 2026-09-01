@@ -6,7 +6,7 @@ var ship: Ship
 func Enter():
 	ship = get_tree().get_first_node_in_group("Ship")
 	
-func Update():
+func Update(_delta: float):
 	var deltaPosition = stateExecutor.global_position - ship.global_position
 	
 	var targetPosition = stateExecutor.global_position + deltaPosition.normalized() * 5000

@@ -10,7 +10,7 @@ func _ready() -> void:
 	
 	var asteroid
 	
-	for i in range(10):
+	for i in range(0):
 		asteroid = asteroidResource.instantiate()
 		
 		asteroid.position.x = generator.randf_range(-spawnRange, spawnRange)

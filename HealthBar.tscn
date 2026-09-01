@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://co7fcdxdyw8e3"]
+
+[ext_resource type="Script" uid="uid://b38w72u2k6br8" path="res://health_bar.gd" id="1_ypcvb"]
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ypcvb")
+
+[node name="BackgroundFrame" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 52.0
+offset_bottom = 7.0
+color = Color(0, 0, 0, 1)
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 51.0
+offset_bottom = 6.0
+color = Color(0.34781694, 0.34781697, 0.3478169, 1)
+
+[node name="Foreground" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 51.0
+offset_bottom = 6.0
+color = Color(0.36850002, 0.67, 0.43885005, 1)

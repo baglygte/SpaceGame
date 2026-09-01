@@ -2,7 +2,7 @@ class_name SectionBuilder
 extends Node
 
 var sectionMap: Dictionary
-var sectionScene =  preload("res://Sections/section.tscn")
+var sectionScene =  preload("res://Systems/section.tscn")
 
 func CreateSectionAtPosition(sectionPosition: Vector2, sectionRotation: float) -> Section:
 	var section: Section = sectionScene.instantiate()

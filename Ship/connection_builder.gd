@@ -4,7 +4,7 @@ extends Node
 var connectionSets : Array
 const connectionScene = preload("res://Ship/system_connection.tscn")
 
-func BreakConnection(connection: SystemConnection):
+func BreakConnection(connection):
 	var signalerA = GetSignaler(connection.systemA)
 	
 	var signalerB = GetSignaler(connection.systemB)

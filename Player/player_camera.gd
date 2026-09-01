@@ -1,4 +1,5 @@
 extends Camera2D
+class_name PlayerCamera
 
 var connectedPlayer: Player
 @onready var targetZoomLevel: float = zoomedInZoomLevel

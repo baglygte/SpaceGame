@@ -8,6 +8,9 @@ var shipId: int
 var moveDirection := Vector2(0,0)
 var assignedThrusters: Array
 
+func _ready() -> void:	
+	$StarmapBlipConnector.Initialize("Ship")
+	
 func _physics_process(_delta: float) -> void:
 	if moveDirection.length() == 0:
 		return

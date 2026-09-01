@@ -1,22 +1,26 @@
 class_name StateApproach
 extends MoveState
+# Move directly towards the ship
 
 @export var CloseState: String = "StateCircle"
 @export var FarState: String = "StateIdle"
+
+@export var CloseStateDistance: int = 5000
+@export var FarStateDistance: int = 8000
 
 var ship: Ship
 
 func Enter():
 	ship = get_tree().get_first_node_in_group("Ship")
 	
-func Update():
-	var deltaPosition = stateExecutor.global_position - ship.global_position
-	
 	stateExecutor.target = ship.global_position
 	
-	if deltaPosition.length() < 5000:
+func Update(_delta: float):
+	var deltaPosition = stateExecutor.global_position - stateExecutor.target
+
+	if deltaPosition.length() < CloseStateDistance:
 		transitionToState.emit(CloseState)
-	if deltaPosition.length() > 8000:
+	if deltaPosition.length() > FarStateDistance:
 		transitionToState.emit(FarState)
 
 func Exit():

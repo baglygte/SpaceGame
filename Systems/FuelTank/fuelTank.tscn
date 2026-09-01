@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://pmo3c02ivc0w"]
+
+[ext_resource type="Script" uid="uid://6uebmceold4u" path="res://Systems/FuelTank/fuel_tank.gd" id="1_4efwn"]
+[ext_resource type="Texture2D" uid="uid://cylfshjimf6vo" path="res://Sprites/MapGrid.png" id="1_l8dgj"]
+[ext_resource type="Script" uid="uid://dce48q6togcr" path="res://interactive_region.gd" id="3_fb63g"]
+[ext_resource type="Script" uid="uid://cklwast5n2502" path="res://object_hover.gd" id="4_dyf22"]
+[ext_resource type="Script" uid="uid://bdyhbi1gpav6q" path="res://signal_emitter.gd" id="5_vbman"]
+[ext_resource type="Script" uid="uid://wytevps4fcgd" path="res://health.gd" id="7_bscln"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1q08"]
+
+[node name="FuelTank" type="Node2D" groups=["InternalSystem", "WrenchCanEdit"]]
+script = ExtResource("1_4efwn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_l8dgj")
+
+[node name="interactiveRegion" type="Area2D" parent="."]
+script = ExtResource("3_fb63g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactiveRegion"]
+shape = SubResource("RectangleShape2D_g1q08")
+
+[node name="ObjectHover" type="Node" parent="." node_paths=PackedStringArray("hoverArea", "spriteToModulate")]
+script = ExtResource("4_dyf22")
+hoverArea = NodePath("../interactiveRegion")
+spriteToModulate = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://cklwast5n2502"
+
+[node name="SignalEmitter" type="Node2D" parent="."]
+script = ExtResource("5_vbman")
+metadata/_custom_type_script = "uid://bdyhbi1gpav6q"
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("7_bscln")
+metadata/_custom_type_script = "uid://wytevps4fcgd"

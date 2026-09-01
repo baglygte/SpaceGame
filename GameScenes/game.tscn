@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://b2egsoumhyk3y" path="res://GameScenes/global_system_counter.gd" id="9_q3a5i"]
 [ext_resource type="Script" uid="uid://do74rmf0cs88y" path="res://GameScenes/asteroid_creator.gd" id="10_w3as4"]
 [ext_resource type="PackedScene" uid="uid://dwpabs1xai6r6" path="res://GameScenes/pause_menu.tscn" id="11_rjcol"]
-[ext_resource type="Script" uid="uid://61tdi4g8q3rx" path="res://Audio/sound_system.gd" id="15_6ce2g"]
+[ext_resource type="PackedScene" uid="uid://cf7hwrf2qkhv2" path="res://Audio/soundSystem.tscn" id="11_wy7ce"]
 
 [sub_resource type="Gradient" id="Gradient_55g6r"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 0, 1, 1)
@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_68ns4")
 
-[node name="PlayerViewports" type="HBoxContainer" parent="HUD" groups=["PlayerViewPorts"]]
+[node name="PlayerViewports" type="HBoxContainer" parent="HUD" groups=["PlayerViewports"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,10 +87,6 @@ size_flags_horizontal = 3
 [node name="GameWorld" type="SubViewport" parent="."]
 script = ExtResource("1_q3a5i")
 
-[node name="SoundSystem" type="Node" parent="." groups=["SoundSystem"]]
-script = ExtResource("15_6ce2g")
-metadata/_custom_type_script = "uid://61tdi4g8q3rx"
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_55g6r")
 
@@ -110,3 +106,5 @@ script = ExtResource("10_w3as4")
 
 [node name="PauseMenu" parent="." instance=ExtResource("11_rjcol")]
 visible = false
+
+[node name="AudioListener" parent="." groups=["SoundSystem"] instance=ExtResource("11_wy7ce")]

@@ -1,23 +1,40 @@
 class_name Health
 extends Node
 
-@export var maxHealth: int
-var healthAmount = 0
+@export var maxHealth: int = 1
+@export var startingHealth: int = maxHealth
+@export var healthBar: HealthBar
+
+var _currentHealth: float = 0
 
 func _ready():
-	GainHealth(maxHealth)
+	GainHealth(startingHealth)
 	
 func LoseHealth(amountToLose: int) -> void:
-	healthAmount -= amountToLose
+	_currentHealth -= amountToLose
 	
-	if healthAmount < 1:
+	if _currentHealth < 0:
+		_currentHealth = 0
+	
+	if _currentHealth == 0:
 		if get_parent().has_method("Kill"):
 			get_parent().Kill()
+			
+	EmitHealthChanged()
 
 func GainHealth(amountToGain: int) -> void:
-	var newHealthAmount = healthAmount + amountToGain
+	var newcurrentHealth = _currentHealth + amountToGain
 	
-	if newHealthAmount > maxHealth:
-		newHealthAmount = maxHealth
+	if newcurrentHealth > maxHealth:
+		newcurrentHealth = maxHealth
 		
-	healthAmount  = newHealthAmount
+	_currentHealth  = newcurrentHealth
+	
+	EmitHealthChanged()
+
+func EmitHealthChanged() -> void:
+	if healthBar == null:
+		return
+		
+	healthBar.UpdateHealthBar(_currentHealth/maxHealth)
+	
